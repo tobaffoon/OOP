@@ -33,6 +33,7 @@ public class BinHeap {
 
   /**
    * Gets number of elements in Binary Heap.
+   * 
    * @return number of elements in {@code #tree}
    */
 
