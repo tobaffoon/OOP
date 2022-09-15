@@ -32,7 +32,8 @@ public class BinHeap {
   }
 
   /**
-   * @return number of elements in {@code #tree}.
+   * Gets number of elements in Binary Heap.
+   * @return number of elements in {@code #tree}
    */
 
   private int getLength() {
@@ -77,7 +78,9 @@ public class BinHeap {
    * @param idx idx of a kid
    */
   private void siftUp(int idx) {
-    if (idx == 0) return;
+    if (idx == 0) {
+      return;
+    }
     int dadIdx = (idx + 1) / 2 - 1;
     if (this.getEl(idx) < this.getEl(dadIdx)) {
       this.swap(idx, dadIdx);
