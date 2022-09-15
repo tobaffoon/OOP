@@ -1,23 +1,23 @@
 package ru.nsu.amazyar;
 
 /**
- * Executes heapSort
+ * Executes heapSort.
  * <p>
  * Sorts only int[]
  * </p>
  */
 public class BinHeap {
   /**
-   * binary Heap, used in HeapSort algorithm
+   * binary Heap, used in HeapSort algorithm.
    */
   private int[] tree;
   /**
-   * Number of elements in {@link #tree}
+   * Number of elements in {@link #tree}.
    */
   private int binLength = 0;
 
   /**
-   * Initialises {@code #tree}
+   * Initialises {@code #tree}.
    *
    * @param arr initial array
    */
@@ -32,7 +32,7 @@ public class BinHeap {
   }
 
   /**
-   * @return number of elements in {@code #tree}
+   * @return number of elements in {@code #tree}.
    */
 
   private int getLength() {
@@ -40,7 +40,7 @@ public class BinHeap {
   }
 
   /**
-   * Returns an element from binary heap
+   * Returns an element from binary heap.
    *
    * @param idx index of desired element in {@code #tree}
    * @return element in idx position in {@code #tree}
@@ -50,7 +50,7 @@ public class BinHeap {
   }
 
   /**
-   * Sets the element of binary heap
+   * Sets the element of binary heap.
    *
    * @param idx      index of desired element in {@code #tree}
    * @param newValue value to assign to desired element
@@ -60,7 +60,7 @@ public class BinHeap {
   }
 
   /**
-   * Changes values of two binary heap elements
+   * Changes values of two binary heap elements.
    *
    * @param idxA index of the first element in {@code #tree}
    * @param idxB index of the second element in {@code #tree}
@@ -72,7 +72,7 @@ public class BinHeap {
   }
 
   /**
-   * Ensures that a kid in HeapSort algorithm is smaller than its parent
+   * Ensures that a kid in HeapSort algorithm is smaller than its parent.
    *
    * @param idx idx of a kid
    */
@@ -86,7 +86,7 @@ public class BinHeap {
   }
 
   /**
-   * Ensures that parents in HeapSort are smaller than their children
+   * Ensures that parents in HeapSort are smaller than their children.
    *
    * @param idx idx of a parent
    */
@@ -110,7 +110,7 @@ public class BinHeap {
   }
 
   /**
-   * Sorts an array using HeapSort
+   * Sorts an array using HeapSort.
    *
    * @param arr initial array that becomes sorted after method execution
    */
