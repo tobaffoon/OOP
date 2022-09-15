@@ -47,8 +47,8 @@ class HeapSortTest {
      */
     @Test
     void sortSorted() {
-        int[] sortArr = {-4,-3,-2,-1,0,1,2,3,4};
-        int[] hardRes = {-4,-3,-2,-1,0,1,2,3,4};
+        int[] sortArr = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
+        int[] hardRes = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         binHeap.heapSort(sortArr);
         Assertions.assertArrayEquals(hardRes, sortArr);
     }
@@ -60,7 +60,7 @@ class HeapSortTest {
     @Test
     void sortReversedSorted() {
         int[] reSortArr = {4, 3, 2, 1, 0, -1, -2, -3, -4};
-        int[] hardRes = {-4,-3,-2,-1,0,1,2,3,4};
+        int[] hardRes = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
         binHeap.heapSort(reSortArr);
         Assertions.assertArrayEquals(hardRes, reSortArr);
     }
@@ -71,8 +71,8 @@ class HeapSortTest {
      */
     @Test
     void sortSameElem() {
-        int[] sameElemArr = {-3,-3,-3,-3,-3,-3,-3};
-        int[] hardRes = {-3,-3,-3,-3,-3,-3,-3};
+        int[] sameElemArr = {-3, -3, -3, -3, -3, -3, -3};
+        int[] hardRes = {-3, -3, -3, -3, -3, -3, -3};
         binHeap.heapSort(sameElemArr);
         Assertions.assertArrayEquals(sameElemArr, hardRes);
     }
