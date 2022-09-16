@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1694f934-2389-420d-9a26-69b35af0eae3" name="Changes" comment="" />
+    <list default="true" id="1694f934-2389-420d-9a26-69b35af0eae3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/src/main/java/ru/nsu/amazyar/Stack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/src/main/java/ru/nsu/amazyar/UserInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/amazyar/BinHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/amazyar/BinaryHeap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/amazyar/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/amazyar/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/amazyar/HeapSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/amazyar/HeapSortTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,12 +38,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="HeapSortTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.amazyar.HeapSortTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.HeapSortTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,6 +84,11 @@
       <updated>1663263140393</updated>
       <workItem from="1663263141773" duration="671000" />
       <workItem from="1663264084639" duration="515000" />
+      <workItem from="1663264619676" duration="339000" />
+      <workItem from="1663301614823" duration="48000" />
+      <workItem from="1663302301982" duration="4000" />
+      <workItem from="1663303225985" duration="90000" />
+      <workItem from="1663311197990" duration="301000" />
     </task>
     <servers />
   </component>
