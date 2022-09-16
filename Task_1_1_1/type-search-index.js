@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"BinHeap"},{"p":"ru.nsu.amazyar","l":"Main"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"BinaryHeap"},{"p":"ru.nsu.amazyar","l":"Main"}]
