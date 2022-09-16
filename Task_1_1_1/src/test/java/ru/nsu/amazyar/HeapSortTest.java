@@ -4,18 +4,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class HeapSortTest {
+public class HeapSortTest {
   /**
    * main binary heap that we will use.
    */
-  private BinHeap binHeap;
+  private BinaryHeap binaryHeap;
 
   /**
    * initialize binary heap.
    */
   @BeforeEach
-  void beforeSortTest() {
-    binHeap = new BinHeap();
+  public void beforeSortTest() {
+    binaryHeap = new BinaryHeap();
   }
 
   /**
@@ -23,9 +23,9 @@ class HeapSortTest {
    * Expects an empty array
    */
   @Test
-  void sortEmptyArray() {
+  public void sortEmptyArray() {
     int[] emptArr = {};
-    binHeap.heapSort(emptArr);
+    binaryHeap.heapSort(emptArr);
     Assertions.assertArrayEquals(new int[0], emptArr);
   }
 
@@ -34,10 +34,10 @@ class HeapSortTest {
    * Expects an array consisting of the same element
    */
   @Test
-  void sortOneElem() {
+  public void sortOneElem() {
     int[] singleton = {5};
     int[] hardRes = {5};
-    binHeap.heapSort(singleton);
+    binaryHeap.heapSort(singleton);
     Assertions.assertArrayEquals(hardRes, singleton);
   }
 
@@ -46,10 +46,10 @@ class HeapSortTest {
    * Expects the same array
    */
   @Test
-  void sortSorted() {
+  public void sortSorted() {
     int[] sortArr = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
     int[] hardRes = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
-    binHeap.heapSort(sortArr);
+    binaryHeap.heapSort(sortArr);
     Assertions.assertArrayEquals(hardRes, sortArr);
   }
 
@@ -58,10 +58,10 @@ class HeapSortTest {
    * Expects the reversed array
    */
   @Test
-  void sortReversedSorted() {
+  public void sortReversedSorted() {
     int[] reSortArr = {4, 3, 2, 1, 0, -1, -2, -3, -4};
     int[] hardRes = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
-    binHeap.heapSort(reSortArr);
+    binaryHeap.heapSort(reSortArr);
     Assertions.assertArrayEquals(hardRes, reSortArr);
   }
 
@@ -70,10 +70,10 @@ class HeapSortTest {
    * Expects the same array
    */
   @Test
-  void sortSameElem() {
+  public void sortSameElem() {
     int[] sameElemArr = {-3, -3, -3, -3, -3, -3, -3};
     int[] hardRes = {-3, -3, -3, -3, -3, -3, -3};
-    binHeap.heapSort(sameElemArr);
+    binaryHeap.heapSort(sameElemArr);
     Assertions.assertArrayEquals(sameElemArr, hardRes);
   }
 
@@ -82,10 +82,10 @@ class HeapSortTest {
    * Expects a sorted array
    */
   @Test
-  void sortArbitraryTest() {
+  public void sortArbitraryTest() {
     int[] justArr = {0, -2, 8, -10, 1, 2, 0, 2, -11, -10};
     int[] hardRes = {-11, -10, -10, -2, 0, 0, 1, 2, 2, 8};
-    binHeap.heapSort(justArr);
+    binaryHeap.heapSort(justArr);
     Assertions.assertArrayEquals(justArr, hardRes);
   }
 }

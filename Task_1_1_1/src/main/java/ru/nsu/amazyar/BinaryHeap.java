@@ -6,7 +6,7 @@ package ru.nsu.amazyar;
  * Sorts only int[]
  * </p>
  */
-public class BinHeap {
+public class BinaryHeap {
   /**
    * binary Heap, used in HeapSort algorithm.
    */
@@ -33,7 +33,7 @@ public class BinHeap {
 
   /**
    * Gets number of elements in Binary Heap.
-   * 
+   *
    * @return number of elements in {@code #tree}
    */
 
@@ -47,7 +47,7 @@ public class BinHeap {
    * @param idx index of desired element in {@code #tree}
    * @return element in idx position in {@code #tree}
    */
-  private int getEl(int idx) {
+  private int getElement(int idx) {
     return this.tree[idx];
   }
 
@@ -57,7 +57,7 @@ public class BinHeap {
    * @param idx      index of desired element in {@code #tree}
    * @param newValue value to assign to desired element
    */
-  private void setEl(int idx, int newValue) {
+  private void setElement(int idx, int newValue) {
     this.tree[idx] = newValue;
   }
 
@@ -68,9 +68,9 @@ public class BinHeap {
    * @param idxB index of the second element in {@code #tree}
    */
   private void swap(int idxA, int idxB) {
-    int temp = this.getEl(idxA);
-    this.setEl(idxA, this.getEl(idxB));
-    this.setEl(idxB, temp);
+    int temp = this.getElement(idxA);
+    this.setElement(idxA, this.getElement(idxB));
+    this.setElement(idxB, temp);
   }
 
   /**
@@ -83,7 +83,7 @@ public class BinHeap {
       return;
     }
     int dadIdx = (idx + 1) / 2 - 1;
-    if (this.getEl(idx) < this.getEl(dadIdx)) {
+    if (this.getElement(idx) < this.getElement(dadIdx)) {
       this.swap(idx, dadIdx);
       siftUp(dadIdx);
     }
@@ -99,11 +99,11 @@ public class BinHeap {
     int leftChild = 2 * idx + 1;
     int rightChild = 2 * idx + 2;
 
-    if (leftChild < this.getLength() && this.getEl(leftChild) < this.getEl(smallest)) {
+    if (leftChild < this.getLength() && this.getElement(leftChild) < this.getElement(smallest)) {
       smallest = leftChild;
     }
 
-    if (rightChild < this.getLength() && this.getEl(rightChild) < this.getEl(smallest)) {
+    if (rightChild < this.getLength() && this.getElement(rightChild) < this.getElement(smallest)) {
       smallest = rightChild;
     }
 
@@ -122,7 +122,7 @@ public class BinHeap {
     this.createTree(arr);
     int length = this.getLength();
     for (int i = 0; i < length; i++) {
-      arr[i] = this.getEl(0);
+      arr[i] = this.getElement(0);
       this.swap(0, length - i - 1);
       this.binLength--;
       siftDown(0);
