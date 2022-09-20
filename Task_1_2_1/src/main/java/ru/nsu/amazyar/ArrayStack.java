@@ -3,31 +3,31 @@ package ru.nsu.amazyar;
 import java.util.EmptyStackException;
 
 /**
- * Stack based on an array Stores only Objects, no primitive types allowed
+ * Stack based on an array Stores only Objects, no primitive types allowed.
  *
  * @param <E> type of Objects to be stored in stack
  */
 public class ArrayStack<E> {
 
   /**
-   * Minimum size of stack Maximum capacity of the stack will never go below this point
+   * Minimum size of stack Maximum capacity of the stack will never go below this point.
    */
-  private final int MIN_SIZE = 32;
+  private final int minSize = 32;
   /**
-   * Capacity of stack Can be enlarged and reduced if needed
+   * Capacity of stack Can be enlarged and reduced if needed.
    */
   private int cap;
   /**
-   * Number of elements in stack
+   * Number of elements in stack.
    */
   private int count;
   /**
-   * Array of stack Used to store elements in it
+   * Array of stack Used to store elements in it.
    */
   private E[] stack;
 
   /**
-   * Creates array avoiding warnings Uses safe but unknown cast to create array of type E
+   * Creates array avoiding warnings Uses safe but unknown cast to create array of type E.
    *
    * @param length length of created array
    * @return generated array of type E
@@ -38,32 +38,32 @@ public class ArrayStack<E> {
   }
 
   /**
-   * Creates empty stack
+   * Creates empty stack.
    */
   public ArrayStack() {
     count = 0;
-    cap = MIN_SIZE;
+    cap = minSize;
     stack = generateArray(cap);
   }
 
   /**
-   * Creates stack of set length
+   * Creates stack of set length.
    *
    * @param minCapacity number of elements that can be stored if stack without resizing
    */
   public ArrayStack(int minCapacity) {
     count = 0;
-    cap = Math.max(MIN_SIZE, minCapacity);
+    cap = Math.max(minSize, minCapacity);
     stack = generateArray(cap);
   }
 
   /**
-   * Enlarges or shrinks stack
+   * Enlarges or shrinks stack.
    * <ul>
-   *  <li>If {@link #stack} is too small to accommodate new number of elements it enlarges to include
-   *  at least two times the newSize</li>
+   *  <li>If {@link #stack} is too small to accommodate
+   *  new number of elements it enlarges to include at least two times the newSize</li>
    *  <li>If {@link #stack} is 4 times bigger than the newSize, it is reasonable to reduce
-   *  it, so we shrink it two times, but keep it at least {@link #MIN_SIZE}</li>
+   *  it, so we shrink it two times, but keep it at least {@link #minSize}</li>
    * </ul>
    *
    * @param newSize number of elements we want to be stored in stack
@@ -75,7 +75,7 @@ public class ArrayStack<E> {
         E[] newStack = generateArray(cap);
         System.arraycopy(stack, 0, newStack, 0, count);
         stack = newStack;
-      } else if (cap / 2 >= MIN_SIZE && newSize < cap / 4) {
+      } else if (cap / 2 >= minSize && newSize < cap / 4) {
         cap /= 2;
         E[] newStack = generateArray(cap);
         System.arraycopy(stack, 0, newStack, 0, newSize);
@@ -85,7 +85,7 @@ public class ArrayStack<E> {
   }
 
   /**
-   * Pushes element on stack Maybe enlarges stack with {@link #resize}
+   * Pushes element on stack Maybe enlarges stack with {@link #resize}.
    *
    * @param nextElem element being pushed
    */
@@ -95,7 +95,7 @@ public class ArrayStack<E> {
   }
 
   /**
-   * Pushes an array on stack Catches null Array
+   * Pushes an array on stack Catches null Array.
    *
    * @param nextElems array of elements being pushed
    */
@@ -111,7 +111,7 @@ public class ArrayStack<E> {
   }
 
   /**
-   * Pops an element from stack May shrink stack with {@link #resize} Checks for empty array call
+   * Pops an element from stack May shrink stack with {@link #resize} Checks for empty array call.
    *
    * @return top element on stack
    */
@@ -125,7 +125,7 @@ public class ArrayStack<E> {
 
   /**
    * Pops a subStack from stack Most likely causes stack to shrink with {@link #resize} Checks for
-   * popping a subStack bigger that original stack
+   * popping a subStack bigger that original stack.
    *
    * @param length length of subStack
    * @return subStack of set length
@@ -143,7 +143,7 @@ public class ArrayStack<E> {
   }
 
   /**
-   * Gets number of elements
+   * Gets number of elements.
    *
    * @return number of elements on stack
    */
