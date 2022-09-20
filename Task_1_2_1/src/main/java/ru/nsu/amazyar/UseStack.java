@@ -1,7 +1,7 @@
 package ru.nsu.amazyar;
 
 /**
- * Class with main method Executes some {@link ArrayStack} methods
+ * Class with main method Executes some {@link ArrayStack} methods.
  */
 public class UseStack {
 
