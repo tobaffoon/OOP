@@ -17,10 +17,18 @@ class ArrayStackTest {
 
   @Test
   public void pushPopTest() {
-    String[] initText = {"nano", "machines", "son", "making", "the mother", "of all", "omelettes"};
-    stringStack.pushStack(initText);
-    for (int i = initText.length - 1; i >= 0; i--) {
-      Assertions.assertEquals(initText[i], stringStack.pop());
+    String[] initText = {"making", "the mother", "of all", "omelettes", "son", "machines", "nano"};
+    stringStack.push("nano");
+    stringStack.push("machines");
+    stringStack.push("son");
+    ArrayStack<String> strTestStack = new ArrayStack<>();
+    strTestStack.push("making");
+    strTestStack.push("the mother");
+    strTestStack.push("of all");
+    strTestStack.push("omelettes");
+    stringStack.pushStack(strTestStack);
+    for (String s : initText) {
+      Assertions.assertEquals(s, stringStack.pop());
     }
     stringStack.popStack(0);
     stringStack.push("it's");
@@ -48,17 +56,20 @@ class ArrayStackTest {
 
   @Test
   public void nullPushTest() {
-    String[] nullStrArray = null;
+    ArrayStack<String> nullStrArray = null;
     Assertions.assertThrows(NullPointerException.class, () -> stringStack.pushStack(nullStrArray));
     String nullStr = null;
-    stringStack.push(nullStr);
-    Assertions.assertNull(stringStack.pop());
+    Assertions.assertThrows(NullPointerException.class, () -> stringStack.push(nullStr));
   }
 
   @Test
   public void emptyStackTest() {
     Integer[] ints = {2, 6, 23, -1, 0, 89, -9};
-    intStack.pushStack(ints);
+    ArrayStack<Integer> intsStack = new ArrayStack<>();
+    for (int i : ints) {
+      intsStack.push(i);
+    }
+    intStack.pushStack(intsStack);
     Assertions.assertThrows(IndexOutOfBoundsException.class, () -> intStack.popStack(100));
     intStack.popStack(intStack.getCount());
     Assertions.assertEquals(0, intStack.getCount());

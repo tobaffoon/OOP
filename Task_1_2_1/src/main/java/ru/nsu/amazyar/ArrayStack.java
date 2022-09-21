@@ -9,40 +9,17 @@ import java.util.EmptyStackException;
  */
 public class ArrayStack<E> {
 
-  /**
-   * Minimum size of stack Maximum capacity of the stack will never go below this point.
-   */
-  private final int minSize = 32;
-  /**
-   * Capacity of stack Can be enlarged and reduced if needed.
-   */
+  private final int MIN_SIZE = 32;
   private int cap;
-  /**
-   * Number of elements in stack.
-   */
   private int count;
-  /**
-   * Array of stack Used to store elements in it.
-   */
   private E[] stack;
-
-  /**
-   * Creates array avoiding warnings Uses safe but unknown cast to create array of type E.
-   *
-   * @param length length of created array
-   * @return generated array of type E
-   */
-  @SuppressWarnings("unchecked")
-  private E[] generateArray(int length) {
-    return (E[]) new Object[length];
-  }
 
   /**
    * Creates empty stack.
    */
   public ArrayStack() {
     count = 0;
-    cap = minSize;
+    cap = MIN_SIZE;
     stack = generateArray(cap);
   }
 
@@ -53,21 +30,15 @@ public class ArrayStack<E> {
    */
   public ArrayStack(int minCapacity) {
     count = 0;
-    cap = Math.max(minSize, minCapacity);
+    cap = Math.max(MIN_SIZE, minCapacity);
     stack = generateArray(cap);
   }
 
-  /**
-   * Enlarges or shrinks stack.
-   * <ul>
-   *  <li>If {@link #stack} is too small to accommodate
-   *  new number of elements it enlarges to include at least two times the newSize</li>
-   *  <li>If {@link #stack} is 4 times bigger than the newSize, it is reasonable to reduce
-   *  it, so we shrink it two times, but keep it at least {@link #minSize}</li>
-   * </ul>
-   *
-   * @param newSize number of elements we want to be stored in stack
-   */
+  @SuppressWarnings("unchecked")
+  private E[] generateArray(int length) {
+    return (E[]) new Object[length];
+  }
+
   private void resize(int newSize) {
     if (newSize >= 0) {
       if (newSize > cap) {
@@ -75,7 +46,7 @@ public class ArrayStack<E> {
         E[] newStack = generateArray(cap);
         System.arraycopy(stack, 0, newStack, 0, count);
         stack = newStack;
-      } else if (cap / 2 >= minSize && newSize < cap / 4) {
+      } else if (cap / 2 >= MIN_SIZE && newSize < cap / 4) {
         cap /= 2;
         E[] newStack = generateArray(cap);
         System.arraycopy(stack, 0, newStack, 0, newSize);
@@ -90,6 +61,10 @@ public class ArrayStack<E> {
    * @param nextElem element being pushed
    */
   public void push(E nextElem) {
+    if (nextElem == null) {
+      throw new NullPointerException();
+    }
+
     resize(count + 1);
     stack[count++] = nextElem;
   }
@@ -99,13 +74,16 @@ public class ArrayStack<E> {
    *
    * @param nextElems array of elements being pushed
    */
-  public void pushStack(E[] nextElems) {
+  public void pushStack(ArrayStack<E> nextElems) {
     if (nextElems == null) {
       throw new NullPointerException();
     }
 
-    resize(count + nextElems.length);
-    for (E elem : nextElems) {
+    int newStackLength = nextElems.getCount();
+    resize(count + newStackLength);
+    E elem;
+    for (int i = 0; i < newStackLength; i++) {
+      elem = nextElems.pop();
       stack[count++] = elem;
     }
   }
