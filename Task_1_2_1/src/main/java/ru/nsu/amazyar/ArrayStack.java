@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
  */
 public class ArrayStack<E> {
 
-  private final int MIN_SIZE = 32;
+  private static final int MIN_SIZE = 32;
   private int cap;
   private int count;
   private E[] stack;

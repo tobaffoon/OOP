@@ -75,3 +75,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Google style check
+google_style_check_intelij.xml
