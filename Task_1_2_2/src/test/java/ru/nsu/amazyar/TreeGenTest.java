@@ -4,6 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Spliterator;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -225,6 +226,24 @@ class TreeGenTest {
   }
 
   @Test
+  public void trySplitTest(){
+    stringTree.add("A");
+    Assertions.assertNull(stringTree.spliterator().trySplit());
+    stringTree.add("B");
+    stringTree.add("C");
+
+    Spliterator<String> split1 = stringTree.spliterator();
+    Spliterator<String> split2 = split1.trySplit();
+    for (int i = 0; i < 2; i++) {
+      Assertions.assertTrue(split1.tryAdvance(x -> {}));
+    }
+    Assertions.assertFalse(split1.tryAdvance(x -> {}));
+    for (int i = 0; i < 1; i++) {
+      Assertions.assertTrue(split2.tryAdvance(x -> {}));
+    }
+    Assertions.assertFalse(split2.tryAdvance(x -> {}));
+  }
+  @Test
   public void streamTest() {
     stringTree.add("A");
     TreeGen<String>.Node<String> nodeB = stringTree.add("B");
@@ -234,7 +253,7 @@ class TreeGenTest {
     stringTree.add(nodeAb, "BAB");
     stringTree.add(nodeAb, "DAB");
 
-    @SuppressWarnings("replaced")
+    @SuppressWarnings("SimplifyStreamApiCallChains")
     List<String> list = stringTree.stream()
         .filter(x -> x.contains("B") && !x.equals("B"))
         .sorted()

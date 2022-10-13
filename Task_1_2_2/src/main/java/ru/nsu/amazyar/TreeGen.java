@@ -579,7 +579,7 @@ public class TreeGen<E> implements Iterable<E> {
 
         E nextElement = nodeOrder.get(start);
         action.accept(nextElement);
-        nodeOrder.set(start++, nextElement);
+        start++;
         return true;
       }
 
