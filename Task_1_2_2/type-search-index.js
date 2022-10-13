@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"TreeGen.breadthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"TreeGen.depthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"TreeGen.Node"},{"p":"ru.nsu.amazyar","l":"TreeGen"}]
