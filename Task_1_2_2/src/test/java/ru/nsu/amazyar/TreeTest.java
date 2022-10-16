@@ -150,6 +150,26 @@ class TreeTest {
   }
 
   @Test
+  public void bfsTreeIteratorTest() {
+    intTree.add(1);
+    Tree<Integer> nodeTwo = intTree.add(2);
+    intTree.add(3);
+    intTree.add(nodeTwo, 4);
+    Iterator<Tree<Integer>> treeIterator = intTree.treeIterator();
+
+    Assertions.assertTrue(treeIterator.hasNext());
+    treeIterator.next();
+    Assertions.assertEquals(nodeTwo, treeIterator.next());
+
+    treeIterator.remove();
+    Assertions.assertThrows(IllegalStateException.class, treeIterator::remove);
+
+    treeIterator.next();
+    treeIterator.next();
+    Assertions.assertThrows(NoSuchElementException.class, treeIterator::next);
+  }
+
+  @Test
   public void depthFirstSearchIteratorTest() {
     stringTree.add("Water");
     Tree<String> fire = stringTree.add("Fire");
@@ -224,6 +244,11 @@ class TreeTest {
     dfsIt.remove();
     stringTree.add("Z");
     Assertions.assertThrows(ConcurrentModificationException.class, dfsIt::remove);
+
+    Iterator<Tree<String>> treeIt = stringTree.treeIterator();
+    treeIt.next();
+    stringTree.add("Z");
+    Assertions.assertThrows(ConcurrentModificationException.class, treeIt::remove);
   }
 
   @Test

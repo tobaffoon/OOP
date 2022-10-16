@@ -73,7 +73,7 @@ public class Tree<E> implements Iterable<E> {
   /**
    * Changes value of a node by index.
    *
-   * @param index Index of a node whose value will change
+   * @param index    Index of a node whose value will change
    * @param newValue New value of the node
    */
   public void set(int index, E newValue) {
@@ -158,10 +158,9 @@ public class Tree<E> implements Iterable<E> {
   }
 
   private int updateSize() {
-    if(this.children.isEmpty()){
+    if (this.children.isEmpty()) {
       return 1;
-    }
-    else{
+    } else {
       int subTreeSize = 0;
       for (Tree<E> child : children) {
         subTreeSize += child.updateSize();
@@ -234,9 +233,8 @@ public class Tree<E> implements Iterable<E> {
 
   /**
    * Remove specific element from tree. If this element is root, then one of its child becomes root,
-   * this means that child's value and child's children is assigned to root.
-   * Tree becomes empty if no children. If this element isn't root, its children are assigned to
-   * element's parent
+   * this means that child's value and child's children is assigned to root. Tree becomes empty if
+   * no children. If this element isn't root, its children are assigned to element's parent
    *
    * @param rmNode Node to be removed
    * @return removed node
@@ -275,6 +273,11 @@ public class Tree<E> implements Iterable<E> {
   public Iterator<E> iterator() {
     checkEmptyTree();
     return new breadthFirstSearchIterator();
+  }
+
+  public Iterator<Tree<E>> treeIterator() {
+    checkEmptyTree();
+    return new bfsTreeIterator();
   }
 
   /**
@@ -374,8 +377,8 @@ public class Tree<E> implements Iterable<E> {
 
 
     /**
-     * Adds a child of last returned node.
-     * If next has not been called before, {@code IllegalStateException} is thrown
+     * Adds a child of last returned node. If next has not been called before,
+     * {@code IllegalStateException} is thrown
      *
      * @param newValue Value of new child
      */
@@ -387,6 +390,77 @@ public class Tree<E> implements Iterable<E> {
 
       Tree<E> newNode = Tree.this.add(lastRet, newValue);
       queue.add(newNode); //add last because last returned node added its children in the end
+      lastRet = null;
+      ++expectedModCount;
+    }
+
+    private void addChildren(Tree<E> node) {
+      queue.addAll(node.children);
+    }
+
+    private void checkForComodification() {
+      if (expectedModCount != Tree.this.modCount) {
+        throw new ConcurrentModificationException();
+      }
+    }
+  }
+
+  /**
+   * Iterator on nodes of tree using Breadth First Search.
+   */
+  public class bfsTreeIterator implements Iterator<Tree<E>> {
+
+    private Tree<E> lastRet;
+    private final LinkedList<Tree<E>> queue;
+    private long expectedModCount;
+
+    /**
+     * Constructor initiating BFS.
+     */
+    public bfsTreeIterator() {
+      lastRet = null;
+      queue = new LinkedList<>();
+      queue.add(Tree.this);
+      expectedModCount = Tree.this.modCount;
+    }
+
+    /**
+     * Checks if any element left.
+     */
+    public boolean hasNext() {
+      return !queue.isEmpty();
+    }
+
+    /**
+     * Return next element. Also adds its child to the queue
+     *
+     * @return next element
+     */
+
+
+    @SuppressWarnings("null")
+    public Tree<E> next() {
+      checkForComodification();
+      if (!this.hasNext()) {
+        throw new NoSuchElementException();
+      } else {
+        lastRet = queue.poll();
+        this.addChildren(lastRet);
+        return lastRet;
+      }
+    }
+
+    /**
+     * Remove last element. If {@link #next} has not been called before,
+     * {@code IllegalStateException} is thrown
+     */
+    public void remove() {
+      checkForComodification();
+      if (lastRet == null) {
+        throw new IllegalStateException();
+      }
+
+      Tree.this.remove(lastRet);
       lastRet = null;
       ++expectedModCount;
     }
@@ -530,8 +604,6 @@ public class Tree<E> implements Iterable<E> {
     }
     return !it1.hasNext() && !it2.hasNext();
   }
-
-  //TODO Iterator<Node<E>> class for
 
   /**
    * Tree spliterator for stream. Uses BFS-ordered array as source
