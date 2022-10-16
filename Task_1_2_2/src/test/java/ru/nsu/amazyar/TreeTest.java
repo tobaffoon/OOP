@@ -10,23 +10,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TreeGenTest {
+class TreeTest {
 
-  TreeGen<Integer> intTree;
-  TreeGen<String> stringTree;
+  Tree<Integer> intTree;
+  Tree<String> stringTree;
 
   @BeforeEach
   public void beforeTreeGenTest() {
-    intTree = new TreeGen<>();
-    stringTree = new TreeGen<>();
+    intTree = new Tree<>();
+    stringTree = new Tree<>();
   }
 
   @Test
   public void addSizeSetTest() {
-    Assertions.assertThrows(NullPointerException.class, () -> new TreeGen<Double>(null));
+    Assertions.assertThrows(NullPointerException.class, () -> new Tree<Double>(null));
     Assertions.assertTrue(intTree.isEmpty());
     intTree.add(1);
-    TreeGen<Integer>.Node<Integer> nodeTwo = intTree.add(2);
+    Tree<Integer> nodeTwo = intTree.add(2);
     intTree.add(4);
     intTree.add(nodeTwo, 3);
     Assertions.assertThrows(NullPointerException.class, () -> intTree.add(null, 2));
@@ -46,10 +46,10 @@ class TreeGenTest {
   }
 
   @Test
-  public void remove() {
+  public void removeTest() {
     stringTree.add("Bread");
-    TreeGen<String>.Node<String> mayo = stringTree.add("Mayo");
-    TreeGen<String>.Node<String> sausage = stringTree.add(mayo, "Sausage");
+    Tree<String> mayo = stringTree.add("Mayo");
+    Tree<String> sausage = stringTree.add(mayo, "Sausage");
     stringTree.add(mayo, "Onion");
     stringTree.add(sausage, "Cheese");
     stringTree.add("Bread");
@@ -58,8 +58,8 @@ class TreeGenTest {
         () -> stringTree.remove(stringTree.size()));
     Assertions.assertEquals("Sausage", stringTree.remove(3));
 
-    TreeGen<String> testSandwich = new TreeGen<>("Bread");
-    TreeGen<String>.Node<String> mayo1 = testSandwich.add("Mayo");
+    Tree<String> testSandwich = new Tree<>("Bread");
+    Tree<String> mayo1 = testSandwich.add("Mayo");
     testSandwich.add(mayo1, "Onion");
     testSandwich.add(mayo1, "Cheese");
     testSandwich.add("Bread");
@@ -68,7 +68,7 @@ class TreeGenTest {
     testSandwich.clear();
     Assertions.assertTrue(testSandwich.isEmpty());
 
-    Assertions.assertEquals(mayo, stringTree.remove(mayo));
+    Assertions.assertEquals("Mayo", stringTree.remove(mayo));
 
     testSandwich.add("Bread");
     testSandwich.add("Bread");
@@ -112,9 +112,9 @@ class TreeGenTest {
   @Test
   public void breadFirstSearchIteratorTest() {
     stringTree.add("Water");
-    TreeGen<String>.Node<String> fire = stringTree.add("Fire");
+    Tree<String> fire = stringTree.add("Fire");
     stringTree.add("Air");
-    TreeGen<String>.Node<String> earth = stringTree.add(fire, "Earth");
+    Tree<String> earth = stringTree.add(fire, "Earth");
     stringTree.add(earth, "Magnets don't work");
     Iterator<String> it = stringTree.iterator();
 
@@ -131,7 +131,7 @@ class TreeGenTest {
     it.remove();
 
     //iterator add
-    TreeGen<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
+    Tree<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
     Assertions.assertEquals("Water", bfsIt.next());
     Assertions.assertEquals("Air", bfsIt.next());
     Assertions.assertThrows(NullPointerException.class, () -> bfsIt.add(null));
@@ -152,11 +152,11 @@ class TreeGenTest {
   @Test
   public void depthFirstSearchIteratorTest() {
     stringTree.add("Water");
-    TreeGen<String>.Node<String> fire = stringTree.add("Fire");
+    Tree<String> fire = stringTree.add("Fire");
     stringTree.add("Air");
-    TreeGen<String>.Node<String> earth = stringTree.add(fire, "Earth");
+    Tree<String> earth = stringTree.add(fire, "Earth");
     stringTree.add(earth, "Magnets don't work");
-    TreeGen<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
+    Tree<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
 
     //iterate
     Assertions.assertThrows(IllegalStateException.class, dfsIt::remove);
@@ -171,7 +171,7 @@ class TreeGenTest {
     dfsIt.remove();
 
     //iterator add
-    TreeGen<String>.depthFirstSearchIterator dfsIt1 = stringTree.dfsIterator();
+    Tree<String>.depthFirstSearchIterator dfsIt1 = stringTree.dfsIterator();
     Assertions.assertEquals("Water", dfsIt1.next());
     Assertions.assertEquals("Earth", dfsIt1.next());
     Assertions.assertThrows(NullPointerException.class, () -> dfsIt1.add(null));
@@ -182,6 +182,7 @@ class TreeGenTest {
     Assertions.assertTrue(stringTree.contains("Math"));
     dfsIt1.set("Ground");
     Assertions.assertTrue(stringTree.contains("Ground"));
+    Assertions.assertFalse(stringTree.contains("Math"));
     Assertions.assertEquals("Magnets don't work", dfsIt1.next());
     Assertions.assertThrows(NoSuchElementException.class, dfsIt1::next);
     stringTree.set(3, "Klein");
@@ -191,7 +192,7 @@ class TreeGenTest {
 
   @Test
   public void equalsTest() {
-    TreeGen<Integer> smallIntTree = new TreeGen<>();
+    Tree<Integer> smallIntTree = new Tree<>();
     for (int i = 0; i < 10; i++) {
       intTree.add(i);
       smallIntTree.add(i);
@@ -207,18 +208,18 @@ class TreeGenTest {
   @Test
   public void comodificationTest() {
     stringTree.add("A");
-    TreeGen<String>.Node<String> nodeB = stringTree.add("B");
+    Tree<String> nodeB = stringTree.add("B");
     stringTree.add("C");
     stringTree.add(nodeB, "D");
 
-    TreeGen<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
+    Tree<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
     bfsIt.next();
     bfsIt.next();
     stringTree.remove(nodeB);
     Assertions.assertThrows(ConcurrentModificationException.class, bfsIt::remove);
     Assertions.assertThrows(ConcurrentModificationException.class, () -> bfsIt.add("B"));
 
-    TreeGen<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
+    Tree<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
     dfsIt.next();
     dfsIt.remove();
     stringTree.add("Z");
@@ -246,9 +247,9 @@ class TreeGenTest {
   @Test
   public void streamTest() {
     stringTree.add("A");
-    TreeGen<String>.Node<String> nodeB = stringTree.add("B");
+    Tree<String> nodeB = stringTree.add("B");
     stringTree.add("C");
-    TreeGen<String>.Node<String> nodeAb = stringTree.add(nodeB, "AB");
+    Tree<String> nodeAb = stringTree.add(nodeB, "AB");
     stringTree.add(nodeB, "CB");
     stringTree.add(nodeAb, "BAB");
     stringTree.add(nodeAb, "DAB");

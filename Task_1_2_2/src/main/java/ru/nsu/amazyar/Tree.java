@@ -16,16 +16,16 @@ import java.util.stream.StreamSupport;
  *
  * @param <E> type of elements of tree
  */
-public class TreeGen<E> implements Iterable<E> {
+public class Tree<E> implements Iterable<E> {
 
   /**
    * Root-node of tree.
    */
-  private Node<E> root;
+  private E value;
+  private Tree<E> parent;
+  private ArrayList<Tree<E>> children;
+  private int size;
 
-  /**
-   * Flag to know if {@link #root} size should be updated.
-   */
   private boolean sizeModified = false;
 
   private long modCount = 0;
@@ -33,20 +33,26 @@ public class TreeGen<E> implements Iterable<E> {
   /**
    * Constructor for empty tree.
    */
-  public TreeGen() {
-    root = null;
+  public Tree() {
+    value = null;
+    parent = null;
+    children = new ArrayList<>();
+    size = 0;
   }
 
   /**
    * Constructor for singleton tree.
    *
-   * @param rootValue Value of the only element
+   * @param nodeValue Value of the only element
    */
-  public TreeGen(E rootValue) {
-    if (rootValue == null) {
+  public Tree(E nodeValue) {
+    if (nodeValue == null) {
       throw new NullPointerException();
     }
-    root = new Node<>(rootValue);
+    value = nodeValue;
+    parent = null;
+    children = new ArrayList<>();
+    size = 1;
   }
 
   /**
@@ -55,28 +61,28 @@ public class TreeGen<E> implements Iterable<E> {
    * @param node  Node whose value will change
    * @param value New value of the node
    */
-  public void set(Node<E> node, E value) {
+  public void set(Tree<E> node, E value) {
     if (node == null || value == null) {
       throw new NullPointerException();
     }
 
     ++modCount;
-    node.rootValue = value;
+    node.value = value;
   }
 
   /**
    * Changes value of a node by index.
    *
    * @param index Index of a node whose value will change
-   * @param value New value of the node
+   * @param newValue New value of the node
    */
-  public void set(int index, E value) {
+  public void set(int index, E newValue) {
     this.checkElementIndex(index);
     breadthFirstSearchIterator it = bfsIterator();
     for (int i = 0; i <= index; i++) {
       it.next();
     }
-    it.set(value);
+    it.set(newValue);
   }
 
   /**
@@ -86,16 +92,13 @@ public class TreeGen<E> implements Iterable<E> {
    * @param e          Value of new node
    * @return Created node
    */
-  public Node<E> add(Node<E> parentNode, E e) {
+  public Tree<E> add(Tree<E> parentNode, E e) {
     if (parentNode == null || e == null) {
       throw new NullPointerException();
     } else {
       sizeModified = true;
       ++modCount;
-      if (parentNode.children == null) {
-        parentNode.children = new ArrayList<>();
-      }
-      Node<E> newChild = new Node<>(e);
+      Tree<E> newChild = new Tree<>(e);
       newChild.parent = parentNode;
       parentNode.children.add(newChild);
       return newChild;
@@ -108,12 +111,12 @@ public class TreeGen<E> implements Iterable<E> {
    * @param e Value of new node
    * @return Created node
    */
-  public Node<E> add(E e) {
+  public Tree<E> add(E e) {
     if (this.isEmpty()) {
-      root = new Node<>(e);
-      return root;
+      value = e;
+      return this;
     } else {
-      return add(root, e);
+      return add(this, e);
     }
   }
 
@@ -121,7 +124,10 @@ public class TreeGen<E> implements Iterable<E> {
    * Makes Tree empty.
    */
   public void clear() {
-    root = null;
+    value = null;
+    parent = null;
+    children = new ArrayList<>();
+    size = 0;
     ++modCount;
   }
 
@@ -144,9 +150,23 @@ public class TreeGen<E> implements Iterable<E> {
     checkEmptyTree();
     if (sizeModified) {
       sizeModified = false;
-      return root.updateSize();
+      size = updateSize();
+      return size;
     } else {
-      return root.size;
+      return size;
+    }
+  }
+
+  private int updateSize() {
+    if(this.children.isEmpty()){
+      return 1;
+    }
+    else{
+      int subTreeSize = 0;
+      for (Tree<E> child : children) {
+        subTreeSize += child.updateSize();
+      }
+      return 1 + subTreeSize;
     }
   }
 
@@ -156,7 +176,7 @@ public class TreeGen<E> implements Iterable<E> {
    * @return true if tree is empty, false if it is not
    */
   public boolean isEmpty() {
-    return root == null;
+    return value == null;
   }
 
   private void checkEmptyTree() {
@@ -184,12 +204,11 @@ public class TreeGen<E> implements Iterable<E> {
     return false;
   }
 
-  private void reassignChildren(Node<E> oldParent, Node<E> newParent) {
-    if (newParent.children == null) {
-      newParent.children = new ArrayList<>();
-    }
-
-    for (Node<E> child : oldParent.children) {
+  private void reassignChildren(Tree<E> oldParent, Tree<E> newParent) {
+    /* NOTE: child isn't removed from children list of oldParent because reassignChildren is called
+     * only when oldParent is removed from the tree, so it is not needed to modify it
+     */
+    for (Tree<E> child : oldParent.children) {
       newParent.children.add(child);
       child.parent = newParent;
     }
@@ -204,47 +223,48 @@ public class TreeGen<E> implements Iterable<E> {
   public E remove(int index) {
     this.checkElementIndex(index);
     Iterator<E> it = iterator();
-    E returnValue = null;
-    for (int i = 0; i <= index; i++) {
-      returnValue = it.next();
+    E returnValue;
+    for (int i = 0; i < index; i++) {
+      it.next();
     }
+    returnValue = it.next();
     it.remove();
     return returnValue;
   }
 
   /**
    * Remove specific element from tree. If this element is root, then one of its child becomes root,
-   * tree becomes empty if no children If this element isn't root, its children are assigned to
+   * this means that child's value and child's children is assigned to root.
+   * Tree becomes empty if no children. If this element isn't root, its children are assigned to
    * element's parent
    *
    * @param rmNode Node to be removed
    * @return removed node
    */
-  public Node<E> remove(Node<E> rmNode) {
+  public E remove(Tree<E> rmNode) {
     if (rmNode == null) {
       throw new NullPointerException();
     }
 
     ++modCount;
     sizeModified = true;
-    if (rmNode == root) {
+    if (rmNode == this) {
       //delete first child from children list and make it root
-      if (rmNode.children != null) {
-        Node<E> newRoot = rmNode.children.remove(0);
-        reassignChildren(rmNode, newRoot);
-        root = newRoot;
+      if (!rmNode.children.isEmpty()) {
+        Tree<E> newRoot = rmNode.children.remove(0);
+        rmNode.value = newRoot.value;
+        reassignChildren(newRoot, rmNode);
       } else {
-        root = null;
+        rmNode.clear();
       }
     } else {
       rmNode.parent.children.remove(rmNode);
       if (rmNode.children != null) {
-        Node<E> newFather = rmNode.parent;
-        reassignChildren(rmNode, newFather);
+        reassignChildren(rmNode, rmNode.parent);
       }
     }
 
-    return rmNode;
+    return rmNode.value;
   }
 
   /**
@@ -282,9 +302,8 @@ public class TreeGen<E> implements Iterable<E> {
    */
   public class breadthFirstSearchIterator implements Iterator<E> {
 
-    private Node<E> lastRet;
-    private final LinkedList<Node<E>> queue;
-    private int cursor;
+    private Tree<E> lastRet;
+    private final LinkedList<Tree<E>> queue;
     private long expectedModCount;
 
     /**
@@ -293,16 +312,15 @@ public class TreeGen<E> implements Iterable<E> {
     public breadthFirstSearchIterator() {
       lastRet = null;
       queue = new LinkedList<>();
-      queue.add(TreeGen.this.root);
-      cursor = 0;
-      expectedModCount = TreeGen.this.modCount;
+      queue.add(Tree.this);
+      expectedModCount = Tree.this.modCount;
     }
 
     /**
      * Checks if any element left.
      */
     public boolean hasNext() {
-      return cursor < queue.size();
+      return !queue.isEmpty();
     }
 
     /**
@@ -310,14 +328,17 @@ public class TreeGen<E> implements Iterable<E> {
      *
      * @return next element
      */
+
+
+    @SuppressWarnings("null")
     public E next() {
       checkForComodification();
       if (!this.hasNext()) {
         throw new NoSuchElementException();
       } else {
-        lastRet = queue.get(cursor++);
+        lastRet = queue.poll();
         this.addChildren(lastRet);
-        return lastRet.rootValue;
+        return lastRet.value;
       }
     }
 
@@ -331,7 +352,7 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      TreeGen.this.remove(lastRet);
+      Tree.this.remove(lastRet);
       lastRet = null;
       ++expectedModCount;
     }
@@ -347,14 +368,14 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      TreeGen.this.set(lastRet, value);
+      Tree.this.set(lastRet, value);
       ++expectedModCount;
     }
 
 
     /**
-     * Adds a child of last node. If next has not been called before, {@code IllegalStateException}
-     * is thrown
+     * Adds a child of last returned node.
+     * If next has not been called before, {@code IllegalStateException} is thrown
      *
      * @param newValue Value of new child
      */
@@ -364,20 +385,18 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      Node<E> newNode = TreeGen.this.add(lastRet, newValue);
+      Tree<E> newNode = Tree.this.add(lastRet, newValue);
       queue.add(newNode); //add last because last returned node added its children in the end
       lastRet = null;
       ++expectedModCount;
     }
 
-    private void addChildren(Node<E> node) {
-      if (node.children != null) {
-        queue.addAll(node.children);
-      }
+    private void addChildren(Tree<E> node) {
+      queue.addAll(node.children);
     }
 
     private void checkForComodification() {
-      if (expectedModCount != TreeGen.this.modCount) {
+      if (expectedModCount != Tree.this.modCount) {
         throw new ConcurrentModificationException();
       }
     }
@@ -388,8 +407,8 @@ public class TreeGen<E> implements Iterable<E> {
    */
   public class depthFirstSearchIterator implements Iterator<E> {
 
-    private Node<E> lastRet;
-    private final Stack<Node<E>> stack;
+    private Tree<E> lastRet;
+    private final Stack<Tree<E>> stack;
     private long expectedModCount;
 
     /**
@@ -397,9 +416,9 @@ public class TreeGen<E> implements Iterable<E> {
      */
     public depthFirstSearchIterator() {
       stack = new Stack<>();
-      stack.push(TreeGen.this.root);
+      stack.push(Tree.this);
       lastRet = null;
-      expectedModCount = TreeGen.this.modCount;
+      expectedModCount = Tree.this.modCount;
     }
 
     /**
@@ -420,16 +439,14 @@ public class TreeGen<E> implements Iterable<E> {
       if (!this.hasNext()) {
         throw new NoSuchElementException();
       } else {
-        Node<E> currentNode = stack.pop();
+        Tree<E> currentNode = stack.pop();
 
-        if (currentNode.children != null) {
-          for (int i = currentNode.children.size() - 1; i >= 0; i--) {
-            stack.push(currentNode.children.get(i));
-          }
+        for (int i = currentNode.children.size() - 1; i >= 0; i--) {
+          stack.push(currentNode.children.get(i));
         }
 
         lastRet = currentNode;
-        return currentNode.rootValue;
+        return currentNode.value;
       }
     }
 
@@ -443,7 +460,7 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      TreeGen.this.remove(lastRet);
+      Tree.this.remove(lastRet);
       lastRet = null;
       ++expectedModCount;
     }
@@ -459,7 +476,7 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      TreeGen.this.set(lastRet, value);
+      Tree.this.set(lastRet, value);
       ++expectedModCount;
     }
 
@@ -475,14 +492,14 @@ public class TreeGen<E> implements Iterable<E> {
         throw new IllegalStateException();
       }
 
-      Node<E> newNode = TreeGen.this.add(lastRet, newValue);
+      Tree<E> newNode = Tree.this.add(lastRet, newValue);
       stack.push(newNode);
       lastRet = null;
       ++expectedModCount;
     }
 
     private void checkForComodification() {
-      if (expectedModCount != TreeGen.this.modCount) {
+      if (expectedModCount != Tree.this.modCount) {
         throw new ConcurrentModificationException();
       }
     }
@@ -501,7 +518,7 @@ public class TreeGen<E> implements Iterable<E> {
       return false;
     }
 
-    @SuppressWarnings("unchecked") TreeGen<E> oTree = (TreeGen<E>) o;
+    @SuppressWarnings("unchecked") Tree<E> oTree = (Tree<E>) o;
 
     Iterator<E> it1 = this.iterator();
     Iterator<E> it2 = oTree.iterator();
@@ -514,34 +531,7 @@ public class TreeGen<E> implements Iterable<E> {
     return !it1.hasNext() && !it2.hasNext();
   }
 
-  /**
-   * Vertex of tree.
-   */
-  public class Node<T extends E> {
-
-    private T rootValue;
-    private Node<T> parent = null;
-    private ArrayList<Node<T>> children = null;
-    private int size = 1;
-
-    /**
-     * Constructor with node value.
-     *
-     * @param rootValue Node value
-     */
-    public Node(T rootValue) {
-      this.rootValue = rootValue;
-    }
-
-    private int updateSize() {
-      if (this.children != null) {
-        for (Node<T> child : children) {
-          this.size += child.updateSize();
-        }
-      }
-      return this.size;
-    }
-  }
+  //TODO Iterator<Node<E>> class for
 
   /**
    * Tree spliterator for stream. Uses BFS-ordered array as source
@@ -549,7 +539,7 @@ public class TreeGen<E> implements Iterable<E> {
    * @return Spliterator of {@code this}
    */
   public Spliterator<E> spliterator() {
-    Iterator<E> iterator = TreeGen.this.iterator();
+    Iterator<E> iterator = Tree.this.iterator();
     ArrayList<E> nodeOrder = new ArrayList<>();
     while (iterator.hasNext()) {
       nodeOrder.add(iterator.next());
