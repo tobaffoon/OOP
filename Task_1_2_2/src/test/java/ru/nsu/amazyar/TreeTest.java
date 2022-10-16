@@ -27,8 +27,10 @@ class TreeTest {
     Assertions.assertTrue(intTree.isEmpty());
     intTree.add(1);
     Tree<Integer> nodeTwo = intTree.add(2);
+    Assertions.assertTrue(nodeTwo.isLeaf());
     intTree.add(4);
     intTree.add(nodeTwo, 3);
+    Assertions.assertFalse(nodeTwo.isLeaf());
     Assertions.assertThrows(NullPointerException.class, () -> intTree.add(null, 2));
     Assertions.assertThrows(NullPointerException.class, () -> intTree.add(nodeTwo, null));
     Assertions.assertThrows(NullPointerException.class, () -> intTree.add(null));
@@ -290,5 +292,45 @@ class TreeTest {
     Assertions.assertEquals("BAB", list.get(1));
     Assertions.assertEquals("CB", list.get(2));
     Assertions.assertEquals("DAB", list.get(3));
+  }
+
+  @Test
+  public void trySplitTreeTest(){
+    stringTree.add("A");
+    Assertions.assertNull(stringTree.treeSpliterator().trySplit());
+    stringTree.add("B");
+    stringTree.add("C");
+
+    Spliterator<Tree<String>> split1 = stringTree.treeSpliterator();
+    Spliterator<Tree<String>> split2 = split1.trySplit();
+    for (int i = 0; i < 2; i++) {
+      Assertions.assertTrue(split1.tryAdvance(x -> {}));
+    }
+    Assertions.assertFalse(split1.tryAdvance(x -> {}));
+    for (int i = 0; i < 1; i++) {
+      Assertions.assertTrue(split2.tryAdvance(x -> {}));
+    }
+    Assertions.assertFalse(split2.tryAdvance(x -> {}));
+  }
+
+  @Test
+  public void streamTreeTest() {
+    stringTree.add("A");
+    Tree<String> nodeB = stringTree.add("B");
+    stringTree.add("C");
+    Tree<String> nodeAb = stringTree.add(nodeB, "AB");
+    stringTree.add(nodeB, "CB");
+    stringTree.add(nodeAb, "BAB");
+    stringTree.add(nodeAb, "DAB");
+
+    @SuppressWarnings("SimplifyStreamApiCallChains")
+    List<String> list = stringTree.treeStream()
+        .filter(x -> x.getValue().contains("B") && !x.isLeaf())
+        .map(Tree::getValue)
+        .collect(Collectors.toList());
+
+    Assertions.assertEquals(2, list.size());
+    Assertions.assertEquals("B", list.get(0));
+    Assertions.assertEquals("AB", list.get(1));
   }
 }

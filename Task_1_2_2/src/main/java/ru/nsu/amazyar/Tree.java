@@ -178,10 +178,23 @@ public class Tree<E> implements Iterable<E> {
     return value == null;
   }
 
+  /**
+   * Check if node is a leaf
+   * @return True if node is leaf, false otherwise
+   */
+  public boolean isLeaf(){
+    return this.children.isEmpty() && this.value != null;
+  }
+
   private void checkEmptyTree() {
     if (isEmpty()) {
       throw new IllegalStateException();
     }
+  }
+
+  public E getValue(){
+    checkEmptyTree();
+    return this.value;
   }
 
   /**
@@ -668,5 +681,70 @@ public class Tree<E> implements Iterable<E> {
 
   public Stream<E> stream() {
     return StreamSupport.stream(this.spliterator(), false);
+  }
+
+  /**
+   * Tree spliterator for stream. Uses BFS-ordered array as source
+   *
+   * @return Spliterator of {@code this}
+   */
+  public Spliterator<Tree<E>> treeSpliterator() {
+    Iterator<Tree<E>> treeIterator = this.treeIterator();
+    ArrayList<Tree<E>> nodeOrder = new ArrayList<>();
+    while (treeIterator.hasNext()) {
+      nodeOrder.add(treeIterator.next());
+    }
+
+    class TreeSpliterator implements Spliterator<Tree<E>> {
+
+      private int start;
+      private final int end;
+
+      public TreeSpliterator() {
+        super();
+        start = 0;
+        end = nodeOrder.size();
+      }
+
+      private TreeSpliterator(int start, int end) {
+        super();
+        this.start = start;
+        this.end = end;
+      }
+
+      public boolean tryAdvance(Consumer<? super Tree<E>> action) {
+        if (start >= end) {
+          return false;
+        }
+
+        Tree<E> nextNode = nodeOrder.get(start);
+        action.accept(nextNode);
+        start++;
+        return true;
+      }
+
+      public long estimateSize() {
+        return end - start;
+      }
+
+      public Spliterator<Tree<E>> trySplit() {
+        if (end - start < 2) {
+          return null;
+        }
+        int middle = (end - start) / 2;
+        Spliterator<Tree<E>> secondSplit = new TreeSpliterator(start, middle);
+        this.start = middle;
+        return secondSplit;
+      }
+
+      public int characteristics() {
+        return this.IMMUTABLE | this.NONNULL | this.SIZED | this.SUBSIZED;
+      }
+    }
+    return new TreeSpliterator();
+  }
+
+  public Stream<Tree<E>> treeStream() {
+    return StreamSupport.stream(this.treeSpliterator(), false);
   }
 }
