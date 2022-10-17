@@ -1,12 +1,11 @@
 package ru.nsu.amazyar;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
-import java.util.Stack;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -158,15 +157,7 @@ public class Tree<E> implements Iterable<E> {
   }
 
   private int updateSize() {
-    if (this.children.isEmpty()) {
-      return 1;
-    } else {
-      int subTreeSize = 0;
-      for (Tree<E> child : children) {
-        subTreeSize += child.updateSize();
-      }
-      return 1 + subTreeSize;
-    }
+    return this.children.stream().mapToInt(Tree::updateSize).reduce(1, Integer::sum);
   }
 
   /**
@@ -180,9 +171,10 @@ public class Tree<E> implements Iterable<E> {
 
   /**
    * Check if node is a leaf
+   *
    * @return True if node is leaf, false otherwise
    */
-  public boolean isLeaf(){
+  public boolean isLeaf() {
     return this.children.isEmpty() && this.value != null;
   }
 
@@ -192,7 +184,7 @@ public class Tree<E> implements Iterable<E> {
     }
   }
 
-  public E getValue(){
+  public E getValue() {
     checkEmptyTree();
     return this.value;
   }
@@ -313,30 +305,34 @@ public class Tree<E> implements Iterable<E> {
     return new depthFirstSearchIterator();
   }
 
+  //TODO create common interface for Tree Iterators to reuse common methods
+
   /**
    * Iterator using Breadth First Search.
    */
   public class breadthFirstSearchIterator implements Iterator<E> {
 
     private Tree<E> lastRet;
-    private final LinkedList<Tree<E>> queue;
+    private final ArrayList<Tree<E>> queue;
     private long expectedModCount;
+    private int cursor;
 
     /**
      * Constructor initiating BFS.
      */
     public breadthFirstSearchIterator() {
       lastRet = null;
-      queue = new LinkedList<>();
+      queue = new ArrayList<>();
       queue.add(Tree.this);
       expectedModCount = Tree.this.modCount;
+      cursor = 0;
     }
 
     /**
      * Checks if any element left.
      */
     public boolean hasNext() {
-      return !queue.isEmpty();
+      return cursor < queue.size();
     }
 
     /**
@@ -344,15 +340,13 @@ public class Tree<E> implements Iterable<E> {
      *
      * @return next element
      */
-
-
     @SuppressWarnings("null")
     public E next() {
       checkForComodification();
       if (!this.hasNext()) {
         throw new NoSuchElementException();
       } else {
-        lastRet = queue.poll();
+        lastRet = queue.get(cursor++);
         this.addChildren(lastRet);
         return lastRet.value;
       }
@@ -424,32 +418,27 @@ public class Tree<E> implements Iterable<E> {
   public class bfsTreeIterator implements Iterator<Tree<E>> {
 
     private Tree<E> lastRet;
-    private final LinkedList<Tree<E>> queue;
+    private final ArrayList<Tree<E>> queue;
     private long expectedModCount;
+    private int cursor;
 
     /**
      * Constructor initiating BFS.
      */
     public bfsTreeIterator() {
       lastRet = null;
-      queue = new LinkedList<>();
+      queue = new ArrayList<>();
       queue.add(Tree.this);
       expectedModCount = Tree.this.modCount;
+      cursor = 0;
     }
 
     /**
      * Checks if any element left.
      */
     public boolean hasNext() {
-      return !queue.isEmpty();
+      return cursor < queue.size();
     }
-
-    /**
-     * Return next element. Also adds its child to the queue
-     *
-     * @return next element
-     */
-
 
     @SuppressWarnings("null")
     public Tree<E> next() {
@@ -457,7 +446,7 @@ public class Tree<E> implements Iterable<E> {
       if (!this.hasNext()) {
         throw new NoSuchElementException();
       } else {
-        lastRet = queue.poll();
+        lastRet = queue.get(cursor++);
         this.addChildren(lastRet);
         return lastRet;
       }
@@ -495,14 +484,14 @@ public class Tree<E> implements Iterable<E> {
   public class depthFirstSearchIterator implements Iterator<E> {
 
     private Tree<E> lastRet;
-    private final Stack<Tree<E>> stack;
+    private final ArrayDeque<Tree<E>> stack;
     private long expectedModCount;
 
     /**
      * Constructor initiating DFS.
      */
     public depthFirstSearchIterator() {
-      stack = new Stack<>();
+      stack = new ArrayDeque<>();
       stack.push(Tree.this);
       lastRet = null;
       expectedModCount = Tree.this.modCount;
@@ -512,7 +501,7 @@ public class Tree<E> implements Iterable<E> {
      * Checks if any element left.
      */
     public boolean hasNext() {
-      return !stack.empty();
+      return !stack.isEmpty();
     }
 
     /**
@@ -591,7 +580,6 @@ public class Tree<E> implements Iterable<E> {
       }
     }
   }
-
 
   /**
    * Check if this and o are equal. Compares nodes' value at same index. Index does not represent

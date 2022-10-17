@@ -254,7 +254,7 @@ class TreeTest {
   }
 
   @Test
-  public void trySplitTest(){
+  public void trySplitTest() {
     stringTree.add("A");
     Assertions.assertNull(stringTree.spliterator().trySplit());
     stringTree.add("B");
@@ -263,14 +263,19 @@ class TreeTest {
     Spliterator<String> split1 = stringTree.spliterator();
     Spliterator<String> split2 = split1.trySplit();
     for (int i = 0; i < 2; i++) {
-      Assertions.assertTrue(split1.tryAdvance(x -> {}));
+      Assertions.assertTrue(split1.tryAdvance(x -> {
+      }));
     }
-    Assertions.assertFalse(split1.tryAdvance(x -> {}));
+    Assertions.assertFalse(split1.tryAdvance(x -> {
+    }));
     for (int i = 0; i < 1; i++) {
-      Assertions.assertTrue(split2.tryAdvance(x -> {}));
+      Assertions.assertTrue(split2.tryAdvance(x -> {
+      }));
     }
-    Assertions.assertFalse(split2.tryAdvance(x -> {}));
+    Assertions.assertFalse(split2.tryAdvance(x -> {
+    }));
   }
+
   @Test
   public void streamTest() {
     stringTree.add("A");
@@ -295,7 +300,7 @@ class TreeTest {
   }
 
   @Test
-  public void trySplitTreeTest(){
+  public void trySplitTreeTest() {
     stringTree.add("A");
     Assertions.assertNull(stringTree.treeSpliterator().trySplit());
     stringTree.add("B");
@@ -304,13 +309,17 @@ class TreeTest {
     Spliterator<Tree<String>> split1 = stringTree.treeSpliterator();
     Spliterator<Tree<String>> split2 = split1.trySplit();
     for (int i = 0; i < 2; i++) {
-      Assertions.assertTrue(split1.tryAdvance(x -> {}));
+      Assertions.assertTrue(split1.tryAdvance(x -> {
+      }));
     }
-    Assertions.assertFalse(split1.tryAdvance(x -> {}));
+    Assertions.assertFalse(split1.tryAdvance(x -> {
+    }));
     for (int i = 0; i < 1; i++) {
-      Assertions.assertTrue(split2.tryAdvance(x -> {}));
+      Assertions.assertTrue(split2.tryAdvance(x -> {
+      }));
     }
-    Assertions.assertFalse(split2.tryAdvance(x -> {}));
+    Assertions.assertFalse(split2.tryAdvance(x -> {
+    }));
   }
 
   @Test
