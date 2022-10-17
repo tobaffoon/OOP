@@ -133,7 +133,7 @@ class TreeTest {
     it.remove();
 
     //iterator add
-    Tree<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
+    Tree<String>.BreadthFirstSearchIterator bfsIt = stringTree.BfsIterator();
     Assertions.assertEquals("Water", bfsIt.next());
     Assertions.assertEquals("Air", bfsIt.next());
     Assertions.assertThrows(NullPointerException.class, () -> bfsIt.add(null));
@@ -178,7 +178,7 @@ class TreeTest {
     stringTree.add("Air");
     Tree<String> earth = stringTree.add(fire, "Earth");
     stringTree.add(earth, "Magnets don't work");
-    Tree<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
+    Tree<String>.DepthFirstSearchIterator dfsIt = stringTree.DfsIterator();
 
     //iterate
     Assertions.assertThrows(IllegalStateException.class, dfsIt::remove);
@@ -193,7 +193,7 @@ class TreeTest {
     dfsIt.remove();
 
     //iterator add
-    Tree<String>.depthFirstSearchIterator dfsIt1 = stringTree.dfsIterator();
+    Tree<String>.DepthFirstSearchIterator dfsIt1 = stringTree.DfsIterator();
     Assertions.assertEquals("Water", dfsIt1.next());
     Assertions.assertEquals("Earth", dfsIt1.next());
     Assertions.assertThrows(NullPointerException.class, () -> dfsIt1.add(null));
@@ -234,14 +234,14 @@ class TreeTest {
     stringTree.add("C");
     stringTree.add(nodeB, "D");
 
-    Tree<String>.breadthFirstSearchIterator bfsIt = stringTree.bfsIterator();
+    Tree<String>.BreadthFirstSearchIterator bfsIt = stringTree.BfsIterator();
     bfsIt.next();
     bfsIt.next();
     stringTree.remove(nodeB);
     Assertions.assertThrows(ConcurrentModificationException.class, bfsIt::remove);
     Assertions.assertThrows(ConcurrentModificationException.class, () -> bfsIt.add("B"));
 
-    Tree<String>.depthFirstSearchIterator dfsIt = stringTree.dfsIterator();
+    Tree<String>.DepthFirstSearchIterator dfsIt = stringTree.DfsIterator();
     dfsIt.next();
     dfsIt.remove();
     stringTree.add("Z");

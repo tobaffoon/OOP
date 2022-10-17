@@ -77,7 +77,7 @@ public class Tree<E> implements Iterable<E> {
    */
   public void set(int index, E newValue) {
     this.checkElementIndex(index);
-    breadthFirstSearchIterator it = bfsIterator();
+    BreadthFirstSearchIterator it = BfsIterator();
     for (int i = 0; i <= index; i++) {
       it.next();
     }
@@ -170,7 +170,7 @@ public class Tree<E> implements Iterable<E> {
   }
 
   /**
-   * Check if node is a leaf
+   * Check if node is a leaf.
    *
    * @return True if node is leaf, false otherwise
    */
@@ -277,12 +277,12 @@ public class Tree<E> implements Iterable<E> {
    */
   public Iterator<E> iterator() {
     checkEmptyTree();
-    return new breadthFirstSearchIterator();
+    return new BreadthFirstSearchIterator();
   }
 
   public Iterator<Tree<E>> treeIterator() {
     checkEmptyTree();
-    return new bfsTreeIterator();
+    return new BfsTreeIterator();
   }
 
   /**
@@ -290,9 +290,9 @@ public class Tree<E> implements Iterable<E> {
    *
    * @return iterator
    */
-  public breadthFirstSearchIterator bfsIterator() {
+  public BreadthFirstSearchIterator BfsIterator() {
     checkEmptyTree();
-    return new breadthFirstSearchIterator();
+    return new BreadthFirstSearchIterator();
   }
 
   /**
@@ -300,9 +300,9 @@ public class Tree<E> implements Iterable<E> {
    *
    * @return iterator
    */
-  public depthFirstSearchIterator dfsIterator() {
+  public DepthFirstSearchIterator DfsIterator() {
     checkEmptyTree();
-    return new depthFirstSearchIterator();
+    return new DepthFirstSearchIterator();
   }
 
   //TODO create common interface for Tree Iterators to reuse common methods
@@ -310,7 +310,7 @@ public class Tree<E> implements Iterable<E> {
   /**
    * Iterator using Breadth First Search.
    */
-  public class breadthFirstSearchIterator implements Iterator<E> {
+  public class BreadthFirstSearchIterator implements Iterator<E> {
 
     private Tree<E> lastRet;
     private final ArrayList<Tree<E>> queue;
@@ -320,7 +320,7 @@ public class Tree<E> implements Iterable<E> {
     /**
      * Constructor initiating BFS.
      */
-    public breadthFirstSearchIterator() {
+    public BreadthFirstSearchIterator() {
       lastRet = null;
       queue = new ArrayList<>();
       queue.add(Tree.this);
@@ -415,7 +415,7 @@ public class Tree<E> implements Iterable<E> {
   /**
    * Iterator on nodes of tree using Breadth First Search.
    */
-  public class bfsTreeIterator implements Iterator<Tree<E>> {
+  public class BfsTreeIterator implements Iterator<Tree<E>> {
 
     private Tree<E> lastRet;
     private final ArrayList<Tree<E>> queue;
@@ -425,7 +425,7 @@ public class Tree<E> implements Iterable<E> {
     /**
      * Constructor initiating BFS.
      */
-    public bfsTreeIterator() {
+    public BfsTreeIterator() {
       lastRet = null;
       queue = new ArrayList<>();
       queue.add(Tree.this);
@@ -440,6 +440,11 @@ public class Tree<E> implements Iterable<E> {
       return cursor < queue.size();
     }
 
+    /**
+     * Return next node. Also adds its child to the queue
+     *
+     * @return next node
+     */
     @SuppressWarnings("null")
     public Tree<E> next() {
       checkForComodification();
@@ -481,7 +486,7 @@ public class Tree<E> implements Iterable<E> {
   /**
    * Iterator using Depth First Search.
    */
-  public class depthFirstSearchIterator implements Iterator<E> {
+  public class DepthFirstSearchIterator implements Iterator<E> {
 
     private Tree<E> lastRet;
     private final ArrayDeque<Tree<E>> stack;
@@ -490,7 +495,7 @@ public class Tree<E> implements Iterable<E> {
     /**
      * Constructor initiating DFS.
      */
-    public depthFirstSearchIterator() {
+    public DepthFirstSearchIterator() {
       stack = new ArrayDeque<>();
       stack.push(Tree.this);
       lastRet = null;
@@ -593,16 +598,17 @@ public class Tree<E> implements Iterable<E> {
       return false;
     }
 
-    @SuppressWarnings("unchecked") Tree<E> oTree = (Tree<E>) o;
+    @SuppressWarnings("unchecked") Tree<E> otree = (Tree<E>) o;
 
     Iterator<E> it1 = this.iterator();
-    Iterator<E> it2 = oTree.iterator();
+    Iterator<E> it2 = otree.iterator();
 
     while (it1.hasNext() && it2.hasNext()) {
       if (!it1.next().equals(it2.next())) {
         return false;
       }
     }
+
     return !it1.hasNext() && !it2.hasNext();
   }
 
