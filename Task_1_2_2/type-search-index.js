@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"Tree.bfsTreeIterator"},{"p":"ru.nsu.amazyar","l":"Tree.breadthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"Tree.depthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"Tree"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"Tree.BfsTreeIterator"},{"p":"ru.nsu.amazyar","l":"Tree.BreadthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"Tree.DepthFirstSearchIterator"},{"p":"ru.nsu.amazyar","l":"Tree"}]
