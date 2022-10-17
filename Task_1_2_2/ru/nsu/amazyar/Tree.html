@@ -246,7 +246,7 @@ implements java.lang.Iterable&lt;E&gt;</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="Tree.BreadthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.BreadthFirstSearchIterator</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#BfsIterator()">BfsIterator</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#bfsIterator()">bfsIterator</a></span>()</code></th>
 <td class="colLast">
 <div class="block">BFS iterator.</div>
 </td>
@@ -267,7 +267,7 @@ implements java.lang.Iterable&lt;E&gt;</pre>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="Tree.DepthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.DepthFirstSearchIterator</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DfsIterator()">DfsIterator</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dfsIterator()">dfsIterator</a></span>()</code></th>
 <td class="colLast">
 <div class="block">DFS iterator as simple iterator.</div>
 </td>
@@ -612,9 +612,10 @@ implements java.lang.Iterable&lt;E&gt;</pre>
 <li class="blockList">
 <h4>remove</h4>
 <pre class="methodSignature">public&nbsp;<a href="Tree.html" title="type parameter in Tree">E</a>&nbsp;remove&#8203;(<a href="Tree.html" title="class in ru.nsu.amazyar">Tree</a>&lt;<a href="Tree.html" title="type parameter in Tree">E</a>&gt;&nbsp;rmNode)</pre>
-<div class="block">Remove specific element from tree. If this element is root, then one of its child becomes root,
- this means that child's value and child's children is assigned to root. Tree becomes empty if
- no children. If this element isn't root, its children are assigned to element's parent</div>
+<div class="block">Remove specific element from tree. If this element is root, then one of its child becomes
+ root, this means that child's value and child's children is assigned to root. Tree becomes
+ empty if no children. If this element isn't root, its children are assigned to element's
+ parent</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>rmNode</code> - Node to be removed</dd>
@@ -648,13 +649,13 @@ implements java.lang.Iterable&lt;E&gt;</pre>
 <pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="class in ru.nsu.amazyar">Tree</a>&lt;<a href="Tree.html" title="type parameter in Tree">E</a>&gt;&gt;&nbsp;treeIterator()</pre>
 </li>
 </ul>
-<a id="BfsIterator()">
+<a id="bfsIterator()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>BfsIterator</h4>
-<pre class="methodSignature">public&nbsp;<a href="Tree.BreadthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.BreadthFirstSearchIterator</a>&nbsp;BfsIterator()</pre>
+<h4>bfsIterator</h4>
+<pre class="methodSignature">public&nbsp;<a href="Tree.BreadthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.BreadthFirstSearchIterator</a>&nbsp;bfsIterator()</pre>
 <div class="block">BFS iterator.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -662,13 +663,13 @@ implements java.lang.Iterable&lt;E&gt;</pre>
 </dl>
 </li>
 </ul>
-<a id="DfsIterator()">
+<a id="dfsIterator()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>DfsIterator</h4>
-<pre class="methodSignature">public&nbsp;<a href="Tree.DepthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.DepthFirstSearchIterator</a>&nbsp;DfsIterator()</pre>
+<h4>dfsIterator</h4>
+<pre class="methodSignature">public&nbsp;<a href="Tree.DepthFirstSearchIterator.html" title="class in ru.nsu.amazyar">Tree.DepthFirstSearchIterator</a>&nbsp;dfsIterator()</pre>
 <div class="block">DFS iterator as simple iterator.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
