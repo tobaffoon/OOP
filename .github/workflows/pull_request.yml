@@ -1,12 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: 'CI: PR to master branch'
 
 # Controls when the workflow will run
-on:
-  pull_request:
-    branches: [ "master" ]  
-  workflow_dispatch:
+on: { pull_request: { branches: [ main, master ] } }
 
 jobs:
   build:
@@ -16,13 +13,13 @@ jobs:
         working-directory: ./${{ github.event.pull_request.title }}
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Set permissions for gradle script
+      - name: Change wrapper permissions
         run: chmod +x ./gradlew
-    
+
       - name: Execute Gradle build
         run: ./gradlew build
 
