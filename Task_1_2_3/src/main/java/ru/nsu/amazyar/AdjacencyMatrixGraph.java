@@ -32,7 +32,7 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
 
     @Override
     public List<Vertex<V>> getVertices() {
-        return matrix.keySet().stream().toList();
+        return matrix.keySet().stream().collect(Collectors.toList());
     }
 
     @Override
