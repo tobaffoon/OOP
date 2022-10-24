@@ -17,6 +17,7 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     @Override
     public Vertex<V> addVertex(@NotNull V newValue) {
         Vertex<V> newVertex = new Vertex<>(newValue);
+        matrix.put(newVertex, new Pair<>(newVertex, new ArrayList<>()));
         for (Vertex<V> friend : this.getVertices()) {
             matrix.put(newVertex, new Pair<>(friend, new ArrayList<>()));
             matrix.put(friend, new Pair<>(newVertex, new ArrayList<>()));
