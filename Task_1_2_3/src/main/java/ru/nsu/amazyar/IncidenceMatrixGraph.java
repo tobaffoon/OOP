@@ -1,5 +1,6 @@
 package ru.nsu.amazyar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
 
     private final Map<Vertex<V>, Map<Edge<E>, EdgeDirection>> matrix;
+    private final List<Edge<E>> edges;
 
     private enum EdgeDirection {
         IN,
@@ -18,6 +20,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
 
     public IncidenceMatrixGraph() {
         matrix = new HashMap<>();
+        edges = new ArrayList<>();
     }
 
     @Override
@@ -76,6 +79,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
             matrix.get(from).put(newEdge, EdgeDirection.OUT);
             matrix.get(to).put(newEdge, EdgeDirection.IN);
         }
+        edges.add(newEdge);
         return newEdge;
     }
 
@@ -85,6 +89,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
             throw new NullPointerException();
         }
         matrix.values().forEach(map -> map.remove(rmEdge));
+        edges.remove(rmEdge);
     }
 
     public void removeEdge(E weight, Vertex<V> from, Vertex<V> to) {
@@ -102,12 +107,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
 
     @Override
     public List<Edge<E>> getEdges() {
-        if (this.verticesCount() == 0) {
-            return null;
-        }
-
-        return matrix.getOrDefault(this.getVertices().get(0), null).keySet().stream().collect(
-            Collectors.toList());
+        return this.edges;
     }
 
     @Override
