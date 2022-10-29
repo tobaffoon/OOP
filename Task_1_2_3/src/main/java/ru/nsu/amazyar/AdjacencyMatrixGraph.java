@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.jetbrains.annotations.NotNull;
 
 public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     private final Map<Vertex<V>, Map<Vertex<V>, List<Edge<E>>>> matrix;
