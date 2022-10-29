@@ -24,7 +24,7 @@ class AdjacencyMatrixGraphTest {
         sampleGraph.addEdge(1, vert3, vert1);
     }
     @Test
-    public void adjacencyMatrixTest(){
+    public void removeTest(){
         //init graph
         Assertions.assertEquals(3, sampleGraph.verticesCount());
 
@@ -79,5 +79,19 @@ class AdjacencyMatrixGraphTest {
         refSort.put(sampleGraph.findVertex(3), (double) -1);
 
         Assertions.assertEquals(refSort, mapSort);
+    }
+
+    @Test
+    public void nullTest(){
+        Graph<Integer, Integer> emptyGraph = new AdjacencyMatrixGraph<>();
+        Assertions.assertTrue(emptyGraph.getVertices().isEmpty());
+        Assertions.assertTrue(emptyGraph.getEdges().isEmpty());
+        Assertions.assertNull(emptyGraph.findVertex(2));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.addVertex(null));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.removeVertex(null));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.findVertex(null));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.addEdge(null, null, null));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.removeEdge(null));
+        Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.removeEdge(null, null, null));
     }
 }

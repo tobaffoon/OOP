@@ -16,7 +16,10 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     }
 
     @Override
-    public Vertex<V> addVertex(@NotNull V newValue) {
+    public Vertex<V> addVertex(V newValue) {
+        if(newValue == null){
+            throw new NullPointerException();
+        }
         Vertex<V> newVertex = new Vertex<>(newValue);
         matrix.put(newVertex,  new HashMap<>());
         for (Vertex<V> friend : this.getVertices()) {
@@ -27,7 +30,10 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     }
 
     @Override
-    public void removeVertex(@NotNull Vertex<V> rmVertex) {
+    public void removeVertex(Vertex<V> rmVertex) {
+        if(rmVertex == null){
+            throw new NullPointerException();
+        }
         matrix.remove(rmVertex);
         for (Vertex<V> vertex : this.getVertices()) {
             matrix.get(vertex).remove(rmVertex);    //remove vertex from all lists of other vertices
@@ -40,7 +46,10 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     }
 
     @Override
-    public Vertex<V> findVertex(@NotNull V value) {
+    public Vertex<V> findVertex(V value) {
+        if(value == null){
+            throw new NullPointerException();
+        }
         for (Vertex<V> v : matrix.keySet()) {
             if (v.getValue().equals(value)) {
                 return v;
@@ -50,18 +59,27 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
     }
 
     @Override
-    public Edge<E> addEdge(@NotNull E weight, Vertex<V> from, Vertex<V> to) {
+    public Edge<E> addEdge(E weight, Vertex<V> from, Vertex<V> to) {
+        if(weight == null || from == null || to == null){
+            throw new NullPointerException();
+        }
         Edge<E> newEdge = new Edge<>(weight, from, to);
         matrix.get(from).get(to).add(newEdge);
         return newEdge;
     }
 
     @Override
-    public void removeEdge(@NotNull Edge<E> rmEdge) {
+    public void removeEdge(Edge<E> rmEdge) {
+        if(rmEdge == null){
+            throw new NullPointerException();
+        }
         matrix.get(rmEdge.vertexFrom()).get(rmEdge.vertexTo()).remove(rmEdge);
     }
 
-    public void removeEdge(@NotNull E weight, Vertex<V> from, Vertex<V> to) {
+    public void removeEdge(E weight, Vertex<V> from, Vertex<V> to) {
+        if(weight == null || from == null || to == null){
+            throw new NullPointerException();
+        }
         matrix.get(from).get(to).removeIf(edge -> edge.vertexFrom() == from && edge.vertexTo() == to && edge.getWeight().equals(weight));
     }
 
