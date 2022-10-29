@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.jetbrains.annotations.NotNull;
 
 public class GraphAlgorithms {
 
-    public static <V, E extends Number> HashMap<Vertex<V>, Double> sortFrom(
-        @NotNull Graph<V, E> graph, Vertex<V> start) {
-
+    public static <V, E extends Number> HashMap<Vertex<V>, Double> sortFrom(Graph<V, E> graph, Vertex<V> start) {
+        if(graph == null || start == null){
+            throw new NullPointerException();
+        }
         List<Edge<E>> edges = graph.getEdges();
         Map<Vertex<V>, Double> minDistance =
             graph.getVertices().stream()

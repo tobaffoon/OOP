@@ -2,8 +2,7 @@ package ru.nsu.amazyar;
 
 import java.util.List;
 
-public interface Graph<V, E extends Number>{
-    //TODO check if Vertex or Edge is in graph before doing anything
+public interface Graph<V, E extends Number> {
     Vertex<V> addVertex(V newValue);
     void removeVertex(Vertex<V> rmVertex);
     List<Vertex<V>> getVertices();

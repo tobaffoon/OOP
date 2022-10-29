@@ -69,6 +69,7 @@ class IncidenceMatrixGraphTest {
         sampleGraph.addEdge(0, start, sampleGraph.findVertex(1));
         Assertions.assertNull(GraphAlgorithms.sortFrom(sampleGraph, start));
 
+        sampleGraph.removeEdge(-10, sampleGraph.findVertex(2), sampleGraph.findVertex(3));
         sampleGraph.removeEdge(1, sampleGraph.findVertex(2), sampleGraph.findVertex(3));
         Map<Vertex<Integer>, Double> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
 
@@ -83,7 +84,7 @@ class IncidenceMatrixGraphTest {
 
     @Test
     public void nullTest(){
-        Graph<Integer, Integer> emptyGraph = new AdjacencyMatrixGraph<>();
+        Graph<Integer, Integer> emptyGraph = new IncidenceMatrixGraph<>();
         Assertions.assertTrue(emptyGraph.getVertices().isEmpty());
         Assertions.assertTrue(emptyGraph.getEdges().isEmpty());
         Assertions.assertNull(emptyGraph.findVertex(2));

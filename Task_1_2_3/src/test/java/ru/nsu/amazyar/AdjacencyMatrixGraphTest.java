@@ -69,6 +69,7 @@ class AdjacencyMatrixGraphTest {
         sampleGraph.addEdge(0, start, sampleGraph.findVertex(1));
         Assertions.assertNull(GraphAlgorithms.sortFrom(sampleGraph, start));
 
+        sampleGraph.removeEdge(-10, sampleGraph.findVertex(2), sampleGraph.findVertex(3));
         sampleGraph.removeEdge(1, sampleGraph.findVertex(2), sampleGraph.findVertex(3));
         Map<Vertex<Integer>, Double> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
 
