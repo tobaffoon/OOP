@@ -28,6 +28,11 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
         if(newValue == null){
             throw new NullPointerException();
         }
+        //Check for already existing vertices
+        //Needed to ensure "find" method unambiguity
+        if(this.findVertex(newValue) != null){
+            throw new IllegalStateException("Vertex ambiguity is not allowed");
+        }
         Vertex<V> newVertex = new Vertex<>(newValue);
         matrix.put(newVertex, new HashMap<>());
         for (Edge<E> edge : this.getEdges()) {

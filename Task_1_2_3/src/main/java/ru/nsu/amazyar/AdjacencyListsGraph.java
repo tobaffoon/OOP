@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
-    private final Map<Vertex<V>, List<Edge<E>>> matrix;
+    private final Map<Vertex<V>, List<Edge<E>>> adjacencyList;
 
     public AdjacencyListsGraph() {
-        matrix = new HashMap<>();
+        adjacencyList = new HashMap<>();
     }
 
     @Override
@@ -18,8 +18,13 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(newValue == null){
             throw new NullPointerException();
         }
+        //Check for already existing vertices
+        //Needed to ensure "find" method unambiguity
+        if(this.findVertex(newValue) != null){
+            throw new IllegalStateException("Vertex ambiguity is not allowed");
+        }
         Vertex<V> newVertex = new Vertex<>(newValue);
-        matrix.put(newVertex, new ArrayList<>());
+        adjacencyList.put(newVertex, new ArrayList<>());
         return newVertex;
     }
 
@@ -28,15 +33,15 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(rmVertex == null){
             throw new NullPointerException();
         }
-        matrix.remove(rmVertex);
+        adjacencyList.remove(rmVertex);
         for (Vertex<V> vertex : this.getVertices()) {
-            matrix.get(vertex).removeIf(edge -> edge.vertexTo() == rmVertex);
+            adjacencyList.get(vertex).removeIf(edge -> edge.vertexTo() == rmVertex);
         }
     }
 
     @Override
     public List<Vertex<V>> getVertices() {
-        return matrix.keySet().stream().collect(Collectors.toList());
+        return adjacencyList.keySet().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -44,7 +49,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(value == null){
             throw new NullPointerException();
         }
-        for (Vertex<V> v : matrix.keySet()) {
+        for (Vertex<V> v : adjacencyList.keySet()) {
             if (v.getValue().equals(value)) {
                 return v;
             }
@@ -58,7 +63,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
             throw new NullPointerException();
         }
         Edge<E> newEdge = new Edge<>(weight, from, to);
-        matrix.get(from).add(newEdge);
+        adjacencyList.get(from).add(newEdge);
         return newEdge;
     }
 
@@ -67,7 +72,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(rmEdge == null){
             throw new NullPointerException();
         }
-        matrix.get(rmEdge.vertexFrom()).remove(rmEdge);
+        adjacencyList.get(rmEdge.vertexFrom()).remove(rmEdge);
     }
 
     @Override
@@ -75,16 +80,16 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(weight == null || from == null || to == null){
             throw new NullPointerException();
         }
-        matrix.get(from).removeIf(edge -> edge.vertexTo() == to && edge.getWeight().equals(weight));
+        adjacencyList.get(from).removeIf(edge -> edge.vertexTo() == to && edge.getWeight().equals(weight));
     }
 
     @Override
     public List<Edge<E>> getEdges() {
-        return matrix.values().stream().flatMap(List::stream).collect(Collectors.toList());
+        return adjacencyList.values().stream().flatMap(List::stream).collect(Collectors.toList());
     }
 
     @Override
     public int verticesCount() {
-        return matrix.size();
+        return adjacencyList.size();
     }
 }

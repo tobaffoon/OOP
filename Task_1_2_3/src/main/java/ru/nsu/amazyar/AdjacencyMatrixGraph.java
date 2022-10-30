@@ -19,6 +19,11 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
         if(newValue == null){
             throw new NullPointerException();
         }
+        //Check for already existing vertices
+        //Needed to ensure "find" method unambiguity
+        if(this.findVertex(newValue) != null){
+            throw new IllegalStateException("Vertex ambiguity is not allowed");
+        }
         Vertex<V> newVertex = new Vertex<>(newValue);
         matrix.put(newVertex,  new HashMap<>());
         for (Vertex<V> friend : this.getVertices()) {
@@ -35,7 +40,8 @@ public class AdjacencyMatrixGraph <V, E extends Number> implements Graph<V, E>{
         }
         matrix.remove(rmVertex);
         for (Vertex<V> vertex : this.getVertices()) {
-            matrix.get(vertex).remove(rmVertex);    //remove vertex from all lists of other vertices
+            matrix.get(vertex)
+                .remove(rmVertex);    //remove vertex from all lists of other vertices
         }
     }
 
