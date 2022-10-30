@@ -14,7 +14,6 @@ public class GraphAlgorithms {
         List<Edge<E>> edges = graph.getEdges();
 
         for (Vertex<V> vertex : graph.getVertices()) {
-            vertex.wasSorted = true;
             vertex.sortDistance = Double.POSITIVE_INFINITY;
         }
         start.sortDistance = 0.0;
@@ -35,6 +34,11 @@ public class GraphAlgorithms {
             if (from.sortDistance + edge.getWeight().doubleValue() < to.sortDistance) {
                 return null;
             }
+        }
+
+        //not before actual path calculation to ensure that negative cycle fail
+        for (Vertex<V> vertex : graph.getVertices()) {
+            vertex.wasSorted = true;
         }
 
         return graph.getVertices().stream()

@@ -1,9 +1,7 @@
 package ru.nsu.amazyar;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,21 +69,32 @@ class AdjacencyListsGraphTest {
 
         sampleGraph.removeEdge(-10.0, sampleGraph.findVertex("2"), sampleGraph.findVertex("3"));
         sampleGraph.removeEdge(1.0, sampleGraph.findVertex("2"), sampleGraph.findVertex("3"));
-        GraphAlgorithms.sortFrom(sampleGraph, start);
-
-        List<Vertex<String>> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
-
         Vertex<String> vert1 = sampleGraph.findVertex("1");
         Vertex<String> vert2 = sampleGraph.findVertex("2");
         Vertex<String> vert3 = sampleGraph.findVertex("3");
+        Assertions.assertThrows(IllegalAccessException.class, vert3::getSortDistance);
+
+        List<Vertex<String>> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
+
         Assertions.assertEquals(vert2, mapSort.get(0));
-        Assertions.assertEquals(-4.0, mapSort.get(0).sortDistance);
+        try {
+            Assertions.assertEquals(-4.0, mapSort.get(0).getSortDistance());
+        }catch (IllegalAccessException ignored){}
+
         Assertions.assertEquals(vert3, mapSort.get(1));
-        Assertions.assertEquals(-2.0, mapSort.get(1).sortDistance);
+        try {
+            Assertions.assertEquals(-2.0, mapSort.get(1).getSortDistance());
+        }catch (IllegalAccessException ignored){}
+
         Assertions.assertEquals(vert1, mapSort.get(2));
-        Assertions.assertEquals(-1.0, mapSort.get(2).sortDistance);
+        try {
+            Assertions.assertEquals(-1.0, mapSort.get(2).getSortDistance());
+        }catch (IllegalAccessException ignored){}
+
         Assertions.assertEquals(start, mapSort.get(3));
-        Assertions.assertEquals(0.0, mapSort.get(3).sortDistance);
+        try {
+            Assertions.assertEquals(0.0, mapSort.get(3).getSortDistance());
+        }catch (IllegalAccessException ignored){}
     }
 
     @Test
