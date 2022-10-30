@@ -66,20 +66,25 @@ class IncidenceMatrixGraphTest {
     @Test
     public void minDistanceTest() {
         Vertex<String> start = sampleGraph.addVertex("0");
-        sampleGraph.addEdge(0.0, start, sampleGraph.findVertex("1"));
+        sampleGraph.addEdge(-1.0, start, sampleGraph.findVertex("1"));
         Assertions.assertNull(GraphAlgorithms.sortFrom(sampleGraph, start));
 
         sampleGraph.removeEdge(-10.0, sampleGraph.findVertex("2"), sampleGraph.findVertex("3"));
         sampleGraph.removeEdge(1.0, sampleGraph.findVertex("2"), sampleGraph.findVertex("3"));
-        Map<Vertex<String>, Double> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
 
-        Map<Vertex<String>, Double> refSort = new HashMap<>();
-        refSort.put(start, 0.0);
-        refSort.put(sampleGraph.findVertex("1"), 0.0);
-        refSort.put(sampleGraph.findVertex("2"), -3.0);
-        refSort.put(sampleGraph.findVertex("3"), -1.0);
+        List<Vertex<String>> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
 
-        Assertions.assertEquals(refSort, mapSort);
+        Vertex<String> vert1 = sampleGraph.findVertex("1");
+        Vertex<String> vert2 = sampleGraph.findVertex("2");
+        Vertex<String> vert3 = sampleGraph.findVertex("3");
+        Assertions.assertEquals(vert2, mapSort.get(0));
+        Assertions.assertEquals(-4.0, mapSort.get(0).sortDistance);
+        Assertions.assertEquals(vert3, mapSort.get(1));
+        Assertions.assertEquals(-2.0, mapSort.get(1).sortDistance);
+        Assertions.assertEquals(vert1, mapSort.get(2));
+        Assertions.assertEquals(-1.0, mapSort.get(2).sortDistance);
+        Assertions.assertEquals(start, mapSort.get(3));
+        Assertions.assertEquals(0.0, mapSort.get(3).sortDistance);
     }
 
     @Test
@@ -96,5 +101,10 @@ class IncidenceMatrixGraphTest {
         Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.removeEdge(null));
         Assertions.assertThrows(NullPointerException.class,
             () -> sampleGraph.removeEdge(null, null, null));
+    }
+
+    @Test
+    public void ambiguousVertexTest(){
+        Assertions.assertThrows(IllegalStateException.class, () -> sampleGraph.addVertex(sampleGraph.getVertices().get(0).getValue()));
     }
 }
