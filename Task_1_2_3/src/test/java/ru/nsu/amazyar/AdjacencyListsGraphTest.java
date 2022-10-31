@@ -13,10 +13,10 @@ class AdjacencyListsGraphTest {
 
     @BeforeEach
     public void initSampleGraph() {
-        try{
+        try {
             sampleGraph = GraphReader.readGraph("sampleGraphs/adjacency_matrix.txt",
                 GraphRepresentation.ADJACENCY_LIST);
-        }catch (IOException e){
+        } catch (IOException e) {
             sampleGraph = new AdjacencyListsGraph<>();
         }
     }
@@ -79,22 +79,26 @@ class AdjacencyListsGraphTest {
         Assertions.assertEquals(vert2, mapSort.get(0));
         try {
             Assertions.assertEquals(-4.0, mapSort.get(0).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(vert3, mapSort.get(1));
         try {
             Assertions.assertEquals(-2.0, mapSort.get(1).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(vert1, mapSort.get(2));
         try {
             Assertions.assertEquals(-1.0, mapSort.get(2).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(start, mapSort.get(3));
         try {
             Assertions.assertEquals(0.0, mapSort.get(3).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
     }
 
     @Test
@@ -111,10 +115,63 @@ class AdjacencyListsGraphTest {
         Assertions.assertThrows(NullPointerException.class, () -> sampleGraph.removeEdge(null));
         Assertions.assertThrows(NullPointerException.class,
             () -> sampleGraph.removeEdge(null, null, null));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> GraphAlgorithms.sortFrom(null, null));
     }
 
     @Test
-    public void ambiguousVertexTest(){
-        Assertions.assertThrows(IllegalStateException.class, () -> sampleGraph.addVertex(sampleGraph.getVertices().get(0).getValue()));
+    public void ambiguousVertexTest() {
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> sampleGraph.addVertex(sampleGraph.getVertices().get(0).getValue()));
+    }
+
+    @Test
+    public void equalTest() {
+        //simple cases
+        Assertions.assertEquals(sampleGraph, sampleGraph);
+        Assertions.assertNotEquals(sampleGraph, null);
+
+        //same source
+        Graph<String, Double> anotherGraph;
+        try {
+            anotherGraph = GraphReader.readGraph("sampleGraphs/adjacency_matrix.txt",
+                GraphRepresentation.ADJACENCY_LIST);
+        } catch (IOException e) {
+            anotherGraph = new AdjacencyListsGraph<>();
+        }
+        Assertions.assertEquals(sampleGraph, anotherGraph);
+
+        //vertex equality
+        Vertex<String> vertex0 = anotherGraph.addVertex("silent");
+        Assertions.assertFalse(vertex0.equals(null));
+        Assertions.assertFalse(vertex0.equals("silent"));
+
+        //different size of vertices lists
+        Assertions.assertNotEquals(sampleGraph, anotherGraph);
+
+        Vertex<String> vertex1 = anotherGraph.addVertex("white");
+        //edge equality
+        Edge<Double> sampleEdge = anotherGraph.addEdge(0.0, vertex0, vertex1);
+        Assertions.assertFalse(sampleEdge.equals("silent"));
+        Assertions.assertFalse(sampleEdge.equals(null));
+
+        //different size of edges lists
+        Vertex<String> vertex2 = sampleGraph.addVertex(vertex0.getValue());
+        Vertex<String> vertex3 = sampleGraph.addVertex(vertex1.getValue());
+        Assertions.assertNotEquals(sampleGraph, anotherGraph);
+
+        //different edges
+        Edge<Double> anotherSampleEdge = sampleGraph.addEdge(0.1, vertex2, vertex3);
+        Assertions.assertNotEquals(sampleGraph, anotherGraph);
+
+        //different vertices
+        sampleGraph.addEdge(0.0, vertex2, vertex3);
+        sampleGraph.removeEdge(anotherSampleEdge);
+        sampleGraph.findVertex(vertex1.getValue()).setValue(vertex1.getValue() + "end");
+        Assertions.assertNotEquals(sampleGraph, anotherGraph);
+
+        //same
+        sampleGraph.findVertex(vertex1.getValue() + "end").setValue(vertex1.getValue());
+        Assertions.assertEquals(sampleGraph, anotherGraph);
     }
 }
