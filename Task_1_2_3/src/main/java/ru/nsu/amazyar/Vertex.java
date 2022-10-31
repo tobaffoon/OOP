@@ -14,7 +14,7 @@ public class Vertex<V> {
     protected double sortDistance;
     protected boolean wasSorted;
 
-    public Vertex(V value) {
+    protected Vertex(V value) {
         this.value = value;
         sortDistance = Double.POSITIVE_INFINITY;
         this.wasSorted = false;
@@ -27,15 +27,16 @@ public class Vertex<V> {
     public void setValue(V value) {
         this.value = value;
     }
+
     public double getSortDistance() throws IllegalAccessException {
-        if(wasSorted){
+        if (wasSorted) {
             return sortDistance;
         }
         throw new IllegalAccessException("No sorting occurred");
     }
 
     /**
-     * Compares vertices by their value
+     * Compares vertices by their value.
      */
     @Override
     public boolean equals(Object o) {

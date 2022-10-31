@@ -11,7 +11,7 @@ public class Edge <E extends Number>{
     private final Vertex<?> from;
     private final Vertex<?> to;
 
-    public Edge(E weight, Vertex<?> from, Vertex<?> to) {
+    protected Edge(E weight, Vertex<?> from, Vertex<?> to) {
         this.weight = weight;
         this.from = from;
         this.to = to;
@@ -34,7 +34,7 @@ public class Edge <E extends Number>{
     }
 
     /**
-     * Compares edges by weight and incident vertices
+     * Compares edges by weight and incident vertices.
      */
     @Override
     public boolean equals(Object o) {

@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+/**
+ * Reads graph from a file.
+ */
 public class GraphReader {
     public enum GraphRepresentation{
         ADJACENCY_MATRIX,
@@ -14,11 +17,17 @@ public class GraphReader {
         ADJACENCY_LIST
     }
 
+    /**
+     * Returns graph from a file with directory path.
+     */
     public static Graph<String,Double> readGraph(String path, GraphRepresentation graphType) throws IOException {
         Path paths = Paths.get(path);
         return readGraph(paths, graphType);
     }
 
+    /**
+     * Returns graph from a file with directory path.
+     */
     public static Graph<String,Double> readGraph(Path path, GraphRepresentation graphType) throws IOException {
         BufferedReader reader = new BufferedReader(Files.newBufferedReader(path));
 
