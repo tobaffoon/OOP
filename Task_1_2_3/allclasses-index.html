@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":2,"i1":2,"i2":1,"i3":2,"i4":2,"i5":2};
-var tabs = {65535:["t0","All Classes"],1:["t1","Interface Summary"],2:["t2","Class Summary"]};
+var data = {"i0":2,"i1":2,"i2":2,"i3":1,"i4":2,"i5":2,"i6":4,"i7":2,"i8":2};
+var tabs = {65535:["t0","All Classes"],1:["t1","Interface Summary"],2:["t2","Class Summary"],4:["t3","Enum Summary"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -103,39 +103,61 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <table class="typeSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Classes</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Interface Summary</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Class Summary</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Classes</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Interface Summary</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Class Summary</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Enum Summary</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Class</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="class in ru.nsu.amazyar">AdjacencyMatrixGraph</a>&lt;<a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>,&#8203;<a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">E</a> extends java.lang.Number&gt;</td>
-<th class="colLast" scope="row">&nbsp;</th>
+<td class="colFirst"><a href="ru/nsu/amazyar/AdjacencyListsGraph.html" title="class in ru.nsu.amazyar">AdjacencyListsGraph</a>&lt;<a href="ru/nsu/amazyar/AdjacencyListsGraph.html" title="type parameter in AdjacencyListsGraph">V</a>,&#8203;<a href="ru/nsu/amazyar/AdjacencyListsGraph.html" title="type parameter in AdjacencyListsGraph">E</a> extends java.lang.Number&gt;</td>
+<th class="colLast" scope="row">
+<div class="block">Graph implementation on adjacency list.</div>
+</th>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/Edge.html" title="class in ru.nsu.amazyar">Edge</a>&lt;<a href="ru/nsu/amazyar/Edge.html" title="type parameter in Edge">E</a> extends java.lang.Number&gt;</td>
+<td class="colFirst"><a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="class in ru.nsu.amazyar">AdjacencyMatrixGraph</a>&lt;<a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>,&#8203;<a href="ru/nsu/amazyar/AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">E</a> extends java.lang.Number&gt;</td>
 <th class="colLast" scope="row">
-<div class="block">Oriented edge in a graph</div>
+<div class="block">Graph implementation on adjacency matrix.</div>
 </th>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/Graph.html" title="interface in ru.nsu.amazyar">Graph</a>&lt;<a href="ru/nsu/amazyar/Graph.html" title="type parameter in Graph">V</a>,&#8203;<a href="ru/nsu/amazyar/Graph.html" title="type parameter in Graph">E</a> extends java.lang.Number&gt;</td>
-<th class="colLast" scope="row">&nbsp;</th>
+<td class="colFirst"><a href="ru/nsu/amazyar/Edge.html" title="class in ru.nsu.amazyar">Edge</a>&lt;<a href="ru/nsu/amazyar/Edge.html" title="type parameter in Edge">E</a> extends java.lang.Number&gt;</td>
+<th class="colLast" scope="row">
+<div class="block">Oriented edge in a graph.</div>
+</th>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/GraphAlgorithms.html" title="class in ru.nsu.amazyar">GraphAlgorithms</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
+<td class="colFirst"><a href="ru/nsu/amazyar/Graph.html" title="interface in ru.nsu.amazyar">Graph</a>&lt;<a href="ru/nsu/amazyar/Graph.html" title="type parameter in Graph">V</a>,&#8203;<a href="ru/nsu/amazyar/Graph.html" title="type parameter in Graph">E</a> extends java.lang.Number&gt;</td>
+<th class="colLast" scope="row">
+<div class="block">Most general graph interface.</div>
+</th>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/Pair.html" title="class in ru.nsu.amazyar">Pair</a>&lt;<a href="ru/nsu/amazyar/Pair.html" title="type parameter in Pair">F</a>,&#8203;<a href="ru/nsu/amazyar/Pair.html" title="type parameter in Pair">S</a>&gt;</td>
+<td class="colFirst"><a href="ru/nsu/amazyar/GraphAlgorithms.html" title="class in ru.nsu.amazyar">GraphAlgorithms</a></td>
 <th class="colLast" scope="row">
-<div class="block">Ordered pair.</div>
+<div class="block">Class with static algorithms on graphs</div>
 </th>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><a href="ru/nsu/amazyar/Vertex.html" title="class in ru.nsu.amazyar">Vertex</a>&lt;<a href="ru/nsu/amazyar/Vertex.html" title="type parameter in Vertex">E</a>&gt;</td>
+<td class="colFirst"><a href="ru/nsu/amazyar/GraphReader.html" title="class in ru.nsu.amazyar">GraphReader</a></td>
 <th class="colLast" scope="row">
-<div class="block">Vertex of a graph</div>
+<div class="block">Reads graph from a file.</div>
+</th>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><a href="ru/nsu/amazyar/GraphReader.GraphRepresentation.html" title="enum in ru.nsu.amazyar">GraphReader.GraphRepresentation</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><a href="ru/nsu/amazyar/IncidenceMatrixGraph.html" title="class in ru.nsu.amazyar">IncidenceMatrixGraph</a>&lt;<a href="ru/nsu/amazyar/IncidenceMatrixGraph.html" title="type parameter in IncidenceMatrixGraph">V</a>,&#8203;<a href="ru/nsu/amazyar/IncidenceMatrixGraph.html" title="type parameter in IncidenceMatrixGraph">E</a> extends java.lang.Number&gt;</td>
+<th class="colLast" scope="row">
+<div class="block">Graph implementation on incidence matrix.</div>
+</th>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><a href="ru/nsu/amazyar/Vertex.html" title="class in ru.nsu.amazyar">Vertex</a>&lt;<a href="ru/nsu/amazyar/Vertex.html" title="type parameter in Vertex">V</a>&gt;</td>
+<th class="colLast" scope="row">
+<div class="block">Vertex of a graph.</div>
 </th>
 </tr>
 </table>
