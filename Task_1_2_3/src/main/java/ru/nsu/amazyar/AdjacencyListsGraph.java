@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
-    private final Map<Vertex<V>, List<Edge<E>>> adjacencyList;
+    private final Map<Vertex<V>, HashMap<Vertex<V>, ArrayList<Edge<E>>>> adjacencyList;
 
     public AdjacencyListsGraph() {
         adjacencyList = new HashMap<>();
@@ -24,7 +24,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
             throw new IllegalStateException("Vertex ambiguity is not allowed");
         }
         Vertex<V> newVertex = new Vertex<>(newValue);
-        adjacencyList.put(newVertex, new ArrayList<>());
+        adjacencyList.put(newVertex, new HashMap<>());
         return newVertex;
     }
 
@@ -35,7 +35,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         }
         adjacencyList.remove(rmVertex);
         for (Vertex<V> vertex : this.getVertices()) {
-            adjacencyList.get(vertex).removeIf(edge -> edge.vertexTo() == rmVertex);
+            adjacencyList.get(vertex).remove(rmVertex);
         }
     }
 
@@ -63,7 +63,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
             throw new NullPointerException();
         }
         Edge<E> newEdge = new Edge<>(weight, from, to);
-        adjacencyList.get(from).add(newEdge);
+        adjacencyList.get(from).computeIfAbsent(to, ignore -> new ArrayList<>()).add(newEdge);
         return newEdge;
     }
 
@@ -72,7 +72,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(rmEdge == null){
             throw new NullPointerException();
         }
-        adjacencyList.get(rmEdge.vertexFrom()).remove(rmEdge);
+        adjacencyList.get(rmEdge.vertexFrom()).get(rmEdge.vertexTo()).remove(rmEdge);
     }
 
     @Override
@@ -80,12 +80,12 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
         if(weight == null || from == null || to == null){
             throw new NullPointerException();
         }
-        adjacencyList.get(from).removeIf(edge -> edge.vertexTo() == to && edge.getWeight().equals(weight));
+        adjacencyList.get(from).get(to).removeIf(edge -> edge.getWeight().equals(weight));
     }
 
     @Override
     public List<Edge<E>> getEdges() {
-        return adjacencyList.values().stream().flatMap(List::stream).collect(Collectors.toList());
+        return adjacencyList.values().stream().flatMap(map -> map.values().stream().flatMap(List::stream)).collect(Collectors.toList());
     }
 
     @Override
