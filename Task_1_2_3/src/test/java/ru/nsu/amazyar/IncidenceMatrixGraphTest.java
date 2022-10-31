@@ -13,10 +13,10 @@ class IncidenceMatrixGraphTest {
 
     @BeforeEach
     public void initSampleGraph() {
-        try{
+        try {
             sampleGraph = GraphReader.readGraph("sampleGraphs/adjacency_matrix.txt",
                 GraphRepresentation.INCIDENCE_MATRIX);
-        }catch (IOException e){
+        } catch (IOException e) {
             sampleGraph = new IncidenceMatrixGraph<>();
         }
     }
@@ -79,22 +79,26 @@ class IncidenceMatrixGraphTest {
         Assertions.assertEquals(vert2, mapSort.get(0));
         try {
             Assertions.assertEquals(-4.0, mapSort.get(0).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(vert3, mapSort.get(1));
         try {
             Assertions.assertEquals(-2.0, mapSort.get(1).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(vert1, mapSort.get(2));
         try {
             Assertions.assertEquals(-1.0, mapSort.get(2).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
 
         Assertions.assertEquals(start, mapSort.get(3));
         try {
             Assertions.assertEquals(0.0, mapSort.get(3).getSortDistance());
-        }catch (IllegalAccessException ignored){}
+        } catch (IllegalAccessException ignored) {
+        }
     }
 
     @Test
@@ -114,30 +118,31 @@ class IncidenceMatrixGraphTest {
     }
 
     @Test
-    public void ambiguousVertexTest(){
-        Assertions.assertThrows(IllegalStateException.class, () -> sampleGraph.addVertex(sampleGraph.getVertices().get(0).getValue()));
+    public void ambiguousVertexTest() {
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> sampleGraph.addVertex(sampleGraph.getVertices().get(0).getValue()));
     }
 
     @Test
-    public void equalTest(){
+    public void equalTest() {
         //simple cases
         Assertions.assertEquals(sampleGraph, sampleGraph);
         Assertions.assertNotEquals(sampleGraph, null);
 
         //same source
         Graph<String, Double> anotherGraph;
-        try{
+        try {
             anotherGraph = GraphReader.readGraph("sampleGraphs/adjacency_matrix.txt",
                 GraphRepresentation.INCIDENCE_MATRIX);
-        }catch (IOException e){
+        } catch (IOException e) {
             anotherGraph = new IncidenceMatrixGraph<>();
         }
         Assertions.assertEquals(sampleGraph, anotherGraph);
 
         //vertex equality
         Vertex<String> vertex0 = anotherGraph.addVertex("silent");
-        Assertions.assertFalse(vertex0.equals(null));
-        Assertions.assertFalse(vertex0.equals("silent"));
+        Assertions.assertNotEquals(null, vertex0);
+        Assertions.assertNotEquals("silent", vertex0);
 
         //different size of vertices lists
         Assertions.assertNotEquals(sampleGraph, anotherGraph);
@@ -145,8 +150,8 @@ class IncidenceMatrixGraphTest {
         Vertex<String> vertex1 = anotherGraph.addVertex("white");
         //edge equality
         Edge<Double> sampleEdge = anotherGraph.addEdge(0.0, vertex0, vertex1);
-        Assertions.assertFalse(sampleEdge.equals("silent"));
-        Assertions.assertFalse(sampleEdge.equals(null));
+        Assertions.assertNotEquals("silent", sampleEdge);
+        Assertions.assertNotEquals(null, sampleEdge);
 
         //different size of edges lists
         Vertex<String> vertex2 = sampleGraph.addVertex(vertex0.getValue());

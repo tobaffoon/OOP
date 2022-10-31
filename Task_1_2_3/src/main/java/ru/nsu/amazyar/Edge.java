@@ -4,9 +4,11 @@ import java.util.Objects;
 
 /**
  * Oriented edge in a graph.
+ *
  * @param <E> Edge weight value type
  */
-public class Edge <E extends Number>{
+public class Edge<E extends Number> {
+
     private E weight;
     private final Vertex<?> from;
     private final Vertex<?> to;

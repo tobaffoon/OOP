@@ -11,7 +11,11 @@ import java.util.HashMap;
  * Reads graph from a file.
  */
 public class GraphReader {
-    public enum GraphRepresentation{
+
+    /**
+     * Implementation to use to store the graph.
+     */
+    public enum GraphRepresentation {
         ADJACENCY_MATRIX,
         INCIDENCE_MATRIX,
         ADJACENCY_LIST
@@ -20,7 +24,8 @@ public class GraphReader {
     /**
      * Returns graph from a file with directory path.
      */
-    public static Graph<String,Double> readGraph(String path, GraphRepresentation graphType) throws IOException {
+    public static Graph<String, Double> readGraph(String path, GraphRepresentation graphType)
+        throws IOException {
         Path paths = Paths.get(path);
         return readGraph(paths, graphType);
     }
@@ -28,19 +33,20 @@ public class GraphReader {
     /**
      * Returns graph from a file with directory path.
      */
-    public static Graph<String,Double> readGraph(Path path, GraphRepresentation graphType) throws IOException {
+    public static Graph<String, Double> readGraph(Path path, GraphRepresentation graphType)
+        throws IOException {
         BufferedReader reader = new BufferedReader(Files.newBufferedReader(path));
 
         //scan line with vertices names
         String line = reader.readLine();
-        if(line == null){
+        if (line == null) {
             throw new IllegalStateException("Empty file");
         }
 
         //if file is not empty - initialise new graph and vertex numbering
         Graph<String, Double> graph;
         HashMap<Integer, String> vertexNumbering = new HashMap<>();
-        switch (graphType){
+        switch (graphType) {
             case ADJACENCY_LIST:
                 graph = new AdjacencyListsGraph<>();
                 break;
@@ -69,19 +75,19 @@ public class GraphReader {
         for (i = 0; ; i++) {
             //scan one line
             line = reader.readLine();
-            if(line == null){
+            if (line == null) {
                 break;
             }
 
             //check that number of rows isn't too big
-            if(i >= vertexCount){
+            if (i >= vertexCount) {
                 throw new IllegalStateException("Incorrect table size");
             }
 
             //separate lists of multiEdges in line
             edgesList = line.trim().split(" +");
             //check that number of columns is correct
-            if(edgesList.length != vertexCount){
+            if (edgesList.length != vertexCount) {
                 throw new IllegalStateException("Incorrect table size");
             }
 
@@ -101,7 +107,7 @@ public class GraphReader {
         }
 
         //check that there were enough rows
-        if(i < vertexCount){
+        if (i < vertexCount) {
             throw new IllegalStateException("Incorrect table size");
         }
         return graph;

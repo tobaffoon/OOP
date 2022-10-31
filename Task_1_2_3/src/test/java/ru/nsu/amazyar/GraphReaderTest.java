@@ -47,9 +47,9 @@ class GraphReaderTest {
         referenceGraph.addEdge(1.0, vert1, vert3);
 
         try {
-            Assertions.assertTrue(referenceGraph.equals(
+            Assertions.assertEquals(referenceGraph,
                 GraphReader.readGraph(Paths.get("sampleGraphs/adjacency_matrix.txt"),
-                    GraphRepresentation.INCIDENCE_MATRIX)));
+                    GraphRepresentation.INCIDENCE_MATRIX));
         } catch (IOException ignored) {
 
         }
@@ -70,9 +70,9 @@ class GraphReaderTest {
         referenceGraph.addEdge(1.0, vert1, vert3);
 
         try {
-            Assertions.assertTrue(referenceGraph.equals(
+            Assertions.assertEquals(referenceGraph,
                 GraphReader.readGraph(Paths.get("sampleGraphs/adjacency_matrix.txt"),
-                    GraphRepresentation.ADJACENCY_MATRIX)));
+                    GraphRepresentation.ADJACENCY_MATRIX));
         } catch (IOException ignored) {
 
         }
@@ -93,9 +93,9 @@ class GraphReaderTest {
         referenceGraph.addEdge(1.0, vert1, vert3);
 
         try {
-            Assertions.assertTrue(referenceGraph.equals(
+            Assertions.assertEquals(referenceGraph,
                 GraphReader.readGraph(Paths.get("sampleGraphs/adjacency_matrix.txt"),
-                    GraphRepresentation.ADJACENCY_LIST)));
+                    GraphRepresentation.ADJACENCY_LIST));
         } catch (IOException ignored) {
 
         }

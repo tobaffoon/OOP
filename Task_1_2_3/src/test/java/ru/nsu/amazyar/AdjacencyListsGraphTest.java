@@ -143,8 +143,8 @@ class AdjacencyListsGraphTest {
 
         //vertex equality
         Vertex<String> vertex0 = anotherGraph.addVertex("silent");
-        Assertions.assertFalse(vertex0.equals(null));
-        Assertions.assertFalse(vertex0.equals("silent"));
+        Assertions.assertNotEquals(null, vertex0);
+        Assertions.assertNotEquals("silent", vertex0);
 
         //different size of vertices lists
         Assertions.assertNotEquals(sampleGraph, anotherGraph);
@@ -152,8 +152,8 @@ class AdjacencyListsGraphTest {
         Vertex<String> vertex1 = anotherGraph.addVertex("white");
         //edge equality
         Edge<Double> sampleEdge = anotherGraph.addEdge(0.0, vertex0, vertex1);
-        Assertions.assertFalse(sampleEdge.equals("silent"));
-        Assertions.assertFalse(sampleEdge.equals(null));
+        Assertions.assertNotEquals("silent", sampleEdge);
+        Assertions.assertNotEquals(null, sampleEdge);
 
         //different size of edges lists
         Vertex<String> vertex2 = sampleGraph.addVertex(vertex0.getValue());
