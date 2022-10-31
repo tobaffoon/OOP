@@ -12,8 +12,6 @@ import java.util.Objects;
 public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
 
     private final Map<Vertex<V>, Map<Edge<E>, EdgeDirection>> matrix;
-    //edges is used to getEdges to avoid using any key and getting value (map containing all edges as keys)
-    //because keySet may be empty and map methods return Sets which are hard to get single element from
     private final List<Edge<E>> edges;
 
     private enum EdgeDirection {
@@ -93,9 +91,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
         //put (rewrite) loop edge
         if (from == to) {
             matrix.get(from).put(newEdge, EdgeDirection.LOOP);
-        }
-        //put (rewrite) regular edge
-        else {
+        } else {    //put (rewrite) regular edge
             matrix.get(from).put(newEdge, EdgeDirection.OUT);
             matrix.get(to).put(newEdge, EdgeDirection.IN);
         }
@@ -113,6 +109,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
         edges.remove(rmEdge);
     }
 
+    @Override
     public void removeEdge(E weight, Vertex<V> from, Vertex<V> to) {
         if (weight == null || from == null || to == null) {
             throw new NullPointerException();

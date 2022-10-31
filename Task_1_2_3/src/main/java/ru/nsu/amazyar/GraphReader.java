@@ -61,7 +61,7 @@ public class GraphReader {
         }
 
         //parse line of vertices names
-        String[] names = line.trim().split(" +");//add skip any number of spaces
+        String[] names = line.trim().split(" +"); //add skip any number of spaces
         int vertexCount = 0;
         for (String name : names) {
             graph.addVertex(name);
@@ -98,7 +98,8 @@ public class GraphReader {
                     if (edge.equals("-")) {
                         continue;
                     }
-                    //from and to vertices are deducted from current table position - i (row) and j (column) values
+                    //from and to vertices are deducted from current table position
+                    //i (row) and j (column) values
                     Vertex<String> from = graph.findVertex(vertexNumbering.get(i));
                     Vertex<String> to = graph.findVertex(vertexNumbering.get(j));
                     graph.addEdge(Double.parseDouble(edge), from, to);

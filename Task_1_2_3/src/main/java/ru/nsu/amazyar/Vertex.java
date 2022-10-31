@@ -28,6 +28,11 @@ public class Vertex<V> {
         this.value = value;
     }
 
+    /**
+     * Returns minimal distance from some vertex
+     * @return Distance if sorting occurred
+     * @throws IllegalAccessException if there was no sorting
+     */
     public double getSortDistance() throws IllegalAccessException {
         if (wasSorted) {
             return sortDistance;

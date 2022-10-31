@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Class with static algorithms on graphs
+ * Class with static algorithms on graphs.
  */
 public class GraphAlgorithms {
 
     /**
-     * Sorts vertices by minimal distance from set vertex For determining minimal distance uses
+     * Sorts vertices by minimal distance from set vertex For determining minimal distance uses.
      * Bellman–Ford algorithm
      *
      * @return Sorted ArrayList of vertices with set distances or null if graph has negative cycles

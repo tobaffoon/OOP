@@ -87,6 +87,7 @@ public class AdjacencyMatrixGraph<V, E extends Number> implements Graph<V, E> {
         matrix.get(rmEdge.vertexFrom()).get(rmEdge.vertexTo()).remove(rmEdge);
     }
 
+    @Override
     public void removeEdge(E weight, Vertex<V> from, Vertex<V> to) {
         if (weight == null || from == null || to == null) {
             throw new NullPointerException();
