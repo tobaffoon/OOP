@@ -29,13 +29,14 @@ class AdjacencyListsGraphTest {
         //remove operations
         Vertex<String> vert4 = sampleGraph.addVertex("4");
         sampleGraph.addEdge(1.0, vert4, sampleGraph.findVertex("3"));
-        Edge<Double> rmEdge1 = sampleGraph.addEdge(1.0, vert4, sampleGraph.findVertex("1"));
-        Edge<Double> rmEdge2 = sampleGraph.addEdge(1.0, vert4, sampleGraph.findVertex("2"));
 
-        sampleGraph.removeEdge(rmEdge2);
-        Assertions.assertFalse(sampleGraph.getEdges().contains(rmEdge2));
+        Edge<Double> rmEdge1 = sampleGraph.addEdge(1.0, vert4, sampleGraph.findVertex("1"));
         sampleGraph.removeEdge(1.0, vert4, sampleGraph.findVertex("1"));
         Assertions.assertFalse(sampleGraph.getEdges().contains(rmEdge1));
+
+        Edge<Double> rmEdge2 = sampleGraph.addEdge(1.0, vert4, sampleGraph.findVertex("2"));
+        sampleGraph.removeEdge(rmEdge2);
+        Assertions.assertFalse(sampleGraph.getEdges().contains(rmEdge2));
 
         Assertions.assertNotNull(sampleGraph.findVertex("4"));
         sampleGraph.removeVertex(vert4);

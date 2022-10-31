@@ -29,7 +29,8 @@ public class Vertex<V> {
     }
 
     /**
-     * Returns minimal distance from some vertex
+     * Returns minimal distance from some vertex.
+     *
      * @return Distance if sorting occurred
      * @throws IllegalAccessException if there was no sorting
      */
