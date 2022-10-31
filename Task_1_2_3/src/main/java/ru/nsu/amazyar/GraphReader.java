@@ -1,10 +1,10 @@
 package ru.nsu.amazyar;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class GraphReader {
@@ -14,34 +14,40 @@ public class GraphReader {
         ADJACENCY_LIST
     }
 
-    public static Graph<String,Double> readGraph(String filename, GraphReader.GraphRepresentation graphType)
-        throws IOException {
-        File file = new File(filename);
-        if(!file.isFile()){
-            throw new FileNotFoundException("Couldn't open file");
-        }
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line;
-        try {
-            line = reader.readLine();
-        }catch (IOException e){
+    public static Graph<String,Double> readGraph(String path, GraphRepresentation graphType) throws IOException {
+        Path paths = Paths.get(path);
+        return readGraph(paths, graphType);
+    }
+
+    public static Graph<String,Double> readGraph(Path path, GraphRepresentation graphType) throws IOException {
+        BufferedReader reader = new BufferedReader(Files.newBufferedReader(path));
+
+        String line = reader.readLine();
+        if(line == null){
             throw new IllegalStateException("Empty file");
         }
 
         Graph<String, Double> graph;
         HashMap<Integer, String> vertexNumbering = new HashMap<>();
         switch (graphType){
-            case ADJACENCY_LIST -> graph = new AdjacencyListsGraph<>();
-            case INCIDENCE_MATRIX -> graph = new IncidenceMatrixGraph<>();
-            case ADJACENCY_MATRIX -> graph = new AdjacencyMatrixGraph<>();
-            default -> throw new IllegalStateException("Unknown representation type");
+            case ADJACENCY_LIST:
+                graph = new AdjacencyListsGraph<>();
+                break;
+            case INCIDENCE_MATRIX:
+                graph = new IncidenceMatrixGraph<>();
+                break;
+            case ADJACENCY_MATRIX:
+                graph = new AdjacencyMatrixGraph<>();
+                break;
+            default:
+                graph = new AdjacencyMatrixGraph<>();
         }
 
-        String[] edgesLists = line.split(" ");
+        String[] argsLists = line.trim().split(" +");//add skip any number of spaces
         int vertexCount = 0;
-        for (String edgesList : edgesLists) {
-            graph.addVertex(edgesList);
-            vertexNumbering.put(vertexCount++, edgesList);
+        for (String argsList : argsLists) {
+            graph.addVertex(argsList);
+            vertexNumbering.put(vertexCount++, argsList);
         }
 
         int i;
@@ -51,13 +57,16 @@ public class GraphReader {
             if(line == null){
                 break;
             }
-            edgesLists = line.split(" ");
-            if(edgesLists.length != vertexCount){
+            if(i >= vertexCount){
+                throw new IllegalStateException("Incorrect table size");
+            }
+            argsLists = line.trim().split(" +");
+            if(argsLists.length != vertexCount){
                 throw new IllegalStateException("Incorrect table size");
             }
 
-            for (int j = 0; j < edgesLists.length; j++) {
-                multiEdges = edgesLists[j].split(",");
+            for (int j = 0; j < argsLists.length; j++) {
+                multiEdges = argsLists[j].split(",");
                 for (String edge : multiEdges) {
                     if (edge.equals("-")) {
                         continue;
@@ -68,8 +77,7 @@ public class GraphReader {
                 }
             }
         }
-
-        if(i != vertexCount){
+        if(i < vertexCount){
             throw new IllegalStateException("Incorrect table size");
         }
         return graph;
