@@ -22,11 +22,13 @@ public class GraphReader {
     public static Graph<String,Double> readGraph(Path path, GraphRepresentation graphType) throws IOException {
         BufferedReader reader = new BufferedReader(Files.newBufferedReader(path));
 
+        //scan line with vertices names
         String line = reader.readLine();
         if(line == null){
             throw new IllegalStateException("Empty file");
         }
 
+        //if file is not empty - initialise new graph and vertex numbering
         Graph<String, Double> graph;
         HashMap<Integer, String> vertexNumbering = new HashMap<>();
         switch (graphType){
@@ -43,40 +45,53 @@ public class GraphReader {
                 graph = new AdjacencyMatrixGraph<>();
         }
 
-        String[] argsLists = line.trim().split(" +");//add skip any number of spaces
+        //parse line of vertices names
+        String[] names = line.trim().split(" +");//add skip any number of spaces
         int vertexCount = 0;
-        for (String argsList : argsLists) {
-            graph.addVertex(argsList);
-            vertexNumbering.put(vertexCount++, argsList);
+        for (String name : names) {
+            graph.addVertex(name);
+            vertexNumbering.put(vertexCount++, name);
         }
 
-        int i;
+        //read lines of edges
         String[] multiEdges;
+        String[] edgesList;
+        int i;
         for (i = 0; ; i++) {
+            //scan one line
             line = reader.readLine();
             if(line == null){
                 break;
             }
+
+            //check that number of rows isn't too big
             if(i >= vertexCount){
                 throw new IllegalStateException("Incorrect table size");
             }
-            argsLists = line.trim().split(" +");
-            if(argsLists.length != vertexCount){
+
+            //separate lists of multiEdges in line
+            edgesList = line.trim().split(" +");
+            //check that number of columns is correct
+            if(edgesList.length != vertexCount){
                 throw new IllegalStateException("Incorrect table size");
             }
 
-            for (int j = 0; j < argsLists.length; j++) {
-                multiEdges = argsLists[j].split(",");
+            //parse multiEdges in given list of multiEdges
+            for (int j = 0; j < names.length; j++) {
+                multiEdges = edgesList[j].split(",");
                 for (String edge : multiEdges) {
                     if (edge.equals("-")) {
                         continue;
                     }
+                    //from and to vertices are deducted from current table position - i (row) and j (column) values
                     Vertex<String> from = graph.findVertex(vertexNumbering.get(i));
                     Vertex<String> to = graph.findVertex(vertexNumbering.get(j));
                     graph.addEdge(Double.parseDouble(edge), from, to);
                 }
             }
         }
+
+        //check that there were enough rows
         if(i < vertexCount){
             throw new IllegalStateException("Incorrect table size");
         }

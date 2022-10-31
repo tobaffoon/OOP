@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
 
     private final Map<Vertex<V>, Map<Edge<E>, EdgeDirection>> matrix;
+    //edges is used to getEdges to avoid using any key and getting value (map containing all edges as keys)
+    //because keySet may be empty and map methods return Sets which are hard to get single element from
     private final List<Edge<E>> edges;
 
     private enum EdgeDirection {
@@ -28,6 +30,7 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
         if(newValue == null){
             throw new NullPointerException();
         }
+
         //Check for already existing vertices
         //Needed to ensure "find" method unambiguity
         if(this.findVertex(newValue) != null){
@@ -47,9 +50,10 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
             throw new NullPointerException();
         }
         matrix.remove(rmVertex);
+        //removes entry if edge goes in or out from the vertex
         for (Vertex<V> vertex : this.getVertices()) {
-            matrix.get(vertex).keySet()
-                .removeIf(edge -> edge.vertexFrom() == rmVertex || edge.vertexTo() == rmVertex);
+            matrix.get(vertex).entrySet()
+                .removeIf(entry -> entry.getValue() != EdgeDirection.NO_EDGE);
         }
     }
 
@@ -77,10 +81,15 @@ public class IncidenceMatrixGraph<V, E extends Number> implements Graph<V, E> {
             throw new NullPointerException();
         }
         Edge<E> newEdge = new Edge<>(weight, from, to);
+
+        //put entry of newEdge incident to no vertex
         matrix.values().forEach(map -> map.put(newEdge, EdgeDirection.NO_EDGE));
+        //put (rewrite) for loop edge
         if (from == to) {
             matrix.get(from).put(newEdge, EdgeDirection.LOOP);
-        } else {
+        }
+        //
+        else {
             matrix.get(from).put(newEdge, EdgeDirection.OUT);
             matrix.get(to).put(newEdge, EdgeDirection.IN);
         }
