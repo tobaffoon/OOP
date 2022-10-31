@@ -41,7 +41,7 @@ public class AdjacencyListsGraph <V, E extends Number> implements Graph<V, E>{
 
     @Override
     public List<Vertex<V>> getVertices() {
-        return adjacencyList.keySet().stream().collect(Collectors.toList());
+        return new ArrayList<>(adjacencyList.keySet());
     }
 
     @Override

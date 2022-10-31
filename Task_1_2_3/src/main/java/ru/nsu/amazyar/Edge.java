@@ -1,7 +1,9 @@
 package ru.nsu.amazyar;
 
+import java.util.Objects;
+
 /**
- * Oriented edge in a graph
+ * Oriented edge in a graph.
  * @param <E> Edge weight value type
  */
 public class Edge <E extends Number>{
@@ -29,5 +31,25 @@ public class Edge <E extends Number>{
 
     public Vertex<?> vertexTo() {
         return to;
+    }
+
+    /**
+     * Compares edges by weight and incident vertices
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Edge<?> edge = (Edge<?>) o;
+        return weight.equals(edge.weight) && from.equals(edge.from) && to.equals(edge.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(weight, from, to);
     }
 }

@@ -1,28 +1,30 @@
 package ru.nsu.amazyar;
 
-/**
- * Vertex of a graph
- *
- * @param <E> Vertex value type
- */
-public class Vertex<E> {
+import java.util.Objects;
 
-    private E value;
+/**
+ * Vertex of a graph.
+ *
+ * @param <V> Vertex value type
+ */
+public class Vertex<V> {
+
+    private V value;
     //protected to use in sort algorithm
     protected double sortDistance;
     protected boolean wasSorted;
 
-    public Vertex(E value) {
+    public Vertex(V value) {
         this.value = value;
         sortDistance = Double.POSITIVE_INFINITY;
         this.wasSorted = false;
     }
 
-    public E getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(E value) {
+    public void setValue(V value) {
         this.value = value;
     }
     public double getSortDistance() throws IllegalAccessException {
@@ -30,5 +32,25 @@ public class Vertex<E> {
             return sortDistance;
         }
         throw new IllegalAccessException("No sorting occurred");
+    }
+
+    /**
+     * Compares vertices by their value
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Vertex<?> vertex = (Vertex<?>) o;
+        return value.equals(vertex.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
