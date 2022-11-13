@@ -1,7 +1,10 @@
 package ru.nsu.amazyar;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,33 +76,25 @@ class AdjacencyMatrixGraphTest {
         Vertex<String> vert1 = sampleGraph.findVertex("1");
         Vertex<String> vert2 = sampleGraph.findVertex("2");
         Vertex<String> vert3 = sampleGraph.findVertex("3");
-        Assertions.assertThrows(IllegalAccessException.class, vert3::getSortDistance);
 
-        List<Vertex<String>> mapSort = GraphAlgorithms.sortFrom(sampleGraph, start);
+        Set<Entry<Vertex<String>, Double>> entries = GraphAlgorithms.sortFrom(sampleGraph, start).entrySet();
+        Iterator<Entry<Vertex<String>, Double>> setIterator = entries.iterator();
 
-        Assertions.assertEquals(vert2, mapSort.get(0));
-        try {
-            Assertions.assertEquals(-4.0, mapSort.get(0).getSortDistance());
-        } catch (IllegalAccessException ignored) {
-        }
+        Entry<Vertex<String>, Double> currentEntry = setIterator.next();
+        Assertions.assertEquals(vert2, currentEntry.getKey());
+        Assertions.assertEquals(-4.0, currentEntry.getValue());
 
-        Assertions.assertEquals(vert3, mapSort.get(1));
-        try {
-            Assertions.assertEquals(-2.0, mapSort.get(1).getSortDistance());
-        } catch (IllegalAccessException ignored) {
-        }
+        currentEntry = setIterator.next();
+        Assertions.assertEquals(vert3, currentEntry.getKey());
+            Assertions.assertEquals(-2.0, currentEntry.getValue());
 
-        Assertions.assertEquals(vert1, mapSort.get(2));
-        try {
-            Assertions.assertEquals(-1.0, mapSort.get(2).getSortDistance());
-        } catch (IllegalAccessException ignored) {
-        }
+        currentEntry = setIterator.next();
+        Assertions.assertEquals(vert1, currentEntry.getKey());
+            Assertions.assertEquals(-1.0, currentEntry.getValue());
 
-        Assertions.assertEquals(start, mapSort.get(3));
-        try {
-            Assertions.assertEquals(0.0, mapSort.get(3).getSortDistance());
-        } catch (IllegalAccessException ignored) {
-        }
+        currentEntry = setIterator.next();
+        Assertions.assertEquals(start, currentEntry.getKey());
+            Assertions.assertEquals(0.0, currentEntry.getValue());
     }
 
     @Test

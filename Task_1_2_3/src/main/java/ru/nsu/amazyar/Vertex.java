@@ -10,14 +10,9 @@ import java.util.Objects;
 public class Vertex<V> {
 
     private V value;
-    //protected to use in sort algorithm
-    protected double sortDistance;
-    protected boolean wasSorted;
 
     protected Vertex(V value) {
         this.value = value;
-        sortDistance = Double.POSITIVE_INFINITY;
-        this.wasSorted = false;
     }
 
     public V getValue() {
@@ -26,19 +21,6 @@ public class Vertex<V> {
 
     public void setValue(V value) {
         this.value = value;
-    }
-
-    /**
-     * Returns minimal distance from some vertex.
-     *
-     * @return Distance if sorting occurred
-     * @throws IllegalAccessException if there was no sorting
-     */
-    public double getSortDistance() throws IllegalAccessException {
-        if (wasSorted) {
-            return sortDistance;
-        }
-        throw new IllegalAccessException("No sorting occurred");
     }
 
     /**

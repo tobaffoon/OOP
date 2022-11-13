@@ -1,8 +1,10 @@
 package ru.nsu.amazyar;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 /**
  * Class with static algorithms on graphs.
@@ -15,26 +17,27 @@ public class GraphAlgorithms {
      *
      * @return Sorted ArrayList of vertices with set distances or null if graph has negative cycles
      */
-    public static <V, E extends Number> List<Vertex<V>> sortFrom(Graph<V, E> graph,
+    public static <V, E extends Number> LinkedHashMap<Vertex<V>, Double> sortFrom(Graph<V, E> graph,
         Vertex<V> start) {
         if (graph == null || start == null) {
             throw new NullPointerException();
         }
         List<Edge<E>> edges = graph.getEdges();
 
+        HashMap<Vertex<V>, Double> minDistance = new HashMap<>();
         //initialisation
         for (Vertex<V> vertex : graph.getVertices()) {
-            vertex.sortDistance = Double.POSITIVE_INFINITY;
+            minDistance.put(vertex, Double.POSITIVE_INFINITY);
         }
-        start.sortDistance = 0.0;
+        minDistance.put(start, 0.0);
 
         //Bellman–Ford main loop
         for (int i = 0; i < graph.verticesCount(); i++) {
             for (Edge<E> edge : edges) {
                 Vertex<V> from = (Vertex<V>) edge.vertexFrom();
                 Vertex<V> to = (Vertex<V>) edge.vertexTo();
-                if (from.sortDistance + edge.getWeight().doubleValue() < to.sortDistance) {
-                    to.sortDistance = from.sortDistance + edge.getWeight().doubleValue();
+                if (minDistance.get(from) + edge.getWeight().doubleValue() < minDistance.get(to)) {
+                    minDistance.put(to, minDistance.get(from) + edge.getWeight().doubleValue());
                 }
             }
         }
@@ -43,19 +46,16 @@ public class GraphAlgorithms {
         for (Edge<E> edge : edges) {
             Vertex<V> from = (Vertex<V>) edge.vertexFrom();
             Vertex<V> to = (Vertex<V>) edge.vertexTo();
-            if (from.sortDistance + edge.getWeight().doubleValue() < to.sortDistance) {
+            if (minDistance.get(from) + edge.getWeight().doubleValue() < minDistance.get(to)) {
                 return null;
             }
         }
 
-        //not before actual path calculation to ensure that negative cycle fail
-        for (Vertex<V> vertex : graph.getVertices()) {
-            vertex.wasSorted = true;
-        }
-
-        return graph.getVertices().stream()
-            .sorted(Comparator.comparingDouble(vert -> vert.sortDistance))
-            .collect(Collectors.toList());
+        LinkedHashMap<Vertex<V>, Double> resMap = new LinkedHashMap<>();
+        minDistance.entrySet().stream()
+            .sorted(Comparator.comparingDouble(Map.Entry::getValue))                //sort vertices
+            .forEachOrdered(entry -> resMap.put(entry.getKey(), entry.getValue())); //order them
+        return resMap;
     }
 
 }
