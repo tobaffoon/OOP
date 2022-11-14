@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"SubstringFinder"},{"p":"ru.nsu.amazyar","l":"TwoCharBuffer"},{"p":"ru.nsu.amazyar","l":"ZFunctionCreator"}]
