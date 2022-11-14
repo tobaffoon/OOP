@@ -9,21 +9,42 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Finds pattern in reader.
+ * Contains static methods to return all entries of pattern in reader
+ */
 public class SubstringFinder {
 
-    //TODO посмотреть что с PR, написать доки
+    /**
+     * Finds pattern in file from path.
+     * @param pattern required pattern
+     * @param stringPath path to the file
+     * @return list of indexes of beginnings of pattern entries
+     */
     public static List<Integer> getAllEntries(String pattern, String stringPath)
         throws IOException {
         Path path = Paths.get(stringPath);
         return getAllEntries(pattern, path);
     }
 
+    /**
+     * Finds pattern in file from path.
+     * @param pattern required pattern
+     * @param path path to the file
+     * @return list of indexes of beginnings of pattern entries
+     */
     public static List<Integer> getAllEntries(String pattern, Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             return getAllEntries(pattern, reader);
         }
     }
 
+    /**
+     * Finds pattern in reader.
+     * @param pattern required pattern
+     * @param reader source of the text
+     * @return list of indexes of beginnings of pattern entries
+     */
     public static List<Integer> getAllEntries(String pattern, Reader reader) throws IOException {
         List<Integer> entries = new ArrayList<>();       //contains indices of patterns in reader
         int[] zPattern = ZFunctionCreator.getZfunction(pattern);
@@ -31,6 +52,7 @@ public class SubstringFinder {
 
         TwoCharBuffer twoBuffer = new TwoCharBuffer(patternSize);   //buffer with two subbuffers
         int bufferCap = reader.read(twoBuffer.getSecondBuffer());   //n of elements of last subbufer
+
         //text is smaller than pattern => no need to check for entries
         if (bufferCap < patternSize) {
             return entries;
@@ -52,12 +74,10 @@ public class SubstringFinder {
             //condition is true when first buffer is exhausted
             if (effectiveIdx == 0) {
                 twoBuffer.switchBuffers();  //replace exhausted buffer with next one
-                bufferCap = reader.read(twoBuffer.getSecondBuffer());   //read new buffer
-                //second buffer is empty, but first one is full (thanks to condition of cycle)
+                bufferCap = reader.read(twoBuffer.getSecondBuffer());
                 if (bufferCap == -1) {
                     bufferSize = patternSize;
                 }
-                //second buffer isn't empty
                 else {
                     bufferSize = patternSize + bufferCap;
                 }
