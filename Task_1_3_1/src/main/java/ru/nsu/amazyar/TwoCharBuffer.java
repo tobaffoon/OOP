@@ -2,7 +2,7 @@ package ru.nsu.amazyar;
 
 /**
  * Class with two char buffers.
- * Used to operate with two buffers effectively
+ * Used to operate two buffers effectively
  */
 public class TwoCharBuffer {
     private final int singleSize;
@@ -23,6 +23,11 @@ public class TwoCharBuffer {
         return secondBuffer;
     }
 
+    /**
+     * Gets value from buffers.
+     * Gets value from first buffer if idx is smaller than its size and from second buffer otherwise
+     * @throws IndexOutOfBoundsException when idx is bigger then buffers size
+     */
     public int get(int idx){
         checkIdx(idx);
         if(idx < singleSize){
@@ -33,7 +38,11 @@ public class TwoCharBuffer {
             return secondBuffer[idx];
         }
     }
-
+    /**
+     * Sets value in buffers.
+     * Sets value in first buffer if idx is smaller than its size and from second buffer otherwise
+     * @throws IndexOutOfBoundsException when idx is bigger then buffers size
+     */
     public void set(int idx, char value){
         checkIdx(idx);
         if(idx < singleSize){
@@ -45,6 +54,9 @@ public class TwoCharBuffer {
         }
     }
 
+    /**
+     * Switches buffers with each other.
+     */
     public void switchBuffers(){
         char[] temp = firstBuffer;
         firstBuffer = secondBuffer;
