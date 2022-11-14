@@ -4,7 +4,7 @@ package ru.nsu.amazyar;
  * Creates Z array of a string. Z arrays are used in finding all entries of a pattern in a text
  * problem
  */
-public class ZFunctionCreator {
+public class ZfunctionCreator {
 
     /**
      * Creates Z array of a string.

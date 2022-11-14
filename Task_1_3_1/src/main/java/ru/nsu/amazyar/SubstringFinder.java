@@ -49,7 +49,7 @@ public class SubstringFinder {
      */
     public static List<Integer> getAllEntries(String pattern, Reader reader) throws IOException {
         List<Integer> entries = new ArrayList<>();       //contains indices of patterns in reader
-        int[] zPattern = ZFunctionCreator.getZfunction(pattern);
+        int[] zpattern = ZfunctionCreator.getZfunction(pattern);
         int patternSize = pattern.length();
 
         TwoCharBuffer twoBuffer = new TwoCharBuffer(patternSize);   //buffer with two subbuffers
@@ -86,16 +86,16 @@ public class SubstringFinder {
 
             //doesn't equal to 0, when it's beginning substring already matched beginning of pattern
             //here `rightBoarder - i` shows how far matching with pattern was already calculated
-            currentEntryLength = (rightBoarder > i) ?
-                Math.min(zPattern[i - leftBoarder], rightBoarder - i)
+            currentEntryLength = (rightBoarder > i)
+                ? Math.min(zpattern[i - leftBoarder], rightBoarder - i)
                 : 0;
 
             //break if pattern is exhausted or buffer is exhausted (when it was not fully filled)
             //or when symbols from pattern and buffer (text) don't match
-            while (currentEntryLength != patternSize &&
-                effectiveIdx + currentEntryLength < bufferSize &&
-                pattern.charAt(currentEntryLength) ==
-                    twoBuffer.get(effectiveIdx + currentEntryLength)
+            while (currentEntryLength != patternSize
+                && effectiveIdx + currentEntryLength < bufferSize
+                && pattern.charAt(currentEntryLength)
+                    == twoBuffer.get(effectiveIdx + currentEntryLength)
             ) {
                 currentEntryLength++;
             }
