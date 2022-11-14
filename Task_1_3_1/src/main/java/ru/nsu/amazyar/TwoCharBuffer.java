@@ -9,6 +9,9 @@ public class TwoCharBuffer {
     private char[] firstBuffer;
     private char[] secondBuffer;
 
+    /**
+     * Basic constructor
+     */
     public TwoCharBuffer(int size) {
         singleSize = size;
         firstBuffer = new char[singleSize];
