@@ -103,8 +103,6 @@ class SubstringFinderTest {
             List<Integer> resList =
                 SubstringFinder.getAllEntries("Спаси", "src/test/resources/rusFile.txt");
             int[] reference = {0, 13};
-//          Assertions.assertArrayEquals(reference, resList.stream()
-//          .mapToInt(Integer::intValue).toArray());
         } catch (IOException ignored) {
         }
     }
