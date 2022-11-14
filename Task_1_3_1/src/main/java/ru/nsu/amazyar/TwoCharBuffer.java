@@ -1,5 +1,9 @@
 package ru.nsu.amazyar;
 
+/**
+ * Class with two char buffers.
+ * Used to operate with two buffers effectively
+ */
 public class TwoCharBuffer {
     private final int singleSize;
     private char[] firstBuffer;
@@ -42,8 +46,9 @@ public class TwoCharBuffer {
     }
 
     public void switchBuffers(){
+        char[] temp = firstBuffer;
         firstBuffer = secondBuffer;
-        secondBuffer = new char[singleSize];
+        secondBuffer = temp;
     }
 
     private void checkIdx(int idx){
