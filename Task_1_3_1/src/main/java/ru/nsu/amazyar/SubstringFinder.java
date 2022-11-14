@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Finds pattern in reader.
- * Contains static methods to return all entries of pattern in reader
+ * Finds pattern in reader. Contains static methods to return all entries of pattern in reader
  */
 public class SubstringFinder {
 
     /**
      * Finds pattern in file from path.
-     * @param pattern required pattern
+     *
+     * @param pattern    required pattern
      * @param stringPath path to the file
      * @return list of indexes of beginnings of pattern entries
      */
@@ -29,8 +29,9 @@ public class SubstringFinder {
 
     /**
      * Finds pattern in file from path.
+     *
      * @param pattern required pattern
-     * @param path path to the file
+     * @param path    path to the file
      * @return list of indexes of beginnings of pattern entries
      */
     public static List<Integer> getAllEntries(String pattern, Path path) throws IOException {
@@ -41,8 +42,9 @@ public class SubstringFinder {
 
     /**
      * Finds pattern in reader.
+     *
      * @param pattern required pattern
-     * @param reader source of the text
+     * @param reader  source of the text
      * @return list of indexes of beginnings of pattern entries
      */
     public static List<Integer> getAllEntries(String pattern, Reader reader) throws IOException {
@@ -77,8 +79,7 @@ public class SubstringFinder {
                 bufferCap = reader.read(twoBuffer.getSecondBuffer());
                 if (bufferCap == -1) {
                     bufferSize = patternSize;
-                }
-                else {
+                } else {
                     bufferSize = patternSize + bufferCap;
                 }
             }
