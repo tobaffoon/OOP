@@ -1,6 +1,7 @@
 package ru.nsu.amazyar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,11 @@ public class RecordBook {
 
     public enum AssessmentForm {
         CREDIT, DIFFERENTIAL_CREDIT, EXAM
+    }
+
+    public RecordBook() {
+        this.records = new HashMap<>();
+        this.qualificationWorkGrade = -1;
     }
 
     private class Record {
