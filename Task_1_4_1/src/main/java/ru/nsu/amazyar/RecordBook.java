@@ -2,38 +2,60 @@ package ru.nsu.amazyar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RecordBook {
-    private List<Discipline> records;
+
+    private Map<String, List<Record>> records;
     private int qualificationWorkGrade;
+
     private enum Grade {
         FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
     }
 
-    private abstract class Discipline{
-        public final String name;
-        private final List<Grade> results;
-        public Discipline(String name) {
-            results = new ArrayList<>();
-            this.name = name;
-        }
+    public enum AssessmentForm {
+        CREDIT, DIFFERENTIAL_CREDIT, EXAM
     }
 
-    private class CreditDiscipline extends Discipline {
-        public final boolean pass;
+    private class Record {
+        private final String teacher;
+        private final Grade grade;
+        private final AssessmentForm form;
 
-        public CreditDiscipline(String name, boolean pass) {
-            super(name);
-            this.pass = pass;
-        }
-    }
-
-    private class DifferentialCreditDiscipline extends Discipline{
-        private final int grade;
-
-        public DifferentialCreditDiscipline(String name, int grade) {
-            super(name);
+        public Record(String teacher, Grade grade, AssessmentForm form) {
+            this.teacher = teacher;
             this.grade = grade;
+            this.form = form;
+        }
+    }
+
+    public void addRecord(String name, boolean pass) {
+
+    }
+
+    public void addRecord(String discipline, String teacher, int grade, AssessmentForm form)
+        throws IndexOutOfBoundsException, IllegalStateException {
+        // Credited discipline must not have integer as the grade
+        if(form == AssessmentForm.CREDIT){
+            throw new IllegalStateException("Inappropriate value for assessment form");
+        }
+
+        List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
+        switch (grade) {
+            case 2:
+                previousRecords.add(new Record(teacher, Grade.POOR, form));
+                break;
+            case 3:
+                previousRecords.add(new Record(teacher, Grade.SATISFACTORY, form));
+                break;
+            case 4:
+                previousRecords.add(new Record(teacher, Grade.GOOD, form));
+                break;
+            case 5:
+                previousRecords.add(new Record(teacher, Grade.EXCELLENT, form));
+                break;
+            default:
+                throw new IndexOutOfBoundsException("Grade out of bounds");
         }
     }
 }
