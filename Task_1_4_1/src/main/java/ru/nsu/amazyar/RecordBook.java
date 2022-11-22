@@ -44,15 +44,19 @@ public class RecordBook {
         switch (grade) {
             case 2:
                 previousRecords.add(new Record(teacher, Grade.POOR, form));
+                records.putIfAbsent(teacher, previousRecords);
                 break;
             case 3:
                 previousRecords.add(new Record(teacher, Grade.SATISFACTORY, form));
+                records.putIfAbsent(teacher, previousRecords);
                 break;
             case 4:
                 previousRecords.add(new Record(teacher, Grade.GOOD, form));
+                records.putIfAbsent(teacher, previousRecords);
                 break;
             case 5:
                 previousRecords.add(new Record(teacher, Grade.EXCELLENT, form));
+                records.putIfAbsent(teacher, previousRecords);
                 break;
             default:
                 throw new IndexOutOfBoundsException("Grade out of bounds");
