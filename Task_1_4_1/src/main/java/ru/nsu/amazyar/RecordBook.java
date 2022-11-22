@@ -29,8 +29,15 @@ public class RecordBook {
         }
     }
 
-    public void addRecord(String name, boolean pass) {
-
+    public void addRecord(String discipline, String teacher, boolean pass) {
+        List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
+        if(pass){
+            previousRecords.add(new Record(teacher, Grade.PASS, AssessmentForm.CREDIT));
+            records.putIfAbsent(teacher, previousRecords);
+        }
+        else{
+            previousRecords.add(new Record(teacher, Grade.FAIL, AssessmentForm.CREDIT));
+        }
     }
 
     public void addRecord(String discipline, String teacher, int grade, AssessmentForm form)
@@ -44,9 +51,9 @@ public class RecordBook {
         switch (grade) {
             case 2:
                 previousRecords.add(new Record(teacher, Grade.POOR, form));
-                records.putIfAbsent(teacher, previousRecords);
-                break;
-            case 3:
+                records.putIfAbsent(teacher, previousRecords);  // use putIfAbsent because if
+                break;                                          // list isn't absent it's updated
+            case 3:                                             // by itself upon adding new record
                 previousRecords.add(new Record(teacher, Grade.SATISFACTORY, form));
                 records.putIfAbsent(teacher, previousRecords);
                 break;
