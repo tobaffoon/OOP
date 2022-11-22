@@ -1,11 +1,20 @@
 package ru.nsu.amazyar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecordBook {
+    private List<Discipline> records;
+    private int qualificationWorkGrade;
+    private enum Grade {
+        FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
+    }
 
     private abstract class Discipline{
         public final String name;
-
+        private final List<Grade> results;
         public Discipline(String name) {
+            results = new ArrayList<>();
             this.name = name;
         }
     }
@@ -21,20 +30,10 @@ public class RecordBook {
 
     private class DifferentialCreditDiscipline extends Discipline{
         private final int grade;
-        private int GRADE_LOW_BOUND = 1;
-        private int GRADE_HIGH_BOUND = 5;
 
         public DifferentialCreditDiscipline(String name, int grade) {
             super(name);
             this.grade = grade;
-        }
-
-        public DifferentialCreditDiscipline(String name, int grade,
-            int GRADE_LOW_BOUND, int GRADE_HIGH_BOUND) {
-            super(name);
-            this.grade = grade;
-            this.GRADE_LOW_BOUND = GRADE_LOW_BOUND;
-            this.GRADE_HIGH_BOUND = GRADE_HIGH_BOUND;
         }
     }
 }
