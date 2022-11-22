@@ -24,6 +24,7 @@ public class RecordBook {
     }
 
     private class Record {
+
         private final String teacher;
         private final Grade grade;
         private final AssessmentForm form;
@@ -37,11 +38,10 @@ public class RecordBook {
 
     public void addRecord(String discipline, String teacher, boolean pass) {
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
-        if(pass){
+        if (pass) {
             previousRecords.add(new Record(teacher, Grade.PASS, AssessmentForm.CREDIT));
             records.putIfAbsent(teacher, previousRecords);
-        }
-        else{
+        } else {
             previousRecords.add(new Record(teacher, Grade.FAIL, AssessmentForm.CREDIT));
         }
     }
@@ -49,7 +49,7 @@ public class RecordBook {
     public void addRecord(String discipline, String teacher, int grade, AssessmentForm form)
         throws IndexOutOfBoundsException, IllegalStateException {
         // Credited discipline must not have integer as the grade
-        if(form == AssessmentForm.CREDIT){
+        if (form == AssessmentForm.CREDIT) {
             throw new IllegalStateException("Inappropriate value for assessment form");
         }
 
