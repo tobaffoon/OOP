@@ -10,20 +10,22 @@ public class ZfunctionCreator {
      * Creates Z array of a string.
      */
     public static int[] getZfunction(String str) {
-        int l = 0;
-        int r = 0;
-        int[] z = new int[str.length()];
-        z[0] = str.length();
+        return getZfunction(str, 0, new int[str.length()]);
+    }
+
+    public static int[] getZfunction(String str, int startIndex, int[] zArray) {
+        int l = startIndex;
+        int r = startIndex;
         for (int i = 1; i < str.length(); i++) {
-            z[i] = (r > i) ? Math.min(z[i - l], r - i) : 0;
-            while (i + z[i] < str.length() && str.charAt(z[i]) == str.charAt(i + z[i])) {
-                z[i]++;
+            zArray[i] = (r > i) ? Math.min(zArray[i - l], r - i) : 0;
+            while (i + zArray[i] < str.length() && str.charAt(zArray[i]) == str.charAt(i + zArray[i])) {
+                zArray[i]++;
             }
-            if ((i + z[i]) > r) {
+            if ((i + zArray[i]) > r) {
                 l = i;
-                r = i + z[i];
+                r = i + zArray[i];
             }
         }
-        return z;
+        return zArray;
     }
 }
