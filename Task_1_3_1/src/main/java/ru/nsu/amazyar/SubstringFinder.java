@@ -64,21 +64,21 @@ public class SubstringFinder {
             return entries;
         }
 
-        int[] textZArray;
+        int[] textZarray;
 
         //i is counter for buffers filled
         for (int i = 0; ; i++) {
             twoBuffer.switchBuffers();  //replace exhausted buffer with next one
             bufferCapacity = reader.read(twoBuffer.getSecondBuffer());
 
-            textZArray = ZfunctionCreator.getZfunction(
+            textZarray = ZfunctionCreator.getZfunction(
                 pattern + "\0" + new String(twoBuffer.getFirstBuffer())
                     + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
 
             //skip pattern part of zArray and ignore last values. Substrings are too short there
-            for (int j = patternSize + 1; j < textZArray.length - patternSize; j++) {
+            for (int j = patternSize + 1; j < textZarray.length - patternSize; j++) {
                 //if entry length matches length of the pattern then pattern is the entry
-                if (textZArray[j] == patternSize) {
+                if (textZarray[j] == patternSize) {
                     //buffers passed + current index (minding pattern offset)
                     entries.add(i * patternSize + j - (patternSize + 1));
                 }
