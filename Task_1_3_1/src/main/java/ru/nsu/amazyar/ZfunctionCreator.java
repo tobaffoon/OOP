@@ -10,19 +10,17 @@ public class ZfunctionCreator {
      * Creates Z array of a string.
      */
     public static int[] getZfunction(String str) {
-        return getZfunction(str, 1, new int[0]);
+        return getZfunction(str, new int[0]);
     }
 
-    public static int[] getZfunction(String str, int startIndex, int[] zarray) {
-        int l = startIndex - 1;
-        int r = startIndex - 1;
-        int patternSize = startIndex - 1;
+    public static int[] getZfunction(String str, int[] zarray) {
+        int startIndex = zarray.length + 1;
+        int l = zarray.length;
+        int r = zarray.length;
         int[] z = new int[str.length()];
-        //copy existing subArray to new subArray. StartIndex always equals to zarray.size()+1
-        //TODO add checks for "StartIndex equals to zarray.size()+1" and staff like that
-        System.arraycopy(zarray, 0, z, 0, patternSize);
+        System.arraycopy(zarray, 0, z, 0, zarray.length);
         //for condition means that subText which is smaller that pattern can't match it
-        for (int i = startIndex; i < str.length() - patternSize; i++) {
+        for (int i = startIndex; i < str.length() - zarray.length; i++) {
             z[i] = (r > i) ? Math.min(z[i - l], r - i) : 0;
             while (i + z[i] < str.length()
                 && str.charAt(z[i]) == str.charAt(i + z[i])

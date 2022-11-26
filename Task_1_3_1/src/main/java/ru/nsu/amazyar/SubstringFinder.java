@@ -73,7 +73,7 @@ public class SubstringFinder {
 
             textZarray = ZfunctionCreator.getZfunction(
                 pattern + "\0" + new String(twoBuffer.getFirstBuffer())
-                    + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
+                    + new String(twoBuffer.getSecondBuffer()), zpattern);
 
             //skip pattern part of zArray and ignore last values. Substrings are too short there
             for (int j = patternSize + 1; j < textZarray.length - patternSize; j++) {
