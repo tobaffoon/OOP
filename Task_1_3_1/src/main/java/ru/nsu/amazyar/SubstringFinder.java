@@ -71,8 +71,8 @@ public class SubstringFinder {
             twoBuffer.switchBuffers();  //replace exhausted buffer with next one
             bufferCapacity = reader.read(twoBuffer.getSecondBuffer());
 
-            textZArray = ZfunctionCreator.getZfunction(pattern + "\0" + Arrays.toString(
-                twoBuffer.getFirstBuffer()) + Arrays.toString(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
+            textZArray = ZfunctionCreator.getZfunction(pattern + "\0" + new String(twoBuffer.getFirstBuffer())
+                + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
 
             for (int j = 0; j < textZArray.length; j++) {
                 //if entry length matches length of the pattern then pattern is the entry
