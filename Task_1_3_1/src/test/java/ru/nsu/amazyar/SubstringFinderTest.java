@@ -106,4 +106,10 @@ class SubstringFinderTest {
         } catch (IOException ignored) {
         }
     }
+
+    @Test
+    public void emptyPatternTest() {
+        Assertions.assertThrows(IllegalStateException.class, () ->
+            SubstringFinder.getAllEntries("", new StringReader("what")));
+    }
 }
