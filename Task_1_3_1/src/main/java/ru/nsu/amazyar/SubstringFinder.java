@@ -74,10 +74,12 @@ public class SubstringFinder {
             textZArray = ZfunctionCreator.getZfunction(pattern + "\0" + new String(twoBuffer.getFirstBuffer())
                 + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
 
-            for (int j = 0; j < textZArray.length; j++) {
+            //skip pattern part of zArray and ignore last values. Substrings are too short there
+            for (int j = patternSize + 1; j < textZArray.length - patternSize; j++) {
                 //if entry length matches length of the pattern then pattern is the entry
                 if (textZArray[j] == patternSize) {
-                    entries.add(i * patternSize + j); //number = buffers passed + current index
+                    //buffers passed + current index (minding pattern offset)
+                    entries.add(i * patternSize + (j - (patternSize + 1)));
                 }
             }
 
