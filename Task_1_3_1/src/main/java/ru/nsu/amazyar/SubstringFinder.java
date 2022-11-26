@@ -80,6 +80,11 @@ public class SubstringFinder {
                     entries.add();
                 }
             }
+
+            //if next buffer contains fewer characters than pattern, there is no need in matching it
+            if(bufferCapacity < patternSize){
+                break;
+            }
         }
 
         return entries;
