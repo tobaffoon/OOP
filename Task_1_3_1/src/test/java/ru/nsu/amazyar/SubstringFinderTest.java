@@ -13,7 +13,7 @@ class SubstringFinderTest {
         try {
             List<Integer> resList =
                 SubstringFinder.getAllEntries("seven", "src/test/resources/normalFile.txt");
-            int[] reference = {34, 113, 152, 161, 174, 182, 189, 203, 216, 230, 241, 255, 263};
+            int[] reference = {28, 97, 132, 140, 152, 160, 166, 180, 192, 206, 216, 230, 238};
             Assertions.assertArrayEquals(reference,
                 resList.stream().mapToInt(Integer::intValue).toArray());
         } catch (IOException ignored) {
@@ -74,8 +74,8 @@ class SubstringFinderTest {
             List<Integer> resList =
                 SubstringFinder.getAllEntries("AGAIN", "src/test/resources/ultraFile.txt");
             int[] reference =
-                {131, 348, 358, 368, 378, 388, 398, 408, 418, 428, 438, 448, 458, 468, 478, 488,
-                    498};
+                {123, 332, 342, 352, 362, 372, 382, 392, 402, 412, 422, 432, 442, 452, 462, 472,
+                    482};
             Assertions.assertArrayEquals(reference,
                 resList.stream().mapToInt(Integer::intValue).toArray());
         } catch (IOException ignored) {
@@ -93,6 +93,16 @@ class SubstringFinderTest {
                 {0, 15, 36};
             Assertions.assertArrayEquals(reference,
                 resList.stream().mapToInt(Integer::intValue).toArray());
+        } catch (IOException ignored) {
+        }
+    }
+
+    @Test
+    public void rusFileTest() {
+        try {
+            List<Integer> resList =
+                SubstringFinder.getAllEntries("Спаси", "src/test/resources/rusFile.txt");
+            int[] reference = {0, 13};
         } catch (IOException ignored) {
         }
     }
