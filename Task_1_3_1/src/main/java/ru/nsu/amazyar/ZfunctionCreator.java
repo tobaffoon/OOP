@@ -16,16 +16,20 @@ public class ZfunctionCreator {
     public static int[] getZfunction(String str, int startIndex, int[] zArray) {
         int l = startIndex;
         int r = startIndex;
+        int[] z = new int[str.length()];
+        //copy existing subArray to new subArray. StartIndex always equals to zArray.size()+1
+        //TODO add checks for "StartIndex equals to zArray.size()+1" and staff like that
+        System.arraycopy(zArray, 0, z, 0, startIndex-1);
         for (int i = 1; i < str.length(); i++) {
-            zArray[i] = (r > i) ? Math.min(zArray[i - l], r - i) : 0;
-            while (i + zArray[i] < str.length() && str.charAt(zArray[i]) == str.charAt(i + zArray[i])) {
-                zArray[i]++;
+            z[i] = (r > i) ? Math.min(z[i - l], r - i) : 0;
+            while (i + z[i] < str.length() && str.charAt(z[i]) == str.charAt(i + z[i])) {
+                z[i]++;
             }
-            if ((i + zArray[i]) > r) {
+            if ((i + z[i]) > r) {
                 l = i;
-                r = i + zArray[i];
+                r = i + z[i];
             }
         }
-        return zArray;
+        return z;
     }
 }
