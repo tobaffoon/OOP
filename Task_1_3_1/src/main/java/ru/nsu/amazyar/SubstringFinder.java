@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ public class SubstringFinder {
      * @return list of indexes of beginnings of pattern entries
      */
     public static List<Integer> getAllEntries(String pattern, Reader reader) throws IOException {
-        if(pattern.equals("")){
+        if (pattern.equals("")) {
             throw new IllegalStateException("Empty patterns aren't allowed");
         }
         List<Integer> entries = new ArrayList<>();       //contains indices of patterns in reader
@@ -57,7 +56,8 @@ public class SubstringFinder {
         int patternSize = pattern.length();
 
         TwoCharBuffer twoBuffer = new TwoCharBuffer(patternSize);   //buffer with two subbuffers
-        int bufferCapacity = reader.read(twoBuffer.getSecondBuffer());   //n of elements of last subbufer
+        int bufferCapacity =
+            reader.read(twoBuffer.getSecondBuffer());   //n of elements of last subbufer
 
         //text is smaller than pattern => no need to check for entries
         if (bufferCapacity < patternSize) {
@@ -71,20 +71,21 @@ public class SubstringFinder {
             twoBuffer.switchBuffers();  //replace exhausted buffer with next one
             bufferCapacity = reader.read(twoBuffer.getSecondBuffer());
 
-            textZArray = ZfunctionCreator.getZfunction(pattern + "\0" + new String(twoBuffer.getFirstBuffer())
-                + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
+            textZArray = ZfunctionCreator.getZfunction(
+                pattern + "\0" + new String(twoBuffer.getFirstBuffer())
+                    + new String(twoBuffer.getSecondBuffer()), patternSize + 1, zpattern);
 
             //skip pattern part of zArray and ignore last values. Substrings are too short there
             for (int j = patternSize + 1; j < textZArray.length - patternSize; j++) {
                 //if entry length matches length of the pattern then pattern is the entry
                 if (textZArray[j] == patternSize) {
                     //buffers passed + current index (minding pattern offset)
-                    entries.add(i * patternSize + (j - (patternSize + 1)));
+                    entries.add(i * patternSize + j - (patternSize + 1));
                 }
             }
 
             //if next buffer contains fewer characters than pattern, there is no need in matching it
-            if(bufferCapacity < patternSize){
+            if (bufferCapacity < patternSize) {
                 break;
             }
         }
