@@ -48,6 +48,9 @@ public class SubstringFinder {
      * @return list of indexes of beginnings of pattern entries
      */
     public static List<Integer> getAllEntries(String pattern, Reader reader) throws IOException {
+        if(pattern.equals("")){
+            throw new IllegalStateException("Empty patterns aren't allowed");
+        }
         List<Integer> entries = new ArrayList<>();       //contains indices of patterns in reader
         int[] zpattern = ZfunctionCreator.getZfunction(pattern);
         int patternSize = pattern.length();
