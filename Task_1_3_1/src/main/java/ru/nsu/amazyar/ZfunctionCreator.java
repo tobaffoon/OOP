@@ -13,6 +13,10 @@ public class ZfunctionCreator {
         return getZfunction(str, new int[0]);
     }
 
+    /**
+     * Creates extended Z array from existing one
+     * @param zarray Calculated Z array
+     */
     public static int[] getZfunction(String str, int[] zarray) {
         int startIndex = zarray.length + 1;
         int l = zarray.length;
