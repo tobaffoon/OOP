@@ -10,7 +10,7 @@ public class ZfunctionCreator {
      * Creates Z array of a string.
      */
     public static int[] getZfunction(String str) {
-        return getZfunction(str, 0, new int[str.length()]);
+        return getZfunction(str, 0, new int[0]);
     }
 
     public static int[] getZfunction(String str, int startIndex, int[] zArray) {
