@@ -13,14 +13,14 @@ public class ZfunctionCreator {
         return getZfunction(str, 1, new int[0]);
     }
 
-    public static int[] getZfunction(String str, int startIndex, int[] zArray) {
+    public static int[] getZfunction(String str, int startIndex, int[] zarray) {
         int l = startIndex - 1;
         int r = startIndex - 1;
         int patternSize = startIndex - 1;
         int[] z = new int[str.length()];
-        //copy existing subArray to new subArray. StartIndex always equals to zArray.size()+1
-        //TODO add checks for "StartIndex equals to zArray.size()+1" and staff like that
-        System.arraycopy(zArray, 0, z, 0, patternSize);
+        //copy existing subArray to new subArray. StartIndex always equals to zarray.size()+1
+        //TODO add checks for "StartIndex equals to zarray.size()+1" and staff like that
+        System.arraycopy(zarray, 0, z, 0, patternSize);
         //for condition means that subText which is smaller that pattern can't match it
         for (int i = startIndex; i < str.length() - patternSize; i++) {
             z[i] = (r > i) ? Math.min(z[i - l], r - i) : 0;
