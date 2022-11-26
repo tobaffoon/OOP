@@ -24,7 +24,7 @@ public class ZfunctionCreator {
         //for condition means that subText which is smaller that pattern can't match it
         for (int i = startIndex; i < str.length() - patternSize; i++) {
             z[i] = (r > i) ? Math.min(z[i - l], r - i) : 0;
-            while (i + z[i] < str.length() && str.charAt(z[i]) == str.charAt(i + z[i])) {
+            while (i + z[i] < str.length() && str.charAt(z[i]) == str.charAt(i + z[i]) && str.charAt(z[i]) != '\0') {
                 z[i]++;
             }
             if ((i + z[i]) > r) {
