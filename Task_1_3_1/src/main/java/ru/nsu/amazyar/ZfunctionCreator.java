@@ -10,12 +10,12 @@ public class ZfunctionCreator {
      * Creates Z array of a string.
      */
     public static int[] getZfunction(String str) {
-        return getZfunction(str, 0, new int[0]);
+        return getZfunction(str, 1, new int[0]);
     }
 
     public static int[] getZfunction(String str, int startIndex, int[] zArray) {
-        int l = startIndex;
-        int r = startIndex;
+        int l = startIndex - 1;
+        int r = startIndex - 1;
         int[] z = new int[str.length()];
         //copy existing subArray to new subArray. StartIndex always equals to zArray.size()+1
         //TODO add checks for "StartIndex equals to zArray.size()+1" and staff like that
