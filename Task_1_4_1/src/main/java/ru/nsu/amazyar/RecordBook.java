@@ -34,6 +34,18 @@ public class RecordBook {
             this.grade = grade;
             this.form = form;
         }
+
+        public String getTeacher() {
+            return teacher;
+        }
+
+        public Grade getGrade() {
+            return grade;
+        }
+
+        public AssessmentForm getForm() {
+            return form;
+        }
     }
 
     public void addRecord(String discipline, String teacher, boolean pass) {
