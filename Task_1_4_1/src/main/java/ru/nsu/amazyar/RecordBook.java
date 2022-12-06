@@ -59,10 +59,15 @@ public class RecordBook {
     }
 
     public int getQualificationWorkGrade() {
-        return qualificationWorkGrade;
+        if(qualificationWorkDone){
+            return qualificationWorkGrade;
+        }
+
+        throw new IllegalStateException("Qualification work hasn't been assessed");
     }
 
     public void setQualificationWorkGrade(int qualificationWorkGrade) {
+        this.qualificationWorkDone = true;
         this.qualificationWorkGrade = qualificationWorkGrade;
     }
 
@@ -132,6 +137,6 @@ public class RecordBook {
 
         return !hasBadMarks() &&
             (lastExcellentMarks / markedDisciplines >= 0.75) &&
-            qualificationWorkGrade == 5;
+            (qualificationWorkGrade == 5 || !qualificationWorkDone);
     }
 }
