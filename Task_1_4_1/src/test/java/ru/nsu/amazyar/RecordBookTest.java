@@ -136,4 +136,10 @@ class RecordBookTest {
         recordBook.addRecord("Name1", 2, "Somebody", 3, AssessmentForm.EXAM);
         Assertions.assertTrue(recordBook.getsIncreasedScholarship());
     }
+
+    @Test
+    public void nullTest(){
+        Assertions.assertThrows(NullPointerException.class, () -> recordBook.addRecord(null,1,"null",2,AssessmentForm.EXAM));
+        Assertions.assertThrows(NullPointerException.class, () -> recordBook.addRecord("null",1,null,2,AssessmentForm.EXAM));
+    }
 }
