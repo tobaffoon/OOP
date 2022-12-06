@@ -8,27 +8,30 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Students' records book with records of semester, subject, mark, etc.
+ */
 public class RecordBook {
 
     private final Map<String, List<Record>> records;
     private int qualificationWorkGrade;
     private boolean qualificationWorkDone;
 
-    private final static int MAX_SEMESTER = 13;
+    private static final int MAX_SEMESTER = 13;
 
     private enum Grade {
         FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
     }
 
     /**
-     * Possible forms of certification
+     * Possible forms of certification.
      */
     public enum AssessmentForm {
         CREDIT, DIFFERENTIAL_CREDIT, EXAM
     }
 
     /**
-     * Regular constructor
+     * Regular constructor.
      */
     public RecordBook() {
         this.records = new HashMap<>();
@@ -172,9 +175,9 @@ public class RecordBook {
                 || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
             .count();
 
-        return !hasBadMarks() &&
-            (lastExcellentMarks / markedDisciplines >= 0.75) &&
-            (qualificationWorkGrade == 5 || !qualificationWorkDone);
+        return !hasBadMarks()
+            && (lastExcellentMarks / markedDisciplines >= 0.75)
+            && (qualificationWorkGrade == 5 || !qualificationWorkDone);
     }
 
     /**

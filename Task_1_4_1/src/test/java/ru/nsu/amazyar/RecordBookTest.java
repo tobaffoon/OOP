@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.amazyar.RecordBook.AssessmentForm;
 
+/**
+ * Test for RecordBook class
+ */
 class RecordBookTest {
 
     RecordBook recordBook;
