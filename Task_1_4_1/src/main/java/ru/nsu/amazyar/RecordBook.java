@@ -38,10 +38,14 @@ public class RecordBook {
 
     private record Record(String teacher, int semester, Grade grade, AssessmentForm form) {
 
-        private Record {
+        private Record(String teacher, int semester, Grade grade, AssessmentForm form) {
             if (teacher == null || grade == null || form == null) {
                 throw new NullPointerException();
             }
+            this.teacher = teacher;
+            this.semester = semester;
+            this.grade = grade;
+            this.form = form;
         }
     }
 
