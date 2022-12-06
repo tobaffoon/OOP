@@ -97,4 +97,16 @@ class RecordBookTest {
         Assertions.assertThrows(IllegalStateException.class, () -> recordBook.addRecord("Name", 1, "Someone", 3, AssessmentForm.CREDIT));
         Assertions.assertThrows(IllegalStateException.class, () -> recordBook.getQualificationWorkGrade());
     }
+
+    @Test
+    public void scholarshipTest(){
+        recordBook = new RecordBook();
+        recordBook.addRecord("Name1", 1, "Somebody", true, AssessmentForm.CREDIT);
+        recordBook.addRecord("Name2", 1, "Someone", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
+
+        Assertions.assertFalse(recordBook.getsIncreasedScholarship());
+
+        recordBook.addRecord("Name1", 2, "Somebody", 3, AssessmentForm.EXAM);
+        Assertions.assertTrue(recordBook.getsIncreasedScholarship());
+    }
 }
