@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RecordBook {
@@ -92,17 +93,15 @@ public class RecordBook {
     }
 
     public boolean getsHonourDegree() {
-        double lastExcellentMarks = (double) records.values().stream()
+        List<Record> lastSemesterRecords = records.values().stream()
             .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
                 .max(Comparator.comparingInt(records -> records.semester)))
-            .filter(Optional::isPresent).map(Optional::get).filter(record -> record.grade == Grade.EXCELLENT).count();
+            .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
-        double markedDisciplines = (double) records.values().stream()
-            .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
-                .max(Comparator.comparingInt(records -> records.semester)))
-            .filter(Optional::isPresent).map(Optional::get).filter(record -> record.form == AssessmentForm.EXAM
-                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
-            .count();
+        double lastExcellentMarks = (double) lastSemesterRecords.stream().filter(record -> record.grade == Grade.EXCELLENT).count();
+
+        double markedDisciplines = (double) lastSemesterRecords.stream().filter(record -> record.form == AssessmentForm.EXAM
+                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).count();
 
         return !hasBadMarks() &&
             (lastExcellentMarks / markedDisciplines >= 0.75) &&
