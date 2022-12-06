@@ -14,6 +14,8 @@ public class RecordBook {
     private int qualificationWorkGrade;
     private boolean qualificationWorkDone;
 
+    private final static int MAX_SEMESTER = 13;
+
     private enum Grade {
         FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
     }
@@ -126,7 +128,7 @@ public class RecordBook {
     }
 
     private void checkSemester(int semester) throws IndexOutOfBoundsException{
-        if (semester < 1 || semester > 13) {
+        if (semester < 1 || semester > MAX_SEMESTER) {
             throw new IndexOutOfBoundsException("Semester out of bounds");
         }
     }
