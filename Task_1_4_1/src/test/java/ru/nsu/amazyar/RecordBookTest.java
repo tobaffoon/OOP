@@ -53,10 +53,33 @@ class RecordBookTest {
     }
 
     @Test
-    public void averageScoreTest() {
+    public void regularTest() {
         //according to cab.nsu.ru it equals 4.7
         double averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
         Assertions.assertEquals(4.7, averageScore);
-    }
 
+        Assertions.assertFalse(recordBook.hasBadMarks());
+        Assertions.assertFalse(recordBook.getsHonourDegree());
+        Assertions.assertFalse(recordBook.getsIncreasedScholarship());
+
+        Assertions.assertThrows(IllegalStateException.class, () -> recordBook.getQualificationWorkGrade());
+        recordBook.setQualificationWorkGrade(5);
+        Assertions.assertEquals(5, recordBook.getQualificationWorkGrade());
+
+        recordBook.addRecord("Some discipline", 1, "Him", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("Another discipline", 2, "Her", 5, AssessmentForm.EXAM);
+        Assertions.assertTrue(recordBook.getsHonourDegree());
+
+        recordBook.setQualificationWorkGrade(3);
+        Assertions.assertEquals(3, recordBook.getQualificationWorkGrade());
+
+        Assertions.assertFalse(recordBook.getsHonourDegree());
+
+        recordBook.addRecord("Digital platforms", 3, "Not Irtegov Dmitriy Valentinovich", 2, AssessmentForm.EXAM);
+        averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
+        Assertions.assertEquals(4.6, averageScore);
+
+        Assertions.assertTrue(recordBook.hasBadMarks());
+        Assertions.assertFalse(recordBook.getsHonourDegree());
+    }
 }
