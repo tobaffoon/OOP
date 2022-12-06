@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class RecordBook {
 
-    private Map<String, List<Record>> records;
+    private final Map<String, List<Record>> records;
     private int qualificationWorkGrade;
 
     private enum Grade {
