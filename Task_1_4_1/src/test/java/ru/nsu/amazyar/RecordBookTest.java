@@ -1,5 +1,7 @@
 package ru.nsu.amazyar;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,10 +54,9 @@ class RecordBookTest {
 
     @Test
     public void averageScoreTest() {
-        //according to cab.nsu.ru it equals 4.7,
-        //but we can't set precision of double, so we check this wy
-        Assertions.assertTrue(
-            4.7 < recordBook.getAverageScore() && recordBook.getAverageScore() < 4.8);
+        //according to cab.nsu.ru it equals 4.7
+        double averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
+        Assertions.assertEquals(4.7, averageScore);
     }
 
 }
