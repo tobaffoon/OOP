@@ -10,18 +10,8 @@ public class RecordBook {
     private Map<String, List<Record>> records;
     private int qualificationWorkGrade;
 
-    public enum Grade {
-        FAIL(0), PASS(1), POOR(2), SATISFACTORY(3), GOOD(4), EXCELLENT(5);
-
-        public final int intValue;
-
-        Grade(int grade) {
-            intValue = grade;
-        }
-
-        public int getIntValue(){
-            return intValue;
-        }
+    private enum Grade {
+        FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
     }
 
     public enum AssessmentForm {
