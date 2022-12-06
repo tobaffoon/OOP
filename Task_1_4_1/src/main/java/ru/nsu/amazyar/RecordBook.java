@@ -1,9 +1,12 @@
 package ru.nsu.amazyar;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class RecordBook {
 
@@ -139,7 +142,20 @@ public class RecordBook {
                 || record.grade == Grade.SATISFACTORY);
     }
 
-//    public boolean getsHonourDegree() {
-//        return
-//    }
+    public boolean getsHonourDegree() {
+        Stream<Record> lastSemesterRecords = records.values().stream().map(
+                oneSubjectRecords -> oneSubjectRecords.stream()
+                    .max(Comparator.comparingInt(records -> records.semester)))
+            .filter(Optional::isPresent).map(Optional::get);
+
+        double lastExcellentMarks =
+            (double) lastSemesterRecords.filter(record -> record.grade == Grade.EXCELLENT).count();
+        double markedDisciplines = (double) lastSemesterRecords.filter(
+            record -> record.form == AssessmentForm.EXAM
+                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).count();
+        return !hasBadMarks() &&
+            (lastExcellentMarks / markedDisciplines >= 0.75) &&
+            qualificationWorkGrade == 5;
+
+    }
 }
