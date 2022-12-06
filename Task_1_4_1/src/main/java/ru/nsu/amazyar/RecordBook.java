@@ -54,6 +54,8 @@ public class RecordBook {
      * @param pass       true if subject was passed, false otherwise
      * @param form       form of certification (must be CREDIT)
      * @throws IllegalStateException if form isn't credit
+     * @throws IndexOutOfBoundsException if semester is of inadequate value
+     * @throws NullPointerException if any of the argument pointers is null
      */
     public void addRecord(String discipline, int semester, String teacher, boolean pass,
         AssessmentForm form) throws IllegalStateException, NullPointerException {
@@ -84,6 +86,8 @@ public class RecordBook {
      * @param grade      grade for completing this course
      * @param form       form of certification (must be EXAM or DIFFERENTIAL CREDIT)
      * @throws IllegalStateException if form isn't EXAM or DIFFERENTIAL CREDIT
+     * @throws IndexOutOfBoundsException if semester or grade are of inadequate value
+     * @throws NullPointerException if any of the argument pointers is null
      */
     public void addRecord(String discipline, int semester, String teacher, int grade,
         AssessmentForm form)
