@@ -104,6 +104,17 @@ public class RecordBook {
             (qualificationWorkGrade == 5 || !qualificationWorkDone);
     }
 
+    public boolean getsIncreasedScholarship() {
+        int currentSemester = getCurrentSemester();
+        if (currentSemester == 1) {
+            return false;
+        }
+
+        return records.values().stream().flatMap(List::stream)
+            .filter(record -> record.semester == currentSemester - 1)
+            .allMatch(record -> record.grade == Grade.EXCELLENT || record.grade == Grade.PASS);
+    }
+
     private int getCurrentSemester() {
         return this.records.values().stream()
             .flatMap(oneSubjectRecords -> oneSubjectRecords.stream().map(Record::semester))
