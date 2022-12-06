@@ -26,11 +26,13 @@ public class RecordBook {
     private class Record {
 
         private final String teacher;
+        private final int semester;
         private final Grade grade;
         private final AssessmentForm form;
 
-        public Record(String teacher, Grade grade, AssessmentForm form) {
+        public Record(String teacher, int semester, Grade grade, AssessmentForm form) {
             this.teacher = teacher;
+            this.semester = semester;
             this.grade = grade;
             this.form = form;
         }
@@ -46,27 +48,34 @@ public class RecordBook {
         public AssessmentForm getForm() {
             return form;
         }
-    }
 
-    public void addRecord(String discipline, String teacher, boolean pass) {
-        List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
-        if (pass) {
-            previousRecords.add(new Record(teacher, Grade.PASS, AssessmentForm.CREDIT));
-            records.putIfAbsent(teacher, previousRecords);
-        } else {
-            previousRecords.add(new Record(teacher, Grade.FAIL, AssessmentForm.CREDIT));
+        public int getSemester() {
+            return semester;
         }
     }
 
-    public void addRecord(String discipline, String teacher, int grade, AssessmentForm form)
+    public void addRecord(String discipline, int semester, String teacher, boolean pass) {
+        checkSemester(semester);
+        List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
+        if (pass) {
+            previousRecords.add(new Record(teacher, semester, Grade.PASS, AssessmentForm.CREDIT));
+            records.putIfAbsent(teacher, previousRecords);
+        } else {
+            previousRecords.add(new Record(teacher, semester, Grade.FAIL, AssessmentForm.CREDIT));
+        }
+    }
+
+    public void addRecord(String discipline, int semester, String teacher, int grade,
+        AssessmentForm form)
         throws IndexOutOfBoundsException, IllegalStateException {
+        checkSemester(semester);
         // Credited discipline must not have integer as the grade
         if (form == AssessmentForm.CREDIT) {
             throw new IllegalStateException("Inappropriate value for assessment form");
         }
 
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
-        previousRecords.add(new Record(teacher, mapIntToGrade(grade), form));
+        previousRecords.add(new Record(teacher, semester, mapIntToGrade(grade), form));
         //use putIfAbsent because if list isn't absent it's updated by itself upon adding new record
         records.putIfAbsent(teacher, previousRecords);
     }
@@ -77,6 +86,21 @@ public class RecordBook {
 
     public void setQualificationWorkGrade(int qualificationWorkGrade) {
         this.qualificationWorkGrade = qualificationWorkGrade;
+    }
+
+    public double getAverageScore() {
+        return records.values().stream()
+            .flatMap(List::stream)
+            .filter(record -> record.form == AssessmentForm.EXAM
+                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
+            .mapToInt(record -> mapGradeToInt(record.grade))
+            .average().orElse(0);
+    }
+
+    private void checkSemester(int semester) {
+        if (semester < 1 || semester > 13) {
+            throw new IndexOutOfBoundsException("Semester out of bounds");
+        }
     }
 
     private static Grade mapIntToGrade(int grade) {
@@ -107,14 +131,5 @@ public class RecordBook {
             default:
                 throw new IndexOutOfBoundsException("Grade out of bounds");
         }
-    }
-
-    public double getAverageScore() {
-        return records.values().stream()
-            .flatMap(List::stream)
-            .filter(record -> record.form == AssessmentForm.EXAM
-                    || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
-            .mapToInt(record -> mapGradeToInt(record.grade))
-            .average().orElse(0);
     }
 }
