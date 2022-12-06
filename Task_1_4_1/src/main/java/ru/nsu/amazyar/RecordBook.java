@@ -62,7 +62,7 @@ public class RecordBook {
         records.putIfAbsent(teacher, previousRecords);
     }
 
-    public int getQualificationWorkGrade() {
+    public int getQualificationWorkGrade() throws IllegalStateException{
         if (qualificationWorkDone) {
             return qualificationWorkGrade;
         }
@@ -125,13 +125,13 @@ public class RecordBook {
             .max(Comparator.naturalOrder()).orElse(1);
     }
 
-    private void checkSemester(int semester) {
+    private void checkSemester(int semester) throws IndexOutOfBoundsException{
         if (semester < 1 || semester > 13) {
             throw new IndexOutOfBoundsException("Semester out of bounds");
         }
     }
 
-    private static Grade mapIntToGrade(int grade) {
+    private static Grade mapIntToGrade(int grade) throws IndexOutOfBoundsException{
         switch (grade) {
             case 2:
                 return Grade.POOR;
@@ -146,7 +146,7 @@ public class RecordBook {
         }
     }
 
-    private static int mapGradeToInt(Grade grade) {
+    private static int mapGradeToInt(Grade grade) throws IndexOutOfBoundsException{
         switch (grade) {
             case POOR:
                 return 2;
