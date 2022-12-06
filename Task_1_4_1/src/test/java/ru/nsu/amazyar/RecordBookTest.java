@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.amazyar.RecordBook.AssessmentForm;
 
 /**
- * Test for RecordBook class
+ * Test for RecordBook class.
  */
 class RecordBookTest {
 
