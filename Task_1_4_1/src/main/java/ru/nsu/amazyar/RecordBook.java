@@ -28,35 +28,8 @@ public class RecordBook {
         this.qualificationWorkDone = false;
     }
 
-    private static class Record {
+    private record Record(String teacher, int semester, Grade grade, AssessmentForm form) {
 
-        private final String teacher;
-        private final int semester;
-        private final Grade grade;
-        private final AssessmentForm form;
-
-        public Record(String teacher, int semester, Grade grade, AssessmentForm form) {
-            this.teacher = teacher;
-            this.semester = semester;
-            this.grade = grade;
-            this.form = form;
-        }
-
-        public String getTeacher() {
-            return teacher;
-        }
-
-        public Grade getGrade() {
-            return grade;
-        }
-
-        public AssessmentForm getForm() {
-            return form;
-        }
-
-        public int getSemester() {
-            return semester;
-        }
     }
 
     public void addRecord(String discipline, int semester, String teacher, boolean pass) {
