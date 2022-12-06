@@ -39,8 +39,11 @@ public class RecordBook {
         this.qualificationWorkDone = false;
     }
 
-    private record Record(String teacher, int semester, Grade grade, AssessmentForm form) {
-
+    private static class Record {
+        public final String teacher;
+        public final int semester;
+        public final Grade grade;
+        public final AssessmentForm form;
         public Record(String teacher, int semester, Grade grade, AssessmentForm form) {
             if (teacher == null || grade == null || form == null) {
                 throw new NullPointerException();
@@ -196,7 +199,7 @@ public class RecordBook {
 
     private int getCurrentSemester() {
         return this.records.values().stream()
-            .flatMap(oneSubjectRecords -> oneSubjectRecords.stream().map(Record::semester))
+            .flatMap(oneSubjectRecords -> oneSubjectRecords.stream().map(record -> record.semester))
             .max(Comparator.naturalOrder()).orElse(1);
     }
 
