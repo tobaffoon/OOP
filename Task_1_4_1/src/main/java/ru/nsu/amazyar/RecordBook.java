@@ -41,7 +41,7 @@ public class RecordBook {
 
     private record Record(String teacher, int semester, Grade grade, AssessmentForm form) {
 
-        private Record(String teacher, int semester, Grade grade, AssessmentForm form) {
+        public Record(String teacher, int semester, Grade grade, AssessmentForm form) {
             if (teacher == null || grade == null || form == null) {
                 throw new NullPointerException();
             }
