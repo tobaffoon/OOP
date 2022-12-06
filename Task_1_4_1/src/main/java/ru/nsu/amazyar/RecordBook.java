@@ -46,7 +46,7 @@ public class RecordBook {
         } else {
             previousRecords.add(new Record(teacher, semester, Grade.FAIL, AssessmentForm.CREDIT));
         }
-        records.put(teacher, previousRecords);
+        records.putIfAbsent(discipline, previousRecords);
     }
 
     public void addRecord(String discipline, int semester, String teacher, int grade,
@@ -60,7 +60,7 @@ public class RecordBook {
 
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
         previousRecords.add(new Record(teacher, semester, mapIntToGrade(grade), form));
-        records.put(teacher, previousRecords);
+        records.putIfAbsent(discipline, previousRecords);
     }
 
     public int getQualificationWorkGrade() throws IllegalStateException{
