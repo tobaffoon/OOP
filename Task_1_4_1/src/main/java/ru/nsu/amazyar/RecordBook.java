@@ -20,10 +20,16 @@ public class RecordBook {
         FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
     }
 
+    /**
+     * Possible forms of certification
+     */
     public enum AssessmentForm {
         CREDIT, DIFFERENTIAL_CREDIT, EXAM
     }
 
+    /**
+     * Regular constructor
+     */
     public RecordBook() {
         this.records = new HashMap<>();
         this.qualificationWorkGrade = -1;
@@ -34,6 +40,17 @@ public class RecordBook {
 
     }
 
+    /**
+     * Add new record to the book.
+     * Accounts for disciplines which can only be passed or failed
+     *
+     * @param discipline name of a subject
+     * @param semester semester number
+     * @param teacher teacher's name
+     * @param pass true if subject was passed, false otherwise
+     * @param form form of certification (must be CREDIT)
+     * @throws IllegalStateException if form isn't credit
+     */
     public void addRecord(String discipline, int semester, String teacher, boolean pass,
         AssessmentForm form) throws IllegalStateException {
         checkSemester(semester);
@@ -49,6 +66,17 @@ public class RecordBook {
         records.putIfAbsent(discipline, previousRecords);
     }
 
+    /**
+     * Add new record to the book.
+     * Accounts for disciplines which are assessed via mark
+     *
+     * @param discipline name of a subject
+     * @param semester semester number
+     * @param teacher teacher's name
+     * @param grade grade for completing this course
+     * @param form form of certification (must be EXAM or DIFFERENTIAL CREDIT)
+     * @throws IllegalStateException if form isn't EXAM or DIFFERENTIAL CREDIT
+     */
     public void addRecord(String discipline, int semester, String teacher, int grade,
         AssessmentForm form)
         throws IndexOutOfBoundsException, IllegalStateException {
@@ -63,6 +91,10 @@ public class RecordBook {
         records.putIfAbsent(discipline, previousRecords);
     }
 
+    /**
+     * Gets qualification work grade.
+     * @throws IllegalStateException if qualification work grade wasn't set before
+     */
     public int getQualificationWorkGrade() throws IllegalStateException{
         if (qualificationWorkDone) {
             return qualificationWorkGrade;
@@ -71,11 +103,17 @@ public class RecordBook {
         throw new IllegalStateException("Qualification work hasn't been assessed");
     }
 
+    /**
+     * Sets qualification work grade.
+     */
     public void setQualificationWorkGrade(int qualificationWorkGrade) {
         this.qualificationWorkDone = true;
         this.qualificationWorkGrade = qualificationWorkGrade;
     }
 
+    /**
+     * Gets average of all marks in the book.
+     */
     public double getAverageScore() {
         return records.values().stream()
             .flatMap(List::stream)
@@ -85,12 +123,18 @@ public class RecordBook {
             .average().orElse(0);
     }
 
+    /**
+     * Checks if book contains bad marks.
+     */
     public boolean hasBadMarks() {
         return records.values().stream().flatMap(List::stream).anyMatch(
             record -> record.grade == Grade.FAIL || record.grade == Grade.POOR
                 || record.grade == Grade.SATISFACTORY);
     }
 
+    /**
+     * Checks if one can get honour degree with this book.
+     */
     public boolean getsHonourDegree() {
         List<Record> lastSemesterRecords = records.values().stream()
             .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
@@ -107,6 +151,9 @@ public class RecordBook {
             (qualificationWorkGrade == 5 || !qualificationWorkDone);
     }
 
+    /**
+     * Checks if one can get increased scholarship with this book.
+     */
     public boolean getsIncreasedScholarship() {
         int currentSemester = getCurrentSemester();
         if (currentSemester == 1) {
