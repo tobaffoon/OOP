@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class RecordBook {
 
@@ -44,10 +43,10 @@ public class RecordBook {
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
         if (pass) {
             previousRecords.add(new Record(teacher, semester, Grade.PASS, AssessmentForm.CREDIT));
-            records.put(teacher, previousRecords);
         } else {
             previousRecords.add(new Record(teacher, semester, Grade.FAIL, AssessmentForm.CREDIT));
         }
+        records.put(teacher, previousRecords);
     }
 
     public void addRecord(String discipline, int semester, String teacher, int grade,
