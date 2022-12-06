@@ -56,8 +56,13 @@ public class RecordBook {
      * @throws IllegalStateException if form isn't credit
      */
     public void addRecord(String discipline, int semester, String teacher, boolean pass,
-        AssessmentForm form) throws IllegalStateException {
+        AssessmentForm form) throws IllegalStateException, NullPointerException {
         checkSemester(semester);
+
+        if(discipline == null){
+            throw new NullPointerException();
+        }
+
         if (form != AssessmentForm.CREDIT) {
             throw new IllegalStateException("Inappropriate value for assessment form");
         }
@@ -82,8 +87,13 @@ public class RecordBook {
      */
     public void addRecord(String discipline, int semester, String teacher, int grade,
         AssessmentForm form)
-        throws IndexOutOfBoundsException, IllegalStateException {
+        throws IndexOutOfBoundsException, IllegalStateException, NullPointerException {
         checkSemester(semester);
+
+        if(discipline == null){
+            throw new NullPointerException();
+        }
+
         // Credited discipline must not have integer as the grade
         if (form != AssessmentForm.EXAM && form != AssessmentForm.DIFFERENTIAL_CREDIT) {
             throw new IllegalStateException("Inappropriate value for assessment form");
