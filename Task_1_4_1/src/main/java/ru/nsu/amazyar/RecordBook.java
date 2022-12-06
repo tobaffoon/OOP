@@ -71,7 +71,7 @@ public class RecordBook {
         records.putIfAbsent(teacher, previousRecords);
     }
 
-    private static Grade mapIntToGrade(int grade){
+    private static Grade mapIntToGrade(int grade) {
         switch (grade) {
             case 2:
                 return Grade.POOR;
@@ -86,7 +86,7 @@ public class RecordBook {
         }
     }
 
-    private static int mapGradeToInt(Grade grade){
+    private static int mapGradeToInt(Grade grade) {
         switch (grade) {
             case POOR:
                 return 2;
@@ -101,7 +101,12 @@ public class RecordBook {
         }
     }
 
-//    public double getAverageScore(){
-//        return records.values().stream().flatMap(List::stream).filter(record -> record.form == AssessmentForm.EXAM || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).mapMultiToInt(RecordBook::mapGradeToInt)
-//    }
+    public double getAverageScore() {
+        return records.values().stream()
+            .flatMap(List::stream)
+            .filter(record -> record.form == AssessmentForm.EXAM
+                    || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
+            .mapToInt(record -> mapGradeToInt(record.grade))
+            .average().orElse(0);
+    }
 }
