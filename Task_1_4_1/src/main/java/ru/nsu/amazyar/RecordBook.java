@@ -43,7 +43,7 @@ public class RecordBook {
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
         if (pass) {
             previousRecords.add(new Record(teacher, semester, Grade.PASS, AssessmentForm.CREDIT));
-            records.putIfAbsent(teacher, previousRecords);
+            records.put(teacher, previousRecords);
         } else {
             previousRecords.add(new Record(teacher, semester, Grade.FAIL, AssessmentForm.CREDIT));
         }
@@ -60,8 +60,7 @@ public class RecordBook {
 
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
         previousRecords.add(new Record(teacher, semester, mapIntToGrade(grade), form));
-        //use putIfAbsent because if list isn't absent it's updated by itself upon adding new record
-        records.putIfAbsent(teacher, previousRecords);
+        records.put(teacher, previousRecords);
     }
 
     public int getQualificationWorkGrade() throws IllegalStateException{
