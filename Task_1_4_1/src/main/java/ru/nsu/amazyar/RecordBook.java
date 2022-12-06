@@ -143,19 +143,20 @@ public class RecordBook {
     }
 
     public boolean getsHonourDegree() {
-        Stream<Record> lastSemesterRecords = records.values().stream().map(
-                oneSubjectRecords -> oneSubjectRecords.stream()
-                    .max(Comparator.comparingInt(records -> records.semester)))
-            .filter(Optional::isPresent).map(Optional::get);
+        Stream<Record> lastSemesterRecords = records.values().stream()
+            .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
+                                        .max(Comparator.comparingInt(records -> records.semester)))
+            .filter(Optional::isPresent).map(Optional::get); //unbox from Optional
 
-        double lastExcellentMarks =
-            (double) lastSemesterRecords.filter(record -> record.grade == Grade.EXCELLENT).count();
-        double markedDisciplines = (double) lastSemesterRecords.filter(
-            record -> record.form == AssessmentForm.EXAM
-                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).count();
+        double lastExcellentMarks = (double) lastSemesterRecords
+            .filter(record -> record.grade == Grade.EXCELLENT).count();
+        double markedDisciplines = (double) lastSemesterRecords
+            .filter(record -> record.form == AssessmentForm.EXAM
+                            || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
+            .count();
+
         return !hasBadMarks() &&
             (lastExcellentMarks / markedDisciplines >= 0.75) &&
             qualificationWorkGrade == 5;
-
     }
 }
