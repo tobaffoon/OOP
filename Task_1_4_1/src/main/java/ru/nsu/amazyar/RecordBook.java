@@ -12,6 +12,7 @@ public class RecordBook {
 
     private final Map<String, List<Record>> records;
     private int qualificationWorkGrade;
+    private boolean qualificationWorkDone;
 
     private enum Grade {
         FAIL, PASS, POOR, SATISFACTORY, GOOD, EXCELLENT
@@ -24,9 +25,10 @@ public class RecordBook {
     public RecordBook() {
         this.records = new HashMap<>();
         this.qualificationWorkGrade = -1;
+        this.qualificationWorkDone = false;
     }
 
-    private class Record {
+    private static class Record {
 
         private final String teacher;
         private final int semester;
