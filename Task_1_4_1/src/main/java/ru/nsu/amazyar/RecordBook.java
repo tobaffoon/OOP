@@ -59,7 +59,7 @@ public class RecordBook {
     }
 
     public int getQualificationWorkGrade() {
-        if(qualificationWorkDone){
+        if (qualificationWorkDone) {
             return qualificationWorkGrade;
         }
 
@@ -78,6 +78,36 @@ public class RecordBook {
                 || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
             .mapToInt(record -> mapGradeToInt(record.grade))
             .average().orElse(0);
+    }
+
+    public boolean hasBadMarks() {
+        return records.values().stream().flatMap(List::stream).noneMatch(
+            record -> record.grade == Grade.FAIL || record.grade == Grade.POOR
+                || record.grade == Grade.SATISFACTORY);
+    }
+
+    public boolean getsHonourDegree() {
+        Stream<Record> lastSemesterRecords = records.values().stream()
+            .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
+                .max(Comparator.comparingInt(records -> records.semester)))
+            .filter(Optional::isPresent).map(Optional::get); //unbox from Optional
+
+        double lastExcellentMarks = (double) lastSemesterRecords
+            .filter(record -> record.grade == Grade.EXCELLENT).count();
+        double markedDisciplines = (double) lastSemesterRecords
+            .filter(record -> record.form == AssessmentForm.EXAM
+                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
+            .count();
+
+        return !hasBadMarks() &&
+            (lastExcellentMarks / markedDisciplines >= 0.75) &&
+            (qualificationWorkGrade == 5 || !qualificationWorkDone);
+    }
+
+    private int getCurrentSemester() {
+        return this.records.values().stream()
+            .flatMap(oneSubjectRecords -> oneSubjectRecords.stream().map(Record::semester))
+            .max(Comparator.naturalOrder()).orElse(1);
     }
 
     private void checkSemester(int semester) {
@@ -114,29 +144,5 @@ public class RecordBook {
             default:
                 throw new IndexOutOfBoundsException("Grade out of bounds");
         }
-    }
-
-    public boolean hasBadMarks() {
-        return records.values().stream().flatMap(List::stream).noneMatch(
-            record -> record.grade == Grade.FAIL || record.grade == Grade.POOR
-                || record.grade == Grade.SATISFACTORY);
-    }
-
-    public boolean getsHonourDegree() {
-        Stream<Record> lastSemesterRecords = records.values().stream()
-            .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
-                                        .max(Comparator.comparingInt(records -> records.semester)))
-            .filter(Optional::isPresent).map(Optional::get); //unbox from Optional
-
-        double lastExcellentMarks = (double) lastSemesterRecords
-            .filter(record -> record.grade == Grade.EXCELLENT).count();
-        double markedDisciplines = (double) lastSemesterRecords
-            .filter(record -> record.form == AssessmentForm.EXAM
-                            || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
-            .count();
-
-        return !hasBadMarks() &&
-            (lastExcellentMarks / markedDisciplines >= 0.75) &&
-            (qualificationWorkGrade == 5 || !qualificationWorkDone);
     }
 }
