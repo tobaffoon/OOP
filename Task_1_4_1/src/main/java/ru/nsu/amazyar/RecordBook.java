@@ -71,6 +71,14 @@ public class RecordBook {
         records.putIfAbsent(teacher, previousRecords);
     }
 
+    public int getQualificationWorkGrade() {
+        return qualificationWorkGrade;
+    }
+
+    public void setQualificationWorkGrade(int qualificationWorkGrade) {
+        this.qualificationWorkGrade = qualificationWorkGrade;
+    }
+
     private static Grade mapIntToGrade(int grade) {
         switch (grade) {
             case 2:
