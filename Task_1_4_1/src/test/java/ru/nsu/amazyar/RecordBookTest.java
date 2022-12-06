@@ -141,8 +141,10 @@ class RecordBookTest {
      * Tests program's behaviour with null pointers.
      */
     @Test
-    public void nullTest(){
-        Assertions.assertThrows(NullPointerException.class, () -> recordBook.addRecord(null,1,"null",2,AssessmentForm.EXAM));
-        Assertions.assertThrows(NullPointerException.class, () -> recordBook.addRecord("null",1,null,2,AssessmentForm.EXAM));
+    public void nullTest() {
+        Assertions.assertThrows(NullPointerException.class,
+            () -> recordBook.addRecord(null, 1, "null", 2, AssessmentForm.EXAM));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> recordBook.addRecord("null", 1, null, 2, AssessmentForm.EXAM));
     }
 }
