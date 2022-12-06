@@ -61,14 +61,17 @@ class RecordBookTest {
     @Test
     public void regularTest() {
         //according to cab.nsu.ru it equals 4.7
-        double averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
+        double averageScore =
+            BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING)
+                .doubleValue();
         Assertions.assertEquals(4.7, averageScore);
 
         Assertions.assertFalse(recordBook.hasBadMarks());
         Assertions.assertFalse(recordBook.getsHonourDegree());
         Assertions.assertFalse(recordBook.getsIncreasedScholarship());
 
-        Assertions.assertThrows(IllegalStateException.class, () -> recordBook.getQualificationWorkGrade());
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> recordBook.getQualificationWorkGrade());
         recordBook.setQualificationWorkGrade(5);
         Assertions.assertEquals(5, recordBook.getQualificationWorkGrade());
 
@@ -81,13 +84,16 @@ class RecordBookTest {
 
         Assertions.assertFalse(recordBook.getsHonourDegree());
 
-        recordBook.addRecord("Digital platforms", 3, "Not Irtegov Dmitriy Valentinovich", false, AssessmentForm.CREDIT);
+        recordBook.addRecord("Digital platforms", 3, "Not Irtegov Dmitriy Valentinovich", false,
+            AssessmentForm.CREDIT);
         recordBook.addRecord("Philosophy", 4, "Plato", 2, AssessmentForm.DIFFERENTIAL_CREDIT);
         recordBook.addRecord("War art", 4, "Sun Tzu", 3, AssessmentForm.EXAM);
         Assertions.assertTrue(recordBook.hasBadMarks());
         Assertions.assertFalse(recordBook.getsHonourDegree());
 
-        averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
+        averageScore =
+            BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING)
+                .doubleValue();
         Assertions.assertEquals(4.5, averageScore);
     }
 
@@ -95,26 +101,32 @@ class RecordBookTest {
      * Test program's behaviour with IndexOutOfBoundsException.
      */
     @Test
-    public void outOfBoundsTest(){
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", -1, "Somebody", true, AssessmentForm.CREDIT));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", 1, "Someone", 6, AssessmentForm.EXAM));
+    public void outOfBoundsTest() {
+        Assertions.assertThrows(IndexOutOfBoundsException.class,
+            () -> recordBook.addRecord("Name", -1, "Somebody", true, AssessmentForm.CREDIT));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,
+            () -> recordBook.addRecord("Name", 1, "Someone", 6, AssessmentForm.EXAM));
     }
 
     /**
      * Test program's behaviour with IllegalStateException.
      */
     @Test
-    public void illegalStateTest(){
-        Assertions.assertThrows(IllegalStateException.class, () -> recordBook.addRecord("Name", 1, "Somebody", true, AssessmentForm.DIFFERENTIAL_CREDIT));
-        Assertions.assertThrows(IllegalStateException.class, () -> recordBook.addRecord("Name", 1, "Someone", 3, AssessmentForm.CREDIT));
-        Assertions.assertThrows(IllegalStateException.class, () -> recordBook.getQualificationWorkGrade());
+    public void illegalStateTest() {
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> recordBook.addRecord("Name", 1, "Somebody", true,
+                AssessmentForm.DIFFERENTIAL_CREDIT));
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> recordBook.addRecord("Name", 1, "Someone", 3, AssessmentForm.CREDIT));
+        Assertions.assertThrows(IllegalStateException.class,
+            () -> recordBook.getQualificationWorkGrade());
     }
 
     /**
      * Test program for not trivial behaviour concerning scholarship.
      */
     @Test
-    public void scholarshipTest(){
+    public void scholarshipTest() {
         recordBook = new RecordBook();
         recordBook.addRecord("Name1", 1, "Somebody", true, AssessmentForm.CREDIT);
         recordBook.addRecord("Name2", 1, "Someone", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
