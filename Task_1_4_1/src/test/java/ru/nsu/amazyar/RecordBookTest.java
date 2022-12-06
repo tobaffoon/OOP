@@ -18,7 +18,7 @@ class RecordBookTest {
     public void funnyTest() {
         Assertions.assertThrows(IndexOutOfBoundsException.class,
             () -> recordBook.addRecord  (
-                "discipline", "teacher", 6, AssessmentForm.EXAM
+                "discipline", 1, "teacher", 6, AssessmentForm.EXAM
                                         )
         );
     }
