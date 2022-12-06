@@ -86,7 +86,7 @@ public class RecordBook {
     }
 
     public boolean hasBadMarks() {
-        return records.values().stream().flatMap(List::stream).noneMatch(
+        return records.values().stream().flatMap(List::stream).anyMatch(
             record -> record.grade == Grade.FAIL || record.grade == Grade.POOR
                 || record.grade == Grade.SATISFACTORY);
     }
