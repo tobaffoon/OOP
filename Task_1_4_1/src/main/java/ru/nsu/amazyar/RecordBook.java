@@ -66,25 +66,42 @@ public class RecordBook {
         }
 
         List<Record> previousRecords = records.getOrDefault(discipline, new ArrayList<>());
+        previousRecords.add(new Record(teacher, mapIntToGrade(grade), form));
+        //use putIfAbsent because if list isn't absent it's updated by itself upon adding new record
+        records.putIfAbsent(teacher, previousRecords);
+    }
+
+    private Grade mapIntToGrade(int grade){
         switch (grade) {
             case 2:
-                previousRecords.add(new Record(teacher, Grade.POOR, form));
-                records.putIfAbsent(teacher, previousRecords);  // use putIfAbsent because if
-                break;                                          // list isn't absent it's updated
-            case 3:                                             // by itself upon adding new record
-                previousRecords.add(new Record(teacher, Grade.SATISFACTORY, form));
-                records.putIfAbsent(teacher, previousRecords);
-                break;
+                return Grade.POOR;
+            case 3:
+                return Grade.SATISFACTORY;
             case 4:
-                previousRecords.add(new Record(teacher, Grade.GOOD, form));
-                records.putIfAbsent(teacher, previousRecords);
-                break;
+                return Grade.GOOD;
             case 5:
-                previousRecords.add(new Record(teacher, Grade.EXCELLENT, form));
-                records.putIfAbsent(teacher, previousRecords);
-                break;
+                return Grade.EXCELLENT;
             default:
                 throw new IndexOutOfBoundsException("Grade out of bounds");
         }
     }
+
+    private int mapGradeToInt(Grade grade){
+        switch (grade) {
+            case POOR:
+                return 2;
+            case SATISFACTORY:
+                return 3;
+            case GOOD:
+                return 4;
+            case EXCELLENT:
+                return 5;
+            default:
+                throw new IndexOutOfBoundsException("Grade out of bounds");
+        }
+    }
+
+//    public double getAverageScore(){
+//        return records.values().stream().flatMap(List::stream).filter(record -> record.form == AssessmentForm.EXAM || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).
+//    }
 }
