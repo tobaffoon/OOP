@@ -12,50 +12,46 @@ class RecordBookTest {
     @BeforeEach
     public void initTest() {
         recordBook = new RecordBook();
+
+        recordBook.addRecord("Calculus", 1,
+            "Vaskevich Vladimir Leontevich", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("Discrete Math", 1,
+            "Vlasov Dmitri Yurievich", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("Declarative Programming", 1,
+            "Vlasov Vladimir Nikolaevich", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("Imperative Programming", 1,
+            "Nesterenko Tatyana Viktorovna", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("English language", 1,
+            "Khotskina Olga Valerevna", true, AssessmentForm.CREDIT);
+        recordBook.addRecord("History", 1,
+            "Oplakanskaya Renata Valerevna", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("Fundamentals of speech culture", 1,
+            "Zavorina Tatyana Ivanovna", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("Physical education", 1,
+            "Oparin Grigoriy Andreevich", true, AssessmentForm.CREDIT);
+        recordBook.addRecord("Digital platforms", 1,
+            "Irtegov Dmitriy Valentinovich", true, AssessmentForm.CREDIT);
+
+        recordBook.addRecord("Calculus", 2,
+            "Vaskevich Vladimir Leontevich", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("Graph Theory", 2,
+            "Apanovich Zinaida Vladimirovna", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("SQL", 2,
+            "Miginskiy Denis Sergeevich", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("Measuring practice", 2,
+            "Belousov Roman Gennadevich", true, AssessmentForm.CREDIT);
+        recordBook.addRecord("Imperative Programming", 2,
+            "Nesterenko Tatyana Viktorovna", 5, AssessmentForm.EXAM);
+        recordBook.addRecord("English language", 2,
+            "Khotskina Olga Valerevna", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
+        recordBook.addRecord("Physical education", 2,
+            "Oparin Grigoriy Andreevich", true, AssessmentForm.CREDIT);
+        recordBook.addRecord("Digital platforms", 2,
+            "Irtegov Dmitriy Valentinovich", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
     }
 
     @Test
     public void averageScoreTest() {
-        recordBook.addRecord("Введение в алгебру и анализ", 1,
-            "Васкевич Владимир Леонтьевич", 5, AssessmentForm.EXAM);
-        recordBook.addRecord("Введение в дискретную математику и математическую логику", 1,
-            "Власов Дмитрий Юрьевич", 5, AssessmentForm.EXAM);
-        recordBook.addRecord("Декларативное программирование", 1,
-            "Власов Владимир Николаевич", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Императивное программирование", 1,
-            "Нестеренко Татьяна Викторовна", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Иностранный язык", 1,
-            "Хоцкина Ольга Валерьевна", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("История", 1,
-            "Оплаканская Рената Валерьевна", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Основы культуры речи", 1,
-            "Заворина Татьяна Ивановна", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Физическая культура и спорт", 1,
-            "Опарин Григорий Андреевич", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("Физическая культура и спорт (элективная дисциплина)",
-            1, "Опарин Григорий Андреевич", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("Цифровые платформы", 1,
-            "Иртегов Дмитрий Валентинович", true, AssessmentForm.CREDIT);
-
-        recordBook.addRecord("Введение в алгебру и анализ", 2,
-            "Васкевич Владимир Леонтьевич", 5, AssessmentForm.EXAM);
-        recordBook.addRecord("Введение в дискретную математику и математическую логику", 2,
-            "Апанович Зинаида Владимировна", 5, AssessmentForm.EXAM);
-        recordBook.addRecord("Декларативное программирование", 2,
-            "Власов Владимир Николаевич", 5, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Измерительный практикум", 2,
-            "Белоусов Роман Геннадьевич", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("Императивное программирование", 2,
-            "Нестеренко Татьяна Викторовна", 5, AssessmentForm.EXAM);
-        recordBook.addRecord("Иностранный язык", 2,
-            "Хоцкина Ольга Валерьевна", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
-        recordBook.addRecord("Физическая культура и спорт", 2,
-            "Опарин Григорий Андреевич", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("Физическая культура и спорт (элективная дисциплина)",
-            2, "Опарин Григорий Андреевич", true, AssessmentForm.CREDIT);
-        recordBook.addRecord("Цифровые платформы", 2,
-            "Иртегов Дмитрий Валентинович", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
-
         //according to cab.nsu.ru it equals 4.7,
         //but we can't set precision of double, so we check this wy
         Assertions.assertTrue(
