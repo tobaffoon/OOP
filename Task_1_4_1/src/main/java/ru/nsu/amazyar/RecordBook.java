@@ -41,14 +41,13 @@ public class RecordBook {
     }
 
     /**
-     * Add new record to the book.
-     * Accounts for disciplines which can only be passed or failed
+     * Add new record to the book. Accounts for disciplines which can only be passed or failed
      *
      * @param discipline name of a subject
-     * @param semester semester number
-     * @param teacher teacher's name
-     * @param pass true if subject was passed, false otherwise
-     * @param form form of certification (must be CREDIT)
+     * @param semester   semester number
+     * @param teacher    teacher's name
+     * @param pass       true if subject was passed, false otherwise
+     * @param form       form of certification (must be CREDIT)
      * @throws IllegalStateException if form isn't credit
      */
     public void addRecord(String discipline, int semester, String teacher, boolean pass,
@@ -67,14 +66,13 @@ public class RecordBook {
     }
 
     /**
-     * Add new record to the book.
-     * Accounts for disciplines which are assessed via mark
+     * Add new record to the book. Accounts for disciplines which are assessed via mark
      *
      * @param discipline name of a subject
-     * @param semester semester number
-     * @param teacher teacher's name
-     * @param grade grade for completing this course
-     * @param form form of certification (must be EXAM or DIFFERENTIAL CREDIT)
+     * @param semester   semester number
+     * @param teacher    teacher's name
+     * @param grade      grade for completing this course
+     * @param form       form of certification (must be EXAM or DIFFERENTIAL CREDIT)
      * @throws IllegalStateException if form isn't EXAM or DIFFERENTIAL CREDIT
      */
     public void addRecord(String discipline, int semester, String teacher, int grade,
@@ -93,9 +91,10 @@ public class RecordBook {
 
     /**
      * Gets qualification work grade.
+     *
      * @throws IllegalStateException if qualification work grade wasn't set before
      */
-    public int getQualificationWorkGrade() throws IllegalStateException{
+    public int getQualificationWorkGrade() throws IllegalStateException {
         if (qualificationWorkDone) {
             return qualificationWorkGrade;
         }
@@ -141,10 +140,14 @@ public class RecordBook {
                 .max(Comparator.comparingInt(records -> records.semester)))
             .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
-        double lastExcellentMarks = (double) lastSemesterRecords.stream().filter(record -> record.grade == Grade.EXCELLENT).count();
+        double lastExcellentMarks = (double) lastSemesterRecords.stream()
+            .filter(record -> record.grade == Grade.EXCELLENT)
+            .count();
 
-        double markedDisciplines = (double) lastSemesterRecords.stream().filter(record -> record.form == AssessmentForm.EXAM
-                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT).count();
+        double markedDisciplines = (double) lastSemesterRecords.stream()
+            .filter(record -> record.form == AssessmentForm.EXAM
+                || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
+            .count();
 
         return !hasBadMarks() &&
             (lastExcellentMarks / markedDisciplines >= 0.75) &&
@@ -171,13 +174,13 @@ public class RecordBook {
             .max(Comparator.naturalOrder()).orElse(1);
     }
 
-    private void checkSemester(int semester) throws IndexOutOfBoundsException{
+    private void checkSemester(int semester) throws IndexOutOfBoundsException {
         if (semester < 1 || semester > MAX_SEMESTER) {
             throw new IndexOutOfBoundsException("Semester out of bounds");
         }
     }
 
-    private static Grade mapIntToGrade(int grade) throws IndexOutOfBoundsException{
+    private static Grade mapIntToGrade(int grade) throws IndexOutOfBoundsException {
         switch (grade) {
             case 2:
                 return Grade.POOR;
@@ -192,7 +195,7 @@ public class RecordBook {
         }
     }
 
-    private static int mapGradeToInt(Grade grade) throws IndexOutOfBoundsException{
+    private static int mapGradeToInt(Grade grade) throws IndexOutOfBoundsException {
         switch (grade) {
             case POOR:
                 return 2;
