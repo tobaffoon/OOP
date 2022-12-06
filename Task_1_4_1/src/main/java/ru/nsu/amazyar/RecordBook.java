@@ -132,4 +132,14 @@ public class RecordBook {
                 throw new IndexOutOfBoundsException("Grade out of bounds");
         }
     }
+
+    public boolean hasBadMarks() {
+        return records.values().stream().flatMap(List::stream).noneMatch(
+            record -> record.grade == Grade.FAIL || record.grade == Grade.POOR
+                || record.grade == Grade.SATISFACTORY);
+    }
+
+//    public boolean getsHonourDegree() {
+//        return
+//    }
 }
