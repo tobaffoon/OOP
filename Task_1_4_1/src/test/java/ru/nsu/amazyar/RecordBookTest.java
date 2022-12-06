@@ -137,6 +137,9 @@ class RecordBookTest {
         Assertions.assertTrue(recordBook.getsIncreasedScholarship());
     }
 
+    /**
+     * Tests program's behaviour with null pointers.
+     */
     @Test
     public void nullTest(){
         Assertions.assertThrows(NullPointerException.class, () -> recordBook.addRecord(null,1,"null",2,AssessmentForm.EXAM));
