@@ -11,6 +11,9 @@ class RecordBookTest {
 
     RecordBook recordBook;
 
+    /**
+     * Create test recordBook and fill it with data.
+     */
     @BeforeEach
     public void initTest() {
         recordBook = new RecordBook();
@@ -52,6 +55,9 @@ class RecordBookTest {
             "Irtegov Dmitriy Valentinovich", 4, AssessmentForm.DIFFERENTIAL_CREDIT);
     }
 
+    /**
+     * Test for the most common cases.
+     */
     @Test
     public void regularTest() {
         //according to cab.nsu.ru it equals 4.7
@@ -78,19 +84,25 @@ class RecordBookTest {
         recordBook.addRecord("Digital platforms", 3, "Not Irtegov Dmitriy Valentinovich", false, AssessmentForm.CREDIT);
         recordBook.addRecord("Philosophy", 4, "Plato", 2, AssessmentForm.DIFFERENTIAL_CREDIT);
         recordBook.addRecord("War art", 4, "Sun Tzu", 3, AssessmentForm.EXAM);
-        averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
-        Assertions.assertEquals(4.5, averageScore);
-
         Assertions.assertTrue(recordBook.hasBadMarks());
         Assertions.assertFalse(recordBook.getsHonourDegree());
+
+        averageScore = BigDecimal.valueOf(recordBook.getAverageScore()).setScale(1, RoundingMode.CEILING).doubleValue();
+        Assertions.assertEquals(4.5, averageScore);
     }
 
+    /**
+     * Test program's behaviour with IndexOutOfBoundsException.
+     */
     @Test
     public void outOfBoundsTest(){
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", -1, "Somebody", true, AssessmentForm.CREDIT));
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", 1, "Someone", 6, AssessmentForm.EXAM));
     }
 
+    /**
+     * Test program's behaviour with IllegalStateException.
+     */
     @Test
     public void illegalStateTest(){
         Assertions.assertThrows(IllegalStateException.class, () -> recordBook.addRecord("Name", 1, "Somebody", true, AssessmentForm.DIFFERENTIAL_CREDIT));
@@ -98,6 +110,9 @@ class RecordBookTest {
         Assertions.assertThrows(IllegalStateException.class, () -> recordBook.getQualificationWorkGrade());
     }
 
+    /**
+     * Test program for not trivial behaviour concerning scholarship.
+     */
     @Test
     public void scholarshipTest(){
         recordBook = new RecordBook();
