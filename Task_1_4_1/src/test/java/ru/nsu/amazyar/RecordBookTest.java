@@ -82,4 +82,10 @@ class RecordBookTest {
         Assertions.assertTrue(recordBook.hasBadMarks());
         Assertions.assertFalse(recordBook.getsHonourDegree());
     }
+
+    @Test
+    public void outOfBoundsTest(){
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", -1, "Somebody", true, AssessmentForm.CREDIT));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> recordBook.addRecord("Name", 1, "Somebody", 6, AssessmentForm.EXAM));
+    }
 }
