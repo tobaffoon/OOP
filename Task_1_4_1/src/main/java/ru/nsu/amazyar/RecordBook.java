@@ -40,10 +40,12 @@ public class RecordBook {
     }
 
     private static class Record {
+
         public final String teacher;
         public final int semester;
         public final Grade grade;
         public final AssessmentForm form;
+
         public Record(String teacher, int semester, Grade grade, AssessmentForm form) {
             if (teacher == null || grade == null || form == null) {
                 throw new NullPointerException();
