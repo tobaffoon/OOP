@@ -92,15 +92,15 @@ public class RecordBook {
     }
 
     public boolean getsHonourDegree() {
-        Stream<Record> lastSemesterRecords = records.values().stream()
+        double lastExcellentMarks = (double) records.values().stream()
             .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
                 .max(Comparator.comparingInt(records -> records.semester)))
-            .filter(Optional::isPresent).map(Optional::get); //unbox from Optional
+            .filter(Optional::isPresent).map(Optional::get).filter(record -> record.grade == Grade.EXCELLENT).count();
 
-        double lastExcellentMarks = (double) lastSemesterRecords
-            .filter(record -> record.grade == Grade.EXCELLENT).count();
-        double markedDisciplines = (double) lastSemesterRecords
-            .filter(record -> record.form == AssessmentForm.EXAM
+        double markedDisciplines = (double) records.values().stream()
+            .map(oneSubjectRecords -> oneSubjectRecords.stream() //get record of last (max) semester
+                .max(Comparator.comparingInt(records -> records.semester)))
+            .filter(Optional::isPresent).map(Optional::get).filter(record -> record.form == AssessmentForm.EXAM
                 || record.form == AssessmentForm.DIFFERENTIAL_CREDIT)
             .count();
 
