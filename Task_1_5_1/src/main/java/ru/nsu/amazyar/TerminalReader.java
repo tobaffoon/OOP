@@ -12,12 +12,13 @@ public class TerminalReader {
 
     /**
      * Get one line from standard input.
+     *
      * @return read line as string
      */
     public static String readLine() {
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             return reader.readLine();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new IOError(e);
         }
     }

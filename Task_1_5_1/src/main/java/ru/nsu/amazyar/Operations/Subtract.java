@@ -4,9 +4,10 @@ import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Subtraction operation
+ * Subtraction operation.
  */
 public class Subtract extends Operation {
+
     @Override
     public int getArity() {
         return 2;
