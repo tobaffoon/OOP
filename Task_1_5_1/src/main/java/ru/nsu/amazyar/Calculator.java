@@ -10,6 +10,7 @@ import java.util.Stack;
  * Evaluates an expression in prefix form.
  */
 public class Calculator {
+
     private static final List<String> ALLOWED_OPERATIONS = OperationFactory.getAllowedOperations();
     private static final List<String> ALLOWED_CONSTANTS = ConstantsFactory.getAllowedConstants();
 
@@ -20,7 +21,7 @@ public class Calculator {
      * @return result of evaluation
      */
     public static double evaluate(String input) {
-        Stack<Double> eval_stack = new Stack<>();
+        Stack<Double> evalStack = new Stack<>();
         List<String> tokens = tokenize(input);
         Collections.reverse(tokens);
         for (String token : tokens) {
@@ -30,23 +31,23 @@ public class Calculator {
                 Operation operation = OperationFactory.getOperation(token);
                 try {
                     for (int i = 0; i < operation.getArity(); i++) {
-                        currentArguments.add(eval_stack.pop());
+                        currentArguments.add(evalStack.pop());
                     }
 
-                    eval_stack.push(operation.calculate(currentArguments));
-                }catch (EmptyStackException e){
+                    evalStack.push(operation.calculate(currentArguments));
+                } catch (EmptyStackException e) {
                     throw new IllegalStateException("Wrong number of arguments");
                 }
             }
             // token is a math constant
             else if (ALLOWED_CONSTANTS.contains(token)) {
-                eval_stack.push(ConstantsFactory.getConstant(token));
+                evalStack.push(ConstantsFactory.getConstant(token));
             }
             // token is an operand (number)
             else {
                 try {
                     double number = Double.parseDouble(token);
-                    eval_stack.push(number);
+                    evalStack.push(number);
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("Word is neither operation or a number");
                 }
@@ -54,10 +55,10 @@ public class Calculator {
         }
 
         // after evaluation of correct expression the only element on stack should be the result
-        if (eval_stack.size() != 1) {
+        if (evalStack.size() != 1) {
             throw new IllegalStateException("Incorrect expression");
         } else {
-            return eval_stack.pop();
+            return evalStack.pop();
         }
     }
 
