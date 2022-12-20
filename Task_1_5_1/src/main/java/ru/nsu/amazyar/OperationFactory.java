@@ -13,6 +13,9 @@ import ru.nsu.amazyar.Operations.Pow;
 import ru.nsu.amazyar.Operations.Sin;
 import ru.nsu.amazyar.Operations.Subtract;
 
+/**
+ * Factory of math operations from string.
+ */
 public class OperationFactory {
     public static final Map<String, Operation> OPERATION_FACTORY;
 
@@ -29,10 +32,19 @@ public class OperationFactory {
         OPERATION_FACTORY.put("cos", new Cos());
     }
 
+    /**
+     * Get supported operations.
+     * @return list of operations as strings
+     */
     public static List<String> getAllowedOperations(){
         return new ArrayList<>(OPERATION_FACTORY.keySet());
     }
 
+    /**
+     * Create an operation with factory.
+     * @param operator String representation of an operation
+     * @return operation as Operation instance
+     */
     public static Operation getOperation(String operator) {
         return OPERATION_FACTORY.get(operator);
     }
