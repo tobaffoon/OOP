@@ -55,7 +55,6 @@ public class Calculator {
 
         // after evaluation of correct expression the only element on stack should be the result
         if (eval_stack.size() != 1) {
-            System.out.println(eval_stack.size());
             throw new IllegalStateException("Incorrect expression");
         } else {
             return eval_stack.pop();
