@@ -34,10 +34,6 @@ public class OperationFactory {
     }
 
     public static Operation getOperation(String operator) {
-        if (OPERATION_FACTORY.containsKey(operator)) {
-            return OPERATION_FACTORY.get(operator);
-        } else {
-            throw new UnsupportedOperationException();
-        }
+        return OPERATION_FACTORY.get(operator);
     }
 }
