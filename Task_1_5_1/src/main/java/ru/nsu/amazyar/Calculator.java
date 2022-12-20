@@ -8,6 +8,7 @@ import java.util.Stack;
 public class Calculator {
     private static final Stack<Double> eval_stack = new Stack<>();
     private static final List<String> ALLOWED_OPERATIONS = OperationFactory.getAllowedOperations();
+    private static final List<String> ALLOWED_CONSTANTS = ConstantsFactory.getAllowedConstants();
 
     public static double evaluate(String input){
         List<String> tokens = tokenize(input);
@@ -22,7 +23,9 @@ public class Calculator {
 
                 eval_stack.push(operation.calculate(currentArguments));
             }
-
+            else if(ALLOWED_CONSTANTS.contains(token)){
+                eval_stack.push(ConstantsFactory.getConstant(token));
+            }
             else{
                 try{
                     double number = Double.parseDouble(token);
