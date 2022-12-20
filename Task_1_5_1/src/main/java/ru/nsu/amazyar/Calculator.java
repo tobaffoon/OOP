@@ -2,6 +2,7 @@ package ru.nsu.amazyar;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -27,11 +28,15 @@ public class Calculator {
             if (ALLOWED_OPERATIONS.contains(token)) {
                 List<Double> currentArguments = new ArrayList<>();
                 Operation operation = OperationFactory.getOperation(token);
-                for (int i = 0; i < operation.getArity(); i++) {
-                    currentArguments.add(eval_stack.pop());
-                }
+                try {
+                    for (int i = 0; i < operation.getArity(); i++) {
+                        currentArguments.add(eval_stack.pop());
+                    }
 
-                eval_stack.push(operation.calculate(currentArguments));
+                    eval_stack.push(operation.calculate(currentArguments));
+                }catch (EmptyStackException e){
+                    throw new IllegalStateException("Wrong number of arguments");
+                }
             }
             // token is a math constant
             else if (ALLOWED_CONSTANTS.contains(token)) {
