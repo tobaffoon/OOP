@@ -1,4 +1,4 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import ru.nsu.amazyar.Operation;
+import ru.nsu.amazyar.Operations.Add;
 
 public class OperationFactory {
     public static final Map<String, Operation> OPERATION_FACTORY;

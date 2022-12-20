@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
-import ru.nsu.amazyar.Operations.OperationFactory;
 
 public class Calculator {
     private static final Stack<Double> eval_stack = new Stack<>();
