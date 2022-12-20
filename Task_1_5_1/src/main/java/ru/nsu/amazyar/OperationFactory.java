@@ -11,6 +11,7 @@ import ru.nsu.amazyar.Operations.Log;
 import ru.nsu.amazyar.Operations.Multiply;
 import ru.nsu.amazyar.Operations.Pow;
 import ru.nsu.amazyar.Operations.Sin;
+import ru.nsu.amazyar.Operations.SquareRoot;
 import ru.nsu.amazyar.Operations.Subtract;
 
 /**
@@ -30,6 +31,7 @@ public class OperationFactory {
         OPERATION_FACTORY.put("log", new Log());
         OPERATION_FACTORY.put("sin", new Sin());
         OPERATION_FACTORY.put("cos", new Cos());
+        OPERATION_FACTORY.put("sqrt", new SquareRoot());
     }
 
     /**
