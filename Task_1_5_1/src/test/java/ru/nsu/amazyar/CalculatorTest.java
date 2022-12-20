@@ -128,9 +128,9 @@ class CalculatorTest {
 
     @Test
     public void mathConstantsTest() {
-        double eApproximation = Calculator.evaluate("pow + 1 / 1 1000000000 1000000000");
-        Assertions.assertTrue(Math.E - 0.0001 < eApproximation
-            && eApproximation < Math.E + 0.0001);
+        double eulerApproximation = Calculator.evaluate("pow + 1 / 1 1000000000 1000000000");
+        Assertions.assertTrue(Math.E - 0.0001 < eulerApproximation
+            && eulerApproximation < Math.E + 0.0001);
 
         double goldRatioApproximation = Calculator.evaluate("/ + 1 sqrt 5 2");
         Assertions.assertTrue(1.618033988 - accuracy < goldRatioApproximation
