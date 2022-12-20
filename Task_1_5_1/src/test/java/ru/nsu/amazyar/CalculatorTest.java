@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-    double accuracy = 0.000000001;
+    final double accuracy = 0.000000001;
 
     @Test
     public void referenceTest() {
@@ -135,5 +135,13 @@ class CalculatorTest {
         double gold_ratio_approximation = Calculator.evaluate("/ + 1 sqrt 5 2");
         Assertions.assertTrue(1.618033988 - accuracy < gold_ratio_approximation
             && gold_ratio_approximation < 1.618033988 + accuracy);
+    }
+
+    @Test
+    public void realEvaluationTest(){
+        double evaluated_value = Calculator.evaluate("/ sqrt cos sin 0 log pow e 2");
+        System.out.println(evaluated_value);
+        Assertions.assertTrue(0.5 - accuracy < evaluated_value
+            && evaluated_value < 0.5 + accuracy);
     }
 }
