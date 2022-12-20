@@ -7,7 +7,7 @@ import java.util.Stack;
 import ru.nsu.amazyar.Operations.OperationFactory;
 
 public class Calculator {
-    private static final Stack<Double> arguments = new Stack<>();
+    private static final Stack<Double> eval_stack = new Stack<>();
     private static final List<String> ALLOWED_OPERATIONS = OperationFactory.getAllowedOperations();
 
     public static double evaluate(String input){
@@ -18,26 +18,26 @@ public class Calculator {
                 List<Double> currentArguments = new ArrayList<>();
                 Operation operation = OperationFactory.getOperation(token);
                 for (int i = 0; i < operation.getArity(); i++) {
-                    currentArguments.add(arguments.pop()); //first we reverse, then put on stack
+                    currentArguments.add(eval_stack.pop()); //first we reverse, then put on stack
                 }                                          //so eventually args are in correct order
 
-                arguments.push(operation.calculate(currentArguments));
+                eval_stack.push(operation.calculate(currentArguments));
             }
 
             else{
                 try{
                     double number = Double.parseDouble(token);
-                    arguments.push(number);
+                    eval_stack.push(number);
                 }catch (NumberFormatException e){
                     throw new IllegalArgumentException("Word is neither operation or a number");
                 }
             }
         }
 
-        if (arguments.size() != 1) {
+        if (eval_stack.size() != 1) {
             throw new IllegalStateException("Incorrect order");
         } else {
-            return arguments.pop();
+            return eval_stack.pop();
         }
     }
 
