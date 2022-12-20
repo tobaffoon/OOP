@@ -9,8 +9,6 @@ import java.util.Stack;
  * Evaluates an expression in prefix form.
  */
 public class Calculator {
-
-    private static final Stack<Double> eval_stack = new Stack<>();
     private static final List<String> ALLOWED_OPERATIONS = OperationFactory.getAllowedOperations();
     private static final List<String> ALLOWED_CONSTANTS = ConstantsFactory.getAllowedConstants();
 
@@ -21,6 +19,7 @@ public class Calculator {
      * @return result of evaluation
      */
     public static double evaluate(String input) {
+        Stack<Double> eval_stack = new Stack<>();
         List<String> tokens = tokenize(input);
         Collections.reverse(tokens);
         for (String token : tokens) {
@@ -51,6 +50,7 @@ public class Calculator {
 
         // after evaluation of correct expression the only element on stack should be the result
         if (eval_stack.size() != 1) {
+            System.out.println(eval_stack.size());
             throw new IllegalStateException("Incorrect expression");
         } else {
             return eval_stack.pop();
