@@ -27,8 +27,8 @@ class CalculatorTest {
     public void cosTest() {
         Assertions.assertEquals(1,
             Calculator.evaluate("cos 0"));
-        double cos_pi = Calculator.evaluate("cos pi");
-        Assertions.assertTrue(-1 - accuracy < cos_pi && cos_pi < -1 + accuracy);
+        double cosPi = Calculator.evaluate("cos pi");
+        Assertions.assertTrue(-1 - accuracy < cosPi && cosPi < -1 + accuracy);
 
         Assertions.assertThrows(IllegalStateException.class,
             () -> Calculator.evaluate("cos 1 2"));
@@ -88,8 +88,8 @@ class CalculatorTest {
     public void sinTest() {
         Assertions.assertEquals(0,
             Calculator.evaluate("sin 0"));
-        double sin_pi_2 = Calculator.evaluate("sin / pi 2");
-        Assertions.assertTrue(1 - accuracy < sin_pi_2 && sin_pi_2 < 1 + accuracy);
+        double sinPi2 = Calculator.evaluate("sin / pi 2");
+        Assertions.assertTrue(1 - accuracy < sinPi2 && sinPi2 < 1 + accuracy);
 
         Assertions.assertThrows(IllegalStateException.class,
             () -> Calculator.evaluate("sin pi pi"));
@@ -101,10 +101,10 @@ class CalculatorTest {
     public void sqrtTest() {
         Assertions.assertEquals(10,
             Calculator.evaluate("sqrt 100"));
-        double sin_pi_4 = Calculator.evaluate("sin / pi 4");
-        double sqrt_2_div_2 = Calculator.evaluate("/ sqrt 2 2");
-        Assertions.assertTrue(sin_pi_4 - accuracy < sqrt_2_div_2
-            && sqrt_2_div_2 < sin_pi_4 + accuracy);
+        double sinPi4 = Calculator.evaluate("sin / pi 4");
+        double sqrt2Div2 = Calculator.evaluate("/ sqrt 2 2");
+        Assertions.assertTrue(sinPi4 - accuracy < sqrt2Div2
+            && sqrt2Div2 < sinPi4 + accuracy);
         Assertions.assertEquals(Double.NaN, Calculator.evaluate("sqrt -1"));
 
         Assertions.assertThrows(IllegalStateException.class,
@@ -127,21 +127,21 @@ class CalculatorTest {
     }
 
     @Test
-    public void mathConstantsTest(){
-        double e_approximation = Calculator.evaluate("pow + 1 / 1 1000000000 1000000000");
-        Assertions.assertTrue(Math.E - 0.0001 < e_approximation
-            && e_approximation < Math.E + 0.0001);
+    public void mathConstantsTest() {
+        double eApproximation = Calculator.evaluate("pow + 1 / 1 1000000000 1000000000");
+        Assertions.assertTrue(Math.E - 0.0001 < eApproximation
+            && eApproximation < Math.E + 0.0001);
 
-        double gold_ratio_approximation = Calculator.evaluate("/ + 1 sqrt 5 2");
-        Assertions.assertTrue(1.618033988 - accuracy < gold_ratio_approximation
-            && gold_ratio_approximation < 1.618033988 + accuracy);
+        double goldRatioApproximation = Calculator.evaluate("/ + 1 sqrt 5 2");
+        Assertions.assertTrue(1.618033988 - accuracy < goldRatioApproximation
+            && goldRatioApproximation < 1.618033988 + accuracy);
     }
 
     @Test
-    public void realEvaluationTest(){
-        double evaluated_value = Calculator.evaluate("/ sqrt cos sin 0 log pow e 2");
-        System.out.println(evaluated_value);
-        Assertions.assertTrue(0.5 - accuracy < evaluated_value
-            && evaluated_value < 0.5 + accuracy);
+    public void realEvaluationTest() {
+        double evaluatedValue = Calculator.evaluate("/ sqrt cos sin 0 log pow e 2");
+        System.out.println(evaluatedValue);
+        Assertions.assertTrue(0.5 - accuracy < evaluatedValue
+            && evaluatedValue < 0.5 + accuracy);
     }
 }
