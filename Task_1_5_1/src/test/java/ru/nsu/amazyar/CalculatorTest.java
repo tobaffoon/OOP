@@ -5,16 +5,11 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-    double accuracy = 0.00000000000001;
+    double accuracy = 0.000000001;
 
     @Test
     public void referenceTest() {
         Assertions.assertEquals(0.0, Calculator.evaluate("sin + - 1 2 1"));
-    }
-
-    @Test
-    public void operationsTest() {
-
     }
 
     @Test
@@ -128,5 +123,17 @@ class CalculatorTest {
             () -> Calculator.evaluate("- 1 2 - 3"));
         Assertions.assertThrows(IllegalStateException.class,
             () -> Calculator.evaluate("- 1 2 3"));
+    }
+
+    @Test
+    public void mathConstantsTest(){
+        double e_approximation = Calculator.evaluate("pow + 1 / 1 1000000000 1000000000");
+        Assertions.assertTrue(Math.E - 0.0001 < e_approximation
+            && e_approximation < Math.E + 0.0001);
+
+        double gold_ratio_approximation = Calculator.evaluate("/ + 1 sqrt 5 2");
+        System.out.println(gold_ratio_approximation);
+        Assertions.assertTrue(1.618033988 - accuracy < gold_ratio_approximation
+            && gold_ratio_approximation < 1.618033988 + accuracy);
     }
 }
