@@ -42,6 +42,6 @@ public class Calculator {
     }
 
     private static List<String> tokenize(String string) {
-        return new ArrayList<>(List.of(string.split(" ")));
+        return new ArrayList<>(List.of(string.toLowerCase().split(" ")));
     }
 }
