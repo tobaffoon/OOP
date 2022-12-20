@@ -38,13 +38,9 @@ public class Calculator {
                 } catch (EmptyStackException e) {
                     throw new IllegalStateException("Wrong number of arguments");
                 }
-            }
-            // token is a math constant
-            else if (ALLOWED_CONSTANTS.contains(token)) {
+            } else if (ALLOWED_CONSTANTS.contains(token)) {       // token is a math constant
                 evalStack.push(ConstantsFactory.getConstant(token));
-            }
-            // token is an operand (number)
-            else {
+            } else {          // token is an operand (number)
                 try {
                     double number = Double.parseDouble(token);
                     evalStack.push(number);
