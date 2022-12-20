@@ -7,6 +7,7 @@ import ru.nsu.amazyar.Operation;
  * Division operation.
  */
 public class Divide extends Operation {
+
     @Override
     public int getArity() {
         return 2;

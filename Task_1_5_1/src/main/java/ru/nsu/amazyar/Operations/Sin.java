@@ -4,9 +4,10 @@ import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Sines operation
+ * Sines operation.
  */
 public class Sin extends Operation {
+
     @Override
     public int getArity() {
         return 1;

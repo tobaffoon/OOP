@@ -7,6 +7,7 @@ import ru.nsu.amazyar.Operation;
  * Cosines operation.
  */
 public class Cos extends Operation {
+
     @Override
     public int getArity() {
         return 1;

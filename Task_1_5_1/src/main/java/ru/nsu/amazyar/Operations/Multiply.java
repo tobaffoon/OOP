@@ -7,6 +7,7 @@ import ru.nsu.amazyar.Operation;
  * Multiplication operation.
  */
 public class Multiply extends Operation {
+
     @Override
     public int getArity() {
         return 2;

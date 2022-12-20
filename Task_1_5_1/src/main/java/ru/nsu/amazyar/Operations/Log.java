@@ -7,6 +7,7 @@ import ru.nsu.amazyar.Operation;
  * Natural logarithm operation.
  */
 public class Log extends Operation {
+
     @Override
     public int getArity() {
         return 1;

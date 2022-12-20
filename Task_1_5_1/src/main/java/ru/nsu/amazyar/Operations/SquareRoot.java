@@ -4,9 +4,10 @@ import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Square root operation
+ * Square root operation.
  */
 public class SquareRoot extends Operation {
+
     @Override
     public int getArity() {
         return 1;

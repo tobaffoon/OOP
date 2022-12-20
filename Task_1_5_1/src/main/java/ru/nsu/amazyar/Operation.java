@@ -13,8 +13,9 @@ public abstract class Operation {
     public abstract int getArity();
 
     /**
-     * Evaluate operation with given operands.
-     * Throws respected errors if evaluation couldn't complete
+     * Evaluate operation with given operands. Throws respected errors if evaluation couldn't
+     * complete
+     *
      * @param arguments list of operands
      * @return result of evaluation
      */
