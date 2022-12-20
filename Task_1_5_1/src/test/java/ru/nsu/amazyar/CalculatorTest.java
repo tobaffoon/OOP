@@ -105,6 +105,7 @@ class CalculatorTest {
         double sqrt_2_div_2 = Calculator.evaluate("/ sqrt 2 2");
         Assertions.assertTrue(sin_pi_4 - accuracy < sqrt_2_div_2
             && sqrt_2_div_2 < sin_pi_4 + accuracy);
+        Assertions.assertEquals(Double.NaN, Calculator.evaluate("sqrt -1"));
 
         Assertions.assertThrows(IllegalStateException.class,
             () -> Calculator.evaluate("sqrt 1 2"));
@@ -132,7 +133,6 @@ class CalculatorTest {
             && e_approximation < Math.E + 0.0001);
 
         double gold_ratio_approximation = Calculator.evaluate("/ + 1 sqrt 5 2");
-        System.out.println(gold_ratio_approximation);
         Assertions.assertTrue(1.618033988 - accuracy < gold_ratio_approximation
             && gold_ratio_approximation < 1.618033988 + accuracy);
     }
