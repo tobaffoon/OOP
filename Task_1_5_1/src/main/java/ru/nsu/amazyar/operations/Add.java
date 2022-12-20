@@ -1,20 +1,20 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar.operations;
 
 import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Square root operation.
+ * Addition operation.
  */
-public class SquareRoot extends Operation {
+public class Add extends Operation {
 
     @Override
     public int getArity() {
-        return 1;
+        return 2;
     }
 
     @Override
     public double calculate(List<Double> arguments) {
-        return Math.sqrt(arguments.get(0));
+        return arguments.get(0) + arguments.get(1);
     }
 }

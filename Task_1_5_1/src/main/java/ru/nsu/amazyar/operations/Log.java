@@ -1,12 +1,12 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar.operations;
 
 import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Cosines operation.
+ * Natural logarithm operation.
  */
-public class Cos extends Operation {
+public class Log extends Operation {
 
     @Override
     public int getArity() {
@@ -15,6 +15,6 @@ public class Cos extends Operation {
 
     @Override
     public double calculate(List<Double> arguments) {
-        return Math.cos(arguments.get(0));
+        return Math.log(arguments.get(0));
     }
 }

@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import ru.nsu.amazyar.Operations.Add;
-import ru.nsu.amazyar.Operations.Cos;
-import ru.nsu.amazyar.Operations.Divide;
-import ru.nsu.amazyar.Operations.Log;
-import ru.nsu.amazyar.Operations.Multiply;
-import ru.nsu.amazyar.Operations.Pow;
-import ru.nsu.amazyar.Operations.Sin;
-import ru.nsu.amazyar.Operations.SquareRoot;
-import ru.nsu.amazyar.Operations.Subtract;
+import ru.nsu.amazyar.operations.Add;
+import ru.nsu.amazyar.operations.Cos;
+import ru.nsu.amazyar.operations.Divide;
+import ru.nsu.amazyar.operations.Log;
+import ru.nsu.amazyar.operations.Multiply;
+import ru.nsu.amazyar.operations.Pow;
+import ru.nsu.amazyar.operations.Sin;
+import ru.nsu.amazyar.operations.SquareRoot;
+import ru.nsu.amazyar.operations.Subtract;
 
 /**
  * Factory of math operations from string.

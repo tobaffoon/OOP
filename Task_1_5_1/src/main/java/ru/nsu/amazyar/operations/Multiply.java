@@ -1,12 +1,12 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar.operations;
 
 import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Subtraction operation.
+ * Multiplication operation.
  */
-public class Subtract extends Operation {
+public class Multiply extends Operation {
 
     @Override
     public int getArity() {
@@ -15,6 +15,6 @@ public class Subtract extends Operation {
 
     @Override
     public double calculate(List<Double> arguments) {
-        return arguments.get(0) - arguments.get(1);
+        return arguments.get(0) * arguments.get(1);
     }
 }
