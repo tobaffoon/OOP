@@ -12,7 +12,9 @@ public class ConstantsFactory {
         CONSTANTS_FACTORY = new HashMap<>();
 
         CONSTANTS_FACTORY.put("e", Math.E);
+        CONSTANTS_FACTORY.put("-e", -Math.E);
         CONSTANTS_FACTORY.put("pi", Math.PI);
+        CONSTANTS_FACTORY.put("-pi", -Math.PI);
     }
 
     public static List<String> getAllowedConstants(){
