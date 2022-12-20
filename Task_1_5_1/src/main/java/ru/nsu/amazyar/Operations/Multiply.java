@@ -15,11 +15,6 @@ public class Multiply extends Operation {
 
     @Override
     public double calculate(List<Double> arguments) {
-        // check for correct number of arguments
-        if (arguments.size() != getArity()) {
-            throw new IllegalStateException("Wrong number of arguments");
-        }
-
         return arguments.get(0) * arguments.get(1);
     }
 }

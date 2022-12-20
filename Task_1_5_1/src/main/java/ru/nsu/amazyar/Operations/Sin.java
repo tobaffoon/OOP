@@ -15,11 +15,6 @@ public class Sin extends Operation {
 
     @Override
     public double calculate(List<Double> arguments) {
-        // check for correct number of arguments
-        if (arguments.size() != getArity()) {
-            throw new IllegalStateException("Wrong number of arguments");
-        }
-
         return Math.sin(arguments.get(0));
     }
 }
