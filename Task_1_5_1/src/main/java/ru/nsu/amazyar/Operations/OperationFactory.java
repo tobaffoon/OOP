@@ -28,8 +28,4 @@ public class OperationFactory {
             throw new UnsupportedOperationException();
         }
     }
-
-    public static Set<String> getOperationFactory() {
-        return OPERATION_FACTORY.keySet();
-    }
 }
