@@ -1,20 +1,20 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar.operations;
 
 import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Natural logarithm operation.
+ * Subtraction operation.
  */
-public class Log extends Operation {
+public class Subtract extends Operation {
 
     @Override
     public int getArity() {
-        return 1;
+        return 2;
     }
 
     @Override
     public double calculate(List<Double> arguments) {
-        return Math.log(arguments.get(0));
+        return arguments.get(0) - arguments.get(1);
     }
 }

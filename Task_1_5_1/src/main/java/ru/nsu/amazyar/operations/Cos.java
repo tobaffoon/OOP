@@ -1,20 +1,20 @@
-package ru.nsu.amazyar.Operations;
+package ru.nsu.amazyar.operations;
 
 import java.util.List;
 import ru.nsu.amazyar.Operation;
 
 /**
- * Multiplication operation.
+ * Cosines operation.
  */
-public class Multiply extends Operation {
+public class Cos extends Operation {
 
     @Override
     public int getArity() {
-        return 2;
+        return 1;
     }
 
     @Override
     public double calculate(List<Double> arguments) {
-        return arguments.get(0) * arguments.get(1);
+        return Math.cos(arguments.get(0));
     }
 }
