@@ -20,6 +20,14 @@ public class Notebook{
         notes.add(newNote);
     }
 
+    public void add(Note note){
+        if(this.contains(note.getName()) != null){
+            return;
+        }
+
+        notes.add(note);
+    }
+
     public boolean remove(String name){
         Note existingNote = this.contains(name);
         if(existingNote == null){
