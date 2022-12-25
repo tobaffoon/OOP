@@ -30,6 +30,10 @@ public class Notebook{
         }
     }
 
+    public List<Note> getNotes(){
+        return this.notes;
+    }
+
     private Note contains(String name){
         for (Note note : notes) {
             if(note.getName().equals(name)){
