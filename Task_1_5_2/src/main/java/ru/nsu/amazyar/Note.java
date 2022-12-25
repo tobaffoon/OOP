@@ -7,6 +7,12 @@ public class Note {
     private String content;
     private LocalDateTime creationTime;
 
+    public Note(){
+        name = "None";
+        content = "None";
+        creationTime = LocalDateTime.now();
+    }
+
     public Note(String name, String content, LocalDateTime creationTime) {
         this.name = name;
         this.content = content;
