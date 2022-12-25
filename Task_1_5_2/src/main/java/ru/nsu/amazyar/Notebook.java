@@ -42,7 +42,7 @@ public class Notebook{
         return this.notes;
     }
 
-    private Note contains(String name){
+    public Note contains(String name){
         for (Note note : notes) {
             if(note.getName().equals(name)){
                 return note;
