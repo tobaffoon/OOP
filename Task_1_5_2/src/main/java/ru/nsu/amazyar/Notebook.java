@@ -12,7 +12,7 @@ public class Notebook{
     }
 
     public void add(String name, String content){
-        if(this.contains(name) != null){
+        if(this.find(name) != null){
             return;
         }
 
@@ -21,7 +21,7 @@ public class Notebook{
     }
 
     public void add(Note note){
-        if(this.contains(note.getName()) != null){
+        if(this.find(note.getName()) != null){
             return;
         }
 
@@ -29,7 +29,7 @@ public class Notebook{
     }
 
     public boolean remove(String name){
-        Note existingNote = this.contains(name);
+        Note existingNote = this.find(name);
         if(existingNote == null){
             return false;
         } else{
@@ -42,7 +42,7 @@ public class Notebook{
         return this.notes;
     }
 
-    public Note contains(String name){
+    public Note find(String name){
         for (Note note : notes) {
             if(note.getName().equals(name)){
                 return note;
