@@ -21,10 +21,9 @@ public class NotebookJSON {
         objectMapper.writeValue(outFile, notebook.getNotes());
     }
 
-    @SuppressWarnings("unchecked")
     public static void readNotebook(Notebook notebook) throws IOException{
         File inFile = new File(defaultFile);
-        List<Note> notes = objectMapper.readValue(inFile, new TypeReference<List<Note>>(){});
+        List<Note> notes = objectMapper.readValue(inFile, new TypeReference<>(){});
         for (Note note : notes) {
             notebook.add(note);
         }
