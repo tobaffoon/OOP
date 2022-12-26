@@ -14,7 +14,7 @@ public class Note {
     private String content;
     private LocalDateTime creationTime;
     private final DateTimeFormatter localFormatter;
-    private final static DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern(
+    private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern(
         "dd.MM.yyyy H:mm",
         Locale.ENGLISH);
 
