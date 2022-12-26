@@ -28,7 +28,7 @@ public class ArgumentParser {
 
         OPTION_SHOW = new Option("s", "show", true, "Show contents of the notebook");
         OPTION_SHOW.setArgs(3);
-        OPTION_SHOW.setOptionalArg(false);
+        OPTION_SHOW.setOptionalArg(true);
 
         OPTIONS = new Options();
         OPTIONS.addOption(OPTION_ADD);
