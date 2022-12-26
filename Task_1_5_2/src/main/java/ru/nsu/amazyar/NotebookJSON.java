@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,13 +36,16 @@ public class NotebookJSON {
      * <p>
      * Method clears existing notes of notebook and replaces them with new ones
      * </p>
-     *
+     * <p>
+     * Method sorts read notes to preserve ascending order of dates.
+     * </p>
      * @param notebook notebook in which read occurs
      */
     public static void readNotebook(Notebook notebook) throws IOException {
         File inFile = new File(defaultFile);
         List<Note> notes = objectMapper.readValue(inFile, new TypeReference<>() {
         });
+        notes.sort(Comparator.comparing(Note::getCreationTime));
         for (Note note : notes) {
             notebook.add(note);
         }
