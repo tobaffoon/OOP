@@ -36,7 +36,7 @@ class NotebookTest {
      * Save json file before tests.
      */
     @BeforeEach
-    public void saveJSON() {
+    public void saveNotebook() {
         Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(buffer));
     }
 
@@ -44,12 +44,12 @@ class NotebookTest {
      * Restore json file after tests.
      */
     @AfterEach
-    public void restoreJSON() {
+    public void restoreNotebook() {
         Assertions.assertDoesNotThrow(() -> NotebookJSON.writeNotebook(buffer));
     }
 
     /**
-     * Test for general notebook class functionality,
+     * Test for general notebook class functionality.
      */
     @Test
     public void notebookTest() {
