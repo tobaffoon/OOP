@@ -41,11 +41,11 @@ public class Note {
 
     public boolean nameContains(@NotNull String[] keywords) {
         for (String key : keywords) {
-            if (this.getName().toLowerCase().contains(key.toLowerCase())) {
-                return true;
+            if (!this.getName().toLowerCase().contains(key.toLowerCase())) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public String getName() {
