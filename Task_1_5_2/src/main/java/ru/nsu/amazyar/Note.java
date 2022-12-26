@@ -10,7 +10,7 @@ public class Note {
     private LocalDateTime creationTime;
     private final DateTimeFormatter localFormatter;
     private final static DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern(
-        "dd.MM.yyyy hh:mm",
+        "dd.MM.yyyy H:mm",
         Locale.ENGLISH);
 
     public Note(){

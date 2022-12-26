@@ -9,8 +9,7 @@ import java.util.Locale;
 public class Notebook{
     private final List<Note> notes;
     private final DateTimeFormatter notebookFormatter = DateTimeFormatter.ofPattern(
-        "dd.MM.yyyy hh:mm",
-        Locale.ENGLISH);
+        "dd.MM.uuuu H:mm");
 
     public Notebook() {
         notes = new LinkedList<>();
