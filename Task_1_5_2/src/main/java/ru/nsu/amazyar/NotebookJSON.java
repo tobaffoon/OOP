@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * IO operations for Notebook using JSON.
@@ -29,7 +30,7 @@ public class NotebookJSON {
      *
      * @param notebook written notebook
      */
-    public static void writeNotebook(Notebook notebook) throws IOException {
+    public static void writeNotebook(@NotNull Notebook notebook) throws IOException {
         File outFile = new File(defaultFileName);
         objectMapper.writeValue(outFile, notebook.getNotes());
     }
@@ -42,9 +43,10 @@ public class NotebookJSON {
      * <p>
      * Method sorts read notes to preserve ascending order of dates.
      * </p>
+     *
      * @param notebook notebook in which read occurs
      */
-    public static void readNotebook(Notebook notebook) throws IOException {
+    public static void readNotebook(@NotNull Notebook notebook) throws IOException {
         File inFile = new File(defaultFileName);
         List<Note> notes = objectMapper.readValue(inFile, new TypeReference<>() {
         });

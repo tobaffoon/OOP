@@ -9,6 +9,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Parse command line arguments for notebook.
@@ -64,7 +65,9 @@ public class NotebookArgumentParser {
      * @param notebook    notebook on which operations will be executed
      * @return true if notebook changed after operations, false otherwise
      */
-    public static boolean executeCommandLine(CommandLine commandLine, Notebook notebook) {
+    public static boolean executeCommandLine(
+        @NotNull CommandLine commandLine,
+        @NotNull Notebook notebook) {
         if (commandLine.hasOption(OPTION_ADD)) {
             String[] values = commandLine.getOptionValues(OPTION_ADD);
 
