@@ -2,14 +2,13 @@ package ru.nsu.amazyar;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
 public class Notebook{
     private final List<Note> notes;
-    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
+    private final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
         "dd.MM.yyyy hh:mm",
         Locale.ENGLISH);
 
@@ -67,5 +66,9 @@ public class Notebook{
         }
 
         return result.toString();
+    }
+
+    public DateTimeFormatter getDateFormatter(){
+        return this.DATE_TIME_FORMATTER;
     }
 }
