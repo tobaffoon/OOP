@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * IO operations for Notebook using JSON.
+ * <p>
+ * Uses Jackson module
+ * </p>
  */
 public class NotebookJSON {
 
