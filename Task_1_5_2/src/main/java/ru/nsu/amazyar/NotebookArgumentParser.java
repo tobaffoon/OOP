@@ -52,10 +52,7 @@ public class NotebookArgumentParser {
      */
     public static CommandLine parseArguments(String[] args) throws ParseException {
         CommandLineParser commandLineParser = new DefaultParser();
-        CommandLine commandLine;
-
-        commandLine = commandLineParser.parse(OPTIONS, args);
-        return commandLine;
+        return commandLineParser.parse(OPTIONS, args);
     }
 
     /**
