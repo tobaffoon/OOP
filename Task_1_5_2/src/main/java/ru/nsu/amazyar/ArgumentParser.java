@@ -1,12 +1,14 @@
 package ru.nsu.amazyar;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 
 public class ArgumentParser {
     private static final Option OPTION_ADD;
@@ -46,13 +48,31 @@ public class ArgumentParser {
         if(commandLine.hasOption(OPTION_ADD)){
             String[] values = commandLine.getOptionValues(OPTION_ADD);
 
-
+            notebook.add(values[0], values[1]);
         }
         if(commandLine.hasOption(OPTION_REMOVE)){
             String[] values = commandLine.getOptionValues(OPTION_REMOVE);
+
+            notebook.remove(values[0]);
         }
         if(commandLine.hasOption(OPTION_SHOW)){
             String[] values = commandLine.getOptionValues(OPTION_SHOW);
+
+            if(values == null) {
+                System.out.println(notebook);
+            } else {
+                DateTimeFormatter notebookFormat = notebook.getDateFormatter();
+                LocalDateTime from = LocalDateTime.parse(values[0], notebookFormat);
+                LocalDateTime to = LocalDateTime.parse(values[1], notebookFormat);
+                String[] keywords = Arrays.copyOfRange(values, 2, values.length);
+
+                for (Note note : notebook.getNotes()) {
+                    if(note.isBetween(from, to) && note.nameContains(keywords)){
+                        System.out.println(note);
+                        System.out.println();
+                    }
+                }
+            }
         }
     }
 }
