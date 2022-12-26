@@ -49,6 +49,7 @@ public class NotebookJSON {
         List<Note> notes = objectMapper.readValue(inFile, new TypeReference<>() {
         });
         notes.sort(Comparator.comparing(Note::getCreationTime));
+        notebook.clear();
         for (Note note : notes) {
             notebook.add(note);
         }
