@@ -19,6 +19,19 @@ public class Note {
         this.creationTime = creationTime;
     }
 
+    public boolean isBetween(LocalDateTime from, LocalDateTime to){
+        return creationTime.compareTo(from) >= 0 && creationTime.compareTo(to) <= 0;
+    }
+
+    public boolean nameContains(String[] keywords){
+        for (String key : keywords) {
+            if(this.getName().toLowerCase().contains(key.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }
