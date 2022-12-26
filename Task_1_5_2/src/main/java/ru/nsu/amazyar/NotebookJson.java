@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * Uses Jackson module
  * </p>
  */
-public class NotebookJSON {
+public class NotebookJson {
 
     private static final String defaultFileName = "notebook.json";
     private static final ObjectMapper objectMapper;

@@ -29,7 +29,7 @@ class NotebookTest {
         fillFile.add("First note", "My first words");
         fillFile.add("Second note", "I am able to construct more complex sentences");
         fillFile.add("Third note", "I feel the urge to sleep");
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.writeNotebook(fillFile));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.writeNotebook(fillFile));
     }
 
     /**
@@ -37,7 +37,7 @@ class NotebookTest {
      */
     @BeforeEach
     public void saveNotebook() {
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(buffer));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.readNotebook(buffer));
     }
 
     /**
@@ -45,7 +45,7 @@ class NotebookTest {
      */
     @AfterEach
     public void restoreNotebook() {
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.writeNotebook(buffer));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.writeNotebook(buffer));
     }
 
     /**
@@ -53,7 +53,7 @@ class NotebookTest {
      */
     @Test
     public void notebookTest() {
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(notebook));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.readNotebook(notebook));
 
         List<Note> notes = notebook.getNotes();
         Assertions.assertFalse(notes.isEmpty());
@@ -84,13 +84,13 @@ class NotebookTest {
      */
     @Test
     public void readWriteTest() {
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(notebook));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.readNotebook(notebook));
 
         notebook.add("New Note", "New info");
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.writeNotebook(notebook));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.writeNotebook(notebook));
 
         Notebook nextNotebook = new Notebook();
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(nextNotebook));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.readNotebook(nextNotebook));
 
         Assertions.assertEquals(notebook.toString(), nextNotebook.toString());
     }
@@ -113,7 +113,7 @@ class NotebookTest {
         String showOutput = showOutputByteArray.toString();
 
         Notebook reference = new Notebook();
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.readNotebook(reference));
+        Assertions.assertDoesNotThrow(() -> NotebookJson.readNotebook(reference));
 
         Assertions.assertEquals(reference.toString(), showOutput);
 
