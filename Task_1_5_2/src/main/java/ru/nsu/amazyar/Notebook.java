@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class Notebook{
     private final List<Note> notes;
-    private final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
+    private final DateTimeFormatter notebookFormatter = DateTimeFormatter.ofPattern(
         "dd.MM.yyyy hh:mm",
         Locale.ENGLISH);
 
@@ -21,7 +21,7 @@ public class Notebook{
             return;
         }
 
-        Note newNote = new Note(name, content, LocalDateTime.now());
+        Note newNote = new Note(name, content, LocalDateTime.now(), notebookFormatter);
         notes.add(newNote);
     }
 
@@ -60,15 +60,13 @@ public class Notebook{
         StringBuilder result = new StringBuilder();
 
         for (Note note : this.getNotes()) {
-            result.append("Name: ").append(note.getName()).append("\n");
-            result.append("Note: ").append(note.getContent()).append("\n");
-            result.append("Added: ").append(note.getCreationTime().format(DATE_TIME_FORMATTER)).append("\n\n");
+            result.append(note.toString()).append("\n\n");
         }
 
         return result.toString();
     }
 
     public DateTimeFormatter getDateFormatter(){
-        return this.DATE_TIME_FORMATTER;
+        return this.notebookFormatter;
     }
 }

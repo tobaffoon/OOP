@@ -71,6 +71,6 @@ public class Note {
     public String toString(){
         return "Name: " + this.getName() + "\n"
             + "Note: " + this.getContent() + "\n"
-            + "Added: " + this.getCreationTime().format(localFormatter) + "\n\n";
+            + "Added: " + this.getCreationTime().format(localFormatter);
     }
 }
