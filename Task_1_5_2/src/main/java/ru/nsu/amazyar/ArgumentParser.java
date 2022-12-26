@@ -44,16 +44,16 @@ public class ArgumentParser {
         return commandLine;
     }
 
-    public static void executeCommandLine(CommandLine commandLine, Notebook notebook){
+    public static boolean executeCommandLine(CommandLine commandLine, Notebook notebook){
         if(commandLine.hasOption(OPTION_ADD)){
             String[] values = commandLine.getOptionValues(OPTION_ADD);
 
-            notebook.add(values[0], values[1]);
+            return notebook.add(values[0], values[1]);
         }
         if(commandLine.hasOption(OPTION_REMOVE)){
             String[] values = commandLine.getOptionValues(OPTION_REMOVE);
 
-            notebook.remove(values[0]);
+            return notebook.remove(values[0]);
         }
         if(commandLine.hasOption(OPTION_SHOW)){
             String[] values = commandLine.getOptionValues(OPTION_SHOW);
@@ -73,6 +73,10 @@ public class ArgumentParser {
                     }
                 }
             }
+
+            return false;
         }
+
+        return false;
     }
 }
