@@ -146,7 +146,8 @@ class NotebookTest {
         Assertions.assertThrows(MissingArgumentException.class,
             () -> Main.main(new String[] {"-add"}));
         Assertions.assertThrows(
-            MissingArgumentException.class, () -> Main.main(new String[] {"-add", "\"Only name\""}));
+            MissingArgumentException.class,
+            () -> Main.main(new String[] {"-add", "\"Only name\""}));
         Assertions.assertThrows(MissingArgumentException.class,
             () -> Main.main(new String[] {"-r"}));
         Assertions.assertDoesNotThrow(() -> Main.main(new String[] {"-s", "\"14.12.2023 7:00\""}));
