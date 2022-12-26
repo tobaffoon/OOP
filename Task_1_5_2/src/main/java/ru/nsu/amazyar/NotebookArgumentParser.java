@@ -84,14 +84,14 @@ public class NotebookArgumentParser {
                 DateTimeFormatter notebookFormat = notebook.getDateFormatter();
                 LocalDateTime from = LocalDateTime.parse(values[0], notebookFormat);
                 LocalDateTime to;
+                String[] keywords = {};
                 if(values.length == 1) {
                     to = LocalDateTime.now();
                 } else{
                     to = LocalDateTime.parse(values[1], notebookFormat);
+                    // first two arguments are time limits, next comes arbitrary big array of keywords
+                    keywords = Arrays.copyOfRange(values, 2, values.length);
                 }
-
-                // first two arguments are time limits, next comes arbitrary big array of keywords
-                String[] keywords = Arrays.copyOfRange(values, 2, values.length);
 
                 for (Note note : notebook.getNotes()) {
                     if (note.isBetween(from, to) && note.nameContains(keywords)) {
