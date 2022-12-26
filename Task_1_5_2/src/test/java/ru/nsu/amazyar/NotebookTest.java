@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.apache.commons.cli.MissingArgumentException;
+import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -99,10 +101,10 @@ class NotebookTest {
     @Test
     public void commandLineTest() {
         Assertions.assertDoesNotThrow(
-            () -> Main.main(new String[] {"-add", "New edit", "New content"}));
+            () -> Main.main(new String[] {"-add", "\"New edit\"", "\"New content\""}));
         Assertions.assertDoesNotThrow(
-            () -> Main.main(new String[] {"-add", "New edit", "Old content"}));
-        Assertions.assertDoesNotThrow(() -> Main.main(new String[] {"-remove", "New edit"}));
+            () -> Main.main(new String[] {"-add", "\"New edit\"", "\"Old content\""}));
+        Assertions.assertDoesNotThrow(() -> Main.main(new String[] {"-remove", "\"New edit\""}));
 
         ByteArrayOutputStream showOutputByteArray = new ByteArrayOutputStream();
         PrintStream showOutputStream = new PrintStream(showOutputByteArray);
@@ -115,10 +117,11 @@ class NotebookTest {
 
         Assertions.assertEquals(reference.toString(), showOutput);
 
-        reference.remove("New edit");
+        reference.remove("\"New edit\"");
         showOutputByteArray.reset();
         Assertions.assertDoesNotThrow(
-            () -> Main.main(new String[] {"-show", "14.12.2019 7:00", "17.12.2023 13:00", "Note"}));
+            () -> Main.main(
+                new String[] {"-show", "\"14.12.2019 7:00\"", "\"17.12.2023 13:00\"", "\"Note\""}));
         showOutput = showOutputByteArray.toString();
         Assertions.assertEquals(reference.toString().replace("\r", ""),
             showOutput.replace("\r", ""));
@@ -128,14 +131,26 @@ class NotebookTest {
         showOutputByteArray.reset();
         Assertions.assertDoesNotThrow(
             () -> Main.main(
-                new String[] {"-show", "14.12.2019 7:00", "17.12.2023 13:00", "Note", "third"}));
+                new String[] {"-show", "\"14.12.2019 7:00\"", "\"17.12.2023 13:00\"", "\"Note\"",
+                    "\"third\""}));
         showOutput = showOutputByteArray.toString();
         Assertions.assertEquals(reference.toString().replace("\r", ""),
             showOutput.replace("\r", ""));
     }
 
+    /**
+     * Wrong arguments exceptions test.
+     */
     @Test
     public void wrongArgumentsTest() {
-
+        Assertions.assertThrows(MissingArgumentException.class,
+            () -> Main.main(new String[] {"-add"}));
+        Assertions.assertThrows(
+            MissingArgumentException.class, () -> Main.main(new String[] {"-add", "\"Only name\""}));
+        Assertions.assertThrows(MissingArgumentException.class,
+            () -> Main.main(new String[] {"-r"}));
+        Assertions.assertDoesNotThrow(() -> Main.main(new String[] {"-s", "\"14.12.2023 7:00\""}));
+        Assertions.assertThrows(
+            ParseException.class, () -> Main.main(new String[] {"-x", "\"14.12.2019 7:00\""}));
     }
 }
