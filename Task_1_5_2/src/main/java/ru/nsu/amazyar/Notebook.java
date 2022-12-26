@@ -16,21 +16,23 @@ public class Notebook{
         notes = new LinkedList<>();
     }
 
-    public void add(String name, String content){
+    public boolean add(String name, String content){
         if(this.find(name) != null){
-            return;
+            return false;
         }
 
         Note newNote = new Note(name, content, LocalDateTime.now(), notebookFormatter);
         notes.add(newNote);
+        return true;
     }
 
-    public void add(Note note){
+    public boolean add(Note note){
         if(this.find(note.getName()) != null){
-            return;
+            return false;
         }
 
         notes.add(note);
+        return true;
     }
 
     public boolean remove(String name){
