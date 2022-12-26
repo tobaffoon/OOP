@@ -1,24 +1,26 @@
 package ru.nsu.amazyar;
 
 import java.io.IOException;
-import org.junit.jupiter.api.Assertions;
+import org.apache.commons.cli.ParseException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class NotebookTest {
-    @Test
-    public void writeTest() {
-        Notebook notebook = new Notebook();
-        notebook.add("alphabet1", "abc");
-        notebook.add("alphabet2", "def");
-        notebook.add("alphabet3", "ghi");
-        notebook.remove("alphabet2");
-        Assertions.assertDoesNotThrow(() -> NotebookJSON.writeNotebook(notebook));
+    Notebook notebook;
+
+    @BeforeEach
+    public void initTests() throws IOException {
+        notebook = new Notebook();
+
+        Notebook fillFile = new Notebook();
+        fillFile.add("First note", "My first words");
+        fillFile.add("Second note", "I am able to construct more complex sentences");
+        fillFile.add("Third note", "I feel the urge to sleep");
+        NotebookJSON.writeNotebook(fillFile);
     }
 
     @Test
-    public void readTest() throws IOException {
-        Notebook notebook = new Notebook();
-        NotebookJSON.readNotebook(notebook);
-        Assertions.assertTrue(notebook.find("alphabet1") != null && notebook.find("alphabet3") != null);
+    public void funnyTest() throws ParseException, IOException {
+        Main.main(new String[]{"-show"});
     }
 }
