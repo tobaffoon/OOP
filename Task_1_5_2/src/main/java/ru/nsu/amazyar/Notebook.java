@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Collection of Notes.
@@ -36,7 +37,7 @@ public class Notebook {
      * @param content contents of the note
      * @return true if note was added (it's name is unique in notebook), false otherwise
      */
-    public boolean add(String name, String content) {
+    public boolean add(@NotNull String name, @NotNull String content) {
         return add(new Note(name, content, LocalDateTime.now()));
     }
 
@@ -45,7 +46,7 @@ public class Notebook {
      *
      * @return true if note was added (it's name is unique in notebook), false otherwise
      */
-    public boolean add(Note note) {
+    public boolean add(@NotNull Note note) {
         if (this.find(note.getName()) != null) {
             return false;
         }
@@ -60,7 +61,7 @@ public class Notebook {
      * @param name note's name
      * @return true if note was removed, false if no note with such name was found
      */
-    public boolean remove(String name) {
+    public boolean remove(@NotNull String name) {
         Note existingNote = this.find(name);
         if (existingNote == null) {
             return false;
@@ -83,7 +84,7 @@ public class Notebook {
      * @param name name of sought note
      * @return found Note if note with such a name exists, null otherwise
      */
-    public Note find(String name) {
+    public Note find(@NotNull String name) {
         for (Note note : notes) {
             if (note.getName().equals(name)) {
                 return note;
