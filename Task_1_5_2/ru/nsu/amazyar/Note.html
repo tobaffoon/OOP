@@ -132,6 +132,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Note</span>
 extends java.lang.Object</pre>
+<div class="block">Note in notebook.</div>
 </li>
 </ul>
 </div>
@@ -153,20 +154,26 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Note</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor for deserialization.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,java.time.LocalDateTime)">Note</a></span>&#8203;(@NotNull java.lang.String&nbsp;name,
     @NotNull java.lang.String&nbsp;content,
     @NotNull java.time.LocalDateTime&nbsp;creationTime)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Normal constructor.</div>
+</td>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,java.time.LocalDateTime,java.time.format.DateTimeFormatter)">Note</a></span>&#8203;(@NotNull java.lang.String&nbsp;name,
     @NotNull java.lang.String&nbsp;content,
     @NotNull java.time.LocalDateTime&nbsp;creationTime,
     @NotNull java.time.format.DateTimeFormatter&nbsp;formatter)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor with formatter for date and time provided.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -205,12 +212,16 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isBetween(java.time.LocalDateTime,java.time.LocalDateTime)">isBetween</a></span>&#8203;(@NotNull java.time.LocalDateTime&nbsp;from,
          @NotNull java.time.LocalDateTime&nbsp;to)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Check if note was created between given points in time.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nameContains(java.lang.String%5B%5D)">nameContains</a></span>&#8203;(@NotNull java.lang.String[]&nbsp;keywords)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Check if note contains all keywords in its name.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -230,7 +241,9 @@ extends java.lang.Object</pre>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">toString override.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -263,6 +276,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Note</h4>
 <pre>public&nbsp;Note()</pre>
+<div class="block">Constructor for deserialization.</div>
 </li>
 </ul>
 <a id="&lt;init&gt;(java.lang.String,java.lang.String,java.time.LocalDateTime)">
@@ -277,6 +291,7 @@ extends java.lang.Object</pre>
             @NotNull java.lang.String&nbsp;content,
             @NotNull
             @NotNull java.time.LocalDateTime&nbsp;creationTime)</pre>
+<div class="block">Normal constructor.</div>
 </li>
 </ul>
 <a id="&lt;init&gt;(java.lang.String,java.lang.String,java.time.LocalDateTime,java.time.format.DateTimeFormatter)">
@@ -293,6 +308,7 @@ extends java.lang.Object</pre>
             @NotNull java.time.LocalDateTime&nbsp;creationTime,
             @NotNull
             @NotNull java.time.format.DateTimeFormatter&nbsp;formatter)</pre>
+<div class="block">Constructor with formatter for date and time provided.</div>
 </li>
 </ul>
 </li>
@@ -315,6 +331,7 @@ extends java.lang.Object</pre>
                          @NotNull java.time.LocalDateTime&nbsp;from,
                          @NotNull
                          @NotNull java.time.LocalDateTime&nbsp;to)</pre>
+<div class="block">Check if note was created between given points in time.</div>
 </li>
 </ul>
 <a id="nameContains(java.lang.String[])">
@@ -325,6 +342,11 @@ extends java.lang.Object</pre>
 <h4>nameContains</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;nameContains&#8203;(@NotNull
                             @NotNull java.lang.String[]&nbsp;keywords)</pre>
+<div class="block">Check if note contains all keywords in its name.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>keywords</code> - array of keywords.</dd>
+</dl>
 </li>
 </ul>
 <a id="getName()">
@@ -391,6 +413,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">toString override.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
