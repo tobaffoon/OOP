@@ -10,7 +10,14 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+/**
+ * Parse command line arguments for notebook.
+ * <p>
+ * Uses Apache Commons CLI library
+ * </p>
+ */
 public class NotebookArgumentParser {
+
     private static final Option OPTION_ADD;
     private static final Option OPTION_REMOVE;
     private static final Option OPTION_SHOW;
@@ -36,6 +43,12 @@ public class NotebookArgumentParser {
         OPTIONS.addOption(OPTION_SHOW);
     }
 
+    /**
+     * Parse String[] args to CommandLine.
+     *
+     * @param args arguments of a program
+     * @return CommandLine object relevant to notebook program
+     */
     public static CommandLine parseArguments(String[] args) throws ParseException {
         CommandLineParser commandLineParser = new DefaultParser();
         CommandLine commandLine;
@@ -44,30 +57,39 @@ public class NotebookArgumentParser {
         return commandLine;
     }
 
-    public static boolean executeCommandLine(CommandLine commandLine, Notebook notebook){
-        if(commandLine.hasOption(OPTION_ADD)){
+    /**
+     * Executes notebook program with given arguments.
+     *
+     * @param commandLine CommandLine object with relevant arguments
+     * @param notebook    notebook on which operations will be executed
+     * @return true if notebook changed after operations, false otherwise
+     */
+    public static boolean executeCommandLine(CommandLine commandLine, Notebook notebook) {
+        if (commandLine.hasOption(OPTION_ADD)) {
             String[] values = commandLine.getOptionValues(OPTION_ADD);
 
             return notebook.add(values[0], values[1]);
         }
-        if(commandLine.hasOption(OPTION_REMOVE)){
+        if (commandLine.hasOption(OPTION_REMOVE)) {
             String[] values = commandLine.getOptionValues(OPTION_REMOVE);
 
             return notebook.remove(values[0]);
         }
-        if(commandLine.hasOption(OPTION_SHOW)){
+        if (commandLine.hasOption(OPTION_SHOW)) {
             String[] values = commandLine.getOptionValues(OPTION_SHOW);
 
-            if(values == null) {
+            if (values == null) {
                 System.out.println(notebook);
             } else {
                 DateTimeFormatter notebookFormat = notebook.getDateFormatter();
                 LocalDateTime from = LocalDateTime.parse(values[0], notebookFormat);
                 LocalDateTime to = LocalDateTime.parse(values[1], notebookFormat);
+
+                // first two arguments are time limits, next comes arbitrary big array of keywords
                 String[] keywords = Arrays.copyOfRange(values, 2, values.length);
 
                 for (Note note : notebook.getNotes()) {
-                    if(note.isBetween(from, to) && note.nameContains(keywords)){
+                    if (note.isBetween(from, to) && note.nameContains(keywords)) {
                         System.out.println(note);
                         System.out.println();
                     }
