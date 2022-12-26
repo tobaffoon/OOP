@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"Main"},{"p":"ru.nsu.amazyar","l":"Note"},{"p":"ru.nsu.amazyar","l":"Notebook"},{"p":"ru.nsu.amazyar","l":"NotebookArgumentParser"},{"p":"ru.nsu.amazyar","l":"NotebookJSON"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"Main"},{"p":"ru.nsu.amazyar","l":"Note"},{"p":"ru.nsu.amazyar","l":"Notebook"},{"p":"ru.nsu.amazyar","l":"NotebookArgumentParser"},{"p":"ru.nsu.amazyar","l":"NotebookJson"}]
