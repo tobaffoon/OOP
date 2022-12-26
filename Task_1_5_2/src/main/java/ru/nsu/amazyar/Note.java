@@ -11,7 +11,7 @@ public class Note {
     private String content;
     private LocalDateTime creationTime;
     private final DateTimeFormatter localFormatter;
-    private final static DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern(
+    private final static DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern(
         "dd.MM.yyyy H:mm",
         Locale.ENGLISH);
 
@@ -19,12 +19,12 @@ public class Note {
         name = "None";
         content = "None";
         creationTime = LocalDateTime.now();
-        localFormatter = defaultFormatter;
+        localFormatter = DEFAULT_FORMATTER;
     }
 
     public Note(@NotNull String name, @NotNull String content,
         @NotNull LocalDateTime creationTime) {
-        this(name, content, creationTime, defaultFormatter);
+        this(name, content, creationTime, DEFAULT_FORMATTER);
     }
 
     public Note(@NotNull String name, @NotNull String content, @NotNull LocalDateTime creationTime,
