@@ -1,11 +1,17 @@
 package ru.nsu.amazyar;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class Notebook{
     private final List<Note> notes;
+    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
+        "dd.MM.yyyy hh:mm",
+        Locale.ENGLISH);
 
     public Notebook() {
         notes = new LinkedList<>();
@@ -49,5 +55,17 @@ public class Notebook{
             }
         }
         return null;
+    }
+
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+
+        for (Note note : this.getNotes()) {
+            result.append("Name: ").append(note.getName()).append("\n");
+            result.append("Note: ").append(note.getContent()).append("\n");
+            result.append("Added: ").append(note.getCreationTime().format(DATE_TIME_FORMATTER)).append("\n\n");
+        }
+
+        return result.toString();
     }
 }
