@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class NotebookJSON {
 
-    private static final String defaultFile = "notebook.json";
+    private static final String defaultFileName = "notebook.json";
     private static final ObjectMapper objectMapper;
 
     static {
@@ -30,7 +30,7 @@ public class NotebookJSON {
      * @param notebook written notebook
      */
     public static void writeNotebook(Notebook notebook) throws IOException {
-        File outFile = new File(defaultFile);
+        File outFile = new File(defaultFileName);
         objectMapper.writeValue(outFile, notebook.getNotes());
     }
 
@@ -45,7 +45,7 @@ public class NotebookJSON {
      * @param notebook notebook in which read occurs
      */
     public static void readNotebook(Notebook notebook) throws IOException {
-        File inFile = new File(defaultFile);
+        File inFile = new File(defaultFileName);
         List<Note> notes = objectMapper.readValue(inFile, new TypeReference<>() {
         });
         notes.sort(Comparator.comparing(Note::getCreationTime));
