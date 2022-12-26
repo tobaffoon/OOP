@@ -35,7 +35,7 @@ public class NotebookArgumentParser {
         OPTION_REMOVE.setOptionalArg(false);
 
         OPTION_SHOW = new Option("s", "show", true, "Show contents of the notebook");
-        OPTION_SHOW.setArgs(3);
+        OPTION_SHOW.setArgs(Option.UNLIMITED_VALUES);
         OPTION_SHOW.setOptionalArg(true);
 
         OPTIONS = new Options();
@@ -79,7 +79,7 @@ public class NotebookArgumentParser {
             String[] values = commandLine.getOptionValues(OPTION_SHOW);
 
             if (values == null) {
-                System.out.println(notebook);
+                System.out.print(notebook);
             } else {
                 DateTimeFormatter notebookFormat = notebook.getDateFormatter();
                 LocalDateTime from = LocalDateTime.parse(values[0], notebookFormat);
