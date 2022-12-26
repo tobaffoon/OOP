@@ -10,7 +10,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class ArgumentParser {
+public class NotebookArgumentParser {
     private static final Option OPTION_ADD;
     private static final Option OPTION_REMOVE;
     private static final Option OPTION_SHOW;
