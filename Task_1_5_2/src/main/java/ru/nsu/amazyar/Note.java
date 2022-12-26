@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Note in notebook.
+ */
 public class Note {
 
     private String name;
@@ -15,6 +18,9 @@ public class Note {
         "dd.MM.yyyy H:mm",
         Locale.ENGLISH);
 
+    /**
+     * Constructor for deserialization.
+     */
     public Note() {
         name = "None";
         content = "None";
@@ -22,11 +28,17 @@ public class Note {
         localFormatter = DEFAULT_FORMATTER;
     }
 
+    /**
+     * Normal constructor.
+     */
     public Note(@NotNull String name, @NotNull String content,
         @NotNull LocalDateTime creationTime) {
         this(name, content, creationTime, DEFAULT_FORMATTER);
     }
 
+    /**
+     * Constructor with formatter for date and time provided.
+     */
     public Note(@NotNull String name, @NotNull String content, @NotNull LocalDateTime creationTime,
         @NotNull DateTimeFormatter formatter) {
         this.name = name;
@@ -35,10 +47,17 @@ public class Note {
         this.localFormatter = formatter;
     }
 
+    /**
+     * Check if note was created between given points in time.
+     */
     public boolean isBetween(@NotNull LocalDateTime from, @NotNull LocalDateTime to) {
         return creationTime.compareTo(from) >= 0 && creationTime.compareTo(to) <= 0;
     }
 
+    /**
+     * Check if note contains all keywords in its name.
+     * @param keywords array of keywords.
+     */
     public boolean nameContains(@NotNull String[] keywords) {
         for (String key : keywords) {
             if (!this.getName().toLowerCase().contains(key.toLowerCase())) {
@@ -72,6 +91,9 @@ public class Note {
         this.creationTime = creationTime;
     }
 
+    /**
+     * toString override.
+     */
     public String toString() {
         return "Name: " + this.getName() + "\n"
             + "Note: " + this.getContent() + "\n"
