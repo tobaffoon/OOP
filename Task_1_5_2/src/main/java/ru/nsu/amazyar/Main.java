@@ -16,13 +16,13 @@ public class Main {
         CommandLine mainCommandLine = NotebookArgumentParser.parseArguments(args);
 
         Notebook notebook = new Notebook();
-        NotebookJSON.readNotebook(notebook);
+        NotebookJson.readNotebook(notebook);
 
         boolean notebookChanged =
             NotebookArgumentParser.executeCommandLine(mainCommandLine, notebook);
 
         if (notebookChanged) {
-            NotebookJSON.writeNotebook(notebook);
+            NotebookJson.writeNotebook(notebook);
         }
     }
 }

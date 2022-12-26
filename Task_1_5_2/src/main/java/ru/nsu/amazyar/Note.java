@@ -56,6 +56,7 @@ public class Note {
 
     /**
      * Check if note contains all keywords in its name.
+     *
      * @param keywords array of keywords.
      */
     public boolean nameContains(@NotNull String[] keywords) {
