@@ -85,9 +85,9 @@ public class NotebookArgumentParser {
                 LocalDateTime from = LocalDateTime.parse(values[0], notebookFormat);
                 LocalDateTime to;
                 String[] keywords = {};
-                if(values.length == 1) {
+                if (values.length == 1) {
                     to = LocalDateTime.now();
-                } else{
+                } else {
                     to = LocalDateTime.parse(values[1], notebookFormat);
                     // first two arguments are time limits, next comes arbitrary big array of keywords
                     keywords = Arrays.copyOfRange(values, 2, values.length);
