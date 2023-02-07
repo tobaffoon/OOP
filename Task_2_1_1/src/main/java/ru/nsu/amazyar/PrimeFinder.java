@@ -2,6 +2,7 @@ package ru.nsu.amazyar;
 
 import java.util.Collection;
 import java.lang.Math;
+import java.util.List;
 
 public interface PrimeFinder {
     private static boolean simplePrimeCheck(Integer number) {
@@ -20,7 +21,7 @@ public interface PrimeFinder {
         return false;
     }
 
-    static boolean containsNoPrimes(Collection<Integer> collection){
+    static boolean containsNoPrimes(List<Integer> collection){
         return collection.stream().noneMatch(PrimeFinder::simplePrimeCheck);
     }
 }
