@@ -3,10 +3,8 @@ package ru.nsu.amazyar;
 import java.util.Collection;
 import java.lang.Math;
 
-public abstract class PrimeFinder {
-    public abstract boolean containsNoPrimes(Collection<Integer> collection);
-
-    private boolean simplePrimeCheck(Integer number) {
+public interface PrimeFinder {
+    private static boolean simplePrimeCheck(Integer number) {
         if(number <= 0){
             return false;
         }
@@ -20,5 +18,9 @@ public abstract class PrimeFinder {
         }
 
         return false;
+    }
+
+    static boolean containsNoPrimes(Collection<Integer> collection){
+        return collection.stream().noneMatch(PrimeFinder::simplePrimeCheck);
     }
 }
