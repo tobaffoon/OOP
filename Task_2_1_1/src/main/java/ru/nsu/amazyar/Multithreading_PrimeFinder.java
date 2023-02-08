@@ -28,6 +28,7 @@ public class Multithreading_PrimeFinder extends PrimeFinder{
         for (int i = 0; i < threadsCount; i++) {
             PrimeFinderThread pThread = new PrimeFinderThread(list.subList(i * listSize, (i+1) * listSize));
             primeFinderThreads.add(pThread);
+            pThread.setDaemon(true);            // if some thread found Prime others can terminate immediately
             pThread.start();
         }
         for (PrimeFinderThread pThread : primeFinderThreads) {
