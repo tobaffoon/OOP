@@ -4,7 +4,7 @@ import java.lang.Math;
 import java.util.List;
 
 public class PrimeFinder {
-    private static boolean simplePrimeCheck(Integer number) {
+    public static boolean simplePrimeCheck(Integer number) {
         if(number <= 1){
             return false;
         }
