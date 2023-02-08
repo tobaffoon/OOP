@@ -65,17 +65,17 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
             primeThread.start();
         }
         if (listSize % threadsCount != 0) { //add extra thread to take care of end of the list
-            PrimeFinderThread pThread =
+            PrimeFinderThread primeThread =
                 new PrimeFinderThread(list.subList(threadsCount * subListStep, listSize));
-            primeFinderThreads.add(pThread);
-            pThread.setDaemon(true);
-            pThread.start();
+            primeFinderThreads.add(primeThread);
+            primeThread.setDaemon(true);
+            primeThread.start();
         }
 
         //----------Process threads results----------
-        for (PrimeFinderThread pThread : primeFinderThreads) {
+        for (PrimeFinderThread primeThread : primeFinderThreads) {
             try {
-                pThread.join();
+                primeThread.join();
                 if (getPrimeFound()) {
                     return false;
                 }
