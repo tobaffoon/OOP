@@ -1,24 +1,26 @@
 package ru.nsu.amazyar;
 
-import java.util.Collection;
 import java.lang.Math;
 import java.util.List;
 
 public interface PrimeFinder {
     private static boolean simplePrimeCheck(Integer number) {
-        if(number <= 0){
+        if(number <= 1){
             return false;
         }
-        if(number % 2 == 0){
+        if(number == 2){
             return true;
+        }
+        if(number % 2 == 0){
+            return false;
         }
 
         int factorUpperBound = (int) Math.sqrt(number);
         for(int i = 3; i <= factorUpperBound; i+=2){
-            if(number % i == 0) return true;
+            if(number % i == 0) return false;
         }
 
-        return false;
+        return true;
     }
 
     static boolean containsNoPrimes(List<Integer> collection){
