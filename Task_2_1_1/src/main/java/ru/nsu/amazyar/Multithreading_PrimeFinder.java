@@ -25,6 +25,9 @@ public class Multithreading_PrimeFinder extends PrimeFinder{
     public boolean containsNoPrimes(List<Integer> list, int threadsCount){
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
+        if(listSize <= threadsCount * 10){
+            return super.containsNoPrimes(list);
+        }
         int subListStep = listSize / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
             PrimeFinderThread pThread = new PrimeFinderThread(list.subList(i * subListStep, (i+1) * subListStep));
