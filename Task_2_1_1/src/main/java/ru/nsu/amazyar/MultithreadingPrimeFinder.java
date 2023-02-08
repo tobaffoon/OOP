@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Checks list for primes via multithreading.
  */
-public class Multithreading_PrimeFinder extends PrimeFinder {
+public class MultithreadingPrimeFinder extends PrimeFinder {
 
     private static final int DEFAULT_THREADS_COUNT = 5;
     private boolean primeFound = false;
@@ -21,7 +21,7 @@ public class Multithreading_PrimeFinder extends PrimeFinder {
 
         @Override
         public void run() {
-            if (Multithreading_PrimeFinder.super.containsNoPrimes(threadList)) {
+            if (MultithreadingPrimeFinder.super.containsNoPrimes(threadList)) {
                 primeFound = true;
             }
         }

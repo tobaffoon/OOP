@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Checks list for primes via parallelStream.
  */
-public class ParallelStream_PrimeFinder extends PrimeFinder {
+public class ParallelStreamPrimeFinder extends PrimeFinder {
 
     /**
      * Checks for primes in list.
