@@ -40,6 +40,9 @@ public class PrimeFinder {
      * Check list for containing primes.
      */
     public boolean containsNoPrimes(List<Integer> collection) {
+        if(collection == null){
+            throw new NullPointerException();
+        }
         return collection.stream().noneMatch(PrimeFinder::simplePrimeCheck);
     }
 }
