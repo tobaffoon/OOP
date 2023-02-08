@@ -19,7 +19,7 @@ public class Main {
         scanner.close();
         List<Integer> array = Arrays.stream(numbers.split(" +"))
             .map(Integer::parseInt).collect(Collectors.toList());
-        Multithreading_PrimeFinder primeFinder = new Multithreading_PrimeFinder();
+        MultithreadingPrimeFinder primeFinder = new MultithreadingPrimeFinder();
         System.out.println(primeFinder.containsNoPrimes(array, 2));
     }
 }

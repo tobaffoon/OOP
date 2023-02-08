@@ -27,10 +27,11 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         }
     }
 
-    private synchronized void setPrimeFound(boolean value){
+    private synchronized void setPrimeFound(boolean value) {
         this.primeFound = value;
     }
-    private synchronized boolean getPrimeFound(){
+
+    private synchronized boolean getPrimeFound() {
         return this.primeFound;
     }
 

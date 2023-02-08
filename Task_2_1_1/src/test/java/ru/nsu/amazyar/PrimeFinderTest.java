@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PrimeFinderTest {
+
     static PrimeFinder primeFinder = new PrimeFinder();
     static MultithreadingPrimeFinder multithreadingPrimeFinder = new MultithreadingPrimeFinder();
     static ParallelStreamPrimeFinder parallelStreamPrimeFinder = new ParallelStreamPrimeFinder();
@@ -17,7 +18,7 @@ class PrimeFinderTest {
     static List<Integer> bigNonPrimesList;
 
     @BeforeAll
-    public static void listsInit(){
+    public static void listsInit() {
         emptyList = new ArrayList<>();
 
         singlePrimeList = new ArrayList<>(List.of(17));
@@ -25,27 +26,28 @@ class PrimeFinderTest {
         singleNonPrimeList = new ArrayList<>(39);
 
         endingPrimeList = new ArrayList<>();
-        for (int i = 4; i <= 1024; i+=2){
+        for (int i = 4; i <= 1024; i += 2) {
             endingPrimeList.add(i);
         }
         endingPrimeList.add(1_000_000_007);
 
         bigNonPrimesList = new ArrayList<>();
-        for (int i = 1235; i <= 45340; i+=501) {
-            bigNonPrimesList.add(i * (i+2));
+        for (int i = 1235; i <= 45340; i += 501) {
+            bigNonPrimesList.add(i * (i + 2));
         }
     }
 
     @Test
-    public void primeCheckerTest(){
+    public void primeCheckerTest() {
         Assertions.assertTrue(PrimeFinder.simplePrimeCheck(2));
         Assertions.assertFalse(PrimeFinder.simplePrimeCheck(0));
         Assertions.assertFalse(PrimeFinder.simplePrimeCheck(1));
-        Assertions.assertFalse(PrimeFinder.simplePrimeCheck(2*3*5*7*11*13*17*23*29));
+        Assertions.assertFalse(
+            PrimeFinder.simplePrimeCheck(2 * 3 * 5 * 7 * 11 * 13 * 17 * 23 * 29));
     }
-    
+
     @Test
-    public void sequentialListCheckerTest(){
+    public void sequentialListCheckerTest() {
         Assertions.assertTrue(primeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(primeFinder.containsNoPrimes(singlePrimeList));
         Assertions.assertTrue(primeFinder.containsNoPrimes(singleNonPrimeList));
@@ -54,20 +56,21 @@ class PrimeFinderTest {
     }
 
     @Test
-    public void multiThreadingListCheckerTest(){
+    public void multiThreadingListCheckerTest() {
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(multithreadingPrimeFinder.containsNoPrimes(singlePrimeList));
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(singleNonPrimeList));
         Assertions.assertFalse(multithreadingPrimeFinder.containsNoPrimes(endingPrimeList));
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList));
 
-        Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList,1));
-        Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList,100));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList,0));
+        Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList, 1));
+        Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList, 100));
+        Assertions.assertThrows(IllegalArgumentException.class,
+            () -> multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList, 0));
     }
 
     @Test
-    public void parallelStreamListCheckerTest(){
+    public void parallelStreamListCheckerTest() {
         Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(parallelStreamPrimeFinder.containsNoPrimes(singlePrimeList));
         Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(singleNonPrimeList));
@@ -76,11 +79,16 @@ class PrimeFinderTest {
     }
 
     @Test
-    public void nullPointerTest(){
-        Assertions.assertThrows(NullPointerException.class, () -> PrimeFinder.simplePrimeCheck(null));
-        Assertions.assertThrows(NullPointerException.class, () -> primeFinder.containsNoPrimes(null));
-        Assertions.assertThrows(NullPointerException.class, () -> multithreadingPrimeFinder.containsNoPrimes(null));
-        Assertions.assertThrows(NullPointerException.class, () -> multithreadingPrimeFinder.containsNoPrimes(null, 1));
-        Assertions.assertThrows(NullPointerException.class, () -> parallelStreamPrimeFinder.containsNoPrimes(null));
+    public void nullPointerTest() {
+        Assertions.assertThrows(NullPointerException.class,
+            () -> PrimeFinder.simplePrimeCheck(null));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> primeFinder.containsNoPrimes(null));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> multithreadingPrimeFinder.containsNoPrimes(null));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> multithreadingPrimeFinder.containsNoPrimes(null, 1));
+        Assertions.assertThrows(NullPointerException.class,
+            () -> parallelStreamPrimeFinder.containsNoPrimes(null));
     }
 }
