@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.amazyar","l":"Main"},{"p":"ru.nsu.amazyar","l":"MultithreadingPrimeFinder"},{"p":"ru.nsu.amazyar","l":"ParallelStreamPrimeFinder"},{"p":"ru.nsu.amazyar","l":"PrimeFinder"}]
