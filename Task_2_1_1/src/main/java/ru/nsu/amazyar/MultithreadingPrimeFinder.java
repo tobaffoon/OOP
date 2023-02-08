@@ -21,8 +21,8 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
 
         @Override
         public void run() {
-            if (MultithreadingPrimeFinder.super.containsNoPrimes(threadList)) {
-                primeFound = true;
+            if (!MultithreadingPrimeFinder.super.containsNoPrimes(threadList)) {
+                setPrimeFound(true);
             }
         }
     }
