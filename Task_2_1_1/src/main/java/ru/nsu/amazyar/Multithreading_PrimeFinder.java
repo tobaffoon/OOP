@@ -3,11 +3,13 @@ package ru.nsu.amazyar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Multithreading_PrimeFinder implements PrimeFinder{
+public class Multithreading_PrimeFinder extends PrimeFinder{
 
     private static final int DEFAULT_THREADS_COUNT = 5;
 
-    private static class PrimeFinderThread extends Thread{
+    public Multithreading_PrimeFinder() {
+    }
+    private class PrimeFinderThread extends Thread{
         private final List<Integer> threadList;
         private boolean primeFound = false;
 
@@ -17,14 +19,14 @@ public class Multithreading_PrimeFinder implements PrimeFinder{
 
         @Override
         public void run() {
-            this.primeFound = PrimeFinder.containsNoPrimes(this.threadList);
+            this.primeFound = containsNoPrimes(this.threadList);
         }
 
         public boolean primeFound() {
             return primeFound;
         }
     }
-    public static boolean containsNoPrimes(List<Integer> list, int threadsCount){
+    public boolean containsNoPrimes(List<Integer> list, int threadsCount){
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount);
         int listSize = list.size();
         for (int i = 0; i < threadsCount; i++) {
@@ -42,7 +44,7 @@ public class Multithreading_PrimeFinder implements PrimeFinder{
         }
         return true;
     }
-    public static boolean containsNoPrimes(List<Integer> list){
+    public boolean containsNoPrimes(List<Integer> list){
         return containsNoPrimes(list, DEFAULT_THREADS_COUNT);
     }
 }
