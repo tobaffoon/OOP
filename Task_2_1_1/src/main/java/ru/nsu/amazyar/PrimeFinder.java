@@ -3,7 +3,7 @@ package ru.nsu.amazyar;
 import java.lang.Math;
 import java.util.List;
 
-public interface PrimeFinder {
+public class PrimeFinder {
     private static boolean simplePrimeCheck(Integer number) {
         if(number <= 1){
             return false;
@@ -23,7 +23,7 @@ public interface PrimeFinder {
         return true;
     }
 
-    static boolean containsNoPrimes(List<Integer> collection){
+    public boolean containsNoPrimes(List<Integer> collection){
         return collection.stream().noneMatch(PrimeFinder::simplePrimeCheck);
     }
 }

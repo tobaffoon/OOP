@@ -13,6 +13,7 @@ public class Main {
         scanner.close();
         List<Integer> array = Arrays.stream(numbers.split(" +"))
             .map(Integer::parseInt).collect(Collectors.toList());
-        System.out.println(PrimeFinder.containsNoPrimes(array));
+        PrimeFinder primeFinder = new PrimeFinder();
+        System.out.println(primeFinder.containsNoPrimes(array));
     }
 }
