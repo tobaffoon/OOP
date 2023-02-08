@@ -38,9 +38,9 @@ class PrimeFinderTest {
         }
 
         longNonPrimesList = new ArrayList<>();
-        for (int i = 3; i <= 45340; i+=2) {
-            for (int j = 2; j <= 1024; j+=2) {
-                longNonPrimesList.add(i * (i+j));
+        for (int i = 3; i <= 45340; i += 2) {
+            for (int j = 2; j <= 1024; j += 2) {
+                longNonPrimesList.add(i * (i + j));
             }
         }
     }
