@@ -28,6 +28,12 @@ public class Multithreading_PrimeFinder extends PrimeFinder {
     }
 
     public boolean containsNoPrimes(List<Integer> list, int threadsCount) {
+        if (list == null) {
+            throw new NullPointerException();
+        }
+        if (threadsCount == 0) {
+            throw new IllegalArgumentException("Can't have 0 threads in process");
+        }
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
 

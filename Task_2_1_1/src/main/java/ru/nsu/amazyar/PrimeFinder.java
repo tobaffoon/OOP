@@ -12,6 +12,10 @@ public class PrimeFinder {
      * Check number for being prime.
      */
     public static boolean simplePrimeCheck(Integer number) {
+        if (number == null) {
+            throw new NullPointerException();
+        }
+
         if (number <= 1) {
             return false;
         }
