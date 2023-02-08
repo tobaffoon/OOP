@@ -27,6 +27,13 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         }
     }
 
+    private synchronized void setPrimeFound(boolean value){
+        this.primeFound = value;
+    }
+    private synchronized boolean getPrimeFound(){
+        return this.primeFound;
+    }
+
     public boolean containsNoPrimes(List<Integer> list, int threadsCount) {
         if (list == null) {
             throw new NullPointerException();
@@ -36,6 +43,7 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         }
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
+        this.setPrimeFound(false);
 
         //----------Small lists trivial case----------
         if (listSize <= threadsCount * 10) {
@@ -64,11 +72,10 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         for (PrimeFinderThread pThread : primeFinderThreads) {
             try {
                 pThread.join();
-                if (primeFound) {
+                if (getPrimeFound()) {
                     return false;
                 }
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException ignored) {
             }
         }
         return true;
