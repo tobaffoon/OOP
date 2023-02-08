@@ -23,14 +23,22 @@ public class Multithreading_PrimeFinder extends PrimeFinder{
     }
 
     public boolean containsNoPrimes(List<Integer> list, int threadsCount){
-        List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount);
+        List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
+        int subListStep = listSize / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
-            PrimeFinderThread pThread = new PrimeFinderThread(list.subList(i * listSize, (i+1) * listSize));
+            PrimeFinderThread pThread = new PrimeFinderThread(list.subList(i * subListStep, (i+1) * subListStep));
             primeFinderThreads.add(pThread);
             pThread.setDaemon(true);            // if some thread found Prime others can terminate immediately
             pThread.start();
         }
+        if(listSize % threadsCount != 0){
+            PrimeFinderThread pThread = new PrimeFinderThread(list.subList(threadsCount * subListStep, listSize));
+            primeFinderThreads.add(pThread);
+            pThread.setDaemon(true);
+            pThread.start();
+        }
+
         for (PrimeFinderThread pThread : primeFinderThreads) {
             try {
                 pThread.join();
