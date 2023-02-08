@@ -35,6 +35,9 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         return this.primeFound;
     }
 
+    /**
+     * Checks for primes in list.
+     */
     public boolean containsNoPrimes(List<Integer> list, int threadsCount) {
         if (list == null) {
             throw new NullPointerException();
@@ -54,12 +57,12 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         //----------Thread creation----------
         int subListStep = listSize / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
-            PrimeFinderThread pThread =
+            PrimeFinderThread primeThread =
                 new PrimeFinderThread(list.subList(i * subListStep, (i + 1) * subListStep));
-            primeFinderThreads.add(pThread);
+            primeFinderThreads.add(primeThread);
             //thread can terminate immediately if a prime number's found (main thread exits)
-            pThread.setDaemon(true);
-            pThread.start();
+            primeThread.setDaemon(true);
+            primeThread.start();
         }
         if (listSize % threadsCount != 0) { //add extra thread to take care of end of the list
             PrimeFinderThread pThread =
