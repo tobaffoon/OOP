@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Multithreading_PrimeFinder extends PrimeFinder{
-
     private static final int DEFAULT_THREADS_COUNT = 5;
+    private boolean primeFound = false;
 
-    public Multithreading_PrimeFinder() {
-    }
     private class PrimeFinderThread extends Thread{
         private final List<Integer> threadList;
-        private boolean primeFound = false;
 
         public PrimeFinderThread(List<Integer> threadList) {
             this.threadList = threadList;
@@ -19,13 +16,12 @@ public class Multithreading_PrimeFinder extends PrimeFinder{
 
         @Override
         public void run() {
-            this.primeFound = containsNoPrimes(this.threadList);
-        }
-
-        public boolean primeFound() {
-            return primeFound;
+            if(!containsNoPrimes(threadList)){
+                primeFound = true;
+            }
         }
     }
+
     public boolean containsNoPrimes(List<Integer> list, int threadsCount){
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount);
         int listSize = list.size();
@@ -37,7 +33,7 @@ public class Multithreading_PrimeFinder extends PrimeFinder{
         for (PrimeFinderThread pThread : primeFinderThreads) {
             try {
                 pThread.join();
-                if(pThread.primeFound()) return false;
+                if(primeFound) return false;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
