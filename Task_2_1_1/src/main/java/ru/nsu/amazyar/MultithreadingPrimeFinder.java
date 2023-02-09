@@ -9,7 +9,7 @@ import java.util.List;
 public class MultithreadingPrimeFinder extends PrimeFinder {
 
     private static final int DEFAULT_THREADS_COUNT = 5;
-    private boolean primeFound = false;
+    private volatile boolean primeFound = false;
 
     private class PrimeFinderThread extends Thread {
 
