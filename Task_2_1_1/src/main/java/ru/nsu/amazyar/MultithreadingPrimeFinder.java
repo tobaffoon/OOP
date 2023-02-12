@@ -50,9 +50,9 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         this.setPrimeFound(false);
 
         //----------Small lists trivial case----------
-        if (listSize <= threadsCount * 10) {
-            return super.containsNoPrimes(list);
-        }
+//        if (listSize <= threadsCount * 10) {
+//            return super.containsNoPrimes(list);
+//        }
 
         //----------Thread creation----------
         int subListStep = listSize / threadsCount;
