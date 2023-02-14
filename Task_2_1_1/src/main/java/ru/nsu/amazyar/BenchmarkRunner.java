@@ -2,7 +2,16 @@ package ru.nsu.amazyar;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -73,7 +82,7 @@ public class BenchmarkRunner {
      * Run big list with simple primeFinder.
      */
     @Benchmark
-    public boolean SequentialBigBenchmark() {
+    public boolean sequentialBigBenchmark() {
         return primeFinder.containsNoPrimes(bigNonPrimesList);
     }
 
@@ -98,7 +107,7 @@ public class BenchmarkRunner {
      * Run long list with simple primeFinder.
      */
     @Benchmark
-    public boolean SequentialLongBenchmark() {
+    public boolean sequentialLongBenchmark() {
         return primeFinder.containsNoPrimes(longNonPrimesList);
     }
 
@@ -123,7 +132,7 @@ public class BenchmarkRunner {
      * Run longer list with simple primeFinder.
      */
     @Benchmark
-    public boolean SequentialLongerBenchmark() {
+    public boolean sequentialLongerBenchmark() {
         return primeFinder.containsNoPrimes(longerNonPrimesList);
     }
 
