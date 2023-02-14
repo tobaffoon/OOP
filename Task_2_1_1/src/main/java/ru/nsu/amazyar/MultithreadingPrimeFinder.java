@@ -41,9 +41,9 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
         this.primeFound.set(false);
-        List<Integer> subList;
 
         //----------Thread creation----------
+        List<Integer> subList;
         int subListStep = listSize / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
             subList = list.subList(i * subListStep, (i + 1) * subListStep);
