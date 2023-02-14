@@ -2,6 +2,7 @@ package ru.nsu.amazyar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Checks list for primes via multithreading.
@@ -9,7 +10,7 @@ import java.util.List;
 public class MultithreadingPrimeFinder extends PrimeFinder {
 
     private static final int DEFAULT_THREADS_COUNT = 5;
-    private volatile boolean primeFound = false;
+    private final AtomicBoolean primeFound = new AtomicBoolean();
 
     private class PrimeFinderThread extends Thread {
 
@@ -22,17 +23,9 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         @Override
         public void run() {
             if (!MultithreadingPrimeFinder.super.containsNoPrimes(threadList)) {
-                setPrimeFound(true);
+                MultithreadingPrimeFinder.this.primeFound.set(true);
             }
         }
-    }
-
-    private synchronized void setPrimeFound(boolean value) {
-        this.primeFound = value;
-    }
-
-    private synchronized boolean getPrimeFound() {
-        return this.primeFound;
     }
 
     /**
@@ -47,7 +40,7 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         }
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
-        this.setPrimeFound(false);
+        this.primeFound.set(false);
 
         //----------Small lists trivial case----------
 //        if (listSize <= threadsCount * 10) {
@@ -76,7 +69,7 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         for (PrimeFinderThread primeThread : primeFinderThreads) {
             try {
                 primeThread.join();
-                if (getPrimeFound()) {
+                if (this.primeFound.get()) {
                     return false;
                 }
             } catch (InterruptedException ignored) {
