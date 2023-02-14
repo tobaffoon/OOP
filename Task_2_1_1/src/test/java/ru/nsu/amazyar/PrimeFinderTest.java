@@ -13,7 +13,6 @@ class PrimeFinderTest {
     static ParallelStreamPrimeFinder parallelStreamPrimeFinder = new ParallelStreamPrimeFinder();
     static List<Integer> emptyList;
     static List<Integer> singlePrimeList;
-    static List<Integer> singleNonPrimeList;
     static List<Integer> endingPrimeList;
     static List<Integer> bigNonPrimesList;
     static List<Integer> longNonPrimesList;
@@ -23,8 +22,6 @@ class PrimeFinderTest {
         emptyList = new ArrayList<>();
 
         singlePrimeList = new ArrayList<>(List.of(17));
-
-        singleNonPrimeList = new ArrayList<>(39);
 
         endingPrimeList = new ArrayList<>();
         for (int i = 4; i <= 1024; i += 2) {
@@ -58,7 +55,6 @@ class PrimeFinderTest {
     public void sequentialListCheckerTest() {
         Assertions.assertTrue(primeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(primeFinder.containsNoPrimes(singlePrimeList));
-        Assertions.assertTrue(primeFinder.containsNoPrimes(singleNonPrimeList));
         Assertions.assertFalse(primeFinder.containsNoPrimes(endingPrimeList));
         Assertions.assertTrue(primeFinder.containsNoPrimes(bigNonPrimesList));
         Assertions.assertTrue(primeFinder.containsNoPrimes(longNonPrimesList));
@@ -68,7 +64,6 @@ class PrimeFinderTest {
     public void multiThreadingListCheckerTest() {
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(multithreadingPrimeFinder.containsNoPrimes(singlePrimeList));
-        Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(singleNonPrimeList));
         Assertions.assertFalse(multithreadingPrimeFinder.containsNoPrimes(endingPrimeList));
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(bigNonPrimesList));
         Assertions.assertTrue(multithreadingPrimeFinder.containsNoPrimes(longNonPrimesList));
@@ -83,7 +78,6 @@ class PrimeFinderTest {
     public void parallelStreamListCheckerTest() {
         Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(emptyList));
         Assertions.assertFalse(parallelStreamPrimeFinder.containsNoPrimes(singlePrimeList));
-        Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(singleNonPrimeList));
         Assertions.assertFalse(parallelStreamPrimeFinder.containsNoPrimes(endingPrimeList));
         Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(bigNonPrimesList));
         Assertions.assertTrue(parallelStreamPrimeFinder.containsNoPrimes(longNonPrimesList));
