@@ -41,23 +41,17 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
         List<PrimeFinderThread> primeFinderThreads = new ArrayList<>(threadsCount + 1);
         int listSize = list.size();
         this.primeFound.set(false);
+        List<Integer> subList;
 
         //----------Thread creation----------
         int subListStep = listSize / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
-            PrimeFinderThread primeThread =
-                new PrimeFinderThread(list.subList(i * subListStep, (i + 1) * subListStep));
-            primeFinderThreads.add(primeThread);
-            //thread can terminate immediately if a prime number's found (main thread exits)
-            primeThread.setDaemon(true);
-            primeThread.start();
+            subList = list.subList(i * subListStep, (i + 1) * subListStep);
+            createAndRunPrimeFinder(subList, primeFinderThreads);
         }
         if (listSize % threadsCount != 0) { //add extra thread to take care of end of the list
-            PrimeFinderThread primeThread =
-                new PrimeFinderThread(list.subList(threadsCount * subListStep, listSize));
-            primeFinderThreads.add(primeThread);
-            primeThread.setDaemon(true);
-            primeThread.start();
+            subList = list.subList(threadsCount * subListStep, listSize);
+            createAndRunPrimeFinder(subList, primeFinderThreads);
         }
 
         //----------Process threads results----------
@@ -78,5 +72,13 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
      */
     public boolean containsNoPrimes(List<Integer> list) {
         return containsNoPrimes(list, DEFAULT_THREADS_COUNT);
+    }
+
+    private void createAndRunPrimeFinder(List<Integer> list, List<PrimeFinderThread> threadList) {
+        PrimeFinderThread primeThread =
+            new PrimeFinderThread(list);
+        threadList.add(primeThread);
+        primeThread.setDaemon(true);
+        primeThread.start();
     }
 }
