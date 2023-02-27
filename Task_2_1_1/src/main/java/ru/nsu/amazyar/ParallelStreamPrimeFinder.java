@@ -10,6 +10,7 @@ public class ParallelStreamPrimeFinder extends PrimeFinder {
     /**
      * Checks for primes in list.
      */
+    @Override
     public boolean containsNoPrimes(List<Integer> collection) {
         if (collection == null) {
             throw new NullPointerException();
