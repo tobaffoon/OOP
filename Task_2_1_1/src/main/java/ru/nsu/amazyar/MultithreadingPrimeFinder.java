@@ -70,6 +70,7 @@ public class MultithreadingPrimeFinder extends PrimeFinder {
     /**
      * Checks for primes in list.
      */
+    @Override
     public boolean containsNoPrimes(List<Integer> list) {
         return containsNoPrimes(list, DEFAULT_THREADS_COUNT);
     }
