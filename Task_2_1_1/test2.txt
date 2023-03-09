@@ -1,0 +1,379 @@
+# Run complete. Total time: 04:47:06
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                                                            (threadsCount)    Mode    Cnt   Score    Error  Units
+BenchmarkRunner.SequentialBigBenchmark                                                            1    avgt      5   0,009 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            2    avgt      5   0,009 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            3    avgt      5   0,009 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            4    avgt      5   0,009 �  0,001   s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           1    avgt      5   7,268 �  0,107   s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           2    avgt      5   7,283 �  0,100   s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           3    avgt      5   7,212 �  0,302   s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           4    avgt      5   7,192 �  0,318   s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         1    avgt      5  72,209 �  1,698   s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         2    avgt      5  72,248 �  2,084   s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         3    avgt      5  72,294 �  1,114   s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         4    avgt      5  72,332 �  1,142   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        1    avgt      5   0,010 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        2    avgt      5   0,008 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        3    avgt      5   0,006 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        4    avgt      5   0,006 �  0,001   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       1    avgt      5   7,312 �  0,185   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       2    avgt      5   5,589 �  0,225   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       3    avgt      5   4,470 �  0,142   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       4    avgt      5   3,844 �  0,284   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     1    avgt      5  72,863 �  1,664   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     2    avgt      5  44,381 �  3,602   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     3    avgt      5  35,199 �  0,936   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     4    avgt      5  30,431 �  1,076   s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        1    avgt      5   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        2    avgt      5   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        3    avgt      5   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        4    avgt      5   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       1    avgt      5   2,511 �  0,061   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       2    avgt      5   2,462 �  0,171   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       3    avgt      5   2,578 �  0,797   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       4    avgt      5   2,743 �  0,797   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     1    avgt      5  25,598 �  8,136   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     2    avgt      5  26,494 �  5,576   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     3    avgt      5  26,353 �  7,218   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     4    avgt      5  26,830 �  8,548   s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            1  sample   5134   0,010 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.00                               1  sample          0,008            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.50                               1  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.90                               1  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.95                               1  sample          0,011            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.99                               1  sample          0,011            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.999                              1  sample          0,013            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.9999                             1  sample          0,014            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p1.00                               1  sample          0,014            s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            2  sample   5197   0,010 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.00                               2  sample          0,008            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.50                               2  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.90                               2  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.95                               2  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.99                               2  sample          0,011            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.999                              2  sample          0,013            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.9999                             2  sample          0,014            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p1.00                               2  sample          0,014            s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            3  sample   5126   0,010 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.00                               3  sample          0,008            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.50                               3  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.90                               3  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.95                               3  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.99                               3  sample          0,011            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.999                              3  sample          0,013            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.9999                             3  sample          0,017            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p1.00                               3  sample          0,017            s/op
+BenchmarkRunner.SequentialBigBenchmark                                                            4  sample   5257   0,010 �  0,001   s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.00                               4  sample          0,008            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.50                               4  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.90                               4  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.95                               4  sample          0,010            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.99                               4  sample          0,011            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.999                              4  sample          0,013            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p0.9999                             4  sample          0,015            s/op
+BenchmarkRunner.SequentialBigBenchmark:SequentialBigBenchmark�p1.00                               4  sample          0,015            s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           1  sample     10   7,360 �  0,123   s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.00                             1  sample          7,172            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.50                             1  sample          7,395            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.90                             1  sample          7,431            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.95                             1  sample          7,432            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.99                             1  sample          7,432            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.999                            1  sample          7,432            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.9999                           1  sample          7,432            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p1.00                             1  sample          7,432            s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           2  sample     10   7,250 �  0,074   s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.00                             2  sample          7,164            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.50                             2  sample          7,269            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.90                             2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.95                             2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.99                             2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.999                            2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.9999                           2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p1.00                             2  sample          7,306            s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           3  sample     10   7,233 �  0,119   s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.00                             3  sample          7,147            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.50                             3  sample          7,214            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.90                             3  sample          7,370            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.95                             3  sample          7,374            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.99                             3  sample          7,374            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.999                            3  sample          7,374            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.9999                           3  sample          7,374            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p1.00                             3  sample          7,374            s/op
+BenchmarkRunner.SequentialLongBenchmark                                                           4  sample     10   7,264 �  0,100   s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.00                             4  sample          7,172            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.50                             4  sample          7,256            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.90                             4  sample          7,376            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.95                             4  sample          7,382            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.99                             4  sample          7,382            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.999                            4  sample          7,382            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p0.9999                           4  sample          7,382            s/op
+BenchmarkRunner.SequentialLongBenchmark:SequentialLongBenchmark�p1.00                             4  sample          7,382            s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         1  sample      5  72,531 �  1,443   s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.00                         1  sample         72,075            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.50                         1  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.90                         1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.95                         1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.99                         1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.999                        1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.9999                       1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p1.00                         1  sample         72,880            s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         2  sample      5  71,806 �  2,099   s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.00                         2  sample         71,135            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.50                         2  sample         71,806            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.90                         2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.95                         2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.99                         2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.999                        2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.9999                       2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p1.00                         2  sample         72,612            s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         3  sample      5  71,860 �  1,396   s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.00                         3  sample         71,404            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.50                         3  sample         71,806            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.90                         3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.95                         3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.99                         3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.999                        3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.9999                       3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p1.00                         3  sample         72,343            s/op
+BenchmarkRunner.SequentialLongerBenchmark                                                         4  sample      5  73,041 �  1,387   s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.00                         4  sample         72,478            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.50                         4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.90                         4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.95                         4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.99                         4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.999                        4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p0.9999                       4  sample         73,283            s/op
+BenchmarkRunner.SequentialLongerBenchmark:SequentialLongerBenchmark�p1.00                         4  sample         73,283            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        1  sample   4922   0,010 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.00                       1  sample          0,009            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.50                       1  sample          0,010            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.90                       1  sample          0,011            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.95                       1  sample          0,011            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.99                       1  sample          0,012            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.999                      1  sample          0,013            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.9999                     1  sample          0,016            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p1.00                       1  sample          0,016            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        2  sample   6503   0,008 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.00                       2  sample          0,007            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.50                       2  sample          0,007            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.90                       2  sample          0,008            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.95                       2  sample          0,009            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.99                       2  sample          0,010            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.999                      2  sample          0,012            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.9999                     2  sample          0,015            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p1.00                       2  sample          0,015            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        3  sample   7765   0,006 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.00                       3  sample          0,005            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.50                       3  sample          0,006            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.90                       3  sample          0,007            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.95                       3  sample          0,008            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.99                       3  sample          0,010            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.999                      3  sample          0,011            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.9999                     3  sample          0,013            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p1.00                       3  sample          0,013            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                                                        4  sample   8685   0,006 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.00                       4  sample          0,004            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.50                       4  sample          0,005            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.90                       4  sample          0,008            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.95                       4  sample          0,008            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.99                       4  sample          0,009            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.999                      4  sample          0,010            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p0.9999                     4  sample          0,011            s/op
+BenchmarkRunner.multiThreadingBigBenchmark:multiThreadingBigBenchmark�p1.00                       4  sample          0,011            s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       1  sample     10   7,395 �  0,205   s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.00                     1  sample          7,206            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.50                     1  sample          7,386            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.90                     1  sample          7,602            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.95                     1  sample          7,608            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.99                     1  sample          7,608            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.999                    1  sample          7,608            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.9999                   1  sample          7,608            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p1.00                     1  sample          7,608            s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       2  sample     10   5,676 �  0,173   s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.00                     2  sample          5,545            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.50                     2  sample          5,658            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.90                     2  sample          5,918            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.95                     2  sample          5,939            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.99                     2  sample          5,939            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.999                    2  sample          5,939            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.9999                   2  sample          5,939            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p1.00                     2  sample          5,939            s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       3  sample     15   4,523 �  0,128   s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.00                     3  sample          4,362            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.50                     3  sample          4,496            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.90                     3  sample          4,751            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.95                     3  sample          4,782            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.99                     3  sample          4,782            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.999                    3  sample          4,782            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.9999                   3  sample          4,782            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p1.00                     3  sample          4,782            s/op
+BenchmarkRunner.multiThreadingLongBenchmark                                                       4  sample     15   3,843 �  0,067   s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.00                     4  sample          3,762            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.50                     4  sample          3,850            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.90                     4  sample          3,948            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.95                     4  sample          3,993            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.99                     4  sample          3,993            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.999                    4  sample          3,993            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p0.9999                   4  sample          3,993            s/op
+BenchmarkRunner.multiThreadingLongBenchmark:multiThreadingLongBenchmark�p1.00                     4  sample          3,993            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     1  sample      5  73,900 �  9,742   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.00                 1  sample         72,343            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.50                 1  sample         72,880            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.90                 1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.95                 1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.99                 1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.999                1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.9999               1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p1.00                 1  sample         78,383            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     2  sample      5  45,057 �  2,128   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.00                 2  sample         44,426            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.50                 2  sample         44,896            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.90                 2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.95                 2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.99                 2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.999                2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.9999               2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p1.00                 2  sample         45,902            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     3  sample      5  35,581 �  1,587   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.00                 3  sample         35,098            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.50                 3  sample         35,433            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.90                 3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.95                 3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.99                 3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.999                3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.9999               3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p1.00                 3  sample         36,105            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark                                                     4  sample      5  30,642 �  0,295   s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.00                 4  sample         30,535            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.50                 4  sample         30,669            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.90                 4  sample         30,736            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.95                 4  sample         30,736            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.99                 4  sample         30,736            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.999                4  sample         30,736            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p0.9999               4  sample         30,736            s/op
+BenchmarkRunner.multiThreadingLongerBenchmark:multiThreadingLongerBenchmark�p1.00                 4  sample         30,736            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        1  sample  12953   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.00                       1  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.50                       1  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.90                       1  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.95                       1  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.99                       1  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.999                      1  sample          0,005            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.9999                     1  sample          0,006            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p1.00                       1  sample          0,006            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        2  sample  12945   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.00                       2  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.50                       2  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.90                       2  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.95                       2  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.99                       2  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.999                      2  sample          0,005            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.9999                     2  sample          0,037            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p1.00                       2  sample          0,051            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        3  sample  12935   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.00                       3  sample          0,003            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.50                       3  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.90                       3  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.95                       3  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.99                       3  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.999                      3  sample          0,005            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.9999                     3  sample          0,030            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p1.00                       3  sample          0,041            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                                                        4  sample  12914   0,004 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.00                       4  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.50                       4  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.90                       4  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.95                       4  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.99                       4  sample          0,004            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.999                      4  sample          0,005            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p0.9999                     4  sample          0,031            s/op
+BenchmarkRunner.parallelStreamBigBenchmark:parallelStreamBigBenchmark�p1.00                       4  sample          0,041            s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       1  sample     23   2,500 �  0,027   s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.00                     1  sample          2,437            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.50                     1  sample          2,500            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.90                     1  sample          2,543            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.95                     1  sample          2,564            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.99                     1  sample          2,567            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.999                    1  sample          2,567            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.9999                   1  sample          2,567            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p1.00                     1  sample          2,567            s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       2  sample     22   2,616 �  0,199   s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.00                     2  sample          2,319            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.50                     2  sample          2,468            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.90                     2  sample          2,922            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.95                     2  sample          2,939            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.99                     2  sample          2,940            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.999                    2  sample          2,940            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.9999                   2  sample          2,940            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p1.00                     2  sample          2,940            s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       3  sample     21   2,733 �  0,153   s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.00                     3  sample          2,441            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.50                     3  sample          2,810            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.90                     3  sample          2,932            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.95                     3  sample          2,947            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.99                     3  sample          2,949            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.999                    3  sample          2,949            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.9999                   3  sample          2,949            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p1.00                     3  sample          2,949            s/op
+BenchmarkRunner.parallelStreamLongBenchmark                                                       4  sample     22   2,506 �  0,039   s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.00                     4  sample          2,437            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.50                     4  sample          2,494            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.90                     4  sample          2,583            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.95                     4  sample          2,624            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.99                     4  sample          2,630            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.999                    4  sample          2,630            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p0.9999                   4  sample          2,630            s/op
+BenchmarkRunner.parallelStreamLongBenchmark:parallelStreamLongBenchmark�p1.00                     4  sample          2,630            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     1  sample      5  26,407 �  5,943   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.00                 1  sample         25,065            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.50                 1  sample         26,374            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.90                 1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.95                 1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.99                 1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.999                1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.9999               1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p1.00                 1  sample         28,890            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     2  sample      5  26,313 �  7,635   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.00                 2  sample         23,991            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.50                 2  sample         26,307            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.90                 2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.95                 2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.99                 2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.999                2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.9999               2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p1.00                 2  sample         29,192            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     3  sample      5  26,099 �  6,029   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.00                 3  sample         24,361            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.50                 3  sample         26,676            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.90                 3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.95                 3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.99                 3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.999                3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.9999               3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p1.00                 3  sample         27,649            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark                                                     4  sample      5  26,300 �  7,117   s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.00                 4  sample         24,394            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.50                 4  sample         26,474            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.90                 4  sample         28,119            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.95                 4  sample         28,119            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.99                 4  sample         28,119            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.999                4  sample         28,119            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p0.9999               4  sample         28,119            s/op
+BenchmarkRunner.parallelStreamLongerBenchmark:parallelStreamLongerBenchmark�p1.00                 4  sample         28,119            s/op
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.4/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 4h 47m 7s
+2 actionable tasks: 1 executed, 1 up-to-date
+5:35:19: Execution finished ':BenchmarkRunner.main()'.

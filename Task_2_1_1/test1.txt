@@ -1,0 +1,81 @@
+# Run complete. Total time: 02:09:23
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                     (threadsCount)  Mode  Cnt   Score    Error  Units
+BenchmarkRunner.SequentialBigBenchmark                     1  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     2  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     3  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     4  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     5  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     6  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     7  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialBigBenchmark                     8  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialLongBenchmark                    1  avgt    5   7,024 �  0,121   s/op
+BenchmarkRunner.SequentialLongBenchmark                    2  avgt    5   7,017 �  0,241   s/op
+BenchmarkRunner.SequentialLongBenchmark                    3  avgt    5   7,068 �  0,310   s/op
+BenchmarkRunner.SequentialLongBenchmark                    4  avgt    5   7,152 �  0,160   s/op
+BenchmarkRunner.SequentialLongBenchmark                    5  avgt    5   7,031 �  0,203   s/op
+BenchmarkRunner.SequentialLongBenchmark                    6  avgt    5   7,050 �  0,159   s/op
+BenchmarkRunner.SequentialLongBenchmark                    7  avgt    5   7,108 �  0,333   s/op
+BenchmarkRunner.SequentialLongBenchmark                    8  avgt    5   7,075 �  0,265   s/op
+BenchmarkRunner.SequentialSmallBenchmark                   1  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   2  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   3  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   4  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   5  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   6  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   7  avgt    5  ? 10??            s/op
+BenchmarkRunner.SequentialSmallBenchmark                   8  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 1  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 2  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 3  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 4  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 5  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 6  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 7  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.multiThreadingBigBenchmark                 8  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                1  avgt    5   3,380 �  0,128   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                2  avgt    5   3,384 �  0,140   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                3  avgt    5   3,371 �  0,110   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                4  avgt    5   3,369 �  0,229   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                5  avgt    5   3,350 �  0,100   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                6  avgt    5   3,378 �  0,150   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                7  avgt    5   3,390 �  0,226   s/op
+BenchmarkRunner.multiThreadingLongBenchmark                8  avgt    5   3,336 �  0,157   s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               1  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               2  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               3  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               4  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               5  avgt    5  ? 10??            s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               6  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               7  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.multiThreadingSmallBenchmark               8  avgt    5   0,001 �  0,001   s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 1  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 2  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 3  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 4  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 5  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 6  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 7  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamBigBenchmark                 8  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamLongBenchmark                1  avgt    5   2,511 �  0,054   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                2  avgt    5   2,504 �  0,104   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                3  avgt    5   2,497 �  0,056   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                4  avgt    5   2,505 �  0,067   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                5  avgt    5   2,496 �  0,066   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                6  avgt    5   2,506 �  0,109   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                7  avgt    5   2,863 �  0,152   s/op
+BenchmarkRunner.parallelStreamLongBenchmark                8  avgt    5   2,511 �  0,082   s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               1  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               2  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               3  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               4  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               5  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               6  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               7  avgt    5  ? 10??            s/op
+BenchmarkRunner.parallelStreamSmallBenchmark               8  avgt    5  ? 10??            s/op
