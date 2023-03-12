@@ -11,6 +11,7 @@ public class Pizzeria {
     private final Queue<Order> orderQueue = new ArrayDeque<>();
     private final Storage<Order> storage;
     private final List<Chef> chefs = new ArrayList<>();
+    private final List<Deliveryman> deliverymen = new ArrayList<>();
 
     public Pizzeria(int chefsNumber, int deliverymenNumber, int storageCapacity) {
         this.chefsNumber = chefsNumber;
