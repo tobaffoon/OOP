@@ -1,11 +1,16 @@
 package ru.nsu.amazyar;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PizzeriaJsonReader {
-    private static ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper = getDefaultObjectMapper();
+    public static final String defaultFileName = "Task_2_2_1\\src\\main\\resources\\configure.json";
 
     private static ObjectMapper getDefaultObjectMapper(){
         ObjectMapper defaultObjectMapper = new ObjectMapper();
@@ -13,7 +18,21 @@ public class PizzeriaJsonReader {
         return defaultObjectMapper;
     }
 
-    public static Pizzeria readPizzeria(File file){
-        return null;
+    public static Pizzeria readPizzeria(File file) throws IOException{
+        JsonNode configuration = objectMapper.readTree(file);
+
+        //-----Int fields deserialisation-----
+        int chefsNumber = configuration.get("chefsNumber").asInt();
+        int storageCapacity = configuration.get("storageCapacity").asInt();
+
+        //-----Array of trunk Capacities deserialisation-----
+        JsonNode trunkCapacitiesJson = configuration.get("truckCapacities");
+        List<Long> truckCapacities = new ArrayList<>();
+        for(JsonNode trunkCapacity : trunkCapacitiesJson){
+            truckCapacities.add(trunkCapacity.asLong());
+        }
+
+        Pizzeria pizzeria = new Pizzeria(chefsNumber, storageCapacity, truckCapacities);
+        return pizzeria;
     }
 }
