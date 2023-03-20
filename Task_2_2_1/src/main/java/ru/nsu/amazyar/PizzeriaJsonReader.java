@@ -2,6 +2,7 @@ package ru.nsu.amazyar;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.Cleaner.Cleanable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PizzeriaJsonReader {
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();
-    public static final String defaultFileName = "Task_2_2_1\\src\\main\\resources\\configure.json";
+    public static final String defaultPizzeriaPath = "Task_2_2_1\\src\\main\\resources\\pizzeriaConfigure.json";
+    public static final String defaultClientsPath = "Task_2_2_1\\src\\main\\resources\\clientsConfigure.json";
 
     private static ObjectMapper getDefaultObjectMapper(){
         ObjectMapper defaultObjectMapper = new ObjectMapper();
 
         return defaultObjectMapper;
+    }
+
+    public static Pizzeria readPizzeria(String str) throws IOException{
+        return readPizzeria(new File(str));
     }
 
     public static Pizzeria readPizzeria(File file) throws IOException{
@@ -40,5 +46,20 @@ public class PizzeriaJsonReader {
 
         Pizzeria pizzeria = new Pizzeria(maxOrders, storageCapacity, chefsOrdersPerMinute, truckCapacities);
         return pizzeria;
+    }
+
+    public static List<Client> readClients(String str) throws IOException{
+        return readClients(new File(str));
+    }
+
+    public static List<Client> readClients(File file) throws IOException{
+        JsonNode configuration = objectMapper.readTree(file);
+        JsonNode distancesJson = configuration.get("distanceFromPizzeria");
+
+        List<Client> clients = new ArrayList<>();
+        for(JsonNode distance : distancesJson){
+            clients.add(new Client(distance.asInt()));
+        }     
+        return clients;
     }
 }
