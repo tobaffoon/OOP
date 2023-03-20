@@ -25,6 +25,15 @@ public class Pizzeria {
         }
     }
 
+    public void runPizzeria(){
+        for(Worker chef : chefs){
+            new Thread(chef);
+        }
+        for(Worker deliveryman : deliverymen){
+            new Thread(deliveryman);
+        }
+    }
+
     public int getChefsNumber(){
         return this.chefs.size();
     }
