@@ -81,3 +81,9 @@ google_style_check_intelij.xml
 
 # Seminar notes
 /Seminar*
+
+# VS code
+/.vscode
+
+# Lecture notes
+/Notes
