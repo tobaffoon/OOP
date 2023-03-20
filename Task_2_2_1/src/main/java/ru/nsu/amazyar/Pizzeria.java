@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
+import ru.nsu.amazyar.Order.OrderState;
+
 public class Pizzeria {
     private final ConcurrentDeque<Order> orderQueue;
     private final ConcurrentDeque<Order> storage;
@@ -36,14 +38,19 @@ public class Pizzeria {
     }
 
     public Order takeOrder(){
-        return orderQueue.pop();
+        Order nextOrder = orderQueue.pop();
+        nextOrder.setState(OrderState.COOKING);
+        return nextOrder;
     }
 
     public void sendPizza(Order order){
         storage.push(order);
+        order.setState(OrderState.STORED);
     }
 
     public Order takePizza(){
-        return storage.pop();
+        Order nextOrder = storage.pop();
+        nextOrder.setState(OrderState.DELIVERING);
+        return nextOrder;
     }
 }

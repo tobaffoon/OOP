@@ -5,14 +5,13 @@ import java.util.UUID;
 public class Order {
     enum OrderState{
         ORDERED,
-        COOKED,
-        WAITING_FOR_STORAGE,
+        COOKING,
         STORED,
         DELIVERING,
         DELIVERED,
     }
     private final UUID orderId;
-    private final OrderState state;
+    private OrderState state;
     private final long timeToDeliver;
 
     public Order(long timeToDeliver) {
@@ -27,6 +26,10 @@ public class Order {
 
     public OrderState getState() {
         return state;
+    }
+
+    public void setState(OrderState state){
+        this.state = state;
     }
 
     public long getTimeToDeliver() {
