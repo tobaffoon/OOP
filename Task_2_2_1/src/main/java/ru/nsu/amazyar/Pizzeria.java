@@ -30,4 +30,20 @@ public class Pizzeria {
     public int getDeliverymenNumber(){
         return this.deliverymen.size();
     }
+
+    public void order(long timeToDeliver){
+        orderQueue.push(new Order(timeToDeliver));
+    }
+
+    public Order takeOrder(){
+        return orderQueue.pop();
+    }
+
+    public void sendPizza(Order order){
+        storage.push(order);
+    }
+
+    public Order takePizza(){
+        return storage.pop();
+    }
 }
