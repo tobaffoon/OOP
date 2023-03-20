@@ -22,6 +22,7 @@ public class PizzeriaJsonReader {
         JsonNode configuration = objectMapper.readTree(file);
 
         //-----Int fields deserialisation-----
+        int maxOrders = configuration.get("maxOrders").asInt();
         int storageCapacity = configuration.get("storageCapacity").asInt();
 
         //-----Array fields deserialisation-----
@@ -37,7 +38,7 @@ public class PizzeriaJsonReader {
             chefsOrdersPerMinute.add(ordersPerMinute.asLong());
         }
 
-        Pizzeria pizzeria = new Pizzeria(storageCapacity, chefsOrdersPerMinute, truckCapacities);
+        Pizzeria pizzeria = new Pizzeria(maxOrders, storageCapacity, chefsOrdersPerMinute, truckCapacities);
         return pizzeria;
     }
 }

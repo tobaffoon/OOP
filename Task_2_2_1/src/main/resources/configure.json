@@ -1,4 +1,5 @@
 {
+    "maxOrders": 25,
     "storageCapacity": 50,
     "chefsOrderPerMinute": [
         1,
