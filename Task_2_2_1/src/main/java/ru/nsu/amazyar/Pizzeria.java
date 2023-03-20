@@ -18,8 +18,7 @@ public class Pizzeria {
         this.deliverymenNumber = deliverymenCapacities.size();
         this.storage = new Storage<>(storageCapacity);
         for(Long capacity : deliverymenCapacities){
-            Deliveryman deliveryman = new Deliveryman(this, capacity);
-            deliverymen.add(deliveryman);
+            deliverymen.add(new Deliveryman(this, capacity));
         }
     }
 }
