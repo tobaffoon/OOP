@@ -3,11 +3,11 @@ package ru.nsu.amazyar;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class Storage<T> extends ArrayDeque<T>{
+public class ConcurrentDeque<T>{
     private final Queue<T> queue;
     private final int capacity;
 
-    public Storage(int capacity) {
+    public ConcurrentDeque(int capacity) {
         this.capacity = capacity;
         this.queue = new ArrayDeque<>(capacity);
     }

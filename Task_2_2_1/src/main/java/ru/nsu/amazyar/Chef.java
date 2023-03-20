@@ -16,12 +16,17 @@ public class Chef extends Worker{
         this(pizzeria, DEFAULT_ORDER_PER_MINUTE);
     }
 
+    public Pizzeria getPizzeria() {
+        return pizzeria;
+    }
+
+    public long getOrdersPerMinute(){
+        return ordersPerMinute;
+    }
+
     @Override
     public void run() {
 
     }
 
-    public Pizzeria getPizzeria() {
-        return pizzeria;
-    }
 }
