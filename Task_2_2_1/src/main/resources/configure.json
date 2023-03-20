@@ -1,6 +1,12 @@
 {
-    "chefsNumber": 5,
     "storageCapacity": 50,
+    "chefsOrderPerMinute": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
     "truckCapacities": [
         6,
         7,

@@ -22,17 +22,22 @@ public class PizzeriaJsonReader {
         JsonNode configuration = objectMapper.readTree(file);
 
         //-----Int fields deserialisation-----
-        int chefsNumber = configuration.get("chefsNumber").asInt();
         int storageCapacity = configuration.get("storageCapacity").asInt();
 
-        //-----Array of trunk Capacities deserialisation-----
+        //-----Array fields deserialisation-----
         JsonNode trunkCapacitiesJson = configuration.get("truckCapacities");
         List<Long> truckCapacities = new ArrayList<>();
         for(JsonNode trunkCapacity : trunkCapacitiesJson){
             truckCapacities.add(trunkCapacity.asLong());
         }
 
-        Pizzeria pizzeria = new Pizzeria(chefsNumber, storageCapacity, truckCapacities);
+        JsonNode ordersPerMinuteJson = configuration.get("chefsOrderPerMinute");
+        List<Long> chefsOrdersPerMinute = new ArrayList<>();
+        for(JsonNode ordersPerMinute : ordersPerMinuteJson){
+            chefsOrdersPerMinute.add(ordersPerMinute.asLong());
+        }
+
+        Pizzeria pizzeria = new Pizzeria(storageCapacity, chefsOrdersPerMinute, truckCapacities);
         return pizzeria;
     }
 }
