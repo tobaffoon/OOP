@@ -26,7 +26,17 @@ public class Chef extends Worker{
 
     @Override
     public void run() {
+        while(true){
+            Order nextOrder = pizzeria.takeOrder();
 
+            try {
+                Thread.sleep(60 / ordersPerMinute);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            pizzeria.sendPizza(nextOrder);
+        }
     }
 
 }
