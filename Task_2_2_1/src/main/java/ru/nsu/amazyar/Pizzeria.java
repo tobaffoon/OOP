@@ -53,4 +53,8 @@ public class Pizzeria {
         nextOrder.setState(OrderState.DELIVERING);
         return nextOrder;
     }
+
+    public int readyPizzas(){
+        return storage.size();
+    }
 }

@@ -43,7 +43,7 @@ public class ConcurrentDeque<T>{
         }
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int size() {
+        return queue.size();
     }
 }
