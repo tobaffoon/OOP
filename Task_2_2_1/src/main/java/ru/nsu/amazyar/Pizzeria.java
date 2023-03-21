@@ -1,9 +1,7 @@
 package ru.nsu.amazyar;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 import ru.nsu.amazyar.Order.OrderState;
 
@@ -43,23 +41,28 @@ public class Pizzeria {
     }
 
     public void order(long timeToDeliver){
-        orderQueue.push(new Order(timeToDeliver));
+        Order nextOrder = new Order(timeToDeliver);
+        orderQueue.push(nextOrder);
+        System.out.println(nextOrder);
     }
 
     public Order takeOrder(){
         Order nextOrder = orderQueue.pop();
         nextOrder.setState(OrderState.COOKING);
+        System.out.println(nextOrder);
         return nextOrder;
     }
 
     public void sendPizza(Order order){
         storage.push(order);
         order.setState(OrderState.STORED);
+        System.out.println(order);
     }
 
     public Order takePizza(){
         Order nextOrder = storage.pop();
         nextOrder.setState(OrderState.DELIVERING);
+        System.out.println(nextOrder);
         return nextOrder;
     }
 

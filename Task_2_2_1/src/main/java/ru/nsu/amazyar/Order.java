@@ -35,4 +35,9 @@ public class Order {
     public long getTimeToDeliver() {
         return timeToDeliver;
     }
+
+    @Override
+    public String toString(){
+        return "[" + orderId.toString() + "]" + state.toString();
+    }
 }
