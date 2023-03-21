@@ -84,6 +84,7 @@ google_style_check_intelij.xml
 
 # VS code
 /.vscode
+*/.vscode
 
 # Lecture notes
 /Notes
