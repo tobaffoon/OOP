@@ -3,9 +3,14 @@ package ru.nsu.amazyar;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import ru.nsu.amazyar.Order.OrderState;
 
 public class Pizzeria {
+    private static final Logger logger = LoggerFactory.getLogger(Pizzeria.class);
+
     private final ConcurrentDeque<Order> orderQueue;
     private final ConcurrentDeque<Order> storage;
     private final List<Worker> chefs = new ArrayList<>();
@@ -43,26 +48,26 @@ public class Pizzeria {
     public void order(long timeToDeliver){
         Order nextOrder = new Order(timeToDeliver);
         orderQueue.push(nextOrder);
-        System.out.println(nextOrder);
+        logger.info(nextOrder.toString());
     }
 
     public Order takeOrder(){
         Order nextOrder = orderQueue.pop();
         nextOrder.setState(OrderState.COOKING);
-        System.out.println(nextOrder);
+        logger.info(nextOrder.toString());
         return nextOrder;
     }
 
     public void sendPizza(Order order){
         storage.push(order);
         order.setState(OrderState.STORED);
-        System.out.println(order);
+        logger.info(order.toString());
     }
 
     public Order takePizza(){
         Order nextOrder = storage.pop();
         nextOrder.setState(OrderState.DELIVERING);
-        System.out.println(nextOrder);
+        logger.info(nextOrder.toString());
         return nextOrder;
     }
 
