@@ -29,12 +29,8 @@ public class Pizzeria {
     }
 
     public void runPizzeria(){
-        for(Worker chef : chefs){
-            new Thread(chef);
-        }
-        for(Worker deliveryman : deliverymen){
-            new Thread(deliveryman);
-        }
+        PizzeriaRunner.createAndRunThreads(chefs, "Chef");
+        PizzeriaRunner.createAndRunThreads(deliverymen, "Deliveryman");
     }
 
     public int getChefsNumber(){
@@ -48,26 +44,30 @@ public class Pizzeria {
     public void order(long timeToDeliver){
         Order nextOrder = new Order(timeToDeliver);
         orderQueue.push(nextOrder);
-        logger.info(nextOrder.toString());
+//        logger.info(nextOrder.toString());
+        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
     }
 
     public Order takeOrder(){
         Order nextOrder = orderQueue.pop();
         nextOrder.setState(OrderState.COOKING);
-        logger.info(nextOrder.toString());
+//        logger.info(nextOrder.toString());
+        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
         return nextOrder;
     }
 
     public void sendPizza(Order order){
         storage.push(order);
         order.setState(OrderState.STORED);
-        logger.info(order.toString());
+//        logger.info(order.toString());
+        System.out.println("ORDER [" + order.getOrderId() + "] is " + order.getState());
     }
 
     public Order takePizza(){
         Order nextOrder = storage.pop();
         nextOrder.setState(OrderState.DELIVERING);
-        logger.info(nextOrder.toString());
+//        logger.info(nextOrder.toString());
+        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
         return nextOrder;
     }
 
