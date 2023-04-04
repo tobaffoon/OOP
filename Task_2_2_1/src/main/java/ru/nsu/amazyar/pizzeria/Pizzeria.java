@@ -160,7 +160,7 @@ public class Pizzeria {
         return storage.size();
     }
 
-    public String getReserveLogs(){
+    public String getReserveLogs() {
         return reserveLogger.toString();
     }
 }
