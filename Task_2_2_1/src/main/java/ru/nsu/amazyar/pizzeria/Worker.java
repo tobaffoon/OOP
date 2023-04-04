@@ -1,17 +1,27 @@
 package ru.nsu.amazyar.pizzeria;
 
-public class Worker implements Runnable{
+/**
+ * Pizzeria worker.
+ */
+public abstract class Worker implements Runnable {
+
     private final Pizzeria pizzeria;
 
+    /**
+     * Constructor with assigned pizzeria.
+     */
     public Worker(Pizzeria pizzeria) {
         this.pizzeria = pizzeria;
     }
 
-    @Override
-    public void run() {
+    /**
+     * Main routine.
+     */
+    public abstract void run();
 
-    }
-
+    /**
+     * Pizzeria getter
+     */
     public Pizzeria getPizzeria() {
         return pizzeria;
     }

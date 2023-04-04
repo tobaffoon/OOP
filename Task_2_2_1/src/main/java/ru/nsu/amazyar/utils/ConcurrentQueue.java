@@ -3,15 +3,25 @@ package ru.nsu.amazyar.utils;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class ConcurrentDeque<T>{
+/**
+ * Self-made concurrent queue.
+ */
+public class ConcurrentQueue<T>{
     private final Queue<T> queue;
     private final int capacity;
 
-    public ConcurrentDeque(int capacity) {
+    /**
+     * Constructor.
+     * @param capacity max number of elements
+     */
+    public ConcurrentQueue(int capacity) {
         this.capacity = capacity;
         this.queue = new ArrayDeque<>(capacity);
     }
 
+    /**
+     * Synchronous pop.
+     */
     public T pop(){
         synchronized (queue){
             while(queue.isEmpty()){
@@ -28,6 +38,9 @@ public class ConcurrentDeque<T>{
         }
     }
 
+    /**
+     * Synchronous push.
+     */
     public void push(T newOrder) {
         synchronized (queue) {
             while(queue.size() == capacity){
@@ -43,6 +56,9 @@ public class ConcurrentDeque<T>{
         }
     }
 
+    /**
+     * Get number of elements in queue.
+     */
     public int size() {
         return queue.size();
     }
