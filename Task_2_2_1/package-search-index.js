@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.nsu.amazyar"},{"l":"ru.nsu.amazyar.pizzeria"},{"l":"ru.nsu.amazyar.utils"}]
