@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.amazyar.utils.PizzeriaJsonReader;
 import ru.nsu.amazyar.utils.ThreadRunner;
 
+/**
+ * Test class for pizzeria and utils packages.
+ */
 public class PizzeriaTest {
 
     private static final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -42,7 +45,6 @@ public class PizzeriaTest {
         ExecutorService pizzeriaThreads = Executors.newFixedThreadPool(4);
         Pizzeria pizzeria =
             PizzeriaJsonReader.readPizzeria("src/test/resources/pizzeriaConfigure.json");
-        List<Thread> staff_threads = pizzeria.runPizzeriaStaff();
 
         List<Client> clients =
             PizzeriaJsonReader.readClients("src/test/resources/clientsConfigure.json");
@@ -51,13 +53,15 @@ public class PizzeriaTest {
         }
         clients.get(0).setConsistentSleep(2000);
         clients.get(1).setConsistentSleep(4000);
-        List<Thread> clients_threads = ThreadRunner.createAndRunThreads(clients, "Client");
 
-        for (Thread staff_thread : staff_threads){
-            pizzeriaThreads.submit(staff_thread);
+        List<Thread> staffThreads = pizzeria.runPizzeriaStaff();
+        for (Thread staffThread : staffThreads) {
+            pizzeriaThreads.submit(staffThread);
         }
-        for (Thread client_thread : clients_threads){
-            pizzeriaThreads.submit(client_thread);
+
+        List<Thread> clientsThreads = ThreadRunner.createAndRunThreads(clients, "Client");
+        for (Thread clientThread : clientsThreads) {
+            pizzeriaThreads.submit(clientThread);
         }
 
         try {

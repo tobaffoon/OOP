@@ -75,11 +75,11 @@ public class Deliveryman extends Worker {
      */
     public void deliver(List<Order> trunk) {
         try {
-            Order furthest_order =
+            Order furthestOrder =
                 trunk.stream().max(Comparator.comparingLong(Order::getTimeToDeliver)).orElseThrow();
-            Thread.sleep(furthest_order.getTimeToDeliver());
+            Thread.sleep(furthestOrder.getTimeToDeliver());
 
-            for(Order order : trunk) {
+            for (Order order : trunk) {
                 pizzeria.finishOrder(order);
             }
         } catch (InterruptedException e) {

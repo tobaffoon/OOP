@@ -20,7 +20,7 @@ public abstract class Worker implements Runnable {
     public abstract void run();
 
     /**
-     * Pizzeria getter
+     * Pizzeria getter.
      */
     public Pizzeria getPizzeria() {
         return pizzeria;

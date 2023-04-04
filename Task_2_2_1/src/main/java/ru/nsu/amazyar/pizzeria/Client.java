@@ -77,7 +77,7 @@ public class Client implements Runnable {
     }
 
     /**
-     * Set mode in which client sleeps for constant time before making an order
+     * Set mode in which client sleeps for constant time before making an order.
      *
      * @param sleepTime time for client to sleep between orders
      */

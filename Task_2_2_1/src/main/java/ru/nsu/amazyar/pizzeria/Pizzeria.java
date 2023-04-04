@@ -45,10 +45,10 @@ public class Pizzeria {
      * Create and run chefs and delivery threads.
      */
     public List<Thread> runPizzeriaStaff() {
-        List<Thread> chefs_list = ThreadRunner.createAndRunThreads(chefs, "Chef");
-        List<Thread> delivery_list = ThreadRunner.createAndRunThreads(deliverymen, "Deliveryman");
-        chefs_list.addAll(delivery_list);
-        return chefs_list;
+        List<Thread> chefsList = ThreadRunner.createAndRunThreads(chefs, "Chef");
+        List<Thread> deliveryList = ThreadRunner.createAndRunThreads(deliverymen, "Deliveryman");
+        chefsList.addAll(deliveryList);
+        return chefsList;
     }
 
     /**

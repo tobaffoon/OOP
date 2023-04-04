@@ -18,9 +18,9 @@ public class ThreadRunner {
         String nameTemplate) {
         List<Thread> threadList = new ArrayList<>();
         for (int i = 0; i < runnables.size(); i++) {
-            Thread new_thread = new Thread(runnables.get(i), nameTemplate + "-" + i);
-            new_thread.start();
-            threadList.add(new_thread);
+            Thread newThread = new Thread(runnables.get(i), nameTemplate + "-" + i);
+            newThread.start();
+            threadList.add(newThread);
         }
         return threadList;
     }

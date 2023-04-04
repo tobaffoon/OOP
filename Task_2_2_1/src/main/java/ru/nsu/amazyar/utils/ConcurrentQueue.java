@@ -6,12 +6,14 @@ import java.util.Queue;
 /**
  * Self-made concurrent queue.
  */
-public class ConcurrentQueue<T>{
+public class ConcurrentQueue<T> {
+
     private final Queue<T> queue;
     private final int capacity;
 
     /**
      * Constructor.
+     *
      * @param capacity max number of elements
      */
     public ConcurrentQueue(int capacity) {
@@ -22,9 +24,9 @@ public class ConcurrentQueue<T>{
     /**
      * Synchronous pop.
      */
-    public T pop(){
-        synchronized (queue){
-            while(queue.isEmpty()){
+    public T pop() {
+        synchronized (queue) {
+            while (queue.isEmpty()) {
                 try {
                     queue.wait();
                 } catch (InterruptedException e) {
@@ -43,7 +45,7 @@ public class ConcurrentQueue<T>{
      */
     public void push(T newOrder) {
         synchronized (queue) {
-            while(queue.size() == capacity){
+            while (queue.size() == capacity) {
                 try {
                     queue.wait();
                 } catch (InterruptedException e) {
