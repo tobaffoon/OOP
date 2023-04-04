@@ -11,7 +11,7 @@ public class Main{
     public static void main(String[] args) {
         try {
             Pizzeria pizzeria = PizzeriaJsonReader.readPizzeria(PizzeriaJsonReader.defaultPizzeriaPath);
-            pizzeria.runPizzeria();
+            pizzeria.runPizzeriaStaff();
 
             List<Client> clients = PizzeriaJsonReader.readClients(PizzeriaJsonReader.defaultClientsPath);
             for(Client client : clients){

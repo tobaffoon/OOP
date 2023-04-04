@@ -30,7 +30,7 @@ public class Pizzeria {
         }
     }
 
-    public void runPizzeria(){
+    public void runPizzeriaStaff(){
         ThreadRunner.createAndRunThreads(chefs, "Chef");
         ThreadRunner.createAndRunThreads(deliverymen, "Deliveryman");
     }
@@ -46,36 +46,46 @@ public class Pizzeria {
     public void makeOrder(long timeToDeliver){
         Order nextOrder = new Order(timeToDeliver);
         orderQueue.push(nextOrder);
+        synchronized (nextOrder) {
+            System.out.println(nextOrder);
+        }
 //        logger.info(nextOrder.toString());
-        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
     }
 
     public Order takeOrder(){
         Order nextOrder = orderQueue.pop();
-        nextOrder.setState(OrderState.COOKING);
+        synchronized (nextOrder) {
+            nextOrder.setState(OrderState.COOKING);
+            System.out.println(nextOrder);
+        }
 //        logger.info(nextOrder.toString());
-        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
         return nextOrder;
     }
 
     public void storePizza(Order order){
         storage.push(order);
-        order.setState(OrderState.STORED);
+        synchronized (order) {
+            order.setState(OrderState.STORED);
+            System.out.println(order);
+        }
 //        logger.info(order.toString());
-        System.out.println("ORDER [" + order.getOrderId() + "] is " + order.getState());
     }
 
     public Order deliverPizza(){
         Order nextOrder = storage.pop();
-        nextOrder.setState(OrderState.DELIVERING);
+        synchronized (nextOrder) {
+            nextOrder.setState(OrderState.DELIVERING);
+            System.out.println(nextOrder);
+        }
 //        logger.info(nextOrder.toString());
-        System.out.println("ORDER [" + nextOrder.getOrderId() + "] is " + nextOrder.getState());
         return nextOrder;
     }
 
     public void finishOrder(Order order){
-        order.setState(OrderState.DELIVERED);
-        System.out.println("ORDER [" + order.getOrderId() + "] is " + order.getState());
+        synchronized (order) {
+            order.setState(OrderState.DELIVERED);
+            System.out.println(order);
+        }
     }
 
     public int readyPizzas(){
