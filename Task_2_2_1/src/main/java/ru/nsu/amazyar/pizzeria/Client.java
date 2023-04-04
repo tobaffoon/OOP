@@ -45,7 +45,8 @@ public class Client implements Runnable {
             Thread.currentThread().getId()); // randomness will depend on client's thread ID
         while (true) {
             try {
-                Thread.sleep(randomTimeGenerator.nextInt(MAX_SLEEP_TIME - MIN_SLEEP_TIME) + 5000);
+                Thread.sleep(
+                    randomTimeGenerator.nextInt(MAX_SLEEP_TIME - MIN_SLEEP_TIME) + MIN_SLEEP_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
