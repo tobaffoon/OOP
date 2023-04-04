@@ -51,6 +51,7 @@ public class Deliveryman extends Worker{
     public void deliver(Order order){
         try {
             Thread.sleep(order.getTimeToDeliver());
+            pizzeria.finishOrder(order);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

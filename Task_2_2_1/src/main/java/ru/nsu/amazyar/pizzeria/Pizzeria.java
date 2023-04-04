@@ -73,6 +73,11 @@ public class Pizzeria {
         return nextOrder;
     }
 
+    public void finishOrder(Order order){
+        order.setState(OrderState.DELIVERED);
+        System.out.println("ORDER [" + order.getOrderId() + "] is " + order.getState());
+    }
+
     public int readyPizzas(){
         return storage.size();
     }
