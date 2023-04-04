@@ -2,7 +2,6 @@ package ru.nsu.amazyar;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.Cleaner.Cleanable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PizzeriaJsonReader {
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();
-    public static final String defaultPizzeriaPath = "Task_2_2_1\\src\\main\\resources\\pizzeriaConfigure.json";
-    public static final String defaultClientsPath = "Task_2_2_1\\src\\main\\resources\\clientsConfigure.json";
+    public static final String defaultPizzeriaPath = "src/main/resources/pizzeriaConfigure.json";
+    public static final String defaultClientsPath = "src/main/resources/clientsConfigure.json";
 
     private static ObjectMapper getDefaultObjectMapper(){
         ObjectMapper defaultObjectMapper = new ObjectMapper();
