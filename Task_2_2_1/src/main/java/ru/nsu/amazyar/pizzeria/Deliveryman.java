@@ -3,7 +3,6 @@ package ru.nsu.amazyar.pizzeria;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import ru.nsu.amazyar.pizzeria.Order.OrderState;
 
 /**
  * Delivers orders from pizzeria.

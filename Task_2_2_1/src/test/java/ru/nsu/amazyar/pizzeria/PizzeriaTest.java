@@ -1,14 +1,10 @@
 package ru.nsu.amazyar.pizzeria;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.nsu.amazyar.utils.PizzeriaJsonReader;
 import ru.nsu.amazyar.utils.ThreadRunner;
@@ -17,26 +13,6 @@ import ru.nsu.amazyar.utils.ThreadRunner;
  * Test class for pizzeria and utils packages.
  */
 public class PizzeriaTest {
-
-    private static final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private static final PrintStream originalOut = System.out;
-
-    /**
-     * Changes standard output stream before each method.
-     */
-    @BeforeAll
-    public static void setUpOut() {
-        System.setOut(new PrintStream(out));
-    }
-
-    /**
-     * Restores standard output system after each method.
-     */
-    @AfterAll
-    public static void restoreOut() {
-        System.setOut(originalOut);
-    }
-
     /**
      * Tests if the whole system by Scanning logs.
      */
@@ -71,33 +47,32 @@ public class PizzeriaTest {
         }
 
         pizzeriaThreads.shutdown();
-        String resultLogs = out.toString();
+        String cookedLogs = pizzeria.getReserveLogs();
 
         // These are carefully calculated minimal volumes of logs that can be produced
-        Assertions.assertTrue(resultLogs.contains("INFO - [0] ORDERED"));
         for (int i = 0; i <= 8; i++) {
-            String ordered = "INFO - [" + i + "] ORDERED";
-            Assertions.assertTrue(resultLogs.contains(ordered));
+            String ordered = "[" + i + "] ORDERED";
+            Assertions.assertTrue(cookedLogs.contains(ordered));
         }
 
         for (int i = 0; i <= 4; i++) {
-            String cooking = "INFO - [" + i + "] COOKING";
-            Assertions.assertTrue(resultLogs.contains(cooking));
+            String cooking = "[" + i + "] COOKING";
+            Assertions.assertTrue(cookedLogs.contains(cooking));
         }
 
         for (int i = 0; i <= 3; i++) {
-            String stored = "INFO - [" + i + "] STORED";
-            Assertions.assertTrue(resultLogs.contains(stored));
+            String stored = "[" + i + "] STORED";
+            Assertions.assertTrue(cookedLogs.contains(stored));
         }
 
         for (int i = 0; i <= 3; i++) {
-            String delivering = "INFO - [" + i + "] DELIVERING";
-            Assertions.assertTrue(resultLogs.contains(delivering));
+            String delivering = "[" + i + "] DELIVERING";
+            Assertions.assertTrue(cookedLogs.contains(delivering));
         }
 
         for (int i = 0; i <= 1; i++) {
-            String delivered = "INFO - [" + i + "] DELIVERED";
-            Assertions.assertTrue(resultLogs.contains(delivered));
+            String delivered = "[" + i + "] DELIVERED";
+            Assertions.assertTrue(cookedLogs.contains(delivered));
         }
     }
 }

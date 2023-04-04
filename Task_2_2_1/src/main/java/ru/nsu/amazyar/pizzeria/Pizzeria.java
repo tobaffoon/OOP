@@ -1,5 +1,7 @@
 package ru.nsu.amazyar.pizzeria;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import ru.nsu.amazyar.utils.ThreadRunner;
 public class Pizzeria {
 
     private static final Logger logger = LoggerFactory.getLogger(Pizzeria.class);
+    private final ByteArrayOutputStream reserveLogger = new ByteArrayOutputStream();
 
     private final ConcurrentQueue<Order> orderQueue;
     private final ConcurrentQueue<Order> storage;
@@ -75,6 +78,11 @@ public class Pizzeria {
         orderQueue.push(nextOrder);
         synchronized (nextOrder) {
             logger.info(nextOrder.toString());
+            try {
+                reserveLogger.write(nextOrder.toString().getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -86,6 +94,11 @@ public class Pizzeria {
         synchronized (nextOrder) {
             nextOrder.setState(OrderState.COOKING);
             logger.info(nextOrder.toString());
+            try {
+                reserveLogger.write(nextOrder.toString().getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return nextOrder;
     }
@@ -100,6 +113,11 @@ public class Pizzeria {
         synchronized (order) {
             order.setState(OrderState.STORED);
             logger.info(order.toString());
+            try {
+                reserveLogger.write(order.toString().getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -111,6 +129,11 @@ public class Pizzeria {
         synchronized (nextOrder) {
             nextOrder.setState(OrderState.DELIVERING);
             logger.info(nextOrder.toString());
+            try {
+                reserveLogger.write(nextOrder.toString().getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return nextOrder;
     }
@@ -122,6 +145,11 @@ public class Pizzeria {
         synchronized (order) {
             order.setState(OrderState.DELIVERED);
             logger.info(order.toString());
+            try {
+                reserveLogger.write(order.toString().getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -130,5 +158,9 @@ public class Pizzeria {
      */
     public int readyPizzas() {
         return storage.size();
+    }
+
+    public String getReserveLogs(){
+        return reserveLogger.toString();
     }
 }
