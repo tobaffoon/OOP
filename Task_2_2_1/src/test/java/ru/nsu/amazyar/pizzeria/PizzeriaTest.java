@@ -74,6 +74,7 @@ public class PizzeriaTest {
         String resultLogs = out.toString();
 
         // These are carefully calculated minimal volumes of logs that can be produced
+        Assertions.assertTrue(resultLogs.contains("INFO - [0] ORDERED"));
         for (int i = 0; i <= 8; i++) {
             String ordered = "INFO - [" + i + "] ORDERED";
             Assertions.assertTrue(resultLogs.contains(ordered));
