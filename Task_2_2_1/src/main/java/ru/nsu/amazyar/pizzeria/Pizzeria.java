@@ -2,13 +2,11 @@ package ru.nsu.amazyar.pizzeria;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-
-import ru.nsu.amazyar.utils.ThreadRunner;
+import org.slf4j.LoggerFactory;
 import ru.nsu.amazyar.pizzeria.Order.OrderState;
 import ru.nsu.amazyar.utils.ConcurrentDeque;
+import ru.nsu.amazyar.utils.ThreadRunner;
 
 public class Pizzeria {
     private static final Logger logger = LoggerFactory.getLogger(Pizzeria.class);

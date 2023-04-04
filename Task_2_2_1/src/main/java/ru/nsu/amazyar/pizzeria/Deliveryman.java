@@ -2,7 +2,6 @@ package ru.nsu.amazyar.pizzeria;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import ru.nsu.amazyar.pizzeria.Order.OrderState;
 
 public class Deliveryman extends Worker{
