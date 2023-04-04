@@ -35,7 +35,7 @@ public class Chef extends Worker{
                 e.printStackTrace();
             }
 
-            pizzeria.sendPizza(nextOrder);
+            pizzeria.storePizza(nextOrder);
         }
     }
 

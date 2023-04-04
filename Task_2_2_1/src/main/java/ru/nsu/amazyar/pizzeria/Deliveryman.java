@@ -34,11 +34,11 @@ public class Deliveryman extends Worker{
         List<Order> trunk = new ArrayList<>();
         while(true){
             if(pizzeria.readyPizzas() == 0){
-                trunk.add(pizzeria.takePizza());
+                trunk.add(pizzeria.deliverPizza());
             }
             else{
                 while(pizzeria.readyPizzas() != 0 && trunk.size() < trunkCapacity){
-                    trunk.add(pizzeria.takePizza());
+                    trunk.add(pizzeria.deliverPizza());
                 }
             }
 

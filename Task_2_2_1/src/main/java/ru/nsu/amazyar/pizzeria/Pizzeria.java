@@ -43,7 +43,7 @@ public class Pizzeria {
         return this.deliverymen.size();
     }
 
-    public void order(long timeToDeliver){
+    public void makeOrder(long timeToDeliver){
         Order nextOrder = new Order(timeToDeliver);
         orderQueue.push(nextOrder);
 //        logger.info(nextOrder.toString());
@@ -58,14 +58,14 @@ public class Pizzeria {
         return nextOrder;
     }
 
-    public void sendPizza(Order order){
+    public void storePizza(Order order){
         storage.push(order);
         order.setState(OrderState.STORED);
 //        logger.info(order.toString());
         System.out.println("ORDER [" + order.getOrderId() + "] is " + order.getState());
     }
 
-    public Order takePizza(){
+    public Order deliverPizza(){
         Order nextOrder = storage.pop();
         nextOrder.setState(OrderState.DELIVERING);
 //        logger.info(nextOrder.toString());

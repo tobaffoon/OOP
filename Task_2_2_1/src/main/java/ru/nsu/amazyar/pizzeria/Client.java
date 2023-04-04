@@ -1,7 +1,6 @@
 package ru.nsu.amazyar.pizzeria;
 
 import java.util.Random;
-import ru.nsu.amazyar.pizzeria.Pizzeria;
 
 public class Client implements Runnable{
     private static final int MAX_SLEEP_TIME = 30000;
@@ -32,7 +31,7 @@ public class Client implements Runnable{
                 e.printStackTrace();
             }
             
-            pizzeria.order(timeToDeliver);
+            pizzeria.makeOrder(timeToDeliver);
         }
     }
 
