@@ -47,18 +47,16 @@ public class Pizzeria {
         Order nextOrder = new Order(timeToDeliver);
         orderQueue.push(nextOrder);
         synchronized (nextOrder) {
-            System.out.println(nextOrder);
+            logger.info(nextOrder.toString());
         }
-//        logger.info(nextOrder.toString());
     }
 
     public Order takeOrder(){
         Order nextOrder = orderQueue.pop();
         synchronized (nextOrder) {
             nextOrder.setState(OrderState.COOKING);
-            System.out.println(nextOrder);
+            logger.info(nextOrder.toString());
         }
-//        logger.info(nextOrder.toString());
         return nextOrder;
     }
 
@@ -66,25 +64,23 @@ public class Pizzeria {
         storage.push(order);
         synchronized (order) {
             order.setState(OrderState.STORED);
-            System.out.println(order);
+            logger.info(order.toString());
         }
-//        logger.info(order.toString());
     }
 
     public Order deliverPizza(){
         Order nextOrder = storage.pop();
         synchronized (nextOrder) {
             nextOrder.setState(OrderState.DELIVERING);
-            System.out.println(nextOrder);
+            logger.info(nextOrder.toString());
         }
-//        logger.info(nextOrder.toString());
         return nextOrder;
     }
 
     public void finishOrder(Order order){
         synchronized (order) {
             order.setState(OrderState.DELIVERED);
-            System.out.println(order);
+            logger.info(order.toString());
         }
     }
 
