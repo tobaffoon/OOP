@@ -30,7 +30,7 @@ public class Chef extends Worker{
             Order nextOrder = pizzeria.takeOrder();
 
             try {
-                Thread.sleep(60 / ordersPerMinute);
+                Thread.sleep(60000 / ordersPerMinute);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

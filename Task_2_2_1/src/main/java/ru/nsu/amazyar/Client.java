@@ -3,7 +3,7 @@ package ru.nsu.amazyar;
 import java.util.Random;
 
 public class Client implements Runnable{
-    private static final int MAX_SLEEP_TIME = 30;
+    private static final int MAX_SLEEP_TIME = 30000;
 
     private Pizzeria pizzeria = null;
     private final int timeToDeliver;
@@ -14,7 +14,7 @@ public class Client implements Runnable{
     }
 
     public Client(int timeToDeliver) {
-        this.timeToDeliver = timeToDeliver;
+        this.timeToDeliver = timeToDeliver * 1000;
     }
 
     @Override
