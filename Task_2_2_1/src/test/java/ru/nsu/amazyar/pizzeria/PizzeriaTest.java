@@ -65,7 +65,7 @@ public class PizzeriaTest {
         }
 
         try {
-            Thread.sleep(20000);
+            Thread.sleep(11000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
