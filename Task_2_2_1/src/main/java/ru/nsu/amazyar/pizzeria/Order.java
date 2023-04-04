@@ -1,7 +1,5 @@
 package ru.nsu.amazyar.pizzeria;
 
-import java.util.UUID;
-
 /**
  * Order for Pizzeria.
  */
@@ -14,7 +12,9 @@ public class Order {
         ORDERED, COOKING, STORED, DELIVERING, DELIVERED,
     }
 
-    private final UUID orderId;
+    private static long ordersCounter = 0;
+
+    private final long orderId;
     private OrderState state;
     private final long timeToDeliver;
 
@@ -25,14 +25,14 @@ public class Order {
      */
     public Order(long timeToDeliver) {
         this.timeToDeliver = timeToDeliver;
-        this.orderId = UUID.randomUUID();
+        this.orderId = ordersCounter++;
         this.state = OrderState.ORDERED;
     }
 
     /**
      * Get order id.
      */
-    public UUID getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
@@ -62,6 +62,6 @@ public class Order {
      */
     @Override
     public String toString() {
-        return "[" + orderId.toString() + "] " + state.toString();
+        return "[" + orderId + "] " + state.toString();
     }
 }
