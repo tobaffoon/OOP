@@ -1,4 +1,4 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 public class Worker implements Runnable{
     private final Pizzeria pizzeria;

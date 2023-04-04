@@ -1,4 +1,4 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,9 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
-import ru.nsu.amazyar.Order.OrderState;
+import ru.nsu.amazyar.utils.ThreadRunner;
+import ru.nsu.amazyar.pizzeria.Order.OrderState;
+import ru.nsu.amazyar.utils.ConcurrentDeque;
 
 public class Pizzeria {
     private static final Logger logger = LoggerFactory.getLogger(Pizzeria.class);
@@ -29,8 +31,8 @@ public class Pizzeria {
     }
 
     public void runPizzeria(){
-        PizzeriaRunner.createAndRunThreads(chefs, "Chef");
-        PizzeriaRunner.createAndRunThreads(deliverymen, "Deliveryman");
+        ThreadRunner.createAndRunThreads(chefs, "Chef");
+        ThreadRunner.createAndRunThreads(deliverymen, "Deliveryman");
     }
 
     public int getChefsNumber(){

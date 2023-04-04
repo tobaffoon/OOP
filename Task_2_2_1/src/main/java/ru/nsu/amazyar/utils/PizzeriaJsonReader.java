@@ -1,4 +1,4 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.nsu.amazyar.pizzeria.Client;
+import ru.nsu.amazyar.pizzeria.Pizzeria;
 
 public class PizzeriaJsonReader {
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();

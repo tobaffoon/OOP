@@ -1,6 +1,7 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 import java.util.Random;
+import ru.nsu.amazyar.pizzeria.Pizzeria;
 
 public class Client implements Runnable{
     private static final int MAX_SLEEP_TIME = 30000;

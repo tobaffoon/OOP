@@ -1,10 +1,9 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 
-import ru.nsu.amazyar.Order.OrderState;
+import ru.nsu.amazyar.pizzeria.Order.OrderState;
 
 public class Deliveryman extends Worker{
     private static final long DEFAULT_TRUNK_CAPACITY = 10;

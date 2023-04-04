@@ -1,4 +1,4 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 import java.util.UUID;
 

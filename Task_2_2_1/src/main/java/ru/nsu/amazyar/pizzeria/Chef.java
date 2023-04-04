@@ -1,4 +1,4 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.pizzeria;
 
 public class Chef extends Worker{
     private static final long DEFAULT_ORDER_PER_MINUTE = 3;
