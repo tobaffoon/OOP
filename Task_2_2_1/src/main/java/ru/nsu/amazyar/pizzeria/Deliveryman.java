@@ -63,25 +63,27 @@ public class Deliveryman extends Worker {
                 }
             }
 
-            Order furthest_order =
-                trunk.stream().max(Comparator.comparingLong(Order::getTimeToDeliver)).orElseThrow();
-
-            deliver(furthest_order);
+            deliver(trunk);
         }
     }
 
     /**
-     * Deliver order. Gets busy for the time specified by the order, then reports about completing
-     * it.
+     * Deliver order.
+     * Gets busy for the time specified by the order which need
+     * to be delivered the furthest from pizzeria,
+     * then reports about completing all the orders, whose pizzas were in his trunk.
      */
-    public void deliver(Order order) {
+    public void deliver(List<Order> trunk) {
         try {
-            Thread.sleep(order.getTimeToDeliver());
-            pizzeria.finishOrder(order);
+            Order furthest_order =
+                trunk.stream().max(Comparator.comparingLong(Order::getTimeToDeliver)).orElseThrow();
+            Thread.sleep(furthest_order.getTimeToDeliver());
+
+            for(Order order : trunk) {
+                pizzeria.finishOrder(order);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        order.setState(OrderState.DELIVERED);
     }
 }
