@@ -1,0 +1,10 @@
+{
+    "maxOrders": 5,
+    "storageCapacity": 4,
+    "chefsOrderPerMinute": [
+        30
+    ],
+    "truckCapacities": [
+        2
+    ]
+}
