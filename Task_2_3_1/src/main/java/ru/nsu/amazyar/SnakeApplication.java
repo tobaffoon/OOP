@@ -12,9 +12,9 @@ public class SnakeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader =
-            new FXMLLoader(SnakeApplication.class.getResource("hello-view.fxml"));
+            new FXMLLoader(SnakeApplication.class.getResource("main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Snake eyes");
         stage.setScene(scene);
         stage.show();
     }
