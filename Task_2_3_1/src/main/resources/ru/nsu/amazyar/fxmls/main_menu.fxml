@@ -16,14 +16,14 @@
       </Label>
       <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="440.0" spacing="2.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" styleClass="MainMenuButton" text="PLAY">
+            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" text="PLAY">
                <font>
                   <Font name="Elephant" size="26.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" styleClass="MainMenuButton" text="Button" />
-            <Button mnemonicParsing="false" styleClass="MainMenuButton" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" styleClass="MainMenuButton" text="QUIT">
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" text="QUIT">
                <font>
                   <Font name="Elephant" size="25.0" />
                </font>
