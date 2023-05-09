@@ -1,10 +1,6 @@
 package ru.nsu.amazyar;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,8 +11,8 @@ public class SnakeApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader =
             new FXMLLoader(SnakeApplication.class.getResource("fxmls/main_menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Snake eyes");
         stage.setScene(scene);
         stage.show();
     }

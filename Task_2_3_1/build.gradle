@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
+    id 'org.beryx.jlink' version '2.26.0'
 }
 
 group 'ru.nsu.amazyar'
@@ -47,10 +48,16 @@ jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
-        name = 'app'
+        name = 'snake'
     }
 }
 
 jlinkZip {
     group = 'distribution'
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
