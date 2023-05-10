@@ -4,4 +4,7 @@ module ru.nsu.amazyar {
 
     opens ru.nsu.amazyar to javafx.fxml;
     exports ru.nsu.amazyar;
+    exports ru.nsu.amazyar.main_menu;
+    exports ru.nsu.amazyar.game_screen;
+    opens ru.nsu.amazyar.main_menu to javafx.fxml;
 }

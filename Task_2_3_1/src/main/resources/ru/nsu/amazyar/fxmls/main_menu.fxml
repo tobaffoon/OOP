@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main_menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main_menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.main_menu.MainMenuController">
    <children>
       <Label text="Snake Eyes" textFill="#71ae08">
          <font>
@@ -16,14 +15,14 @@
       </Label>
       <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="440.0" spacing="2.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" text="PLAY">
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#onPlayPressed" prefHeight="48.0" prefWidth="10000.0" text="PLAY">
                <font>
                   <Font name="Elephant" size="26.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="10000.0" text="QUIT">
+            <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#onLeaderboardPressed" text="LEADERBOARD" />
+            <Button fx:id="tutorialButton" mnemonicParsing="false" onAction="#onTutorialPressed" text="TUTORIAL" />
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitPressed" prefHeight="48.0" prefWidth="10000.0" text="QUIT">
                <font>
                   <Font name="Elephant" size="25.0" />
                </font>
