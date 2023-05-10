@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-public class SceneCreator {
+public class SceneDrawer {
     static public Scene getMainScene(){
         return getSceneFromFxml("fxmls/main_menu.fxml");
     }
