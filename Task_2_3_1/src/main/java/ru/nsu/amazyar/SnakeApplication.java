@@ -1,9 +1,9 @@
 package ru.nsu.amazyar;
 
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.nsu.amazyar.constants.StageConstants;
 
 public class SnakeApplication extends Application {
     private Scene mainMenuScene;
@@ -15,8 +15,10 @@ public class SnakeApplication extends Application {
     @Override
     public void start(Stage stage) {
         mainStage = stage;
-        mainMenuScene = SceneCreator.getMainScene();
-        gameScene = SceneCreator.getGameScene();
+        mainStage.setMinWidth(StageConstants.DEFAULT_STAGE_SIZE);
+        mainStage.setMinHeight(StageConstants.DEFAULT_STAGE_SIZE);
+        mainMenuScene = SceneDrawer.getMainScene();
+        gameScene = SceneDrawer.getGameScene();
 
         mainStage.setTitle("Snake eyes");
         mainStage.setScene(mainMenuScene);

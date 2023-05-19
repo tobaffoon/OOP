@@ -8,13 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ru.nsu.amazyar.SceneCreator;
+import ru.nsu.amazyar.SceneDrawer;
+import ru.nsu.amazyar.constants.MainMenuConstants;
 
 public class MainMenuController implements Initializable {
     private Scene gameScene;
-
+    @FXML
+    VBox buttonBox;
     @FXML
     Button playButton;
     @FXML
@@ -26,7 +28,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gameScene = SceneCreator.getGameScene();
+        gameScene = SceneDrawer.getGameScene();
     }
 
     @FXML
@@ -46,5 +48,4 @@ public class MainMenuController implements Initializable {
     public void onQuitPressed(ActionEvent event){
 
     }
-
 }

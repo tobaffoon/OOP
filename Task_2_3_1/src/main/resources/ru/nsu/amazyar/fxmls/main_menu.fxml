@@ -4,41 +4,104 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import ru.nsu.amazyar.constants.StageConstants?>
+<?import ru.nsu.amazyar.constants.MainMenuConstants?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main_menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.main_menu.MainMenuController">
+<?import javafx.scene.text.Font?>
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.main_menu.MainMenuController">
+   <prefHeight>
+      <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+   </prefHeight>
+   <prefWidth>
+      <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+   </prefWidth>
+
    <children>
-      <Label text="Snake Eyes" textFill="#71ae08">
+      <Label minWidth="-Infinity" alignment="BASELINE_CENTER">
+         <text>
+            <MainMenuConstants fx:constant="DEFAULT_NAME_TEXT"/>
+         </text>
+         <textFill>
+            <MainMenuConstants fx:constant="DEFAULT_NAME_COLOR"/>
+         </textFill>
          <font>
-            <Font name="Algerian" size="70.0" />
+            <MainMenuConstants fx:constant="DEFAULT_NAME_FONT"/>
          </font>
+         <prefWidth>
+            <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+         </prefWidth>
+         <prefHeight>
+            <MainMenuConstants fx:constant="DEFAULT_NAME_HEIGHT"/>
+         </prefHeight>
       </Label>
-      <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="440.0" spacing="2.0">
+      <VBox fx:id="buttonBox" minWidth="-Infinity" alignment="TOP_CENTER">
+         <prefWidth>
+            <MainMenuConstants fx:constant="DEFAULT_VBOX_WIDTH"/>
+         </prefWidth>
+         <prefHeight>
+            <MainMenuConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
+         </prefHeight>
+         <spacing>
+            <MainMenuConstants fx:constant="DEFAULT_BUTTONS_SPACING"/>
+         </spacing>
          <children>
-            <Button fx:id="playButton" mnemonicParsing="false" onAction="#onPlayPressed" prefHeight="48.0" prefWidth="10000.0" text="PLAY">
+            <Button fx:id="playButton" minWidth="-Infinity" onAction="#onPlayPressed" text="PLAY">
                <font>
-                  <Font name="Elephant" size="26.0" />
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_FONT"/>
                </font>
+               <prefHeight>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+               </prefWidth>
             </Button>
-            <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#onLeaderboardPressed" text="LEADERBOARD" />
-            <Button fx:id="tutorialButton" mnemonicParsing="false" onAction="#onTutorialPressed" text="TUTORIAL" />
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitPressed" prefHeight="48.0" prefWidth="10000.0" text="QUIT">
+            <Button fx:id="leaderboardButton" minWidth="-Infinity" onAction="#onLeaderboardPressed" text="LEADERBOARD">
                <font>
-                  <Font name="Elephant" size="25.0" />
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_FONT"/>
                </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+               <prefHeight>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+               </prefWidth>
+            </Button>
+            <Button fx:id="tutorialButton" onAction="#onTutorialPressed" text="TUTORIAL">
+               <font>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+               </font>
+               <prefHeight>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+               </prefWidth>
+            </Button>
+            <Button fx:id="quitButton" onAction="#onQuitPressed" text="QUIT">
+               <font>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+               </font>
+               <prefHeight>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+               </prefWidth>
             </Button>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
          <VBox.margin>
-            <Insets bottom="80.0" left="80.0" right="80.0" />
+            <Insets>
+               <left>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_SIDE_INSET"/>
+               </left>
+               <right>
+                  <MainMenuConstants fx:constant="DEFAULT_BUTTON_SIDE_INSET"/>
+               </right>
+            </Insets>
          </VBox.margin>
          <padding>
-            <Insets top="50.0" />
+<!--            <Insets top="50.0" />-->
          </padding>
       </VBox>
    </children>
