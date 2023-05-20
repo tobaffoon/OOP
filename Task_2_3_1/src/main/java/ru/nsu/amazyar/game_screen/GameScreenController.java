@@ -1,8 +1,10 @@
 package ru.nsu.amazyar.game_screen;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -25,6 +27,7 @@ public class GameScreenController implements Initializable {
     }
     private boolean gameActive = false;
     private List<List<TileStatus>> gridStatus;
+    private final Set<KeyCode> pressedButtons = new HashSet<>();
 
     @FXML
     AutoScalingStackPane gamePane;
@@ -42,7 +45,7 @@ public class GameScreenController implements Initializable {
         if(gameActive){
             throw new IllegalStateException("New game cannot be started while there is an active game");
         }
-        if(rowCount < InGameConstants.MIN_COLUMN_NUMBER || rowCount > InGameConstants.MAX_COLUMN_NUMBER){
+        if(columnCount < InGameConstants.MIN_COLUMN_NUMBER || columnCount > InGameConstants.MAX_COLUMN_NUMBER){
             throw new IllegalArgumentException("ColumnCount is not in range (" + InGameConstants.MIN_COLUMN_NUMBER + ", " + InGameConstants.MAX_COLUMN_NUMBER + ")");
         }
         if(rowCount < InGameConstants.MIN_ROW_NUMBER || rowCount > InGameConstants.MAX_ROW_NUMBER){
@@ -56,8 +59,18 @@ public class GameScreenController implements Initializable {
         gameActive = true;
         SceneDrawer.drawGameGrid(gameBoard, rowCount, columnCount, colorOne, colorTwo);
     }
+
     @FXML
     public void onKeyPressed(KeyEvent keyEvent){
+        pressedButtons.add(keyEvent.getCode());
+    }
 
+    @FXML
+    public void onKeyReleased(KeyEvent keyEvent){
+        pressedButtons.remove(keyEvent.getCode());
+    }
+
+    public boolean isDown(KeyCode code){
+        return pressedButtons.contains(code);
     }
 }
