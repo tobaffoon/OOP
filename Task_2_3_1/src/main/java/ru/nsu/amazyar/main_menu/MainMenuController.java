@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SceneDrawer;
-import ru.nsu.amazyar.constants.MainMenuConstants;
 
 public class MainMenuController implements Initializable {
     private Scene gameScene;
@@ -46,6 +45,7 @@ public class MainMenuController implements Initializable {
     }
     @FXML
     public void onQuitPressed(ActionEvent event){
-
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
