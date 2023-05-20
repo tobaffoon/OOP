@@ -45,12 +45,20 @@ public abstract class SnakeLink {
     }
 
     // use to change direction
-    public void setCurrentDirection(Direction currentDirection) {
-        this.currentDirection = currentDirection;
+    public void turnLeft() {
+        currentDirection = Direction.values()[(currentDirection.ordinal() + 1) % Direction.values().length];
+    }
+
+    public void turnRight() {
+        currentDirection = Direction.values()[(currentDirection.ordinal() - 1) % Direction.values().length];
     }
 
     public void move(){
         switch (currentDirection){
+            case UP -> X--;
+            case LEFT -> Y--;
+            case DOWN -> X++;
+            case RIGHT -> Y++;
         }
     }
 }
