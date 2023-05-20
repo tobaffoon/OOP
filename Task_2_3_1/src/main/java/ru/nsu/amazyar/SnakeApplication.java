@@ -3,6 +3,7 @@ package ru.nsu.amazyar;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.nsu.amazyar.constants.MainMenuConstants;
 import ru.nsu.amazyar.constants.StageConstants;
 
 public class SnakeApplication extends Application {

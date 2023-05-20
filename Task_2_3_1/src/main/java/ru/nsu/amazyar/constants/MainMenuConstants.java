@@ -15,6 +15,6 @@ public class MainMenuConstants {
     public static final double BUTTONS_COUNT = 4;
     public static final double DEFAULT_BUTTON_HEIGHT = (DEFAULT_VBOX_HEIGHT - DEFAULT_BUTTONS_SPACING * (BUTTONS_COUNT - 1)) / BUTTONS_COUNT;
     public static final Font DEFAULT_BUTTON_FONT = Font.font("Elephant", DEFAULT_BUTTON_HEIGHT * 0.5);
-    public static final double DEFAULT_BUTTON_SIDE_INSET = StageConstants.DEFAULT_STAGE_SIZE * 0.1;
-    public static final double DEFAULT_BUTTON_WIDTH = StageConstants.DEFAULT_STAGE_SIZE - 2 * DEFAULT_BUTTON_SIDE_INSET;
+    public static final double DEFAULT_BUTTON_SIDE_INSET = DEFAULT_VBOX_WIDTH * 0.05;
+    public static final double DEFAULT_BUTTON_WIDTH = DEFAULT_VBOX_WIDTH - 2 * DEFAULT_BUTTON_SIDE_INSET;
 }
