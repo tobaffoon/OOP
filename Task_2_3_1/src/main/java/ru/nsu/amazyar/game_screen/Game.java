@@ -2,8 +2,6 @@ package ru.nsu.amazyar.game_screen;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.animation.AnimationTimer;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.CycleTimer;
@@ -31,21 +29,18 @@ public class Game {
         this.columnCount = columns;
         gridStatus = new TileStatus[rows][columns];
 
-        gameLoopTimer = new CycleTimer(2, () -> {update(); draw();});
-        painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
         playerSnake = new Snake();
         entities.add(playerSnake);
 
+        painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
         painter.draw();
+
+        gameLoopTimer = new CycleTimer(2, () -> {update(); painter.draw();});
         gameLoopTimer.start();
     }
 
     public void update(){
-
-    }
-
-    public void draw(){
-        painter.draw();
+        entities.forEach(Entity::move);
     }
 
     public int getRowCount() {
@@ -54,5 +49,9 @@ public class Game {
 
     public int getColumnCount() {
         return columnCount;
+    }
+
+    public List<Entity> getEntities(){
+        return entities;
     }
 }
