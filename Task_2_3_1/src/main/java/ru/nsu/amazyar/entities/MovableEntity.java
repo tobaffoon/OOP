@@ -8,4 +8,6 @@ public interface MovableEntity extends Entity{
     Direction getCurrentDirection();
 
     void move();
+    int getPrevx();
+    int getPrevy();
 }

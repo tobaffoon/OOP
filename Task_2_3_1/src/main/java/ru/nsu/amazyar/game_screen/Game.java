@@ -1,9 +1,9 @@
 package ru.nsu.amazyar.game_screen;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.CycleTimer;
@@ -16,14 +16,13 @@ import ru.nsu.amazyar.entities.snake.Snake;
 
 public class Game {
     private final CycleTimer gameLoopTimer;
-    private final List<MovableEntity> movableEntities = new ArrayList<>();
-    private final List<SimpleEdible> foodEntities = new ArrayList<>();
     private final Snake playerSnake;
     private Direction playerDirectionBuffer;
     private final GamePainter painter;
     private final int rowCount;
     private final int columnCount;
-    private final TileStatus[][] gridStatus;
+    private final Entity[][] grid;
+    private int foodNumber;
 
     public Game(Canvas gameCanvas, int rows, int columns, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
@@ -32,16 +31,16 @@ public class Game {
         if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException("Not enough colors provided");
         }
-        playerSnake = new Snake(0, 0, rows, columns, Direction.DOWN);
-        playerDirectionBuffer = playerSnake.getCurrentDirection();
-        movableEntities.add(playerSnake);
-
         this.rowCount = rows;
         this.columnCount = columns;
-        gridStatus = new TileStatus[columns][rows];
-        initGridStatus();
+        grid = new Entity[columns][rows];
 
-        tryGenerateFood();
+        playerSnake = new Snake(0, 0, rows, columns, Direction.DOWN);
+        playerDirectionBuffer = playerSnake.getCurrentDirection();
+        addEntity(playerSnake);
+
+        foodNumber = 0;
+        generateFood();
 
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
         painter.draw();
@@ -50,24 +49,13 @@ public class Game {
         gameLoopTimer.start();
     }
 
-    private void initGridStatus(){
-        for (int i = 0; i < columnCount; i++) {
-            for (int j = 0; j < rowCount; j++) {
-                gridStatus[i][j] = TileStatus.EMPTY;
-            }
-        }
-
-        gridStatus[playerSnake.getX()][playerSnake.getY()] = TileStatus.SNAKE;
-    }
-
     public void update(){
         // change players direction to last pressed arrow
         playerSnake.changeDirection(playerDirectionBuffer);
 
-        movableEntities.forEach(MovableEntity::move);
-        playerSnake.growTail();
+        getMovableEntitiesAsStream().forEach(MovableEntity::move);
 
-        tryGenerateFood();
+        generateFood();
     }
 
     public int getRowCount() {
@@ -76,14 +64,6 @@ public class Game {
 
     public int getColumnCount() {
         return columnCount;
-    }
-
-    public List<MovableEntity> getMovableEntities(){
-        return movableEntities;
-    }
-
-    public List<SimpleEdible> getFoodEntities(){
-        return foodEntities;
     }
 
     public Snake getPlayerSnake() {
@@ -98,7 +78,7 @@ public class Game {
         int emptyTiles = 0;
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
-                if(gridStatus[i][j] == TileStatus.EMPTY){
+                if(grid[i][j] == null){
                     emptyTiles++;
                 }
             }
@@ -106,14 +86,61 @@ public class Game {
         return emptyTiles;
     }
 
-    public void tryGenerateFood() {
-        if(foodEntities.size() >= InGameConstants.DEFAULT_MAX_FOOD_NUMBER) {
+    public boolean addEntity(Entity entity){
+        if (getEntityAt(entity.getX(), entity.getY()) != null){
+            return false;
+        }
+
+        grid[entity.getX()][entity.getY()] = entity;
+        return true;
+    }
+
+    public Entity getEntityAt(int x, int y){
+        return grid[x][y];
+    }
+
+    public Stream<Entity> getEntitiesAsStream(){
+        return Arrays.stream(grid).flatMap(Arrays::stream).filter(Objects::nonNull);
+    }
+
+    public Stream<MovableEntity> getMovableEntitiesAsStream(){
+        return getEntitiesAsStream().filter((cell) -> cell instanceof MovableEntity).map((e) -> (MovableEntity) e);
+    }
+
+    public void generateFood() {
+        if(foodNumber >= InGameConstants.DEFAULT_MAX_FOOD_NUMBER) {
             return;
         }
 
-        int foodx = ThreadLocalRandom.current().nextInt(0, columnCount);
-        int foody = ThreadLocalRandom.current().nextInt(0, rowCount);
-        foodEntities.add(new SimpleEdible(foodx, foody, 1));
-        gridStatus[foodx][foody] = TileStatus.FOOD;
+        // try to place food until right spot is found
+        // TODO replace pure randomness for fastness
+        int foodx;
+        int foody;
+        do {
+            foodx = ThreadLocalRandom.current().nextInt(0, columnCount);
+            foody = ThreadLocalRandom.current().nextInt(0, rowCount);
+        }while (grid[foodx][foody] != null);
+
+        foodNumber++;
+        grid[foodx][foody] = new SimpleEdible(foodx, foody, 1);
+    }
+
+    public void recalculateGridStatus(){
+        getMovableEntitiesAsStream().forEach((e) -> {
+            // if entity moved from a tile, a tile is empty now
+            grid[e.getPrevx()][e.getPrevy()] = null;
+
+            if(e instanceof Snake){
+                Entity collidingEntity = grid[e.getX()][e.getY()];
+                if(collidingEntity == null) {
+                    grid[e.getX()][e.getY()] = (Snake) e;
+                }
+                else if(collidingEntity instanceof SimpleEdible){
+                    ((Snake) e).growTail();
+                    grid[e.getX()][e.getY()] = (Snake) e;
+                    foodNumber--;
+                }
+            }
+        });
     }
 }

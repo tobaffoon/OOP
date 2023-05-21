@@ -59,4 +59,6 @@ public abstract class SimpleMovableEntity implements MovableEntity {
     }
 
     abstract public void move();
+    abstract public int getPrevx();
+    abstract public int getPrevy();
 }
