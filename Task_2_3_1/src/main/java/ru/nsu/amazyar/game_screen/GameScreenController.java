@@ -19,15 +19,9 @@ import ru.nsu.amazyar.bases.AutoScalingStackPane;
 import ru.nsu.amazyar.constants.InGameConstants;
 
 public class GameScreenController implements Initializable {
-    public enum TileStatus{
-        EMPTY,
-        SNAKE,
-        BRICK,
-        FOOD
-    }
     private boolean gameActive = false;
-    private List<List<TileStatus>> gridStatus;
     private final Set<KeyCode> pressedButtons = new HashSet<>();
+    private Game game;
 
     @FXML
     AutoScalingStackPane gamePane;
@@ -41,7 +35,7 @@ public class GameScreenController implements Initializable {
 
     }
 
-    public void startNewGame(Stage stage, int rowCount, int columnCount, Color colorOne, Color colorTwo){
+    public void startNewGame(Stage stage, int rowCount, int columnCount, Color gridColorOne, Color gridColorTwo){
         if(gameActive){
             throw new IllegalStateException("New game cannot be started while there is an active game");
         }
@@ -51,13 +45,13 @@ public class GameScreenController implements Initializable {
         if(rowCount < InGameConstants.MIN_ROW_NUMBER || rowCount > InGameConstants.MAX_ROW_NUMBER){
             throw new IllegalArgumentException("RowCount is not in range (" + InGameConstants.MIN_ROW_NUMBER + ", " + InGameConstants.MAX_ROW_NUMBER + ")");
         }
-        if(colorOne == null || colorTwo == null){
+        if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException();
         }
 
         stage.setScene(gamePane.getScene());
         gameActive = true;
-        SceneDrawer.drawGameGrid(gameBoard, rowCount, columnCount, colorOne, colorTwo);
+        game = new Game(gameBoard, rowCount, columnCount, gridColorOne, gridColorTwo);
     }
 
     @FXML
