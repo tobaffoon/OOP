@@ -5,6 +5,8 @@ import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.CycleTimer;
+import ru.nsu.amazyar.bases.Direction;
+import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.snake.Snake;
 
@@ -12,6 +14,7 @@ public class Game {
     private final CycleTimer gameLoopTimer;
     private final List<Entity> entities = new ArrayList<>();
     private final Snake playerSnake;
+    private Direction playerDirectionBuffer;
     private final GamePainter painter;
     private final int rowCount;
     private final int columnCount;
@@ -30,6 +33,7 @@ public class Game {
         gridStatus = new TileStatus[rows][columns];
 
         playerSnake = new Snake(rows, columns);
+        playerDirectionBuffer = playerSnake.getCurrentDirection();
         entities.add(playerSnake);
 
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
@@ -40,6 +44,7 @@ public class Game {
     }
 
     public void update(){
+        playerSnake.changeDirection(playerDirectionBuffer);
         entities.forEach(Entity::move);
     }
 
@@ -53,5 +58,13 @@ public class Game {
 
     public List<Entity> getEntities(){
         return entities;
+    }
+
+    public Snake getPlayerSnake() {
+        return playerSnake;
+    }
+
+    public void changePlayerDirection(Direction direction){
+        playerDirectionBuffer = direction;
     }
 }

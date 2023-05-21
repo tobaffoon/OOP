@@ -4,7 +4,7 @@
 <?import ru.nsu.amazyar.constants.StageConstants?>
 <?import javafx.scene.canvas.Canvas?>
 
-<AutoScalingStackPane fx:id="gamePane" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.game_screen.GameScreenController">
+<AutoScalingStackPane fx:id="gamePane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.game_screen.GameScreenController">
    <children>
       <Canvas fx:id="gameBoard">
       <height>

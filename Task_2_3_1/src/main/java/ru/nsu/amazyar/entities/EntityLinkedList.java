@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import ru.nsu.amazyar.bases.Direction;
 
-public class EntityGroup implements Entity {
+public class EntityLinkedList implements Entity {
     private SimpleEntity mainEntity;
     private final List<SimpleEntity> children;
 
-    public EntityGroup(SimpleEntity mainEntity) {
+    public EntityLinkedList(SimpleEntity mainEntity) {
         this.mainEntity = mainEntity;
         this.children = new ArrayList<>();
         children.add(mainEntity);
@@ -48,6 +48,10 @@ public class EntityGroup implements Entity {
     @Override
     public void setY(int y) {
         mainEntity.setY(y);
+    }
+
+    public void changeDirection(Direction direction){
+        mainEntity.changeDirection(direction);
     }
 
     @Override

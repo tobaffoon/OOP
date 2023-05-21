@@ -1,13 +1,14 @@
 package ru.nsu.amazyar.entities.snake;
 
 import ru.nsu.amazyar.bases.Direction;
-import ru.nsu.amazyar.entities.EntityGroup;
+import ru.nsu.amazyar.constants.InGameConstants;
+import ru.nsu.amazyar.entities.EntityLinkedList;
 
-public class Snake extends EntityGroup {
+public class Snake extends EntityLinkedList {
     private SnakeLink tail;
 
     public Snake(int rowCount, int columnCount) {
-        super(new SnakeLink(0, 0, rowCount, columnCount, Direction.DOWN, null));
+        super(new SnakeLink(0, 0, rowCount, columnCount, InGameConstants.DEFAULT_PLAYER_DIRECTION, null));
         this.tail = (SnakeLink) this.getMainEntity();
     }
 

@@ -16,11 +16,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
+import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.constants.InGameConstants;
 
 public class GameScreenController implements Initializable {
     private boolean gameActive = false;
-    private final Set<KeyCode> pressedButtons = new HashSet<>();
     private Game game;
 
     @FXML
@@ -50,21 +50,13 @@ public class GameScreenController implements Initializable {
         }
 
         stage.setScene(gamePane.getScene());
+
+        gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
         gameActive = true;
         game = new Game(gameBoard, rowCount, columnCount, gridColorOne, gridColorTwo);
     }
 
-    @FXML
-    public void onKeyPressed(KeyEvent keyEvent){
-        pressedButtons.add(keyEvent.getCode());
-    }
-
-    @FXML
-    public void onKeyReleased(KeyEvent keyEvent){
-        pressedButtons.remove(keyEvent.getCode());
-    }
-
-    public boolean isDown(KeyCode code){
-        return pressedButtons.contains(code);
+    public void playerChangeDirection(Direction direction){
+        game.changePlayerDirection(direction);
     }
 }

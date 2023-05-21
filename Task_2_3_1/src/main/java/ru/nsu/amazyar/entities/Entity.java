@@ -10,6 +10,7 @@ public interface Entity {
     int getY();
 
     void setY(int y);
+    void changeDirection(Direction direction);
 
     Direction getCurrentDirection();
 
