@@ -11,6 +11,7 @@ public class Snake extends SimpleMovableEntity {
     private SnakeLink head;
     private final Queue<SnakeLink> snakeBody = new ArrayDeque<>();
     private boolean growNextStep = false;
+    private Direction changeDirectionBuffer;
 
     public Snake(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
         super(x, y, gridRowCount, gridColumnCount, initialDirection);
@@ -18,6 +19,7 @@ public class Snake extends SimpleMovableEntity {
         this.prevy = y;
         this.head = new SnakeLink(x, y);
         snakeBody.add(head);
+        this.changeDirectionBuffer = getCurrentDirection();
     }
 
     public Queue<SnakeLink> getSnakeBody() {
@@ -34,6 +36,7 @@ public class Snake extends SimpleMovableEntity {
 
     @Override
     public void move() {
+
         // prev pos is previous tail pos
         prevx = snakeBody.peek().getX();
         prevy = snakeBody.peek().getY();

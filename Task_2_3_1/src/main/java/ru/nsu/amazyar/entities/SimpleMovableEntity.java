@@ -38,24 +38,31 @@ public abstract class SimpleMovableEntity implements MovableEntity {
     }
 
     public void changeDirection(Direction direction){
+        if(changeDirectionAllowed(direction))
+            currentDirection = direction;
+    }
+
+    public boolean changeDirectionAllowed(Direction direction){
         switch (direction){
             case UP:
-                if(currentDirection != Direction.DOWN)
-                    currentDirection = Direction.UP;
+                if(currentDirection == Direction.DOWN)
+                    return false;
                 break;
             case DOWN:
-                if(currentDirection != Direction.UP)
-                    currentDirection = Direction.DOWN;
+                if(currentDirection == Direction.UP)
+                    return false;
                 break;
             case LEFT:
-                if(currentDirection != Direction.RIGHT)
-                    currentDirection = Direction.LEFT;
+                if(currentDirection == Direction.RIGHT)
+                    return false;
                 break;
             case RIGHT:
-                if(currentDirection != Direction.LEFT)
-                    currentDirection = Direction.RIGHT;
+                if(currentDirection == Direction.LEFT)
+                    return false;
                 break;
         }
+
+        return true;
     }
 
     abstract public void move();

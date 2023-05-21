@@ -71,7 +71,8 @@ public class Game {
     }
 
     public void changePlayerDirection(Direction direction){
-        playerDirectionBuffer = direction;
+        if(playerSnake.changeDirectionAllowed(direction))
+            playerDirectionBuffer = direction;
     }
 
     private int emptyTiles(){
