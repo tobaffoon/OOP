@@ -1,10 +1,10 @@
 package ru.nsu.amazyar.entities.snake;
 
 import ru.nsu.amazyar.bases.Direction;
-import ru.nsu.amazyar.entities.SimpleEntity;
+import ru.nsu.amazyar.entities.SimpleMovableEntity;
 
 // Update order: move -> addTail (or other connections) -> changeDirection
-public class SnakeLink extends SimpleEntity {
+public class SnakeLink extends SimpleMovableEntity {
 
     private final SnakeLink nextLink;
     private SnakeLink prevLink;

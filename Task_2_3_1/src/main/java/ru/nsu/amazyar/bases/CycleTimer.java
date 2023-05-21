@@ -9,9 +9,12 @@ public class CycleTimer extends AnimationTimer {
     private long lastTime;
     private Runnable callback;
 
-    public CycleTimer(double fps, Runnable callback) {
-        this.fps = fps;
-        this.frameInterval = 1000000000/fps;
+    /**
+     * Creates a timer that calls callback
+     * @param nanos nanoseconds between callback calls
+     */
+    public CycleTimer(long nanos, Runnable callback) {
+        this.frameInterval = nanos;
         this.callback = callback;
         this.lastTime = System.nanoTime();
     }

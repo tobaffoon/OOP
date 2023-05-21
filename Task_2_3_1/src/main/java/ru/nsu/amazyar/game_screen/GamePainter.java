@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.entities.Entity;
+import ru.nsu.amazyar.entities.MovableEntity;
+import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
 
@@ -21,6 +23,7 @@ public class GamePainter {
     private final Image snakeHeadImage;
     private final Image snakeBodyImage;
     private final Image snakeTailImage;
+    private final Image foodImage;
 
     public GamePainter(Game game, Canvas canvas, Color gridColorOne, Color gridColorTwo){
         this.game = game;
@@ -33,6 +36,8 @@ public class GamePainter {
                 SnakeApplication.class.getResourceAsStream(InGameConstants.SNAKE_BODY_SPRITE));
         this.snakeTailImage = new Image(
                 SnakeApplication.class.getResourceAsStream(InGameConstants.SNAKE_TAIL_SPRITE));
+        this.foodImage = new Image(
+                SnakeApplication.class.getResourceAsStream(InGameConstants.FOOD_SPRITE));
 
         this.cellHeight = drawingCanvas.getHeight() / game.getRowCount();
         this.cellWidth = drawingCanvas.getWidth() / game.getColumnCount();
@@ -44,32 +49,38 @@ public class GamePainter {
     }
 
     private void drawEntities(){
-        List<Entity> entities = game.getEntities();
-        for (Entity entity : entities) {
+        List<MovableEntity> movableEntities = game.getMovableEntities();
+        for (MovableEntity entity : movableEntities) {
             if (entity instanceof Snake){
                 drawSnake((Snake)entity);
             }
         }
+
+        List<SimpleEdible> foodEntities = game.getFoodEntities();
+        for (Entity entity : foodEntities) {
+            drawEntity(entity, foodImage);
+        }
     }
+
 
     private void drawSnake(Snake snake){
         // draw head
         SnakeLink tempLink = snake.getHead();
-        drawSnakeLink(tempLink, snakeHeadImage);
+        drawEntity(tempLink, snakeHeadImage);
 
         // draw body
         while(tempLink.getPrevLink() != null){
             tempLink = tempLink.getPrevLink();
-            drawSnakeLink(tempLink, snakeBodyImage);
+            drawEntity(tempLink, snakeBodyImage);
         }
 
         // draw tail
-        drawSnakeLink(tempLink, snakeTailImage);
+        drawEntity(tempLink, snakeTailImage);
     }
 
-    private void drawSnakeLink(SnakeLink link, Image sprite){
-        double canvasx = link.getX() * cellWidth;
-        double canvasy= link.getY() * cellHeight;
+    private void drawEntity(Entity entity, Image sprite){
+        double canvasx = entity.getX() * cellWidth;
+        double canvasy= entity.getY() * cellHeight;
 
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
         gc.drawImage(sprite, canvasx, canvasy, cellWidth, cellHeight);

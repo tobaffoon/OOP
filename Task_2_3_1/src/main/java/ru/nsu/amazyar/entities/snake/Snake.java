@@ -1,10 +1,9 @@
 package ru.nsu.amazyar.entities.snake;
 
-import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.constants.InGameConstants;
-import ru.nsu.amazyar.entities.EntityLinkedList;
+import ru.nsu.amazyar.entities.MovableEntityLinkedList;
 
-public class Snake extends EntityLinkedList {
+public class Snake extends MovableEntityLinkedList {
     private SnakeLink tail;
 
     public Snake(int rowCount, int columnCount) {

@@ -2,14 +2,14 @@ package ru.nsu.amazyar.entities;
 
 import ru.nsu.amazyar.bases.Direction;
 
-public class SimpleEntity implements Entity {
+public class SimpleMovableEntity implements MovableEntity {
     private int x;
     private int y;
     private final int maxRow;
     private final int maxColumn;
     private Direction currentDirection;
 
-    public SimpleEntity(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
+    public SimpleMovableEntity(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
         this.x = x;
         this.y = y;
         this.maxRow = gridRowCount;

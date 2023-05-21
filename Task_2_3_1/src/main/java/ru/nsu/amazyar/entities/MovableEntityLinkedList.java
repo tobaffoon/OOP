@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import ru.nsu.amazyar.bases.Direction;
 
-public class EntityLinkedList implements Entity {
-    private SimpleEntity mainEntity;
-    private final List<SimpleEntity> children;
+public class MovableEntityLinkedList implements MovableEntity {
+    private SimpleMovableEntity mainEntity;
+    private final List<SimpleMovableEntity> children;
 
-    public EntityLinkedList(SimpleEntity mainEntity) {
+    public MovableEntityLinkedList(SimpleMovableEntity mainEntity) {
         this.mainEntity = mainEntity;
         this.children = new ArrayList<>();
         children.add(mainEntity);
     }
 
-    public void setMainEntity(SimpleEntity mainSimpleEntity){
-        this.mainEntity = mainSimpleEntity;
+    public void setMainEntity(SimpleMovableEntity mainSimpleMovableEntity){
+        this.mainEntity = mainSimpleMovableEntity;
     }
 
-    public SimpleEntity getMainEntity(){
+    public SimpleMovableEntity getMainEntity(){
         return mainEntity;
     }
 
-    public List<SimpleEntity> getChildren(){
+    public List<SimpleMovableEntity> getChildren(){
         return children;
     }
 
-    public void addChild(SimpleEntity entity){
+    public void addChild(SimpleMovableEntity entity){
         children.add(entity);
     }
 
@@ -61,6 +61,6 @@ public class EntityLinkedList implements Entity {
 
     @Override
     public void move() {
-        children.forEach(SimpleEntity::move);
+        children.forEach(SimpleMovableEntity::move);
     }
 }

@@ -10,6 +10,9 @@ public class InGameConstants {
     public static final String SNAKE_HEAD_SPRITE = "images/square.png";
     public static final String SNAKE_BODY_SPRITE = "images/square.png";
     public static final String SNAKE_TAIL_SPRITE = "images/square.png";
+    public static final String FOOD_SPRITE = "images/egg.png";
 
     public static final Direction DEFAULT_PLAYER_DIRECTION = Direction.DOWN;
+    public static final long DEFAULT_NANOS_PER_TILE = 500000000;
+    public static final int DEFAULT_MAX_FOOD_NUMBER = 1;
 }
