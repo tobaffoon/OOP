@@ -32,7 +32,7 @@ public class Game {
         if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException("Not enough colors provided");
         }
-        playerSnake = new Snake(rows, columns);
+        playerSnake = new Snake(0, 0, rows, columns, Direction.DOWN);
         playerDirectionBuffer = playerSnake.getCurrentDirection();
         movableEntities.add(playerSnake);
 
@@ -40,6 +40,8 @@ public class Game {
         this.columnCount = columns;
         gridStatus = new TileStatus[columns][rows];
         initGridStatus();
+
+        tryGenerateFood();
 
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
         painter.draw();
@@ -59,8 +61,12 @@ public class Game {
     }
 
     public void update(){
+        // change players direction to last pressed arrow
         playerSnake.changeDirection(playerDirectionBuffer);
+
         movableEntities.forEach(MovableEntity::move);
+        playerSnake.growTail();
+
         tryGenerateFood();
     }
 
@@ -105,6 +111,9 @@ public class Game {
             return;
         }
 
-        foodEntities.add(new SimpleEdible(ThreadLocalRandom.current().nextInt(0, columnCount), ThreadLocalRandom.current().nextInt(0, rowCount), 1));
+        int foodx = ThreadLocalRandom.current().nextInt(0, columnCount);
+        int foody = ThreadLocalRandom.current().nextInt(0, rowCount);
+        foodEntities.add(new SimpleEdible(foodx, foody, 1));
+        gridStatus[foodx][foody] = TileStatus.FOOD;
     }
 }

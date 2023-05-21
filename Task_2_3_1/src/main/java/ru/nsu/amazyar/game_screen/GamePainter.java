@@ -1,6 +1,9 @@
 package ru.nsu.amazyar.game_screen;
 
+import java.util.Deque;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -65,13 +68,19 @@ public class GamePainter {
 
     private void drawSnake(Snake snake){
         // draw head
-        SnakeLink tempLink = snake.getHead();
-        drawEntity(tempLink, snakeHeadImage);
+        Iterator<SnakeLink> snakeLinks = snake.getSnakeBody().iterator();
+        drawEntity(snakeLinks.next(), snakeHeadImage);
 
+        // only head present
+        if(!snakeLinks.hasNext()){
+            return;
+        }
+
+        SnakeLink tempLink = snakeLinks.next();
         // draw body
-        while(tempLink.getPrevLink() != null){
-            tempLink = tempLink.getPrevLink();
+        while(snakeLinks.hasNext()){
             drawEntity(tempLink, snakeBodyImage);
+            tempLink = snakeLinks.next();
         }
 
         // draw tail
@@ -80,7 +89,7 @@ public class GamePainter {
 
     private void drawEntity(Entity entity, Image sprite){
         double canvasx = entity.getX() * cellWidth;
-        double canvasy= entity.getY() * cellHeight;
+        double canvasy = entity.getY() * cellHeight;
 
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
         gc.drawImage(sprite, canvasx, canvasy, cellWidth, cellHeight);

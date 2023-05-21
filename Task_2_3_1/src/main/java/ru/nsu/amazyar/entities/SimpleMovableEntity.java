@@ -2,11 +2,11 @@ package ru.nsu.amazyar.entities;
 
 import ru.nsu.amazyar.bases.Direction;
 
-public class SimpleMovableEntity implements MovableEntity {
+public abstract class SimpleMovableEntity implements MovableEntity {
     private int x;
     private int y;
-    private final int maxRow;
-    private final int maxColumn;
+    public final int maxRow;
+    public final int maxColumn;
     private Direction currentDirection;
 
     public SimpleMovableEntity(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
@@ -31,14 +31,6 @@ public class SimpleMovableEntity implements MovableEntity {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public int getMaxRow() {
-        return maxRow;
-    }
-
-    public int getMaxColumn() {
-        return maxColumn;
     }
 
     public Direction getCurrentDirection(){
@@ -66,20 +58,5 @@ public class SimpleMovableEntity implements MovableEntity {
         }
     }
 
-    public void move(){
-        switch (currentDirection) {
-            case UP:
-                y = Math.floorMod(y - 1, maxRow);
-                break;
-            case LEFT:
-                x = Math.floorMod(x - 1, maxColumn);
-                break;
-            case DOWN:
-                y = Math.floorMod(y + 1, maxRow);
-                break;
-            case RIGHT:
-                x = Math.floorMod(x + 1, maxColumn);
-                break;
-        }
-    }
+    abstract public void move();
 }
