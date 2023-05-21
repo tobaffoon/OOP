@@ -4,11 +4,10 @@ import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.EntityGroup;
 
 public class Snake extends EntityGroup {
-
     private SnakeLink tail;
 
-    public Snake() {
-        super(new SnakeLink(0, 0, Direction.DOWN, null));
+    public Snake(int rowCount, int columnCount) {
+        super(new SnakeLink(0, 0, rowCount, columnCount, Direction.DOWN, null));
         this.tail = (SnakeLink) this.getMainEntity();
     }
 

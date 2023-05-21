@@ -5,11 +5,15 @@ import ru.nsu.amazyar.bases.Direction;
 public class SimpleEntity implements Entity {
     private int x;
     private int y;
+    private final int maxRow;
+    private final int maxColumn;
     private Direction currentDirection;
 
-    public SimpleEntity(int x, int y, Direction initialDirection) {
+    public SimpleEntity(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
         this.x = x;
         this.y = y;
+        this.maxRow = gridRowCount;
+        this.maxColumn = gridColumnCount;
         this.currentDirection = initialDirection;
     }
 
@@ -29,6 +33,14 @@ public class SimpleEntity implements Entity {
         this.y = y;
     }
 
+    public int getMaxRow() {
+        return maxRow;
+    }
+
+    public int getMaxColumn() {
+        return maxColumn;
+    }
+
     public Direction getCurrentDirection(){
         return currentDirection;
     }
@@ -43,10 +55,10 @@ public class SimpleEntity implements Entity {
 
     public void move(){
         switch (currentDirection) {
-            case UP -> y--;
-            case LEFT -> x--;
-            case DOWN -> y++;
-            case RIGHT -> x++;
+            case UP -> y = Math.floorMod(y - 1, maxRow);
+            case LEFT -> x = Math.floorMod(x - 1, maxColumn);
+            case DOWN -> y = Math.floorMod(y + 1, maxRow);
+            case RIGHT -> x = Math.floorMod(x + 1, maxColumn);
         }
     }
 }

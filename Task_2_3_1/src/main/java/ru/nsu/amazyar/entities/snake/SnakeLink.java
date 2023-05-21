@@ -11,8 +11,8 @@ public class SnakeLink extends SimpleEntity {
     private int prevx;
     private int prevy;
 
-    public SnakeLink(int x, int y, Direction initialDirection, SnakeLink nextLink) {
-        super(x, y, initialDirection);
+    public SnakeLink(int x, int y, int rowCount, int columnCount, Direction initialDirection, SnakeLink nextLink) {
+        super(x, y, rowCount, columnCount, initialDirection);
         this.nextLink = nextLink;
         this.prevLink = null;
     }
@@ -23,7 +23,7 @@ public class SnakeLink extends SimpleEntity {
             return prevLink.addPrevLink();
         }
 
-        this.prevLink = new SnakeLink(prevx, prevy, getCurrentDirection(), this);
+        this.prevLink = new SnakeLink(prevx, prevy, getMaxRow(), getMaxColumn(), getCurrentDirection(), this);
         return this.prevLink;
     }
 

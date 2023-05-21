@@ -29,7 +29,7 @@ public class Game {
         this.columnCount = columns;
         gridStatus = new TileStatus[rows][columns];
 
-        playerSnake = new Snake();
+        playerSnake = new Snake(rows, columns);
         entities.add(playerSnake);
 
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
