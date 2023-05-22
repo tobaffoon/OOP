@@ -29,6 +29,9 @@ public class ControlHandler implements EventHandler<KeyEvent> {
             case DOWN:
                 controller.playerChangeDirection(Direction.DOWN);
                 break;
+            case P:
+                controller.pauseAndUnpause();
+                break;
             default:
                 break;
         }

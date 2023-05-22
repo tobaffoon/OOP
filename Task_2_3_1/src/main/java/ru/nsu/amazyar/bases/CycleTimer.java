@@ -8,6 +8,8 @@ public class CycleTimer extends AnimationTimer {
     private double delta = 0;
     private long lastTime;
     private Runnable callback;
+    private Runnable bufferCallback;
+    private static Runnable spinlock = () -> {};
 
     /**
      * Creates a timer that calls callback
@@ -17,7 +19,9 @@ public class CycleTimer extends AnimationTimer {
         this.frameInterval = nanos;
         this.callback = callback;
         this.lastTime = System.nanoTime();
+        this.bufferCallback = callback;
     }
+
 
     @Override
     public void handle(long now) {
@@ -28,5 +32,13 @@ public class CycleTimer extends AnimationTimer {
             delta--;
             callback.run();
         }
+    }
+
+    public void turnOff(){
+        callback = spinlock;
+    }
+
+    public void turnOn(){
+        callback = bufferCallback;
     }
 }

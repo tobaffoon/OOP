@@ -1,19 +1,12 @@
 package ru.nsu.amazyar.game_screen;
 
 import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -28,13 +21,12 @@ public class GameScreenController implements Initializable {
     private Game game;
     private Stage stage;
     private CycleTimer gameLoopTimer;
+    private boolean gamePaused;
 
     @FXML
     AutoScalingStackPane gamePane;
     @FXML
     Canvas gameBoard;
-    @FXML
-    TreeView<String> questView;
     @FXML
     VBox loseBox;
     @FXML
@@ -43,6 +35,8 @@ public class GameScreenController implements Initializable {
     Button replayButton;
     @FXML
     Button mainMenuButton;
+    @FXML
+    Label pauseLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,10 +65,24 @@ public class GameScreenController implements Initializable {
 
         this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE, this::step);
         gameLoopTimer.start();
+        gamePaused = false;
     }
 
     public void playerChangeDirection(Direction direction){
         game.changePlayerDirection(direction);
+    }
+
+    public void pauseAndUnpause(){
+        if(gamePaused) {
+            pauseLabel.setVisible(false);
+            gameLoopTimer.turnOn();
+            gamePaused = false;
+        }
+        else {
+            pauseLabel.setVisible(true);
+            gameLoopTimer.turnOff();
+            gamePaused = true;
+        }
     }
 
     public void step(){

@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.paint.Color?>
 <AutoScalingStackPane fx:id="gamePane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ru.nsu.amazyar.game_screen.GameScreenController">
    <children>
       <Canvas fx:id="gameBoard">
@@ -120,6 +121,7 @@
             </VBox.margin>
          </Button>
       </VBox>
+      <Label fx:id="pauseLabel" text="pause" textFill="rgba(0,0,0,0.5)" visible="false"/>
 <!--      <TreeView fx:id="questView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="150.0" />-->
    </children>
 </AutoScalingStackPane>
