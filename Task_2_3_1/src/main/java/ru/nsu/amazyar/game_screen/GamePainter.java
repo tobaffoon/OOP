@@ -1,13 +1,16 @@
 package ru.nsu.amazyar.game_screen;
 
 import java.util.Iterator;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.entities.Entity;
+import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
@@ -60,33 +63,33 @@ public class GamePainter {
 
 
     private void drawSnake(Snake snake){
-        // draw head
         Iterator<SnakeLink> snakeLinks = snake.getSnakeBody().iterator();
-        drawEntity(snakeLinks.next(), snakeHeadImage);
+        SnakeLink tempLink = snakeLinks.next();
 
         // only head present
         if(!snakeLinks.hasNext()){
+            drawEntity(tempLink, snakeHeadImage);
             return;
-        }
-
-        SnakeLink tempLink = snakeLinks.next();
-        // draw body
-        while(snakeLinks.hasNext()){
-            drawEntity(tempLink, snakeBodyImage);
-            tempLink = snakeLinks.next();
         }
 
         // draw tail
         drawEntity(tempLink, snakeTailImage);
+
+        // draw body
+        while(snakeLinks.hasNext()){
+            tempLink = snakeLinks.next();
+            drawEntity(tempLink, snakeBodyImage);
+        }
+
+        drawEntity(tempLink, snakeHeadImage);
     }
 
     private void drawEntity(Entity entity, Image sprite){
-
         double canvasx = entity.getX() * cellWidth;
         double canvasy = entity.getY() * cellHeight;
 
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
-        gc.drawImage(sprite, canvasx, canvasy, cellWidth, cellHeight);
+        gc.drawImage(sprite, canvasx+2.5, canvasy+2.5, cellWidth-5, cellHeight-5);
     }
 
     private void drawGameGrid(){

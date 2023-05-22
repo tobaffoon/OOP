@@ -68,11 +68,12 @@ public class GameScreenController implements Initializable {
     }
 
     public void step(){
+        game.update();
         if(game.isGameLost()){
             stage.setScene(SceneDrawer.getLoseScene());
             gameLoopTimer.stop();
         }
-        game.step();
+        game.draw();
     }
 
     public void debugInfo(){

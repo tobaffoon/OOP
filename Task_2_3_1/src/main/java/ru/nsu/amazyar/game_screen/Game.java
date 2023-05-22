@@ -47,8 +47,7 @@ public class Game {
         painter.draw();
     }
 
-    public void step(){
-        update();
+    public void draw(){
         painter.draw();
     }
 
