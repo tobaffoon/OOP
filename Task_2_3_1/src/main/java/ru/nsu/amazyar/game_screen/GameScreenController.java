@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SceneDrawer;
@@ -33,13 +35,21 @@ public class GameScreenController implements Initializable {
     Canvas gameBoard;
     @FXML
     TreeView<String> questView;
+    @FXML
+    VBox loseBox;
+    @FXML
+    Label scoreLabel;
+    @FXML
+    Button replayButton;
+    @FXML
+    Button mainMenuButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void startNewGame(Stage stage, int rowCount, int columnCount, Color gridColorOne, Color gridColorTwo){
+    public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber, int lengthGoal, Color gridColorOne, Color gridColorTwo){
         if(gameActive){
             throw new IllegalStateException("New game cannot be started while there is an active game");
         }
@@ -57,7 +67,7 @@ public class GameScreenController implements Initializable {
 
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
         gameActive = true;
-        game = new Game(gameBoard, rowCount, columnCount, gridColorOne, gridColorTwo);
+        game = new Game(gameBoard, rowCount, columnCount, maxFoodNumber, lengthGoal, gridColorOne, gridColorTwo);
 
         this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE, this::step);
         gameLoopTimer.start();
@@ -70,7 +80,8 @@ public class GameScreenController implements Initializable {
     public void step(){
         game.update();
         if(game.isGameLost()){
-            stage.setScene(SceneDrawer.getLoseScene());
+            loseBox.setVisible(true);
+            scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
             gameLoopTimer.stop();
         }
         game.draw();
@@ -78,5 +89,13 @@ public class GameScreenController implements Initializable {
 
     public void debugInfo(){
         game.debugInfo();
+    }
+
+    public void onReplayButtonPressed(){
+
+    }
+
+    public void onMainMenuButtonPressed(){
+        stage.setScene(SceneDrawer.getMainScene());
     }
 }

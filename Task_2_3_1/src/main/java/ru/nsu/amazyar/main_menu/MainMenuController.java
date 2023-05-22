@@ -49,7 +49,7 @@ public class MainMenuController implements Initializable {
     @FXML
     public void onPlayPressed(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        gameScreenController.startNewGame(stage, 10, 10, Color.BEIGE, Color.WHITE);
+        gameScreenController.startNewGame(stage, 10, 10, 30, 1, Color.BEIGE, Color.WHITE);
     }
     @FXML
     public void onLeaderboardPressed(ActionEvent event){

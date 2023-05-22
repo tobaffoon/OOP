@@ -22,10 +22,12 @@ public class Game {
     private final int rowCount;
     private final int columnCount;
     private final Entity[][] grid;
+    private final int maxFoodNumber;
+    private final int lengthGoal;
     private int foodNumber;
     private boolean gameLost = false;
 
-    public Game(Canvas gameCanvas, int rows, int columns, Color gridColorOne, Color gridColorTwo) {
+    public Game(Canvas gameCanvas, int rows, int columns, int maxFoodNumber, int lengthGoal, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
             throw new IllegalArgumentException("Can't create empty grid");
         }
@@ -35,6 +37,8 @@ public class Game {
         this.rowCount = rows;
         this.columnCount = columns;
         grid = new Entity[columns][rows];
+        this.maxFoodNumber = maxFoodNumber;
+        this.lengthGoal = lengthGoal;
 
         playerSnake = new Snake(0, 0, rows, columns, Direction.DOWN);
         playerDirectionBuffer = playerSnake.getCurrentDirection();
@@ -78,7 +82,7 @@ public class Game {
             playerDirectionBuffer = direction;
     }
 
-    private int emptyTiles(){
+    private int emptyTilesCount(){
         int emptyTiles = 0;
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
@@ -111,8 +115,12 @@ public class Game {
         return getEntitiesAsStream().filter((e) -> e instanceof Snake).map((e) -> (Snake) e).distinct();
     }
 
+    public int getLengthGoal() {
+        return lengthGoal;
+    }
+
     public void generateFood() {
-        if(foodNumber >= InGameConstants.DEFAULT_MAX_FOOD_NUMBER) {
+        if(foodNumber >= Math.min(emptyTilesCount(), maxFoodNumber)) {
             return;
         }
 

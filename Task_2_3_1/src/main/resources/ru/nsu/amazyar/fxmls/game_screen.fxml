@@ -5,6 +5,9 @@
 <?import ru.nsu.amazyar.constants.*?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <AutoScalingStackPane fx:id="gamePane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.amazyar.game_screen.GameScreenController">
    <children>
       <Canvas fx:id="gameBoard">
@@ -16,6 +19,107 @@
          <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
       </width>
       </Canvas>
+      <VBox fx:id="loseBox" alignment="TOP_CENTER" visible="false">
+         <prefHeight>
+            <GameSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
+         </prefHeight>
+         <prefWidth>
+            <GameSceneConstants fx:constant="DEFAULT_VBOX_WIDTH"/>
+         </prefWidth>
+         <spacing>
+            <GameSceneConstants fx:constant="DEFAULT_SPACING"/>
+         </spacing>
+
+         <Label minWidth="-Infinity" alignment="BASELINE_CENTER" text="YOU LOSE" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
+
+            <textFill>
+               <GameSceneConstants fx:constant="DEFAULT_LOSE_LABEL_COLOR"/>
+            </textFill>
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_LABEL_FONT"/>
+            </font>
+            <prefWidth>
+               <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+            </prefWidth>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_LOSE_LABEL_HEIGHT"/>
+            </prefHeight>
+
+            <VBox.margin>
+               <Insets>
+                  <top>
+                     <GameSceneConstants fx:constant="DEFAULT_TOP_MARGIN"/>
+                  </top>
+               </Insets>
+            </VBox.margin>
+         </Label>
+         <Label fx:id="scoreLabel" minWidth="-Infinity" alignment="BASELINE_CENTER" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_SCORE_FONT"/>
+            </font>
+            <prefWidth>
+               <GameSceneConstants fx:constant="DEFAULT_SCORE_LABEL_WIDTH"/>
+            </prefWidth>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_SCORE_LABEL_HEIGHT"/>
+            </prefHeight>
+
+            <VBox.margin>
+               <Insets>
+                  <left>
+                     <GameSceneConstants fx:constant="DEFAULT_SCORE_INSET"/>
+                  </left>
+                  <right>
+                     <GameSceneConstants fx:constant="DEFAULT_SCORE_INSET"/>
+                  </right>
+               </Insets>
+            </VBox.margin>
+         </Label>
+
+         <Button fx:id="replayButton" text="Replay" onMousePressed="#onReplayButtonPressed">
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+            </font>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+            </prefHeight>
+            <prefWidth>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+            </prefWidth>
+            <VBox.margin>
+               <Insets>
+                  <left>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </left>
+                  <right>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </right>
+               </Insets>
+            </VBox.margin>
+         </Button>
+
+         <Button fx:id="mainMenuButton" text="Return to main menu" onMousePressed="#onMainMenuButtonPressed">
+            <font>
+            <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+            </font>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+            </prefHeight>
+            <prefWidth>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+            </prefWidth>
+            <VBox.margin>
+               <Insets>
+                  <left>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </left>
+                  <right>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </right>
+               </Insets>
+            </VBox.margin>
+         </Button>
+      </VBox>
 <!--      <TreeView fx:id="questView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="150.0" />-->
    </children>
 </AutoScalingStackPane>

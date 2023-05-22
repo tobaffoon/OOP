@@ -1,5 +1,6 @@
 package ru.nsu.amazyar.bases;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -37,19 +38,22 @@ public class AutoScalingStackPane extends StackPane {
     public void rescale() {
         if (!getChildren().isEmpty()) {
             getChildren().forEach((c) -> {
-                double xScale = getWidth() / c.getBoundsInLocal().getWidth();
-                double yScale = getHeight() / c.getBoundsInLocal().getHeight();
-                if (autoScale.get() == AutoScale.FILL) {
-                    c.setScaleX(xScale);
-                    c.setScaleY(yScale);
-                } else if (autoScale.get() == AutoScale.FIT) {
-                    double scale = Math.min(xScale, yScale);
-                    c.setScaleX(scale);
-                    c.setScaleY(scale);
-                } else {
-                    c.setScaleX(1d);
-                    c.setScaleY(1d);
-                }
+                Platform.runLater(() -> {
+                    double xScale = getWidth() / c.getBoundsInLocal().getWidth();
+                    double yScale = getHeight() / c.getBoundsInLocal().getHeight();
+
+                    if (autoScale.get() == AutoScale.FILL) {
+                        c.setScaleX(xScale);
+                        c.setScaleY(yScale);
+                    } else if (autoScale.get() == AutoScale.FIT) {
+                        double scale = Math.min(xScale, yScale);
+                        c.setScaleX(scale);
+                        c.setScaleY(scale);
+                    } else {
+                        c.setScaleX(1d);
+                        c.setScaleY(1d);
+                    }
+                });
             });
         }
     }

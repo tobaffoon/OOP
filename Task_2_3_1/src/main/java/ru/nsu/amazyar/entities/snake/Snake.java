@@ -22,6 +22,9 @@ public class Snake extends MovableEntity {
         this.changeDirectionBuffer = getCurrentDirection();
     }
 
+    public int getLength(){
+        return snakeBody.size();
+    }
     public Queue<SnakeLink> getSnakeBody() {
         return snakeBody;
     }

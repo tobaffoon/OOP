@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
+import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
@@ -33,13 +34,13 @@ public class GamePainter {
         this.gridColorOne = gridColorOne;
         this.gridColorTwo = gridColorTwo;
         this.snakeHeadImage = new Image(
-                SnakeApplication.class.getResourceAsStream(InGameConstants.SNAKE_HEAD_SPRITE));
+                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_HEAD_SPRITE));
         this.snakeBodyImage = new Image(
-                SnakeApplication.class.getResourceAsStream(InGameConstants.SNAKE_BODY_SPRITE));
+                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_BODY_SPRITE));
         this.snakeTailImage = new Image(
-                SnakeApplication.class.getResourceAsStream(InGameConstants.SNAKE_TAIL_SPRITE));
+                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_TAIL_SPRITE));
         this.foodImage = new Image(
-                SnakeApplication.class.getResourceAsStream(InGameConstants.FOOD_SPRITE));
+                SnakeApplication.class.getResourceAsStream(GameSceneConstants.FOOD_SPRITE));
 
         this.cellHeight = drawingCanvas.getHeight() / game.getRowCount();
         this.cellWidth = drawingCanvas.getWidth() / game.getColumnCount();
