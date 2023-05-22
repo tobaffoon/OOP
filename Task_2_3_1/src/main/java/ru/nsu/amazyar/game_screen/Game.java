@@ -13,6 +13,7 @@ import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
+import ru.nsu.amazyar.entities.snake.SnakeLink;
 
 public class Game {
     private final CycleTimer gameLoopTimer;
@@ -53,7 +54,8 @@ public class Game {
         // change players direction to last pressed arrow
         playerSnake.changeDirection(playerDirectionBuffer);
 
-        getMovableEntitiesAsStream().forEach(MovableEntity::move);
+        getSnakesAsStream().forEach(MovableEntity::move);
+        recalculateGridStatus();
 
         generateFood();
     }
@@ -104,8 +106,8 @@ public class Game {
         return Arrays.stream(grid).flatMap(Arrays::stream).filter(Objects::nonNull);
     }
 
-    public Stream<MovableEntity> getMovableEntitiesAsStream(){
-        return getEntitiesAsStream().filter((cell) -> cell instanceof MovableEntity).map((e) -> (MovableEntity) e);
+    public Stream<Snake> getSnakesAsStream(){
+        return getEntitiesAsStream().filter((e) -> e instanceof Snake).map((e) -> (Snake) e).distinct();
     }
 
     public void generateFood() {
@@ -126,21 +128,29 @@ public class Game {
         grid[foodx][foody] = new SimpleEdible(foodx, foody, 1);
     }
 
+    public void debugInfo(){
+        for (int i = 0; i < columnCount; i++) {
+            for (int j = 0; j < rowCount; j++) {
+                System.out.print(grid[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
     public void recalculateGridStatus(){
-        getMovableEntitiesAsStream().forEach((e) -> {
+        getSnakesAsStream().forEach((e) -> {
             // if entity moved from a tile, a tile is empty now
             grid[e.getPrevx()][e.getPrevy()] = null;
 
-            if(e instanceof Snake){
-                Entity collidingEntity = grid[e.getX()][e.getY()];
-                if(collidingEntity == null) {
-                    grid[e.getX()][e.getY()] = (Snake) e;
-                }
-                else if(collidingEntity instanceof SimpleEdible){
-                    ((Snake) e).growTail();
-                    grid[e.getX()][e.getY()] = (Snake) e;
-                    foodNumber--;
-                }
+            Entity collidingEntity = grid[e.getX()][e.getY()];
+            if(collidingEntity == null) {
+                grid[e.getX()][e.getY()] = e;
+            }
+            else if(collidingEntity instanceof SimpleEdible){
+                ((Snake) e).growTail();
+                grid[e.getX()][e.getY()] = e;
+                foodNumber--;
             }
         });
     }

@@ -2,7 +2,6 @@ package ru.nsu.amazyar.entities.food;
 
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.Entity;
-import ru.nsu.amazyar.entities.MovableEntity;
 
 public class SimpleEdible implements Entity {
     private final int x, y;

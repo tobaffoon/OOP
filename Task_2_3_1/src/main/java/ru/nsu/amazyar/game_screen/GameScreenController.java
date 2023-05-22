@@ -59,4 +59,8 @@ public class GameScreenController implements Initializable {
     public void playerChangeDirection(Direction direction){
         game.changePlayerDirection(direction);
     }
+
+    public void debugInfo(){
+        game.debugInfo();
+    }
 }

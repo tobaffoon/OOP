@@ -3,9 +3,9 @@ package ru.nsu.amazyar.entities.snake;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import ru.nsu.amazyar.bases.Direction;
-import ru.nsu.amazyar.entities.SimpleMovableEntity;
+import ru.nsu.amazyar.entities.MovableEntity;
 
-public class Snake extends SimpleMovableEntity {
+public class Snake extends MovableEntity {
     private int prevx;
     private int prevy;
     private SnakeLink head;
@@ -17,7 +17,7 @@ public class Snake extends SimpleMovableEntity {
         super(x, y, gridRowCount, gridColumnCount, initialDirection);
         this.prevx = x;
         this.prevy = y;
-        this.head = new SnakeLink(x, y);
+        this.head = new SnakeLink(x, y, this);
         snakeBody.add(head);
         this.changeDirectionBuffer = getCurrentDirection();
     }
@@ -36,7 +36,6 @@ public class Snake extends SimpleMovableEntity {
 
     @Override
     public void move() {
-
         // prev pos is previous tail pos
         prevx = snakeBody.peek().getX();
         prevy = snakeBody.peek().getY();
@@ -63,8 +62,23 @@ public class Snake extends SimpleMovableEntity {
                 break;
         }
 
-        this.head = new SnakeLink(getX(), getY());
+        this.head = new SnakeLink(getX(), getY(), this);
         this.snakeBody.add(this.head);
+    }
+
+    @Override
+    public String toString() {
+        int i = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (SnakeLink link : snakeBody) {
+            stringBuilder.append("[");
+            stringBuilder.append(i);
+            stringBuilder.append("] ");
+            stringBuilder.append(link);
+            i++;
+        }
+
+        return stringBuilder.toString();
     }
 
     @Override

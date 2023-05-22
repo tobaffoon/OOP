@@ -1,10 +1,6 @@
 package ru.nsu.amazyar.game_screen;
 
-import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Queue;
-import java.util.stream.Stream;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -12,8 +8,6 @@ import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.entities.Entity;
-import ru.nsu.amazyar.entities.MovableEntity;
-import ru.nsu.amazyar.entities.SimpleMovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
@@ -56,7 +50,7 @@ public class GamePainter {
     private void drawEntities(){
         game.getEntitiesAsStream().forEach((entity) -> {
             if (entity instanceof Snake){
-                drawSnake((Snake)entity);
+                drawSnake((Snake) entity);
             }
             else if (entity instanceof SimpleEdible){
                 drawEntity(entity, foodImage);
@@ -87,6 +81,7 @@ public class GamePainter {
     }
 
     private void drawEntity(Entity entity, Image sprite){
+
         double canvasx = entity.getX() * cellWidth;
         double canvasy = entity.getY() * cellHeight;
 
