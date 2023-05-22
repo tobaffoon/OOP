@@ -10,6 +10,7 @@
 <?import ru.nsu.amazyar.constants.StageConstants?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.shape.Box?>
+<?import javafx.scene.paint.Color?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ru.nsu.amazyar.settings_screen.SettingsController">
   <prefHeight>
     <SettingsSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
@@ -36,7 +37,7 @@
     </prefHeight>
   </Label>
 
-  <Button fx:id="startButton" text="Start the game" onMousePressed="#onStartButtonPressed">
+  <Button fx:id="startButton" text="Start the game" onAction="#onStartButtonPressed">
     <font>
       <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
     </font>
@@ -84,18 +85,18 @@
     <HBox>
       <VBox>
         <Label fx:id="rowsLabel" text="ROWS: [5]"/>
-        <Slider fx:id="rowsSlider" min="5" max="100" value="5"/>
+        <TextField fx:id="rowsField" text="5"/>
       </VBox>
       <VBox>
         <Label fx:id="columnsLabel" text="COLUMNS: [5]"/>
-        <Slider fx:id="columnsSlider" min="5" max="100" value="5"/>
+        <TextField fx:id="columnsField" text="5"/>
       </VBox>
     </HBox>
 
 <!--    WINNING LENGTH    -->
     <VBox>
-      <Label fx:id="lengthLabel" text="LENGTH TO WIN: [1]"/>
-      <TextField fx:id="lengthField" text="1"/>
+      <Label fx:id="lengthLabel" text="LENGTH TO WIN: [5]"/>
+      <TextField fx:id="lengthField" text="5"/>
     </VBox>
 
 <!--    MAX FOOD NUMBER    -->
@@ -115,11 +116,19 @@
     <HBox>
       <VBox>
         <Label text="Color 1"/>
-        <ColorPicker/>
+        <ColorPicker fx:id="colorPicker1">
+          <value>
+            <Color fx:constant="WHITE"/>
+          </value>
+        </ColorPicker>
       </VBox>
       <VBox>
         <Label text="Color 2"/>
-        <ColorPicker/>
+        <ColorPicker fx:id="colorPicker2">
+          <value>
+            <Color fx:constant="GREY"/>
+          </value>
+        </ColorPicker>
       </VBox>
     </HBox>
 

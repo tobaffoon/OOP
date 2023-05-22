@@ -83,16 +83,14 @@ public class GameScreenController implements Initializable {
             loseBox.setVisible(true);
             scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
             gameLoopTimer.stop();
+            gameActive = false;
         }
         game.draw();
     }
 
-    public void debugInfo(){
-        game.debugInfo();
-    }
-
     public void onReplayButtonPressed(){
-
+        game.restart();
+        gameLoopTimer.start();
     }
 
     public void onMainMenuButtonPressed(){

@@ -20,7 +20,7 @@ public class GameSceneConstants {
     public static final double DEFAULT_SCORE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.1;
     public static final double DEFAULT_BUTTON_HEIGHT = DEFAULT_SCORE_LABEL_HEIGHT;
     public static final Font DEFAULT_SCORE_FONT = Font.font("Georgia Bold", DEFAULT_SCORE_LABEL_HEIGHT * 0.5);
-    public static final Font DEFAULT_BUTTON_FONT = Font.font("Elephant", DEFAULT_BUTTON_HEIGHT * 0.5);
+    public static final Font DEFAULT_BUTTON_FONT = Font.font("Elephant", DEFAULT_BUTTON_HEIGHT * 0.3);
     public static final double DEFAULT_SCORE_INSET = DEFAULT_VBOX_WIDTH * 0.05;
     public static final double DEFAULT_BUTTON_INSET = DEFAULT_VBOX_WIDTH * 0.2;
     public static final double DEFAULT_SCORE_LABEL_WIDTH = DEFAULT_VBOX_WIDTH - 2 * DEFAULT_BUTTON_INSET;

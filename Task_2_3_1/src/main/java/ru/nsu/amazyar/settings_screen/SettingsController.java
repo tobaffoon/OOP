@@ -1,14 +1,24 @@
 package ru.nsu.amazyar.settings_screen;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ru.nsu.amazyar.SceneDrawer;
+import ru.nsu.amazyar.SnakeApplication;
+import ru.nsu.amazyar.game_screen.GameScreenController;
 
 public class SettingsController implements Initializable {
     @FXML
@@ -16,9 +26,9 @@ public class SettingsController implements Initializable {
     @FXML
     Label rowsLabel;
     @FXML
-    Slider rowsSlider;
+    TextField rowsField;
     @FXML
-    Slider columnsSlider;
+    TextField columnsField;
     @FXML
     Label columnsLabel;
     @FXML
@@ -33,23 +43,26 @@ public class SettingsController implements Initializable {
     TextField speedField;
     @FXML
     Label speedLabel;
+    @FXML
+    ColorPicker colorPicker1;
+    @FXML
+    ColorPicker colorPicker2;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rowsSlider.valueProperty().addListener((b, o, n) -> rowsLabel.setText("ROWS: [" + n.intValue() + "]"));
-        columnsSlider.valueProperty().addListener((b, o, n) -> columnsLabel.setText("COLUMNS: [" + n.intValue() + "]"));
-
-        addNumberFieldToLabelListener(lengthField, lengthLabel, "LENGTH TO WIN");
-        addNumberFieldToLabelListener(maxFoodField, maxFoodLabel, "MAX NUMBER OF FOOD");
-        addNumberFieldToLabelListener(speedField, speedLabel, "SPEED");
+        addNumberFieldToLabelListener(lengthField, lengthLabel, "LENGTH TO WIN", 5, 100);
+        addNumberFieldToLabelListener(rowsField, rowsLabel, "ROWS", 5, 100);
+        addNumberFieldToLabelListener(columnsField, columnsLabel, "COLUMNS", 5, 100);
+        addNumberFieldToLabelListener(maxFoodField, maxFoodLabel, "MAX NUMBER OF FOOD", 1, 5);
+        addNumberFieldToLabelListener(speedField, speedLabel, "SPEED", 1, 5);
     }
 
-    private void addNumberFieldToLabelListener(TextField field, Label label, String labelTemplate){
+    private void addNumberFieldToLabelListener(TextField field, Label label, String labelTemplate, int min, int max){
         field.focusedProperty().addListener((b, o, n) -> {
             if(!n){
                 int inputValue = Integer.parseInt(field.getText());
-                field.setText(Integer.toString(roundToBounds(inputValue, 1, 5)));
+                field.setText(Integer.toString(roundToBounds(inputValue, min, max)));
 
                 String value = numberOnlyString(field.getText());
                 label.setText(labelTemplate + ": [" + value + "]");
@@ -76,7 +89,15 @@ public class SettingsController implements Initializable {
         return input;
     }
 
-    public void onStartButtonPressed(){
+    @FXML
+    public void onStartButtonPressed(ActionEvent event) throws IOException {
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
+        FXMLLoader fxmlLoader =
+            new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));
+        new Scene(fxmlLoader.load());
+
+        GameScreenController controller = fxmlLoader.getController();
+        controller.startNewGame(stage, Integer.parseInt(rowsField.getText()), Integer.parseInt(columnsField.getText()), Integer.parseInt(maxFoodField.getText()), Integer.parseInt(lengthField.getText()), colorPicker1.getValue(), colorPicker2.getValue());
     }
 }
