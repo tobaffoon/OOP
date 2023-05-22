@@ -76,11 +76,12 @@ public class GamePainter {
 
         // draw tail
         drawEntity(tempLink, snakeTailImage);
+        tempLink = snakeLinks.next();
 
         // draw body
         while(snakeLinks.hasNext()){
-            tempLink = snakeLinks.next();
             drawEntity(tempLink, snakeBodyImage);
+            tempLink = snakeLinks.next();
         }
 
         drawEntity(tempLink, snakeHeadImage);
