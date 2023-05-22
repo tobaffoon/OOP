@@ -21,8 +21,6 @@ public class MainMenuController implements Initializable {
     Scene gameScene;
     GameScreenController gameScreenController;
     @FXML
-    VBox buttonBox;
-    @FXML
     Button playButton;
     @FXML
     Button leaderboardButton;
@@ -49,7 +47,8 @@ public class MainMenuController implements Initializable {
     @FXML
     public void onPlayPressed(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        gameScreenController.startNewGame(stage, 10, 10, 30, 1, Color.BEIGE, Color.WHITE);
+        stage.setScene(SceneDrawer.getSettingsScene());
+//        gameScreenController.startNewGame(stage, 10, 10, 30, 1, Color.BEIGE, Color.WHITE);
     }
     @FXML
     public void onLeaderboardPressed(ActionEvent event){

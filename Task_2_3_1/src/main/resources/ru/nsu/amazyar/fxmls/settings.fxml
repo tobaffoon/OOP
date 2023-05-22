@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import ru.nsu.amazyar.constants.SettingsSceneConstants?>
+<?import ru.nsu.amazyar.constants.StageConstants?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Box?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ru.nsu.amazyar.settings_screen.SettingsController">
+  <prefHeight>
+    <SettingsSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
+  </prefHeight>
+  <prefWidth>
+    <SettingsSceneConstants fx:constant="DEFAULT_VBOX_WIDTH"/>
+  </prefWidth>
+  <spacing>
+    <SettingsSceneConstants fx:constant="DEFAULT_SPACING"/>
+  </spacing>
+
+  <Label minWidth="-Infinity" alignment="BASELINE_CENTER" text="SET UP THE GAME" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
+    <textFill>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_COLOR"/>
+    </textFill>
+    <font>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_FONT"/>
+    </font>
+    <prefWidth>
+      <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+    </prefWidth>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_HEIGHT"/>
+    </prefHeight>
+  </Label>
+
+  <Button fx:id="startButton" text="Start the game" onMousePressed="#onStartButtonPressed">
+    <font>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+    </font>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+    </prefHeight>
+    <prefWidth>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+    </prefWidth>
+    <VBox.margin>
+      <Insets>
+        <left>
+          <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+        </left>
+        <right>
+          <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+        </right>
+      </Insets>
+    </VBox.margin>
+  </Button>
+
+<!--  PARAMETERS BOX  -->
+  <VBox>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_HEIGHT"/>
+    </prefHeight>
+    <prefWidth>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_WIDTH"/>
+    </prefWidth>
+    <spacing>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_SPACING"/>
+    </spacing>
+    <VBox.margin>
+      <Insets>
+        <left>
+          <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_INSET"/>
+        </left>
+        <right>
+          <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_INSET"/>
+        </right>
+      </Insets>
+    </VBox.margin>
+
+<!--    GRID SIZE    -->
+    <HBox>
+      <VBox>
+        <Label fx:id="rowsLabel" text="ROWS: [5]"/>
+        <Slider fx:id="rowsSlider" min="5" max="100" value="5"/>
+      </VBox>
+      <VBox>
+        <Label fx:id="columnsLabel" text="COLUMNS: [5]"/>
+        <Slider fx:id="columnsSlider" min="5" max="100" value="5"/>
+      </VBox>
+    </HBox>
+
+<!--    WINNING LENGTH    -->
+    <VBox>
+      <Label fx:id="lengthLabel" text="LENGTH TO WIN: [1]"/>
+      <TextField fx:id="lengthField" text="1"/>
+    </VBox>
+
+<!--    MAX FOOD NUMBER    -->
+    <VBox>
+      <Label fx:id="maxFoodLabel" text="MAX NUMBER OF FOOD: [1]"/>
+      <TextField fx:id="maxFoodField" text="1"/>
+    </VBox>
+
+<!--    SPEED    -->
+    <VBox>
+      <Label fx:id="speedLabel" text="SPEED: [1]"/>
+      <TextField fx:id="speedField" text="1"/>
+    </VBox>
+
+
+<!--    GRID COLORS    -->
+    <HBox>
+      <VBox>
+        <Label text="Color 1"/>
+        <ColorPicker/>
+      </VBox>
+      <VBox>
+        <Label text="Color 2"/>
+        <ColorPicker/>
+      </VBox>
+    </HBox>
+
+
+  </VBox>
+</VBox>

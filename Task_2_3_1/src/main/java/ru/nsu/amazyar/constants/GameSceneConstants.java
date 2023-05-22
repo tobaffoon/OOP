@@ -1,9 +1,5 @@
 package ru.nsu.amazyar.constants;
 
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class GameSceneConstants {
@@ -21,7 +17,6 @@ public class GameSceneConstants {
     public static final double DEFAULT_TOP_MARGIN = DEFAULT_VBOX_HEIGHT * 0.2;
 
     public static final double DEFAULT_SPACING = 4;
-    public static final double ELEMENTS_COUNT = 4;
     public static final double DEFAULT_SCORE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.1;
     public static final double DEFAULT_BUTTON_HEIGHT = DEFAULT_SCORE_LABEL_HEIGHT;
     public static final Font DEFAULT_SCORE_FONT = Font.font("Georgia Bold", DEFAULT_SCORE_LABEL_HEIGHT * 0.5);

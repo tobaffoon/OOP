@@ -33,7 +33,7 @@
             <MainMenuConstants fx:constant="DEFAULT_NAME_HEIGHT"/>
          </prefHeight>
       </Label>
-      <VBox fx:id="buttonBox" minWidth="-Infinity" alignment="TOP_CENTER">
+      <VBox minWidth="-Infinity" alignment="TOP_CENTER">
          <prefWidth>
             <MainMenuConstants fx:constant="DEFAULT_VBOX_WIDTH"/>
          </prefWidth>
