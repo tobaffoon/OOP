@@ -16,7 +16,6 @@ import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
 
 public class Game {
-    private final CycleTimer gameLoopTimer;
     private final Snake playerSnake;
     private Direction playerDirectionBuffer;
     private final GamePainter painter;
@@ -24,6 +23,7 @@ public class Game {
     private final int columnCount;
     private final Entity[][] grid;
     private int foodNumber;
+    private boolean gameLost = false;
 
     public Game(Canvas gameCanvas, int rows, int columns, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
@@ -45,9 +45,11 @@ public class Game {
 
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
         painter.draw();
+    }
 
-        gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE, () -> {update(); painter.draw();});
-        gameLoopTimer.start();
+    public void step(){
+        update();
+        painter.draw();
     }
 
     public void update(){
@@ -152,6 +154,13 @@ public class Game {
                 grid[e.getX()][e.getY()] = e;
                 foodNumber--;
             }
+            else if(collidingEntity instanceof Snake){
+                gameLost = true;
+            }
         });
+    }
+
+    public boolean isGameLost() {
+        return gameLost;
     }
 }

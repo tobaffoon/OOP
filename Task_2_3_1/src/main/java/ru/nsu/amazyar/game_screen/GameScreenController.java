@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -16,12 +17,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
+import ru.nsu.amazyar.bases.CycleTimer;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.constants.InGameConstants;
 
 public class GameScreenController implements Initializable {
     private boolean gameActive = false;
     private Game game;
+    private Stage stage;
+    private CycleTimer gameLoopTimer;
 
     @FXML
     AutoScalingStackPane gamePane;
@@ -48,16 +52,27 @@ public class GameScreenController implements Initializable {
         if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException();
         }
-
+        this.stage = stage;
         stage.setScene(gamePane.getScene());
 
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
         gameActive = true;
         game = new Game(gameBoard, rowCount, columnCount, gridColorOne, gridColorTwo);
+
+        this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE, this::step);
+        gameLoopTimer.start();
     }
 
     public void playerChangeDirection(Direction direction){
         game.changePlayerDirection(direction);
+    }
+
+    public void step(){
+        if(game.isGameLost()){
+            stage.setScene(SceneDrawer.getLoseScene());
+            gameLoopTimer.stop();
+        }
+        game.step();
     }
 
     public void debugInfo(){

@@ -16,6 +16,10 @@ public class SceneDrawer {
         return getSceneFromFxml("fxmls/game_screen.fxml");
     }
 
+    static public Scene getLoseScene(){
+        return getSceneFromFxml("fxmls/lose_screen.fxml");
+    }
+
     static private Scene getSceneFromFxml(String path){
         FXMLLoader fxmlLoader =
             new FXMLLoader(SnakeApplication.class.getResource(path));
