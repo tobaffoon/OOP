@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
+import ru.nsu.amazyar.constants.StageConstants;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
@@ -90,7 +91,9 @@ public class GamePainter {
         double canvasy = entity.getY() * cellHeight;
 
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
-        gc.drawImage(sprite, canvasx+2.5, canvasy+2.5, cellWidth-5, cellHeight-5);
+        double vertInset = cellHeight * 0.1;
+        double horInset = cellHeight * 0.1;
+        gc.drawImage(sprite, canvasx+horInset, canvasy+vertInset, cellWidth-2*horInset, cellHeight-2*vertInset);
     }
 
     private void drawGameGrid(){

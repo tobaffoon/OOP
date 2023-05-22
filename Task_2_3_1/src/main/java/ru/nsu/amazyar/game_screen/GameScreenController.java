@@ -43,7 +43,7 @@ public class GameScreenController implements Initializable {
 
     }
 
-    public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber, int lengthGoal, Color gridColorOne, Color gridColorTwo){
+    public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber, int lengthGoal, int speed, Color gridColorOne, Color gridColorTwo){
         if(gameActive){
             throw new IllegalStateException("New game cannot be started while there is an active game");
         }
@@ -63,7 +63,7 @@ public class GameScreenController implements Initializable {
         gameActive = true;
         game = new Game(gameBoard, rowCount, columnCount, maxFoodNumber, lengthGoal, gridColorOne, gridColorTwo);
 
-        this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE, this::step);
+        this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE / speed, this::step);
         gameLoopTimer.start();
         gamePaused = false;
     }

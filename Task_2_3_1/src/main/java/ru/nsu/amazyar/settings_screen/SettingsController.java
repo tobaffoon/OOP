@@ -98,6 +98,6 @@ public class SettingsController implements Initializable {
         new Scene(fxmlLoader.load());
 
         GameScreenController controller = fxmlLoader.getController();
-        controller.startNewGame(stage, Integer.parseInt(rowsField.getText()), Integer.parseInt(columnsField.getText()), Integer.parseInt(maxFoodField.getText()), Integer.parseInt(lengthField.getText()), colorPicker1.getValue(), colorPicker2.getValue());
+        controller.startNewGame(stage, Integer.parseInt(rowsField.getText()), Integer.parseInt(columnsField.getText()), Integer.parseInt(maxFoodField.getText()), Integer.parseInt(lengthField.getText()), Integer.parseInt(speedField.getText()), colorPicker1.getValue(), colorPicker2.getValue());
     }
 }
