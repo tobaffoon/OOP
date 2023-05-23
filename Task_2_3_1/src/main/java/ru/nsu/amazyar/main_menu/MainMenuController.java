@@ -10,12 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SceneDrawer;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.game_screen.GameScreenController;
+import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
 public class MainMenuController implements Initializable {
     Scene gameScene;
@@ -28,9 +29,14 @@ public class MainMenuController implements Initializable {
     Button tutorialButton;
     @FXML
     Button quitButton;
+    Dialog<?> leaderBoardDialog;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.leaderBoardDialog = new Dialog<>();
+        this.leaderBoardDialog.setHeaderText("LEADERBOARD");
+        this.leaderBoardDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
         FXMLLoader fxmlLoader =
             new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));
 
@@ -48,11 +54,13 @@ public class MainMenuController implements Initializable {
     public void onPlayPressed(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(SceneDrawer.getSettingsScene());
-//        gameScreenController.startNewGame(stage, 10, 10, 30, 1, Color.BEIGE, Color.WHITE);
     }
     @FXML
-    public void onLeaderboardPressed(ActionEvent event){
-
+    public void onLeaderboardPressed(ActionEvent event) {
+        LeaderboardManager manager = new LeaderboardManager();
+        manager.loadLeaderboardFromFile();
+        leaderBoardDialog.setContentText(manager.getLeaderboard());
+        leaderBoardDialog.show();
     }
     @FXML
     public void onTutorialPressed(ActionEvent event){

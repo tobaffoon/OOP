@@ -99,6 +99,28 @@
             </VBox.margin>
          </Button>
 
+         <Button fx:id="leaderboardButton" text="Add leaderboard entry" onMousePressed="#onLeaderboardButtonPressed">
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+            </font>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+            </prefHeight>
+            <prefWidth>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+            </prefWidth>
+            <VBox.margin>
+               <Insets>
+                  <left>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </left>
+                  <right>
+                     <GameSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+                  </right>
+               </Insets>
+            </VBox.margin>
+         </Button>
+
          <Button fx:id="mainMenuButton" text="Return to main menu" onMousePressed="#onMainMenuButtonPressed">
             <font>
             <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
