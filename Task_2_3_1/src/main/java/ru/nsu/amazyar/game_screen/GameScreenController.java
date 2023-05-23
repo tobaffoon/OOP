@@ -48,11 +48,11 @@ public class GameScreenController implements Initializable {
     @FXML
     Label pauseLabel;
     private TextInputDialog leaderboardDialog;
-    private LeaderboardManager leaderboardManager;
+    private static final LeaderboardManager leaderboardManager = new LeaderboardManager();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        leaderboardManager = new LeaderboardManager();
+        leaderboardManager.loadLeaderboardFromFile();
 
         leaderboardDialog = new TextInputDialog();
         leaderboardDialog.setTitle("Game Over");
