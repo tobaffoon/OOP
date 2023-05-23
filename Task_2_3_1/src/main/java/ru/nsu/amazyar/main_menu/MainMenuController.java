@@ -31,16 +31,19 @@ public class MainMenuController implements Initializable {
     Button quitButton;
     Dialog<?> leaderBoardDialog;
     Dialog<?> tutorialDialog;
+    private LeaderboardManager manager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.manager = new LeaderboardManager();
+
         this.leaderBoardDialog = new Dialog<>();
         this.leaderBoardDialog.setHeaderText("LEADERBOARD");
-        this.leaderBoardDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        this.leaderBoardDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);;
 
         this.tutorialDialog = new Dialog<>();
         this.tutorialDialog.setHeaderText("TUTORIAL");
-        this.tutorialDialog.getDialogPane();
+        this.tutorialDialog.setContentText(" SNAKE moves on it's own\n Press ARROW KEYS to change direction\n Press P to pause\n Collect eggs to get bigger\n Repeat until WIN\n PS. Avoid BRICKS and your TAIL");
         this.tutorialDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         FXMLLoader fxmlLoader =
@@ -63,14 +66,13 @@ public class MainMenuController implements Initializable {
     }
     @FXML
     public void onLeaderboardPressed(ActionEvent event) {
-        LeaderboardManager manager = new LeaderboardManager();
         manager.loadLeaderboardFromFile();
         leaderBoardDialog.setContentText(manager.getLeaderboard());
         leaderBoardDialog.show();
     }
     @FXML
     public void onTutorialPressed(ActionEvent event){
-
+        tutorialDialog.show();
     }
     @FXML
     public void onQuitPressed(ActionEvent event){

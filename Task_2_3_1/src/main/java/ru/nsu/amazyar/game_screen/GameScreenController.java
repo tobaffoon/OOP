@@ -47,11 +47,13 @@ public class GameScreenController implements Initializable {
     Button leaderboardButton;
     @FXML
     Label pauseLabel;
+    private GamePainter painter;
     private TextInputDialog leaderboardDialog;
     private static final LeaderboardManager leaderboardManager = new LeaderboardManager();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         leaderboardManager.loadLeaderboardFromFile();
 
         leaderboardDialog = new TextInputDialog();
@@ -90,7 +92,10 @@ public class GameScreenController implements Initializable {
 
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
         gameActive = true;
-        game = new Game(gameBoard, rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber, gridColorOne, gridColorTwo);
+        game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber, gridColorOne, gridColorTwo);
+
+        painter = new GamePainter(game, gameBoard, gridColorOne, gridColorTwo);
+        painter.draw();
 
         this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE / speed, this::step);
         gameLoopTimer.start();
@@ -136,7 +141,7 @@ public class GameScreenController implements Initializable {
             gameLoopTimer.stop();
             gameActive = false;
         }
-        game.draw();
+        painter.draw();
     }
 
     public void onReplayButtonPressed(){

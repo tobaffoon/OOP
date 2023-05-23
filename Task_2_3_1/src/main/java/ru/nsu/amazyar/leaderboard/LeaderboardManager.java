@@ -39,6 +39,10 @@ public class LeaderboardManager {
         saveLeaderboardToFile();
     }
 
+    public void clear(){
+        leaderboard.clear();
+    }
+
     private void sortLeaderboard() {
         leaderboard.sort((s1, s2) -> Integer.compare(s2.getScore(), s1.getScore()));
     }

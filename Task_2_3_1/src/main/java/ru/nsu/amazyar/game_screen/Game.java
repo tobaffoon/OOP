@@ -16,7 +16,6 @@ import ru.nsu.amazyar.entities.snake.Snake;
 public class Game {
     private Snake playerSnake;
     private Direction playerDirectionBuffer;
-    private final GamePainter painter;
     private final int rowCount;
     private final int columnCount;
     private final Entity[][] grid;
@@ -27,7 +26,7 @@ public class Game {
     private boolean gameLost = false;
     private boolean gameWon = false;
 
-    public Game(Canvas gameCanvas, int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber, Color gridColorOne, Color gridColorTwo) {
+    public Game(int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
             throw new IllegalArgumentException("Can't create empty grid");
         }
@@ -42,8 +41,6 @@ public class Game {
         this.brickNumber = brickNumber;
 
         initializeInnerStructures();
-        painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
-        painter.draw();
     }
 
     private void initializeInnerStructures(){
@@ -77,7 +74,6 @@ public class Game {
         gameWon = false;
         emptyGrid();
         initializeInnerStructures();
-        painter.draw();
     }
 
     private void emptyGrid(){
@@ -86,10 +82,6 @@ public class Game {
                 grid[i][j] = null;
             }
         }
-    }
-
-    public void draw(){
-        painter.draw();
     }
 
     public void update(){
