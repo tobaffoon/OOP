@@ -98,6 +98,8 @@ public class GameScreenController implements Initializable {
 
     public void onReplayButtonPressed(){
         game.restart();
+        loseBox.setVisible(false);
+        gameLoopTimer = new CycleTimer(gameLoopTimer.getNanosInterval(), this::step);
         gameLoopTimer.start();
     }
 

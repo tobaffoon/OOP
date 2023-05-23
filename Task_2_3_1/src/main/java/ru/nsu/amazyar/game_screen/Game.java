@@ -52,6 +52,7 @@ public class Game {
     }
 
     public void restart(){
+        gameLost = false;
         emptyGrid();
         initializeInnerStructures();
         painter.draw();
