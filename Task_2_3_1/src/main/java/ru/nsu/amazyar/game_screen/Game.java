@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.Direction;
+import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
@@ -22,10 +23,11 @@ public class Game {
     private final int maxFoodNumber;
     private final int lengthGoal;
     private int foodNumber;
+    private final int brickNumber;
     private boolean gameLost = false;
     private boolean gameWon = false;
 
-    public Game(Canvas gameCanvas, int rows, int columns, int maxFoodNumber, int lengthGoal, Color gridColorOne, Color gridColorTwo) {
+    public Game(Canvas gameCanvas, int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
             throw new IllegalArgumentException("Can't create empty grid");
         }
@@ -37,6 +39,7 @@ public class Game {
         grid = new Entity[columns][rows];
         this.maxFoodNumber = maxFoodNumber;
         this.lengthGoal = lengthGoal;
+        this.brickNumber = brickNumber;
 
         initializeInnerStructures();
         painter = new GamePainter(this, gameCanvas, gridColorOne, gridColorTwo);
@@ -48,8 +51,25 @@ public class Game {
         playerDirectionBuffer = playerSnake.getCurrentDirection();
         addEntity(playerSnake);
 
+        generateBricks();
+
         foodNumber = 0;
         generateFood();
+    }
+
+    private void generateBricks(){
+        for (int i = 0; i < brickNumber; i++) {
+            int brickx;
+            int bricky;
+            do {
+                brickx = ThreadLocalRandom.current().nextInt(0, columnCount);
+                int lowery = brickx>=3?0:3;
+                bricky = ThreadLocalRandom.current().nextInt(lowery, rowCount);
+            }while (grid[brickx][bricky] != null);
+
+            addEntity(new Brick(brickx, bricky));
+        }
+
     }
 
     public void restart(){
@@ -155,7 +175,7 @@ public class Game {
         }while (grid[foodx][foody] != null);
 
         foodNumber++;
-        grid[foodx][foody] = new SimpleEdible(foodx, foody, 1);
+        addEntity(new SimpleEdible(foodx, foody, 1));
     }
 
     public void recalculateGridStatus(){
@@ -172,7 +192,7 @@ public class Game {
                 grid[e.getX()][e.getY()] = e;
                 foodNumber--;
             }
-            else if(collidingEntity instanceof Snake){
+            else if(collidingEntity instanceof Snake || collidingEntity instanceof Brick){
                 gameLost = true;
             }
         });

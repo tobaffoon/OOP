@@ -13,10 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import ru.nsu.amazyar.SceneDrawer;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.game_screen.GameScreenController;
 
@@ -44,6 +42,10 @@ public class SettingsController implements Initializable {
     @FXML
     Label speedLabel;
     @FXML
+    TextField brickNumberField;
+    @FXML
+    Label brickNumberLabel;
+    @FXML
     ColorPicker colorPicker1;
     @FXML
     ColorPicker colorPicker2;
@@ -51,28 +53,48 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addNumberFieldToLabelListener(lengthField, lengthLabel, "LENGTH TO WIN", 5, 100);
-        addNumberFieldToLabelListener(rowsField, rowsLabel, "ROWS", 5, 100);
-        addNumberFieldToLabelListener(columnsField, columnsLabel, "COLUMNS", 5, 100);
-        addNumberFieldToLabelListener(maxFoodField, maxFoodLabel, "MAX NUMBER OF FOOD", 1, 5);
-        addNumberFieldToLabelListener(speedField, speedLabel, "SPEED", 1, 5);
+        addNumberFocusListener(lengthField, 5, 100);
+        addNumberFocusListener(rowsField, 5, 100);
+        addNumberFocusListener(columnsField, 5, 100);
+        addNumberFocusListener(maxFoodField, 1, 5);
+        addNumberFocusListener(speedField, 1, 5);
+
+        // separate brickNumber because it's max value is variable;
+        brickNumberField.focusedProperty().addListener((b, o, n) -> {
+            if(!n){
+                int inputValue = Integer.parseInt(brickNumberField.getText());
+                brickNumberField.setText(Integer.toString(roundToBounds(inputValue, 0, (int)Math.ceil(0.3 * (getRowsValue() * getColumnsValue() - 9)))));
+            }
+        });
+
+        addNumberFieldToLabelChangedListener(lengthField, lengthLabel, "LENGTH TO WIN");
+        addNumberFieldToLabelChangedListener(rowsField, rowsLabel, "ROWS");
+        addNumberFieldToLabelChangedListener(columnsField, columnsLabel, "COLUMNS");
+        addNumberFieldToLabelChangedListener(maxFoodField, maxFoodLabel, "MAX NUMBER OF FOOD");
+        addNumberFieldToLabelChangedListener(speedField, speedLabel, "SPEED");
+        addNumberFieldToLabelChangedListener(brickNumberField, brickNumberLabel, "BRICK NUMBER");
     }
 
-    private void addNumberFieldToLabelListener(TextField field, Label label, String labelTemplate, int min, int max){
+    private void addNumberFieldToLabelChangedListener(TextField field, Label label, String labelTemplate){
+        field.textProperty().addListener((b, o, n) ->{
+            String trimValue = numberOnlyString(n);
+            field.setText(trimValue);
+            label.setText(labelTemplate + ": [" + trimValue + "]");
+        });
+    }
+
+    private void addNumberFocusListener(TextField field, int min, int max){
         field.focusedProperty().addListener((b, o, n) -> {
             if(!n){
                 int inputValue = Integer.parseInt(field.getText());
                 field.setText(Integer.toString(roundToBounds(inputValue, min, max)));
-
-                String value = numberOnlyString(field.getText());
-                label.setText(labelTemplate + ": [" + value + "]");
             }
         });
     }
 
     private String numberOnlyString(String input){
         if (!input.matches("\\d*")) {
-            input = input.replaceAll("[^\\d]", "0");
+            input = input.replaceAll("[^\\d]", "");
         }
 
         return input;
@@ -89,6 +111,25 @@ public class SettingsController implements Initializable {
         return input;
     }
 
+    private int getRowsValue(){
+        return Integer.parseInt(rowsField.getText());
+    }
+    private int getColumnsValue(){
+        return Integer.parseInt(columnsField.getText());
+    }
+    private int getMaxFoodValue(){
+        return Integer.parseInt(maxFoodField.getText());
+    }
+    private int getSpeedValue(){
+        return Integer.parseInt(speedField.getText());
+    }
+    private int getLengthValue(){
+        return Integer.parseInt(lengthField.getText());
+    }
+    private int getBrickNumberValue(){
+        return Integer.parseInt(brickNumberField.getText());
+    }
+
     @FXML
     public void onStartButtonPressed(ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -98,6 +139,6 @@ public class SettingsController implements Initializable {
         new Scene(fxmlLoader.load());
 
         GameScreenController controller = fxmlLoader.getController();
-        controller.startNewGame(stage, Integer.parseInt(rowsField.getText()), Integer.parseInt(columnsField.getText()), Integer.parseInt(maxFoodField.getText()), Integer.parseInt(lengthField.getText()), Integer.parseInt(speedField.getText()), colorPicker1.getValue(), colorPicker2.getValue());
+        controller.startNewGame(stage, getRowsValue(), getColumnsValue(), getMaxFoodValue(), getLengthValue(), getBrickNumberValue(), getSpeedValue(), colorPicker1.getValue(), colorPicker2.getValue());
     }
 }

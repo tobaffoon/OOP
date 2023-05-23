@@ -30,12 +30,18 @@ public class MainMenuController implements Initializable {
     @FXML
     Button quitButton;
     Dialog<?> leaderBoardDialog;
+    Dialog<?> tutorialDialog;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.leaderBoardDialog = new Dialog<>();
         this.leaderBoardDialog.setHeaderText("LEADERBOARD");
         this.leaderBoardDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        this.tutorialDialog = new Dialog<>();
+        this.tutorialDialog.setHeaderText("TUTORIAL");
+        this.tutorialDialog.getDialogPane();
+        this.tutorialDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         FXMLLoader fxmlLoader =
             new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));

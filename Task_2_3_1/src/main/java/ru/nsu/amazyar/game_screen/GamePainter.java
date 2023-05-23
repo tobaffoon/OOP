@@ -11,6 +11,7 @@ import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.constants.StageConstants;
+import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
@@ -28,6 +29,7 @@ public class GamePainter {
     private final Image snakeBodyImage;
     private final Image snakeTailImage;
     private final Image foodImage;
+    private final Image brickImage;
 
     public GamePainter(Game game, Canvas canvas, Color gridColorOne, Color gridColorTwo){
         this.game = game;
@@ -42,6 +44,8 @@ public class GamePainter {
                 SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_TAIL_SPRITE));
         this.foodImage = new Image(
                 SnakeApplication.class.getResourceAsStream(GameSceneConstants.FOOD_SPRITE));
+        this.brickImage = new Image(
+                SnakeApplication.class.getResourceAsStream(GameSceneConstants.BRICK_SPRITE));
 
         this.cellHeight = drawingCanvas.getHeight() / game.getRowCount();
         this.cellWidth = drawingCanvas.getWidth() / game.getColumnCount();
@@ -59,6 +63,9 @@ public class GamePainter {
             }
             else if (entity instanceof SimpleEdible){
                 drawEntity(entity, foodImage);
+            }
+            else if (entity instanceof Brick){
+                drawEntity(entity, brickImage);
             }
         });
     }

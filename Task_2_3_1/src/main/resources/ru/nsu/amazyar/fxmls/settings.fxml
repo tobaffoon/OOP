@@ -111,6 +111,12 @@
       <TextField fx:id="speedField" text="1"/>
     </VBox>
 
+<!--    BRICK NUMBER    -->
+    <VBox>
+      <Label fx:id="brickNumberLabel" text="BRICK NUMBER: [0]"/>
+      <TextField fx:id="brickNumberField" text="0"/>
+    </VBox>
+
 
 <!--    GRID COLORS    -->
     <HBox>

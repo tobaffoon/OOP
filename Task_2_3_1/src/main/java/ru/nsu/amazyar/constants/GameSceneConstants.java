@@ -8,6 +8,7 @@ public class GameSceneConstants {
     public static final String SNAKE_BODY_SPRITE = "images/snake_body.png";
     public static final String SNAKE_TAIL_SPRITE = "images/snake_tail.png";
     public static final String FOOD_SPRITE = "images/egg.png";
+    public static final String BRICK_SPRITE = "images/brick.png";
     public static final double DEFAULT_LOSE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final double DEFAULT_WIN_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final Font DEFAULT_LABEL_FONT = Font.font("Georgia Bold", DEFAULT_LOSE_LABEL_HEIGHT * 0.5);
