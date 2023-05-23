@@ -56,8 +56,8 @@ public class SettingsController implements Initializable {
         addNumberFocusListener(lengthField, 5, 100);
         addNumberFocusListener(rowsField, 5, 100);
         addNumberFocusListener(columnsField, 5, 100);
-        addNumberFocusListener(maxFoodField, 1, 5);
-        addNumberFocusListener(speedField, 1, 5);
+        addNumberFocusListener(maxFoodField, 1, 100);
+        addNumberFocusListener(speedField, 1, 10);
 
         // separate brickNumber because it's max value is variable;
         brickNumberField.focusedProperty().addListener((b, o, n) -> {

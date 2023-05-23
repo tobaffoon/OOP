@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.Brick;
@@ -26,13 +25,7 @@ public class Game {
     private boolean gameLost = false;
     private boolean gameWon = false;
 
-    public Game(int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber, Color gridColorOne, Color gridColorTwo) {
-        if(rows == 0 || columns == 0){
-            throw new IllegalArgumentException("Can't create empty grid");
-        }
-        if(gridColorOne == null || gridColorTwo == null){
-            throw new NullPointerException("Not enough colors provided");
-        }
+    public Game(int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber) {
         this.rowCount = rows;
         this.columnCount = columns;
         grid = new Entity[columns][rows];

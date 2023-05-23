@@ -92,7 +92,7 @@ public class GameScreenController implements Initializable {
 
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
         gameActive = true;
-        game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber, gridColorOne, gridColorTwo);
+        game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber);
 
         painter = new GamePainter(game, gameBoard, gridColorOne, gridColorTwo);
         painter.draw();
