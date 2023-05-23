@@ -23,6 +23,7 @@ public class Game {
     private final int lengthGoal;
     private int foodNumber;
     private boolean gameLost = false;
+    private boolean gameWon = false;
 
     public Game(Canvas gameCanvas, int rows, int columns, int maxFoodNumber, int lengthGoal, Color gridColorOne, Color gridColorTwo) {
         if(rows == 0 || columns == 0){
@@ -53,6 +54,7 @@ public class Game {
 
     public void restart(){
         gameLost = false;
+        gameWon = false;
         emptyGrid();
         initializeInnerStructures();
         painter.draw();
@@ -76,6 +78,10 @@ public class Game {
 
         getSnakesAsStream().forEach(MovableEntity::move);
         recalculateGridStatus();
+
+        if(playerSnake.getLength() >= lengthGoal){
+            gameWon = true;
+        }
 
         generateFood();
     }
@@ -178,5 +184,8 @@ public class Game {
 
     public boolean isGameLost() {
         return gameLost;
+    }
+    public boolean isGameWon() {
+        return gameWon;
     }
 }

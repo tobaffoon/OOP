@@ -1,5 +1,6 @@
 package ru.nsu.amazyar.constants;
 
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class GameSceneConstants {
@@ -10,7 +11,8 @@ public class GameSceneConstants {
     public static final double DEFAULT_LOSE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final double DEFAULT_WIN_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final Font DEFAULT_LABEL_FONT = Font.font("Georgia Bold", DEFAULT_LOSE_LABEL_HEIGHT * 0.5);
-    public static final String DEFAULT_LOSE_LABEL_COLOR = "#ff0000";
+    public static final Color DEFAULT_LOSE_LABEL_COLOR = Color.RED;
+    public static final Color DEFAULT_WIN_LABEL_COLOR = Color.GOLD;
 
     public static final double DEFAULT_VBOX_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE;
     public static final double DEFAULT_VBOX_WIDTH = StageConstants.DEFAULT_STAGE_SIZE;

@@ -20,7 +20,7 @@
          <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
       </width>
       </Canvas>
-      <VBox fx:id="loseBox" alignment="TOP_CENTER" visible="false">
+      <VBox fx:id="gameResultBox" alignment="TOP_CENTER" visible="false">
          <prefHeight>
             <GameSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
          </prefHeight>
@@ -31,11 +31,7 @@
             <GameSceneConstants fx:constant="DEFAULT_SPACING"/>
          </spacing>
 
-         <Label minWidth="-Infinity" alignment="BASELINE_CENTER" text="YOU LOSE" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
-
-            <textFill>
-               <GameSceneConstants fx:constant="DEFAULT_LOSE_LABEL_COLOR"/>
-            </textFill>
+         <Label fx:id="resultLabel" minWidth="-Infinity" alignment="BASELINE_CENTER" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
             <font>
                <GameSceneConstants fx:constant="DEFAULT_LABEL_FONT"/>
             </font>

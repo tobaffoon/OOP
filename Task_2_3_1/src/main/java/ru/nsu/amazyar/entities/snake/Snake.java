@@ -23,6 +23,10 @@ public class Snake extends MovableEntity {
     }
 
     public int getLength(){
+        if(growNextStep){
+            return snakeBody.size()+1;
+        }
+
         return snakeBody.size();
     }
     public Queue<SnakeLink> getSnakeBody() {

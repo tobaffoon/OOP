@@ -17,6 +17,7 @@ import ru.nsu.amazyar.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
 import ru.nsu.amazyar.bases.CycleTimer;
 import ru.nsu.amazyar.bases.Direction;
+import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
@@ -33,7 +34,9 @@ public class GameScreenController implements Initializable {
     @FXML
     Canvas gameBoard;
     @FXML
-    VBox loseBox;
+    VBox gameResultBox;
+    @FXML
+    Label resultLabel;
     @FXML
     Label scoreLabel;
     @FXML
@@ -115,7 +118,19 @@ public class GameScreenController implements Initializable {
         game.update();
         if(game.isGameLost()){
             // Show lose screen
-            loseBox.setVisible(true);
+            resultLabel.setText("YOU LOSE");
+            resultLabel.setTextFill(GameSceneConstants.DEFAULT_LOSE_LABEL_COLOR);
+            gameResultBox.setVisible(true);
+            scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
+
+            gameLoopTimer.stop();
+            gameActive = false;
+        }
+        else if(game.isGameWon()){
+            // Show lose screen
+            gameResultBox.setVisible(true);
+            resultLabel.setText("YOU WON");
+            resultLabel.setTextFill(GameSceneConstants.DEFAULT_WIN_LABEL_COLOR);
             scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
 
             gameLoopTimer.stop();
@@ -126,7 +141,7 @@ public class GameScreenController implements Initializable {
 
     public void onReplayButtonPressed(){
         game.restart();
-        loseBox.setVisible(false);
+        gameResultBox.setVisible(false);
         gameLoopTimer = new CycleTimer(gameLoopTimer.getNanosInterval(), this::step);
         gameLoopTimer.start();
     }
