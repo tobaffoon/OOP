@@ -80,8 +80,8 @@ public class Game {
         // change players direction to last pressed arrow
         playerSnake.changeDirection(playerDirectionBuffer);
 
-        getSnakesAsStream().forEach(MovableEntity::move);
         recalculateGridStatus();
+        getSnakesAsStream().forEach(MovableEntity::move);
 
         if(playerSnake.getLength() >= lengthGoal){
             gameWon = true;
@@ -167,13 +167,13 @@ public class Game {
             // if entity moved from a tile, a tile is empty now
             grid[e.getPrevX()][e.getPrevY()] = null;
 
-            Entity collidingEntity = grid[e.getX()][e.getY()];
+            Entity collidingEntity = grid[e.getNextX()][e.getNextY()];
             if(collidingEntity == null) {
-                grid[e.getX()][e.getY()] = e;
+                grid[e.getNextX()][e.getNextY()] = e;
             }
             else if(collidingEntity instanceof SimpleEdible){
                 ((Snake) e).growTail();
-                grid[e.getX()][e.getY()] = e;
+                grid[e.getNextX()][e.getNextY()] = e;
                 foodNumber--;
             }
             else if(collidingEntity instanceof Snake || collidingEntity instanceof Brick){
