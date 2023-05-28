@@ -54,20 +54,8 @@ public class Snake extends MovableEntity {
             snakeBody.poll();   // delete tail
         }
 
-        switch (getCurrentDirection()) {
-            case UP:
-                setY(Math.floorMod(getY() - 1, maxRow));
-                break;
-            case LEFT:
-                setX(Math.floorMod(getX() - 1, maxColumn));
-                break;
-            case DOWN:
-                setY(Math.floorMod(getY() + 1, maxRow));
-                break;
-            case RIGHT:
-                setX(Math.floorMod(getX() + 1, maxColumn));
-                break;
-        }
+        setX(getNextX());
+        setY(getNextY());
 
         this.head = new SnakeLink(getX(), getY(), this);
         this.snakeBody.add(this.head);

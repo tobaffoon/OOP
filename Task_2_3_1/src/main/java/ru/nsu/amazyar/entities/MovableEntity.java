@@ -65,6 +65,34 @@ public abstract class MovableEntity implements Entity {
         return true;
     }
 
+    public int getNextX(){
+        switch (getCurrentDirection()) {
+            case DOWN:
+            case UP:
+                return getX();
+            case LEFT:
+                return Math.floorMod(getX() - 1, maxColumn);
+            case RIGHT:
+                return Math.floorMod(getX() + 1, maxColumn);
+            default:
+                return -1;
+        }
+    }
+
+    public int getNextY(){
+        switch (getCurrentDirection()) {
+            case LEFT:
+            case RIGHT:
+                return getY();
+            case UP:
+                return Math.floorMod(getY() - 1, maxColumn);
+            case DOWN:
+                return Math.floorMod(getY() + 1, maxColumn);
+            default:
+                return -1;
+        }
+    }
+
     abstract public void move();
     abstract public int getPrevx();
     abstract public int getPrevy();
