@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleIntegerProperty;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
@@ -23,6 +26,7 @@ public class Game {
     private final int brickNumber;
     private boolean gameLost = false;
     private boolean gameWon = false;
+    private final SimpleIntegerProperty score;
 
     public Game(int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber) {
         this.rowCount = rows;
@@ -31,6 +35,7 @@ public class Game {
         this.maxFoodNumber = maxFoodNumber;
         this.lengthGoal = lengthGoal;
         this.brickNumber = brickNumber;
+        this.score = new SimpleIntegerProperty(1);
 
         initializeInnerStructures();
     }
@@ -98,8 +103,12 @@ public class Game {
         return columnCount;
     }
 
-    public Snake getPlayerSnake() {
-        return playerSnake;
+    public int getScore() {
+        return this.score.get();
+    }
+
+    public IntegerProperty getScoreProperty() {
+        return this.score;
     }
 
     public void changePlayerDirection(Direction direction){
@@ -174,6 +183,7 @@ public class Game {
             else if(collidingEntity instanceof SimpleEdible){
                 ((Snake) e).growTail();
                 grid[e.getNextX()][e.getNextY()] = e;
+                score.set(score.get()+1);
                 foodNumber--;
             }
             else if(collidingEntity instanceof Snake || collidingEntity instanceof Brick){

@@ -8,18 +8,40 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.paint.Color?>
 <AutoScalingStackPane fx:id="gamePane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ru.nsu.amazyar.game_screen.GameScreenController">
    <children>
       <Canvas fx:id="gameBoard">
-      <height>
-         <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
-      </height>
+         <height>
+            <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
+         </height>
 
-      <width>
-         <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
-      </width>
+         <width>
+            <StageConstants fx:constant="DEFAULT_STAGE_SIZE" />
+         </width>
       </Canvas>
+
+      <VBox>
+         <Label fx:id="currentScoreLabel">
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_CURRENT_SCORE_FONT"/>
+            </font>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_CURRENT_SCORE_LABEL_HEIGHT"/>
+            </prefHeight>
+         </Label>
+         <Label fx:id="pauseLabel" text="pause" textFill="rgba(0,0,0,0.5)" visible="false" alignment="BASELINE_CENTER">
+            <font>
+               <GameSceneConstants fx:constant="DEFAULT_PAUSE_FONT"/>
+            </font>
+            <prefHeight>
+               <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_HEIGHT"/>
+            </prefHeight>
+            <prefWidth>
+               <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_WIDTH"/>
+            </prefWidth>
+         </Label>
+      </VBox>
+
       <VBox fx:id="gameResultBox" alignment="TOP_CENTER" visible="false">
          <prefHeight>
             <GameSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
@@ -50,7 +72,7 @@
                </Insets>
             </VBox.margin>
          </Label>
-         <Label fx:id="scoreLabel" minWidth="-Infinity" alignment="BASELINE_CENTER" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
+         <Label fx:id="finalScoreLabel" minWidth="-Infinity" alignment="BASELINE_CENTER" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
             <font>
                <GameSceneConstants fx:constant="DEFAULT_SCORE_FONT"/>
             </font>
@@ -119,7 +141,7 @@
 
          <Button fx:id="mainMenuButton" text="Return to main menu" onMousePressed="#onMainMenuButtonPressed">
             <font>
-            <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+               <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
             </font>
             <prefHeight>
                <GameSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
@@ -139,7 +161,6 @@
             </VBox.margin>
          </Button>
       </VBox>
-      <Label fx:id="pauseLabel" text="pause" textFill="rgba(0,0,0,0.5)" visible="false"/>
-<!--      <TreeView fx:id="questView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="150.0" />-->
+      <!--      <TreeView fx:id="questView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="150.0" />-->
    </children>
 </AutoScalingStackPane>

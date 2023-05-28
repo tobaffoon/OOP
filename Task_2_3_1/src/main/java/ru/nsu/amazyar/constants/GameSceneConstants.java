@@ -9,6 +9,11 @@ public class GameSceneConstants {
     public static final String SNAKE_TAIL_SPRITE = "images/snake_tail.png";
     public static final String FOOD_SPRITE = "images/egg.png";
     public static final String BRICK_SPRITE = "images/brick.png";
+    public static final double DEFAULT_CURRENT_SCORE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.05;
+    public static final Font DEFAULT_CURRENT_SCORE_FONT = Font.font(DEFAULT_CURRENT_SCORE_LABEL_HEIGHT);
+    public static final double DEFAULT_PAUSE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.5;
+    public static final double DEFAULT_PAUSE_LABEL_WIDTH = StageConstants.DEFAULT_STAGE_SIZE;
+    public static final Font DEFAULT_PAUSE_FONT = Font.font(DEFAULT_CURRENT_SCORE_LABEL_HEIGHT * 5);
     public static final double DEFAULT_LOSE_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final double DEFAULT_WIN_LABEL_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final Font DEFAULT_LABEL_FONT = Font.font("Georgia Bold", DEFAULT_LOSE_LABEL_HEIGHT * 0.5);

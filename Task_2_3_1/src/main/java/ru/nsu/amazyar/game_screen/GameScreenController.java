@@ -38,7 +38,7 @@ public class GameScreenController implements Initializable {
     @FXML
     Label resultLabel;
     @FXML
-    Label scoreLabel;
+    Label finalScoreLabel;
     @FXML
     Button replayButton;
     @FXML
@@ -47,6 +47,9 @@ public class GameScreenController implements Initializable {
     Button leaderboardButton;
     @FXML
     Label pauseLabel;
+    @FXML
+    Label currentScoreLabel;
+
     private GamePainter painter;
     private TextInputDialog leaderboardDialog;
     private static final LeaderboardManager leaderboardManager = new LeaderboardManager();
@@ -62,8 +65,7 @@ public class GameScreenController implements Initializable {
     }
 
     private void inputNameToLeaderboard(String name){
-        LeaderboardEntry newEntry = new LeaderboardEntry(name, game.getPlayerSnake()
-            .getLength());
+        LeaderboardEntry newEntry = new LeaderboardEntry(name, game.getScore());
         leaderboardManager.addEntry(newEntry);
 
         // Show alert that entry was added
@@ -87,12 +89,16 @@ public class GameScreenController implements Initializable {
         if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException();
         }
+        game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber);
+        gameActive = true;
+
         this.stage = stage;
         stage.setScene(gamePane.getScene());
 
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
-        gameActive = true;
-        game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber);
+
+        game.getScoreProperty().addListener((b, o, n) -> currentScoreLabel.setText(n + "/" + lengthGoal));
+        currentScoreLabel.setText(game.getScore() + "/" + lengthGoal);
 
         painter = new GamePainter(game, gameBoard, gridColorOne, gridColorTwo);
         painter.draw();
@@ -126,7 +132,7 @@ public class GameScreenController implements Initializable {
             resultLabel.setText("YOU LOSE");
             resultLabel.setTextFill(GameSceneConstants.DEFAULT_LOSE_LABEL_COLOR);
             gameResultBox.setVisible(true);
-            scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
+            finalScoreLabel.setText("SCORE: " + game.getScore() + "/" + game.getLengthGoal());
 
             gameLoopTimer.stop();
             gameActive = false;
@@ -136,7 +142,7 @@ public class GameScreenController implements Initializable {
             gameResultBox.setVisible(true);
             resultLabel.setText("YOU WON");
             resultLabel.setTextFill(GameSceneConstants.DEFAULT_WIN_LABEL_COLOR);
-            scoreLabel.setText("SCORE: " + game.getPlayerSnake().getLength() + "/" + game.getLengthGoal());
+            finalScoreLabel.setText("SCORE: " + game.getScore() + "/" + game.getLengthGoal());
 
             gameLoopTimer.stop();
             gameActive = false;
