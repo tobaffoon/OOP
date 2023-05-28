@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
-import javafx.scene.paint.Color;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
@@ -166,7 +165,7 @@ public class Game {
     public void recalculateGridStatus(){
         getSnakesAsStream().forEach((e) -> {
             // if entity moved from a tile, a tile is empty now
-            grid[e.getPrevx()][e.getPrevy()] = null;
+            grid[e.getPrevX()][e.getPrevY()] = null;
 
             Entity collidingEntity = grid[e.getX()][e.getY()];
             if(collidingEntity == null) {

@@ -6,8 +6,8 @@ import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.MovableEntity;
 
 public class Snake extends MovableEntity {
-    private int prevx;
-    private int prevy;
+    private int prevX;
+    private int prevY;
     private SnakeLink head;
     private final Queue<SnakeLink> snakeBody = new ArrayDeque<>();
     private boolean growNextStep = false;
@@ -15,8 +15,8 @@ public class Snake extends MovableEntity {
 
     public Snake(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
         super(x, y, gridRowCount, gridColumnCount, initialDirection);
-        this.prevx = x;
-        this.prevy = y;
+        this.prevX = x;
+        this.prevY = y;
         this.head = new SnakeLink(x, y, this);
         snakeBody.add(head);
         this.changeDirectionBuffer = getCurrentDirection();
@@ -44,8 +44,8 @@ public class Snake extends MovableEntity {
     @Override
     public void move() {
         // prev pos is previous tail pos
-        prevx = snakeBody.peek().getX();
-        prevy = snakeBody.peek().getY();
+        prevX = snakeBody.peek().getX();
+        prevY = snakeBody.peek().getY();
 
         if(growNextStep){
             growNextStep = false;
@@ -77,12 +77,12 @@ public class Snake extends MovableEntity {
     }
 
     @Override
-    public int getPrevx() {
-        return prevx;
+    public int getPrevX() {
+        return prevX;
     }
 
     @Override
-    public int getPrevy() {
-        return prevy;
+    public int getPrevY() {
+        return prevY;
     }
 }
