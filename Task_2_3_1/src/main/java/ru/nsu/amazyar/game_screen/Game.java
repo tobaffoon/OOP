@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.Brick;
@@ -182,8 +181,9 @@ public class Game {
                 grid[e.getNextX()][e.getNextY()] = e;
             }
             else if(collidingEntity instanceof SimpleEdible){
-                ((Snake) e).growTail();
-                grid[e.getNextX()][e.getNextY()] = e;
+                e.growTail();
+                grid[e.getPrevX()][e.getPrevY()] = e;   // account for new tail
+                grid[e.getNextX()][e.getNextY()] = e;   // account for new head
                 score.set(score.get()+1);
                 foodNumber--;
             }
@@ -191,10 +191,6 @@ public class Game {
                 gameLost = true;
             }
         });
-    }
-
-    public int getMaxFoodNumber() {
-        return maxFoodNumber;
     }
 
     public boolean isGameLost() {

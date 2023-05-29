@@ -1,25 +1,18 @@
 package ru.nsu.amazyar.entities.snake;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.entities.MovableEntity;
 
 public class Snake extends MovableEntity {
-    private int prevX;
-    private int prevY;
     private SnakeLink head;
-    private final Queue<SnakeLink> snakeBody = new ArrayDeque<>();
+    private final ArrayDeque<SnakeLink> snakeBody = new ArrayDeque<>();
     private boolean growNextStep = false;
-    private Direction changeDirectionBuffer;
 
     public Snake(int x, int y, int gridRowCount, int gridColumnCount, Direction initialDirection) {
         super(x, y, gridRowCount, gridColumnCount, initialDirection);
-        this.prevX = x;
-        this.prevY = y;
-        this.head = new SnakeLink(x, y, this);
+        this.head = new SnakeLink(x, y);
         snakeBody.add(head);
-        this.changeDirectionBuffer = getCurrentDirection();
     }
 
     public int getLength(){
@@ -29,7 +22,7 @@ public class Snake extends MovableEntity {
 
         return snakeBody.size();
     }
-    public Queue<SnakeLink> getSnakeBody() {
+    public ArrayDeque<SnakeLink> getSnakeBody() {
         return snakeBody;
     }
 
@@ -38,26 +31,24 @@ public class Snake extends MovableEntity {
     }
 
     public void growTail() {
+//        this.snakeBody.addFirst(new SnakeLink(getPrevX(), getPrevY()));
         growNextStep = true;
     }
 
     @Override
     public void move() {
-        // prev pos is previous tail pos
-        prevX = snakeBody.peek().getX();
-        prevY = snakeBody.peek().getY();
-
         if(growNextStep){
             growNextStep = false;
         }
         else{
             snakeBody.poll();   // delete tail
         }
+//        snakeBody.poll();
 
         setX(getNextX());
         setY(getNextY());
 
-        this.head = new SnakeLink(getX(), getY(), this);
+        this.head = new SnakeLink(getX(), getY());
         this.snakeBody.add(this.head);
     }
 
@@ -76,13 +67,16 @@ public class Snake extends MovableEntity {
         return stringBuilder.toString();
     }
 
+
+    // prev pos is previous tail pos
+
     @Override
     public int getPrevX() {
-        return prevX;
+        return snakeBody.peek().getX();
     }
 
     @Override
     public int getPrevY() {
-        return prevY;
+        return snakeBody.peek().getY();
     }
 }
