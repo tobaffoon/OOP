@@ -127,9 +127,9 @@ public abstract class MovableEntity implements Entity {
             case RIGHT:
                 return getY();
             case UP:
-                return Math.floorMod(getY() - 1, maxColumn);
+                return Math.floorMod(getY() - 1, maxRow);
             case DOWN:
-                return Math.floorMod(getY() + 1, maxColumn);
+                return Math.floorMod(getY() + 1, maxRow);
             default:
                 return -1;
         }
