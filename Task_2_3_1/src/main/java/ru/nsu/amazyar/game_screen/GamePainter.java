@@ -1,28 +1,26 @@
 package ru.nsu.amazyar.game_screen;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.constants.GameSceneConstants;
-import ru.nsu.amazyar.constants.InGameConstants;
-import ru.nsu.amazyar.constants.StageConstants;
 import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
-import ru.nsu.amazyar.entities.MovableEntity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
 
 public class GamePainter {
+
     private final Canvas drawingCanvas;
-    private Game game;
-    private Color gridColorOne;
-    private Color gridColorTwo;
+    private final Game game;
+    private final Color gridColorOne;
+    private final Color gridColorTwo;
     private final double cellWidth;
     private final double cellHeight;
     private final Image snakeHeadImage;
@@ -31,21 +29,48 @@ public class GamePainter {
     private final Image foodImage;
     private final Image brickImage;
 
-    public GamePainter(Game game, Canvas canvas, Color gridColorOne, Color gridColorTwo){
+    public GamePainter(Game game, Canvas canvas, Color gridColorOne, Color gridColorTwo)
+        throws IOException {
         this.game = game;
         this.drawingCanvas = canvas;
         this.gridColorOne = gridColorOne;
         this.gridColorTwo = gridColorTwo;
-        this.snakeHeadImage = new Image(
-                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_HEAD_SPRITE));
-        this.snakeBodyImage = new Image(
-                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_BODY_SPRITE));
-        this.snakeTailImage = new Image(
-                SnakeApplication.class.getResourceAsStream(GameSceneConstants.SNAKE_TAIL_SPRITE));
-        this.foodImage = new Image(
-                SnakeApplication.class.getResourceAsStream(GameSceneConstants.FOOD_SPRITE));
-        this.brickImage = new Image(
-                SnakeApplication.class.getResourceAsStream(GameSceneConstants.BRICK_SPRITE));
+        try (InputStream snakeHeadStream = SnakeApplication.class.getResourceAsStream(
+            GameSceneConstants.SNAKE_HEAD_SPRITE);
+            InputStream snakeBodyStream = SnakeApplication.class.getResourceAsStream(
+                GameSceneConstants.SNAKE_BODY_SPRITE);
+            InputStream snakeTailStream = SnakeApplication.class.getResourceAsStream(
+                GameSceneConstants.SNAKE_TAIL_SPRITE);
+            InputStream foodStream = SnakeApplication.class.getResourceAsStream(
+                GameSceneConstants.FOOD_SPRITE);
+            InputStream brickStream = SnakeApplication.class.getResourceAsStream(
+                GameSceneConstants.BRICK_SPRITE)) {
+            if (snakeHeadStream == null) {
+                throw new NullPointerException(
+                    "Couldn't find " + GameSceneConstants.SNAKE_HEAD_SPRITE + " resource");
+            }
+            if (snakeBodyStream == null) {
+                throw new NullPointerException(
+                    "Couldn't find " + GameSceneConstants.SNAKE_BODY_SPRITE + " resource");
+            }
+            if (snakeTailStream == null) {
+                throw new NullPointerException(
+                    "Couldn't find " + GameSceneConstants.SNAKE_TAIL_SPRITE + " resource");
+            }
+            if (foodStream == null) {
+                throw new NullPointerException(
+                    "Couldn't find " + GameSceneConstants.FOOD_SPRITE + " resource");
+            }
+            if (brickStream == null) {
+                throw new NullPointerException(
+                    "Couldn't find " + GameSceneConstants.BRICK_SPRITE + " resource");
+            }
+            this.snakeHeadImage = new Image(snakeHeadStream);
+            this.snakeBodyImage = new Image(snakeBodyStream);
+            this.snakeTailImage = new Image(snakeTailStream);
+            this.foodImage = new Image(foodStream);
+            this.brickImage = new Image(brickStream);
+        }
 
         this.cellHeight = drawingCanvas.getHeight() / game.getRowCount();
         this.cellWidth = drawingCanvas.getWidth() / game.getColumnCount();
@@ -91,6 +116,7 @@ public class GamePainter {
             tempLink = snakeLinks.next();
         }
 
+        // draw head
         drawEntity(tempLink, snakeHeadImage);
     }
 

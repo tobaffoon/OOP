@@ -14,8 +14,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.nsu.amazyar.utils.ErrorAlerter;
-import ru.nsu.amazyar.utils.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
 import ru.nsu.amazyar.bases.CycleTimer;
 import ru.nsu.amazyar.bases.Direction;
@@ -23,6 +21,8 @@ import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
+import ru.nsu.amazyar.utils.ErrorAlerter;
+import ru.nsu.amazyar.utils.SceneDrawer;
 
 public class GameScreenController implements Initializable {
     private boolean gameActive;
@@ -99,21 +99,30 @@ public class GameScreenController implements Initializable {
         if(gridColorOne == null || gridColorTwo == null){
             throw new NullPointerException();
         }
+        // create game model
         game = new Game(rowCount, columnCount, maxFoodNumber, lengthGoal, brickNumber);
         gameActive = true;
 
+        // configure stage and scene
         this.stage = stage;
         stage.setScene(gamePane.getScene());
-
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
-
-        game.getScoreProperty().addListener((b, o, n) -> currentScoreLabel.setText(n + "/" + lengthGoal));
+        game.getScoreProperty()
+            .addListener((b, o, n) -> currentScoreLabel.setText(n + "/" + lengthGoal));
         currentScoreLabel.setText(game.getScore() + "/" + lengthGoal);
 
-        painter = new GamePainter(game, gameBoard, gridColorOne, gridColorTwo);
-        painter.draw();
+        // create painter
+        try {
+            painter = new GamePainter(game, gameBoard, gridColorOne, gridColorTwo);
+            painter.draw();
+        } catch (Exception e){      // if painter couldn't be initialized, no game can proceed
+            ErrorAlerter.alert(e);
+            stage.close();
+        }
 
-        this.gameLoopTimer = new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE / speed, this::step);
+        // create game cycle timer
+        this.gameLoopTimer =
+            new CycleTimer(InGameConstants.DEFAULT_NANOS_PER_TILE / speed, this::step);
         gameLoopTimer.start();
         gamePaused = false;
     }
@@ -148,7 +157,7 @@ public class GameScreenController implements Initializable {
             gameActive = false;
         }
         else if(game.isGameWon()){
-            // Show lose screen
+            // Show win screen
             gameResultBox.setVisible(true);
             resultLabel.setText("YOU WON");
             resultLabel.setTextFill(GameSceneConstants.DEFAULT_WIN_LABEL_COLOR);
@@ -166,20 +175,24 @@ public class GameScreenController implements Initializable {
         gameLoopTimer.start();
     }
 
+    @FXML
     public void onRestartButtonPressed(){
         pauseBox.setVisible(false);
         restartGame();
     }
 
+    @FXML
     public void onReplayButtonPressed(){
         gameResultBox.setVisible(false);
         restartGame();
     }
 
+    @FXML
     public void onLeaderboardButtonPressed(){
         leaderboardDialog.showAndWait().ifPresent(this::inputNameToLeaderboard);
     }
 
+    @FXML
     public void onMainMenuButtonPressed(){
         stage.setScene(SceneDrawer.getMainScene());
     }
