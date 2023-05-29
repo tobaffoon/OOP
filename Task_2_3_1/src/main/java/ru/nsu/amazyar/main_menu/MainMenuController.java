@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
-import ru.nsu.amazyar.SceneDrawer;
+import ru.nsu.amazyar.utils.SceneDrawer;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.game_screen.GameScreenController;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;

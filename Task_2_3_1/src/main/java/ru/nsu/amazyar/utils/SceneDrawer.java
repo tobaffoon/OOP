@@ -1,11 +1,9 @@
-package ru.nsu.amazyar;
+package ru.nsu.amazyar.utils;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import ru.nsu.amazyar.SnakeApplication;
 
 public class SceneDrawer {
     static public Scene getMainScene(){

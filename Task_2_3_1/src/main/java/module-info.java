@@ -17,4 +17,6 @@ module ru.nsu.amazyar {
     opens ru.nsu.amazyar.constants to javafx.fxml;
     exports ru.nsu.amazyar.entities.snake;
     opens ru.nsu.amazyar.entities.snake to javafx.fxml;
+    exports ru.nsu.amazyar.utils;
+    opens ru.nsu.amazyar.utils to javafx.fxml;
 }

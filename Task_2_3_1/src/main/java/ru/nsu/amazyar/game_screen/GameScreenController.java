@@ -13,7 +13,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.nsu.amazyar.SceneDrawer;
+import ru.nsu.amazyar.utils.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
 import ru.nsu.amazyar.bases.CycleTimer;
 import ru.nsu.amazyar.bases.Direction;
