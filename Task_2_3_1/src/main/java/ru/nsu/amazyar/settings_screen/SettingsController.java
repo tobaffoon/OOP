@@ -1,7 +1,6 @@
 package ru.nsu.amazyar.settings_screen;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.game_screen.GameScreenController;
+import ru.nsu.amazyar.utils.ErrorAlerter;
 
 public class SettingsController implements Initializable {
     @FXML
@@ -141,14 +141,21 @@ public class SettingsController implements Initializable {
     }
 
     @FXML
-    public void onStartButtonPressed(ActionEvent event) throws IOException {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    public void onStartButtonPressed(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        FXMLLoader fxmlLoader =
-            new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));
-        new Scene(fxmlLoader.load());
+        try {
+            FXMLLoader fxmlLoader =
+                new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));
+            new Scene(fxmlLoader.load());
 
-        GameScreenController controller = fxmlLoader.getController();
-        controller.startNewGame(stage, getRowsValue(), getColumnsValue(), getMaxFoodValue(), getLengthValue(), getBrickNumberValue(), getSpeedValue(), colorPicker1.getValue(), colorPicker2.getValue());
+            GameScreenController controller = fxmlLoader.getController();
+            controller.startNewGame(stage, getRowsValue(), getColumnsValue(), getMaxFoodValue(),
+                getLengthValue(), getBrickNumberValue(), getSpeedValue(), colorPicker1.getValue(),
+                colorPicker2.getValue());
+        } catch (Exception e) {
+            ErrorAlerter.alert(e);
+        }
+
     }
 }

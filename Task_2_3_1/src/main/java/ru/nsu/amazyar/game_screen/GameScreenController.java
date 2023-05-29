@@ -61,8 +61,8 @@ public class GameScreenController implements Initializable {
         gameActive = false;
         try {
             leaderboardManager.loadLeaderboardFromFile();
-        } catch (IOException e) {
-            ErrorAlerter.alert(e);
+        } catch (IOException ignored) { // couldn't find a file -> it will be created
+
         }
 
         leaderboardDialog = new TextInputDialog();
