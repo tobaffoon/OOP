@@ -58,10 +58,11 @@ public class LeaderboardManager {
 
     private void saveLeaderboardToFile() throws IOException {
         File leaderboardFile = new File(LEADERBOARD_FILE);
-        BufferedWriter output = new BufferedWriter(new FileWriter(leaderboardFile));
-        for (LeaderboardEntry entry : leaderboard) {
-            output.write(entry.getName() + LeaderboardEntry.SEPARATOR + entry.getScore());
-            output.newLine();
+        try (BufferedWriter output = new BufferedWriter(new FileWriter(leaderboardFile))) {
+            for (LeaderboardEntry entry : leaderboard) {
+                output.write(entry.getName() + LeaderboardEntry.SEPARATOR + entry.getScore());
+                output.newLine();
+            }
         }
     }
 
@@ -72,15 +73,16 @@ public class LeaderboardManager {
      */
     public void loadLeaderboardFromFile() throws IOException {
         this.clear();
-        BufferedReader reader = new BufferedReader(new FileReader(LEADERBOARD_FILE));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(LeaderboardEntry.SEPARATOR);
-            if (parts.length == 2) {
-                String name = parts[0];
-                int score = Integer.parseInt(parts[1]);
-                LeaderboardEntry playerScore = new LeaderboardEntry(name, score);
-                leaderboard.add(playerScore);
+        try (BufferedReader reader = new BufferedReader(new FileReader(LEADERBOARD_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(LeaderboardEntry.SEPARATOR);
+                if (parts.length == 2) {
+                    String name = parts[0];
+                    int score = Integer.parseInt(parts[1]);
+                    LeaderboardEntry playerScore = new LeaderboardEntry(name, score);
+                    leaderboard.add(playerScore);
+                }
             }
         }
     }
