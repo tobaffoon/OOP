@@ -2,21 +2,27 @@ package ru.nsu.amazyar;
 
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.nsu.amazyar.game_screen.Game;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
+/**
+ * Main snake game test class.
+ */
 public class SnakeTest {
     private final LeaderboardManager testManager = new LeaderboardManager("src/test/resources/test_leaderboard.txt");
 
-    @BeforeAll
-    public static void init(){
-    }
-
+    /**
+     * Test loading and saving leaderboard.
+     */
     @Test
     public void testLeaderboardManager() throws IOException {
-        testManager.loadLeaderboardFromFile();
+        testManager.clear();
+        testManager.addEntry(new LeaderboardEntry("ONE", 1));
+        testManager.addEntry(new LeaderboardEntry("TWO", 2));
+        testManager.addEntry(new LeaderboardEntry("THREE", 3));
+        testManager.addEntry(new LeaderboardEntry("FIVE", 5));
         String leaderboardLoadContent = """
             NAME | SCORE
             FIVE;5
@@ -24,7 +30,7 @@ public class SnakeTest {
             TWO;2
             ONE;1
             """;
-        Assertions.assertEquals(testManager.getLeaderboard(), leaderboardLoadContent);
+        Assertions.assertEquals(leaderboardLoadContent, testManager.getLeaderboard());
 
         testManager.addEntry(new LeaderboardEntry("SIX", 6));
         String leaderboardSaveContent = """
@@ -35,6 +41,24 @@ public class SnakeTest {
             TWO;2
             ONE;1
             """;
-        Assertions.assertEquals(testManager.getLeaderboard(), leaderboardSaveContent);
+        Assertions.assertEquals(leaderboardSaveContent, testManager.getLeaderboard());
+    }
+
+    /**
+     * Test immediate victory and lost.
+     */
+    @Test
+    public void simpleGameTest(){
+        Game testGame = new Game(2, 1, 1, 2, 0);
+        testGame.update();
+        System.out.println(testGame.getScore());
+        Assertions.assertTrue(testGame.isGameWon());
+
+        // bigger grid is required because bricks can spawn in 3x3 area near (0,0) point
+        testGame = new Game(4, 4, 0, 3, 7);
+        testGame.update();
+        testGame.update();
+        testGame.update();
+        Assertions.assertTrue(testGame.isGameLost());
     }
 }
