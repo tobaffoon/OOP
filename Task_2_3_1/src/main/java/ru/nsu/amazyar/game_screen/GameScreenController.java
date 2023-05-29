@@ -25,7 +25,7 @@ import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
 public class GameScreenController implements Initializable {
-    private boolean gameActive = false;
+    private boolean gameActive;
     private Game game;
     private Stage stage;
     private CycleTimer gameLoopTimer;
@@ -58,7 +58,7 @@ public class GameScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        gameActive = false;
         try {
             leaderboardManager.loadLeaderboardFromFile();
         } catch (IOException e) {
@@ -74,16 +74,16 @@ public class GameScreenController implements Initializable {
         LeaderboardEntry newEntry = new LeaderboardEntry(name, game.getScore());
         try {
             leaderboardManager.addEntry(newEntry);
+
+            // Show alert that entry was added
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("LEADERBOARD");
+            alert.setHeaderText(null);
+            alert.setContentText("Score added to leaderboard.");
+            alert.showAndWait();
         } catch (IOException e) {
             ErrorAlerter.alert(e);
         }
-
-        // Show alert that entry was added
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("LEADERBOARD");
-        alert.setHeaderText(null);
-        alert.setContentText("Score added to leaderboard.");
-        alert.showAndWait();
     }
 
     public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber, int lengthGoal, int brickNumber, int speed, Color gridColorOne, Color gridColorTwo){

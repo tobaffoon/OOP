@@ -52,11 +52,11 @@ public class MainMenuController implements Initializable {
     public void onLeaderboardPressed() {
         try {
             leaderboardManager.loadLeaderboardFromFile();
+            leaderBoardDialog.setContentText(leaderboardManager.getLeaderboard());
+            leaderBoardDialog.show();
         } catch (IOException e) {
             ErrorAlerter.alert(e);
         }
-        leaderBoardDialog.setContentText(leaderboardManager.getLeaderboard());
-        leaderBoardDialog.show();
     }
 
     @FXML
