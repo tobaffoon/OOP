@@ -1,5 +1,6 @@
 package ru.nsu.amazyar.game_screen;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import ru.nsu.amazyar.utils.ErrorAlerter;
 import ru.nsu.amazyar.utils.SceneDrawer;
 import ru.nsu.amazyar.bases.AutoScalingStackPane;
 import ru.nsu.amazyar.bases.CycleTimer;
@@ -57,7 +59,11 @@ public class GameScreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        leaderboardManager.loadLeaderboardFromFile();
+        try {
+            leaderboardManager.loadLeaderboardFromFile();
+        } catch (IOException e) {
+            ErrorAlerter.alert(e);
+        }
 
         leaderboardDialog = new TextInputDialog();
         leaderboardDialog.setTitle("Game Over");
@@ -66,7 +72,11 @@ public class GameScreenController implements Initializable {
 
     private void inputNameToLeaderboard(String name){
         LeaderboardEntry newEntry = new LeaderboardEntry(name, game.getScore());
-        leaderboardManager.addEntry(newEntry);
+        try {
+            leaderboardManager.addEntry(newEntry);
+        } catch (IOException e) {
+            ErrorAlerter.alert(e);
+        }
 
         // Show alert that entry was added
         Alert alert = new Alert(AlertType.INFORMATION);

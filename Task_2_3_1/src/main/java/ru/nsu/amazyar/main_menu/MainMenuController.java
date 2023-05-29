@@ -1,5 +1,6 @@
 package ru.nsu.amazyar.main_menu;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
+import ru.nsu.amazyar.utils.ErrorAlerter;
 import ru.nsu.amazyar.utils.SceneDrawer;
 
 public class MainMenuController implements Initializable {
@@ -48,7 +50,11 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void onLeaderboardPressed() {
-        leaderboardManager.loadLeaderboardFromFile();
+        try {
+            leaderboardManager.loadLeaderboardFromFile();
+        } catch (IOException e) {
+            ErrorAlerter.alert(e);
+        }
         leaderBoardDialog.setContentText(leaderboardManager.getLeaderboard());
         leaderBoardDialog.show();
     }

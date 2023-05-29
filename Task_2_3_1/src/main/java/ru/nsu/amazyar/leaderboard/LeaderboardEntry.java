@@ -1,8 +1,9 @@
 package ru.nsu.amazyar.leaderboard;
 
 public class LeaderboardEntry {
-    private String name;
-    private int score;
+    public final static String SEPARATOR = ";";
+    private final String name;
+    private final int score;
 
     public LeaderboardEntry(String name, int score) {
         this.name = name;
@@ -19,6 +20,6 @@ public class LeaderboardEntry {
 
     @Override
     public String toString() {
-        return getName() + ";" + getScore();
+        return getName() + SEPARATOR + getScore();
     }
 }
