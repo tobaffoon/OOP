@@ -1,12 +1,15 @@
 package ru.nsu.amazyar.game_screen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import ru.nsu.amazyar.bases.Direction;
+import ru.nsu.amazyar.bases.Vector2;
 import ru.nsu.amazyar.entities.Brick;
 import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.MovableEntity;
@@ -23,20 +26,20 @@ public class Game {
     private final int lengthGoal;
     private int foodNumber;
     private final int brickNumber;
-    private boolean gameLost = false;
-    private boolean gameWon = false;
+    private boolean gameLost;
+    private boolean gameWon;
     private final SimpleIntegerProperty score;
 
     public Game(int rows, int columns, int maxFoodNumber, int lengthGoal, int brickNumber) {
         this.rowCount = rows;
         this.columnCount = columns;
-        grid = new Entity[columns][rows];
+        this.grid = new Entity[columns][rows];
         this.maxFoodNumber = maxFoodNumber;
         this.lengthGoal = lengthGoal;
         this.brickNumber = brickNumber;
         this.score = new SimpleIntegerProperty();
 
-        initializeInnerStructures();
+        restart();
     }
 
     private void initializeInnerStructures(){
@@ -57,8 +60,8 @@ public class Game {
             int bricky;
             do {
                 brickx = ThreadLocalRandom.current().nextInt(0, columnCount);
-                int lowery = brickx>=3?0:3;
-                bricky = ThreadLocalRandom.current().nextInt(lowery, rowCount);
+                int lower_y = brickx>=3?0:3;    // don't spawn bricks in 3x3 area near the start
+                bricky = ThreadLocalRandom.current().nextInt(lower_y, rowCount);
             }while (grid[brickx][bricky] != null);
 
             addEntity(new Brick(brickx, bricky));
@@ -116,29 +119,22 @@ public class Game {
             playerDirectionBuffer = direction;
     }
 
-    private int emptyTilesCount(){
-        int emptyTiles = 0;
+    private List<Vector2> emptyTilesCoordinates(){
+        List<Vector2> emptyTiles = new ArrayList<>();
+
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
                 if(grid[i][j] == null){
-                    emptyTiles++;
+                    emptyTiles.add(new Vector2(i, j));
                 }
             }
         }
+
         return emptyTiles;
     }
 
-    public boolean addEntity(Entity entity){
-        if (getEntityAt(entity.getX(), entity.getY()) != null){
-            return false;
-        }
-
+    private void addEntity(Entity entity){
         grid[entity.getX()][entity.getY()] = entity;
-        return true;
-    }
-
-    public Entity getEntityAt(int x, int y){
-        return grid[x][y];
     }
 
     public Stream<Entity> getEntitiesAsStream(){
@@ -154,21 +150,15 @@ public class Game {
     }
 
     public void generateFood() {
-        if(foodNumber >= Math.min(emptyTilesCount(), maxFoodNumber)) {
+        List<Vector2> emptyTilesCoordinates = emptyTilesCoordinates();
+        if(foodNumber >= Math.min(emptyTilesCoordinates.size(), maxFoodNumber)) {
             return;
         }
 
-        // try to place food until right spot is found
-        // TODO replace pure randomness for fastness
-        int foodx;
-        int foody;
-        do {
-            foodx = ThreadLocalRandom.current().nextInt(0, columnCount);
-            foody = ThreadLocalRandom.current().nextInt(0, rowCount);
-        }while (grid[foodx][foody] != null);
+        Vector2 foodPos = emptyTilesCoordinates.get(ThreadLocalRandom.current().nextInt(0, emptyTilesCoordinates.size()));
 
         foodNumber++;
-        addEntity(new SimpleEdible(foodx, foody, 1));
+        addEntity(new SimpleEdible(foodPos, 1));
     }
 
     public void recalculateGridStatus(){
