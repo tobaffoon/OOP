@@ -15,16 +15,14 @@ public class SceneDrawer {
     }
 
     static private Scene getSceneFromFxml(String path){
-        FXMLLoader fxmlLoader =
-            new FXMLLoader(SnakeApplication.class.getResource(path));
-
-        Scene scene;
-
+        Scene scene = null;
         try {
+            FXMLLoader fxmlLoader =
+                new FXMLLoader(SnakeApplication.class.getResource(path));
+
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
-            // TODO add dialog handler
-            throw new RuntimeException(e);
+            ErrorAlerter.alert(e);
         }
 
         return scene;
