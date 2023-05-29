@@ -46,7 +46,7 @@ public class GameScreenController implements Initializable {
     @FXML
     Button leaderboardButton;
     @FXML
-    Label pauseLabel;
+    VBox pauseBox;
     @FXML
     Label currentScoreLabel;
 
@@ -114,12 +114,12 @@ public class GameScreenController implements Initializable {
 
     public void pauseAndUnpause(){
         if(gamePaused) {
-            pauseLabel.setVisible(false);
+            pauseBox.setVisible(false);
             gameLoopTimer.turnOn();
             gamePaused = false;
         }
         else {
-            pauseLabel.setVisible(true);
+            pauseBox.setVisible(true);
             gameLoopTimer.turnOff();
             gamePaused = true;
         }
@@ -150,11 +150,20 @@ public class GameScreenController implements Initializable {
         painter.draw();
     }
 
-    public void onReplayButtonPressed(){
+    public void restartGame(){
         game.restart();
-        gameResultBox.setVisible(false);
         gameLoopTimer = new CycleTimer(gameLoopTimer.getNanosInterval(), this::step);
         gameLoopTimer.start();
+    }
+
+    public void onRestartButtonPressed(){
+        pauseBox.setVisible(false);
+        restartGame();
+    }
+
+    public void onReplayButtonPressed(){
+        gameResultBox.setVisible(false);
+        restartGame();
     }
 
     public void onLeaderboardButtonPressed(){

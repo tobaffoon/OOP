@@ -29,17 +29,30 @@
                <GameSceneConstants fx:constant="DEFAULT_CURRENT_SCORE_LABEL_HEIGHT"/>
             </prefHeight>
          </Label>
-         <Label fx:id="pauseLabel" text="pause" textFill="rgba(0,0,0,0.5)" visible="false" alignment="BASELINE_CENTER">
-            <font>
-               <GameSceneConstants fx:constant="DEFAULT_PAUSE_FONT"/>
-            </font>
-            <prefHeight>
-               <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_HEIGHT"/>
-            </prefHeight>
-            <prefWidth>
-               <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_WIDTH"/>
-            </prefWidth>
-         </Label>
+         <VBox fx:id="pauseBox" alignment="BASELINE_CENTER" visible="false">
+            <Label text="pause" textFill="rgba(0,0,0,0.5)" alignment="BASELINE_CENTER">
+               <font>
+                  <GameSceneConstants fx:constant="DEFAULT_PAUSE_FONT"/>
+               </font>
+               <prefHeight>
+                  <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <GameSceneConstants fx:constant="DEFAULT_PAUSE_LABEL_WIDTH"/>
+               </prefWidth>
+            </Label>
+            <Button text="Restart" onMousePressed="#onRestartButtonPressed">
+               <font>
+                  <GameSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+               </font>
+               <prefHeight>
+                  <GameSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+               </prefHeight>
+               <prefWidth>
+                  <GameSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+               </prefWidth>
+            </Button>
+         </VBox>
       </VBox>
 
       <VBox fx:id="gameResultBox" alignment="TOP_CENTER" visible="false">
@@ -161,6 +174,5 @@
             </VBox.margin>
          </Button>
       </VBox>
-      <!--      <TreeView fx:id="questView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="150.0" />-->
    </children>
 </AutoScalingStackPane>
