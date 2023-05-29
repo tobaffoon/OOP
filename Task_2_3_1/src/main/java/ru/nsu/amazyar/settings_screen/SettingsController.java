@@ -59,7 +59,7 @@ public class SettingsController implements Initializable {
         addValueRestrainingListener(maxFoodField, 1, 100);
         addValueRestrainingListener(speedField, 1, 10);
 
-        // separate brickNumber because it's max value is variable;
+        // separate brickNumber because it's max value is variable and unknown before initialisation
         brickNumberField.focusedProperty().addListener((b, o, n) -> {
             if (!n) {
                 int inputValue = Integer.parseInt(brickNumberField.getText());
