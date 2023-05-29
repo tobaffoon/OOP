@@ -115,12 +115,12 @@ public class GameScreenController implements Initializable {
     public void pauseAndUnpause(){
         if(gamePaused) {
             pauseBox.setVisible(false);
-            gameLoopTimer.turnOn();
+            gameLoopTimer.start();
             gamePaused = false;
         }
         else {
             pauseBox.setVisible(true);
-            gameLoopTimer.turnOff();
+            gameLoopTimer.stop();
             gamePaused = true;
         }
     }
