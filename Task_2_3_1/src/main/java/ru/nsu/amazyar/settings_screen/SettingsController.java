@@ -53,17 +53,18 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addNumberFocusListener(lengthField, 5, 100);
-        addNumberFocusListener(rowsField, 5, 100);
-        addNumberFocusListener(columnsField, 5, 100);
-        addNumberFocusListener(maxFoodField, 1, 100);
-        addNumberFocusListener(speedField, 1, 10);
+        addValueRestrainingListener(lengthField, 5, 100);
+        addValueRestrainingListener(rowsField, 5, 100);
+        addValueRestrainingListener(columnsField, 5, 100);
+        addValueRestrainingListener(maxFoodField, 1, 100);
+        addValueRestrainingListener(speedField, 1, 10);
 
         // separate brickNumber because it's max value is variable;
         brickNumberField.focusedProperty().addListener((b, o, n) -> {
-            if(!n){
+            if (!n) {
                 int inputValue = Integer.parseInt(brickNumberField.getText());
-                brickNumberField.setText(Integer.toString(roundToBounds(inputValue, 0, (int)Math.ceil(0.3 * (getRowsValue() * getColumnsValue() - 9)))));
+                brickNumberField.setText(Integer.toString(roundToBounds(inputValue, 0,
+                    (int) Math.ceil(0.3 * (getRowsValue() * getColumnsValue() - 9)))));
             }
         });
 
@@ -75,26 +76,35 @@ public class SettingsController implements Initializable {
         addNumberFieldToLabelChangedListener(brickNumberField, brickNumberLabel, "BRICK NUMBER");
     }
 
-    private void addNumberFieldToLabelChangedListener(TextField field, Label label, String labelTemplate){
-        field.textProperty().addListener((b, o, n) ->{
+    /**
+     * Inputs field's value to label's text.
+     *
+     * @param labelTemplate What to print before the value
+     */
+    private void addNumberFieldToLabelChangedListener(TextField field, Label label,
+        String labelTemplate) {
+        field.textProperty().addListener((b, o, n) -> {
             String trimValue = numberOnlyString(n);
             field.setText(trimValue);
             label.setText(labelTemplate + ": [" + trimValue + "]");
         });
     }
 
-    private void addNumberFocusListener(TextField field, int min, int max){
+    /**
+     * Rounds integer value to bounds when focused is changed.
+     */
+    private void addValueRestrainingListener(TextField field, int min, int max) {
         field.focusedProperty().addListener((b, o, n) -> {
-            if(!n){
+            if (!n) {
                 int inputValue = Integer.parseInt(field.getText());
                 field.setText(Integer.toString(roundToBounds(inputValue, min, max)));
             }
         });
     }
 
-    private String numberOnlyString(String input){
+    private String numberOnlyString(String input) {
         if (!input.matches("\\d*")) {
-            input = input.replaceAll("[^\\d]", "");
+            input = input.replaceAll("\\D", "");
         }
 
         return input;
