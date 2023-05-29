@@ -106,10 +106,6 @@ public class Game {
         recalculateGridStatus();
         getSnakesAsStream().forEach(MovableEntity::move);
 
-        if (playerSnake.getLength() >= lengthGoal) {
-            gameWon = true;
-        }
-
         generateFood();
     }
 
@@ -217,6 +213,9 @@ public class Game {
                 grid[e.getPrevX()][e.getPrevY()] = e;   // account for new tail
                 grid[e.getNextX()][e.getNextY()] = e;   // account for new head
                 score.set(score.get() + 1);
+                if (score.get() >= lengthGoal) {
+                    gameWon = true;
+                }
                 foodNumber--;
             } else if (collidingEntity instanceof Snake || collidingEntity instanceof Brick) {
                 gameLost = true;
