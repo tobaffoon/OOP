@@ -10,10 +10,6 @@ public class SceneDrawer {
         return getSceneFromFxml("fxmls/main_menu.fxml");
     }
 
-    static public Scene getGameScene(){
-        return getSceneFromFxml("fxmls/game_screen.fxml");
-    }
-
     static public Scene getSettingsScene(){
         return getSceneFromFxml("fxmls/settings.fxml");
     }
