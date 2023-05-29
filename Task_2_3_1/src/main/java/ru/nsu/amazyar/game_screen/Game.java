@@ -35,12 +35,13 @@ public class Game {
         this.maxFoodNumber = maxFoodNumber;
         this.lengthGoal = lengthGoal;
         this.brickNumber = brickNumber;
-        this.score = new SimpleIntegerProperty(1);
+        this.score = new SimpleIntegerProperty();
 
         initializeInnerStructures();
     }
 
     private void initializeInnerStructures(){
+        score.set(1);
         playerSnake = new Snake(0, 0, rowCount, columnCount, Direction.DOWN);
         playerDirectionBuffer = playerSnake.getCurrentDirection();
         addEntity(playerSnake);
