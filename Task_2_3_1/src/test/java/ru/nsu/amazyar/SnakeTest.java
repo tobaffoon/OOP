@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
 public class SnakeTest {
@@ -16,13 +17,24 @@ public class SnakeTest {
     @Test
     public void testLeaderboardManager() throws IOException {
         testManager.loadLeaderboardFromFile("src/test/resources/test_leaderboard.txt");
-        String leaderboardContent = """
+        String leaderboardLoadContent = """
             NAME | SCORE
-            ONE;1
-            TWO;2
-            THREE;3
             FIVE;5
+            THREE;3
+            TWO;2
+            ONE;1
             """;
-        Assertions.assertEquals(testManager.getLeaderboard(), leaderboardContent);
+        Assertions.assertEquals(testManager.getLeaderboard(), leaderboardLoadContent);
+
+        testManager.addEntry(new LeaderboardEntry("SIX", 6));
+        String leaderboardSaveContent = """
+            NAME | SCORE
+            SIX;6
+            FIVE;5
+            THREE;3
+            TWO;2
+            ONE;1
+            """;
+        Assertions.assertEquals(testManager.getLeaderboard(), leaderboardSaveContent);
     }
 }
