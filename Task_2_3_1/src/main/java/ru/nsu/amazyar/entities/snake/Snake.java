@@ -26,12 +26,7 @@ public class Snake extends MovableEntity {
         return snakeBody;
     }
 
-    public SnakeLink getHead() {
-        return head;
-    }
-
     public void growTail() {
-//        this.snakeBody.addFirst(new SnakeLink(getPrevX(), getPrevY()));
         growNextStep = true;
     }
 
@@ -43,12 +38,11 @@ public class Snake extends MovableEntity {
         else{
             snakeBody.poll();   // delete tail
         }
-//        snakeBody.poll();
 
         setX(getNextX());
         setY(getNextY());
 
-        this.head = new SnakeLink(getX(), getY());
+        this.head = new SnakeLink(getX(), getY());  // append head
         this.snakeBody.add(this.head);
     }
 
@@ -67,16 +61,25 @@ public class Snake extends MovableEntity {
         return stringBuilder.toString();
     }
 
-
-    // prev pos is previous tail pos
-
+    /**
+     * Returns tail's x coordinate.
+     */
     @Override
     public int getPrevX() {
+        if(snakeBody.isEmpty()){
+            throw new IllegalStateException("Snake wasn't initialized");
+        }
         return snakeBody.peek().getX();
     }
 
+    /**
+     * Returns tail's y coordinate.
+     */
     @Override
     public int getPrevY() {
+        if(snakeBody.isEmpty()){
+            throw new IllegalStateException("Snake wasn't initialized");
+        }
         return snakeBody.peek().getY();
     }
 }
