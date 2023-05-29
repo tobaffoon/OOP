@@ -4,7 +4,7 @@ import javafx.animation.AnimationTimer;
 
 public class CycleTimer extends AnimationTimer {
     private final long frameInterval;
-    private double delta = 0;
+    private double delta;
     private long lastTime;
     private boolean timerWasStopped;
     private final Runnable callback;
@@ -15,6 +15,7 @@ public class CycleTimer extends AnimationTimer {
      */
     public CycleTimer(long nanos, Runnable callback) {
         this.frameInterval = nanos;
+        this.delta = 0;
         this.callback = callback;
         this.lastTime = System.nanoTime();
         this.timerWasStopped = false;

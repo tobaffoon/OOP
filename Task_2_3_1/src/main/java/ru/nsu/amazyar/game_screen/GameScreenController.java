@@ -171,6 +171,7 @@ public class GameScreenController implements Initializable {
 
     public void restartGame(){
         game.restart();
+        painter.draw();
         gameLoopTimer = new CycleTimer(gameLoopTimer.getNanosInterval(), this::step);
         gameLoopTimer.start();
     }
