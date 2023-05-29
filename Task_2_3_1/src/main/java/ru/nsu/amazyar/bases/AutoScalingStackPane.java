@@ -3,7 +3,6 @@ package ru.nsu.amazyar.bases;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -26,35 +25,36 @@ import javafx.scene.layout.StackPane;
  * Rescaling occurs only when the AutoScalingStackPane is resized, it does not
  * occur automatically if and when the content changes size.
  *
- *
  * @author michaelellis
  */
 public class AutoScalingStackPane extends StackPane {
-
     /**
      * Force scale transformation to be recomputed based on the size of this
      * <code>AutoScalingStackPane</code> and the size of the contents.
      */
     public void rescale() {
         if (!getChildren().isEmpty()) {
-            getChildren().forEach((c) -> {
-                Platform.runLater(() -> {
+            getChildren().forEach(
+                (c) -> Platform.runLater(() -> {  // run later to get proper boundsInLocal
                     double xScale = getWidth() / c.getBoundsInLocal().getWidth();
                     double yScale = getHeight() / c.getBoundsInLocal().getHeight();
 
-                    if (autoScale.get() == AutoScale.FILL) {
-                        c.setScaleX(xScale);
-                        c.setScaleY(yScale);
-                    } else if (autoScale.get() == AutoScale.FIT) {
-                        double scale = Math.min(xScale, yScale);
-                        c.setScaleX(scale);
-                        c.setScaleY(scale);
-                    } else {
-                        c.setScaleX(1d);
-                        c.setScaleY(1d);
+                    switch (autoScale.get()) {
+                        case FIT:
+                            double scale = Math.min(xScale, yScale);
+                            c.setScaleX(scale);
+                            c.setScaleY(scale);
+                            break;
+                        case FILL:
+                            c.setScaleX(xScale);
+                            c.setScaleY(yScale);
+                            break;
+                        case NONE:
+                        default:
+                            c.setScaleX(1d);
+                            c.setScaleY(1d);
                     }
-                });
-            });
+                }));
         }
     }
 
@@ -73,20 +73,10 @@ public class AutoScalingStackPane extends StackPane {
     }
 
     /**
-     * Convenience constructor that takes a content Node.
-     *
-     * @param content
+     * AutoScale scaling options: {@link AutoScaleOption#NONE}, {@link AutoScaleOption#FILL},
+     * {@link AutoScaleOption#FIT}
      */
-    public AutoScalingStackPane(Node content) {
-        super(content);
-        init();
-    }
-
-    /**
-     * AutoScale scaling options:
-     * {@link AutoScale#NONE}, {@link AutoScale#FILL}, {@link AutoScale#FIT}
-     */
-    public enum AutoScale {
+    public enum AutoScaleOption {
 
         /**
          * No scaling - revert to behaviour of <code>StackPane</code>.
@@ -103,17 +93,17 @@ public class AutoScalingStackPane extends StackPane {
     }
 
     // AutoScale Property
-    private ObjectProperty<AutoScale>
-        autoScale = new SimpleObjectProperty<AutoScale>(this, "autoScale",
-        AutoScale.FIT);
+    private final ObjectProperty<AutoScaleOption>
+        autoScale = new SimpleObjectProperty<AutoScaleOption>(this, "autoScale",
+        AutoScaleOption.FIT);
 
     /**
      * AutoScalingStackPane scaling property
      *
      * @return AutoScalingStackPane scaling property
-     * @see AutoScale
+     * @see AutoScaleOption
      */
-    public ObjectProperty<AutoScale> autoScaleProperty() {
+    public ObjectProperty<AutoScaleOption> autoScaleProperty() {
         return autoScale;
     }
 
@@ -121,20 +111,18 @@ public class AutoScalingStackPane extends StackPane {
      * Get AutoScale option
      *
      * @return the AutoScale option
-     * @see AutoScale
+     * @see AutoScaleOption
      */
-    public AutoScale getAutoScale() {
+    public AutoScaleOption getAutoScale() {
         return autoScale.getValue();
     }
 
     /**
      * Set the AutoScale option
      *
-     * @param newAutoScale
-     * @see AutoScale
-     *
+     * @see AutoScaleOption
      */
-    public void setAutoScale(AutoScale newAutoScale) {
-        autoScale.setValue(newAutoScale);
+    public void setAutoScale(AutoScaleOption newAutoScaleOption) {
+        autoScale.setValue(newAutoScaleOption);
     }
 }
