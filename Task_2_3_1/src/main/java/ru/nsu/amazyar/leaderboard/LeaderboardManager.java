@@ -72,8 +72,17 @@ public class LeaderboardManager {
      * @throws IOException if problems with default file occurred
      */
     public void loadLeaderboardFromFile() throws IOException {
+        loadLeaderboardFromFile(LEADERBOARD_FILE);
+    }
+
+    /**
+     * Load leaderboard from a file.
+     *
+     * @throws IOException if problems with default file occurred
+     */
+    public void loadLeaderboardFromFile(String path) throws IOException {
         this.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(LEADERBOARD_FILE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(LeaderboardEntry.SEPARATOR);
