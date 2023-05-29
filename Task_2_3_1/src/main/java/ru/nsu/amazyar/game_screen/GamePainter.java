@@ -15,6 +15,9 @@ import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
 
+/**
+ * Painter of the snake game grid.
+ */
 public class GamePainter {
 
     private final Canvas drawingCanvas;
@@ -29,6 +32,15 @@ public class GamePainter {
     private final Image foodImage;
     private final Image brickImage;
 
+    /**
+     * Create new painter.
+     *
+     * @param game         game's model
+     * @param canvas       canvas to draw game on
+     * @param gridColorOne first color of the game's grid
+     * @param gridColorTwo second color of the game's grid
+     * @throws IOException if problem with opening sprites has occurred
+     */
     public GamePainter(Game game, Canvas canvas, Color gridColorOne, Color gridColorTwo)
         throws IOException {
         this.game = game;
@@ -76,20 +88,21 @@ public class GamePainter {
         this.cellWidth = drawingCanvas.getWidth() / game.getColumnCount();
     }
 
-    public void draw(){
+    /**
+     * Draw the game in its current state.
+     */
+    public void draw() {
         this.drawGameGrid();
         this.drawEntities();
     }
 
-    private void drawEntities(){
+    private void drawEntities() {
         game.getEntitiesAsStream().forEach((entity) -> {
-            if (entity instanceof Snake){
+            if (entity instanceof Snake) {
                 drawSnake((Snake) entity);
-            }
-            else if (entity instanceof SimpleEdible){
+            } else if (entity instanceof SimpleEdible){
                 drawEntity(entity, foodImage);
-            }
-            else if (entity instanceof Brick){
+            } else if (entity instanceof Brick){
                 drawEntity(entity, brickImage);
             }
         });

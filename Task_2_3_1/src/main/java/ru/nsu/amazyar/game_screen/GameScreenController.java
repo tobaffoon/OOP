@@ -24,7 +24,11 @@ import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 import ru.nsu.amazyar.utils.ErrorAlerter;
 import ru.nsu.amazyar.utils.SceneDrawer;
 
+/**
+ * Controller for VMC structure of the game.
+ */
 public class GameScreenController implements Initializable {
+
     private boolean gameActive;
     private Game game;
     private Stage stage;
@@ -86,17 +90,39 @@ public class GameScreenController implements Initializable {
         }
     }
 
-    public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber, int lengthGoal, int brickNumber, int speed, Color gridColorOne, Color gridColorTwo){
-        if(gameActive){
-            throw new IllegalStateException("New game cannot be started while there is an active game");
+    /**
+     * Create new {@link Game} model and connected {@link GamePainter}.
+     *
+     * @param stage         main window. Used to set the game's scene
+     * @param rowCount      see {@link Game}
+     * @param columnCount   see {@link Game}
+     * @param maxFoodNumber see {@link Game}
+     * @param lengthGoal    see {@link Game}
+     * @param brickNumber   see {@link Game}
+     * @param gridColorOne  see {@link Game}
+     * @param gridColorTwo  see {@link Game}
+     * @param speed         speed at which the game works. Each frame takes
+     *                      InGameConstants.DEFAULT_NANOS_PER_TILE / speed nanoseconds
+     */
+    public void startNewGame(Stage stage, int rowCount, int columnCount, int maxFoodNumber,
+        int lengthGoal, int brickNumber, Color gridColorOne, Color gridColorTwo, int speed) {
+        if (gameActive) {
+            throw new IllegalStateException(
+                "New game cannot be started while there is an active game");
         }
-        if(columnCount < InGameConstants.MIN_COLUMN_NUMBER || columnCount > InGameConstants.MAX_COLUMN_NUMBER){
-            throw new IllegalArgumentException("ColumnCount is not in range (" + InGameConstants.MIN_COLUMN_NUMBER + ", " + InGameConstants.MAX_COLUMN_NUMBER + ")");
+        if (columnCount < InGameConstants.MIN_COLUMN_NUMBER
+            || columnCount > InGameConstants.MAX_COLUMN_NUMBER) {
+            throw new IllegalArgumentException(
+                "ColumnCount is not in range (" + InGameConstants.MIN_COLUMN_NUMBER + ", "
+                    + InGameConstants.MAX_COLUMN_NUMBER + ")");
         }
-        if(rowCount < InGameConstants.MIN_ROW_NUMBER || rowCount > InGameConstants.MAX_ROW_NUMBER){
-            throw new IllegalArgumentException("RowCount is not in range (" + InGameConstants.MIN_ROW_NUMBER + ", " + InGameConstants.MAX_ROW_NUMBER + ")");
+        if (rowCount < InGameConstants.MIN_ROW_NUMBER
+            || rowCount > InGameConstants.MAX_ROW_NUMBER) {
+            throw new IllegalArgumentException(
+                "RowCount is not in range (" + InGameConstants.MIN_ROW_NUMBER + ", "
+                    + InGameConstants.MAX_ROW_NUMBER + ")");
         }
-        if(gridColorOne == null || gridColorTwo == null){
+        if (gridColorOne == null || gridColorTwo == null) {
             throw new NullPointerException();
         }
         // create game model
@@ -127,26 +153,34 @@ public class GameScreenController implements Initializable {
         gamePaused = false;
     }
 
-    public void playerChangeDirection(Direction direction){
+    /**
+     * See {@link Game}.
+     */
+    public void playerChangeDirection(Direction direction) {
         game.changePlayerDirection(direction);
     }
 
-    public void pauseAndUnpause(){
-        if(gamePaused) {
+    /**
+     * Pauses or unpauses the game.
+     */
+    public void pauseAndUnpause() {
+        if (gamePaused) {
             pauseBox.setVisible(false);
             gameLoopTimer.start();
             gamePaused = false;
-        }
-        else {
+        } else {
             pauseBox.setVisible(true);
             gameLoopTimer.stop();
             gamePaused = true;
         }
     }
 
-    public void step(){
+    /**
+     * Updates game's model and redraws it accordingly.
+     */
+    public void step() {
         game.update();
-        if(game.isGameLost()){
+        if (game.isGameLost()) {
             // Show lose screen
             resultLabel.setText("YOU LOSE");
             resultLabel.setTextFill(GameSceneConstants.DEFAULT_LOSE_LABEL_COLOR);
@@ -155,8 +189,7 @@ public class GameScreenController implements Initializable {
 
             gameLoopTimer.stop();
             gameActive = false;
-        }
-        else if(game.isGameWon()){
+        } else if(game.isGameWon()){
             // Show win screen
             gameResultBox.setVisible(true);
             resultLabel.setText("YOU WON");
@@ -169,30 +202,45 @@ public class GameScreenController implements Initializable {
         painter.draw();
     }
 
-    public void restartGame(){
+    /**
+     * Starts new game with old parameters. Resets timer and redraws canvas accordingly.
+     */
+    public void restartGame() {
         game.restart();
         painter.draw();
         gameLoopTimer = new CycleTimer(gameLoopTimer.getNanosInterval(), this::step);
         gameLoopTimer.start();
     }
 
+    /**
+     * Action on restart button in pause pressed.
+     */
     @FXML
-    public void onRestartButtonPressed(){
+    public void onRestartButtonPressed() {
         pauseBox.setVisible(false);
         restartGame();
     }
 
+    /**
+     * Action on replay button pressed.
+     */
     @FXML
-    public void onReplayButtonPressed(){
+    public void onReplayButtonPressed() {
         gameResultBox.setVisible(false);
         restartGame();
     }
 
+    /**
+     * Action on add entry to leaderboard button pressed.
+     */
     @FXML
-    public void onLeaderboardButtonPressed(){
+    public void onLeaderboardButtonPressed() {
         leaderboardDialog.showAndWait().ifPresent(this::inputNameToLeaderboard);
     }
 
+    /**
+     * Action on back to main menu button pressed.
+     */
     @FXML
     public void onMainMenuButtonPressed(){
         stage.setScene(SceneDrawer.getMainScene());

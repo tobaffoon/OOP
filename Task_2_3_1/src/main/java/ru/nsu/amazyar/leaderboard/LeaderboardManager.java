@@ -9,14 +9,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that manages leaderboard's serialization and deserialization.
+ */
 public class LeaderboardManager {
+
     private static final String LEADERBOARD_FILE = "leaderboard.txt";
     private final List<LeaderboardEntry> leaderboard;
 
+    /**
+     * Create empty leaderboard.
+     */
     public LeaderboardManager() {
         leaderboard = new ArrayList<>();
     }
 
+    /**
+     * Returns leaderboard table as a string.
+     */
     public String getLeaderboard() {
         StringBuilder builder = new StringBuilder();
         builder.append("NAME | SCORE\n");
@@ -24,13 +34,21 @@ public class LeaderboardManager {
         return builder.toString();
     }
 
+    /**
+     * Add new entry to the leaderboard. Safes resulting leaderboard to designated file
+     *
+     * @throws IOException if problems with designated file occurred
+     */
     public void addEntry(LeaderboardEntry entry) throws IOException {
         leaderboard.add(entry);
         sortLeaderboard();
         saveLeaderboardToFile();
     }
 
-    public void clear(){
+    /**
+     * Empty leaderboard.
+     */
+    public void clear() {
         leaderboard.clear();
     }
 
@@ -47,6 +65,11 @@ public class LeaderboardManager {
         }
     }
 
+    /**
+     * Load leaderboard from default file.
+     *
+     * @throws IOException if problems with default file occurred
+     */
     public void loadLeaderboardFromFile() throws IOException {
         this.clear();
         BufferedReader reader = new BufferedReader(new FileReader(LEADERBOARD_FILE));

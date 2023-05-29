@@ -5,16 +5,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import ru.nsu.amazyar.SnakeApplication;
 
+/**
+ * Scene constructor from fxml files.
+ */
 public class SceneDrawer {
-    static public Scene getMainScene(){
+
+    /**
+     * Returns main menu scene.
+     */
+    static public Scene getMainScene() {
         return getSceneFromFxml("fxmls/main_menu.fxml");
     }
 
-    static public Scene getSettingsScene(){
+    /**
+     * Return settings menu scene.
+     */
+    static public Scene getSettingsScene() {
         return getSceneFromFxml("fxmls/settings.fxml");
     }
 
-    static private Scene getSceneFromFxml(String path){
+    static private Scene getSceneFromFxml(String path) {
         Scene scene = null;
         try {
             FXMLLoader fxmlLoader =

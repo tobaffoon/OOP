@@ -6,7 +6,11 @@ import javafx.stage.Stage;
 import ru.nsu.amazyar.constants.StageConstants;
 import ru.nsu.amazyar.utils.SceneDrawer;
 
+/**
+ * Main application class.
+ */
 public class SnakeApplication extends Application {
+
     @Override
     public void start(Stage stage) {
         stage.setMinWidth(StageConstants.DEFAULT_STAGE_SIZE);
@@ -18,6 +22,9 @@ public class SnakeApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Main method.
+     */
     public static void main(String[] args) {
         launch();
     }

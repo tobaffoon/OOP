@@ -2,10 +2,18 @@ package ru.nsu.amazyar.entities.snake;
 
 import ru.nsu.amazyar.entities.Entity;
 
+/**
+ * Component of a {@link Snake}. As snake moves by creating and deleting <i>SnakeLinks</i>, this
+ * class does not have to be Movable.
+ */
 public class SnakeLink implements Entity {
+
     private int x;
     private int y;
 
+    /**
+     * Convenient constructor for {@link Entity}.
+     */
     public SnakeLink(int x, int y) {
         this.x = x;
         this.y = y;

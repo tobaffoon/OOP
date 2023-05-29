@@ -2,7 +2,11 @@ package ru.nsu.amazyar.constants;
 
 import javafx.scene.text.Font;
 
+/**
+ * Constant class with main menu's sizes and fonts.
+ */
 public class MainMenuConstants {
+
     public static final double DEFAULT_NAME_HEIGHT = StageConstants.DEFAULT_STAGE_SIZE * 0.3;
     public static final String DEFAULT_NAME_TEXT = "SNAKE EYES";
     public static final Font DEFAULT_NAME_FONT = Font.font("Algerian", DEFAULT_NAME_HEIGHT * 0.5);

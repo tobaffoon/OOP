@@ -3,7 +3,11 @@ package ru.nsu.amazyar.constants;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Constant class with game's sizes, files and fonts.
+ */
 public class GameSceneConstants {
+
     public static final String SNAKE_HEAD_SPRITE = "images/snake_head.png";
     public static final String SNAKE_BODY_SPRITE = "images/snake_body.png";
     public static final String SNAKE_TAIL_SPRITE = "images/snake_tail.png";

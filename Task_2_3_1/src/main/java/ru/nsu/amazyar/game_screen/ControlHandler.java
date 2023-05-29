@@ -5,9 +5,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import ru.nsu.amazyar.bases.Direction;
 
+/**
+ * Handler for keyboard presses.
+ */
 public class ControlHandler implements EventHandler<KeyEvent> {
+
     private final GameScreenController controller;
 
+    /**
+     * Construct new control handler.
+     *
+     * @param controller controller, whose methods handler calls
+     */
     public ControlHandler(GameScreenController controller) {
         this.controller = controller;
     }

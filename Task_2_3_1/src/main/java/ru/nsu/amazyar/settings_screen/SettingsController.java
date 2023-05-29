@@ -18,7 +18,11 @@ import ru.nsu.amazyar.SnakeApplication;
 import ru.nsu.amazyar.game_screen.GameScreenController;
 import ru.nsu.amazyar.utils.ErrorAlerter;
 
+/**
+ * Controller for VMC structure of the settings menu.
+ */
 public class SettingsController implements Initializable {
+
     @FXML
     Button startButton;
     @FXML
@@ -49,7 +53,6 @@ public class SettingsController implements Initializable {
     ColorPicker colorPicker1;
     @FXML
     ColorPicker colorPicker2;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,8 +116,7 @@ public class SettingsController implements Initializable {
     private int roundToBounds(int input, int min, int max){
         if(input < min){
             input = min;
-        }
-        else if(input > max){
+        } else if(input > max){
             input = max;
         }
 
@@ -124,22 +126,30 @@ public class SettingsController implements Initializable {
     private int getRowsValue(){
         return Integer.parseInt(rowsField.getText());
     }
+
     private int getColumnsValue(){
         return Integer.parseInt(columnsField.getText());
     }
+
     private int getMaxFoodValue(){
         return Integer.parseInt(maxFoodField.getText());
     }
-    private int getSpeedValue(){
+
+    private int getSpeedValue() {
         return Integer.parseInt(speedField.getText());
     }
-    private int getLengthValue(){
+
+    private int getLengthValue() {
         return Integer.parseInt(lengthField.getText());
     }
-    private int getBrickNumberValue(){
+
+    private int getBrickNumberValue() {
         return Integer.parseInt(brickNumberField.getText());
     }
 
+    /**
+     * Action on start game button pressed.
+     */
     @FXML
     public void onStartButtonPressed(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -151,11 +161,10 @@ public class SettingsController implements Initializable {
 
             GameScreenController controller = fxmlLoader.getController();
             controller.startNewGame(stage, getRowsValue(), getColumnsValue(), getMaxFoodValue(),
-                getLengthValue(), getBrickNumberValue(), getSpeedValue(), colorPicker1.getValue(),
-                colorPicker2.getValue());
+                getLengthValue(), getBrickNumberValue(), colorPicker1.getValue(),
+                colorPicker2.getValue(), getSpeedValue());
         } catch (Exception e) {
             ErrorAlerter.alert(e);
         }
-
     }
 }
