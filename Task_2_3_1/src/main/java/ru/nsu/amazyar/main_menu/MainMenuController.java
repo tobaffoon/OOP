@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
+import ru.nsu.amazyar.constants.StageConstants;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 import ru.nsu.amazyar.utils.ErrorAlerter;
 import ru.nsu.amazyar.utils.SceneDrawer;
@@ -34,7 +35,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.leaderboardManager = new LeaderboardManager();
+        this.leaderboardManager = new LeaderboardManager(StageConstants.LEADERBOARD_FILE);
 
         this.leaderBoardDialog = new Dialog<>();
         this.leaderBoardDialog.setHeaderText("LEADERBOARD");

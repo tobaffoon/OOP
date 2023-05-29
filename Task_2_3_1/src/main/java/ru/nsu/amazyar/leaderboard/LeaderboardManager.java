@@ -13,15 +13,16 @@ import java.util.List;
  * Class that manages leaderboard's serialization and deserialization.
  */
 public class LeaderboardManager {
-
-    private static final String LEADERBOARD_FILE = "leaderboard.txt";
     private final List<LeaderboardEntry> leaderboard;
+    private final String path;
 
     /**
      * Create empty leaderboard.
      */
-    public LeaderboardManager() {
+    public LeaderboardManager(String path) {
+
         leaderboard = new ArrayList<>();
+        this.path = path;
     }
 
     /**
@@ -57,7 +58,7 @@ public class LeaderboardManager {
     }
 
     private void saveLeaderboardToFile() throws IOException {
-        File leaderboardFile = new File(LEADERBOARD_FILE);
+        File leaderboardFile = new File(path);
         try (BufferedWriter output = new BufferedWriter(new FileWriter(leaderboardFile))) {
             for (LeaderboardEntry entry : leaderboard) {
                 output.write(entry.getName() + LeaderboardEntry.SEPARATOR + entry.getScore());
@@ -67,20 +68,11 @@ public class LeaderboardManager {
     }
 
     /**
-     * Load leaderboard from default file.
-     *
-     * @throws IOException if problems with default file occurred
-     */
-    public void loadLeaderboardFromFile() throws IOException {
-        loadLeaderboardFromFile(LEADERBOARD_FILE);
-    }
-
-    /**
      * Load leaderboard from a file.
      *
      * @throws IOException if problems with default file occurred
      */
-    public void loadLeaderboardFromFile(String path) throws IOException {
+    public void loadLeaderboardFromFile() throws IOException {
         this.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;

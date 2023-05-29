@@ -8,7 +8,7 @@ import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
 public class SnakeTest {
-    private final LeaderboardManager testManager = new LeaderboardManager();
+    private final LeaderboardManager testManager = new LeaderboardManager("src/test/resources/test_leaderboard.txt");
 
     @BeforeAll
     public static void init(){
@@ -16,7 +16,7 @@ public class SnakeTest {
 
     @Test
     public void testLeaderboardManager() throws IOException {
-        testManager.loadLeaderboardFromFile("src/test/resources/test_leaderboard.txt");
+        testManager.loadLeaderboardFromFile();
         String leaderboardLoadContent = """
             NAME | SCORE
             FIVE;5

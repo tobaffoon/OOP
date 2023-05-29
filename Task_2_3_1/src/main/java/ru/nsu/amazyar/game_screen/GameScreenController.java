@@ -19,6 +19,7 @@ import ru.nsu.amazyar.bases.CycleTimer;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
+import ru.nsu.amazyar.constants.StageConstants;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 import ru.nsu.amazyar.utils.ErrorAlerter;
@@ -58,7 +59,8 @@ public class GameScreenController implements Initializable {
 
     private GamePainter painter;
     private TextInputDialog leaderboardDialog;
-    private static final LeaderboardManager leaderboardManager = new LeaderboardManager();
+    private static final LeaderboardManager leaderboardManager = new LeaderboardManager(
+        StageConstants.LEADERBOARD_FILE);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
