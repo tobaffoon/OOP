@@ -1,0 +1,12 @@
+.button {
+-fx-font-family: Elephant;
+-fx-font-size: 25px;
+-fx-pref-height: 48;
+-fx-pref-width: 10000;
+}
+
+.label{
+-fx-font-family: Algerian;
+-fx-font-size: 70px;
+-fx-text-fill: yellowgreen;
+}

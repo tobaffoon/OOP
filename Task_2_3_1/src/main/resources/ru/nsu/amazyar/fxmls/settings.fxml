@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import ru.nsu.amazyar.constants.SettingsSceneConstants?>
+<?import ru.nsu.amazyar.constants.StageConstants?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ru.nsu.amazyar.settings_screen.SettingsController">
+  <prefHeight>
+    <SettingsSceneConstants fx:constant="DEFAULT_VBOX_HEIGHT"/>
+  </prefHeight>
+  <prefWidth>
+    <SettingsSceneConstants fx:constant="DEFAULT_VBOX_WIDTH"/>
+  </prefWidth>
+  <spacing>
+    <SettingsSceneConstants fx:constant="DEFAULT_SPACING"/>
+  </spacing>
+
+  <Label minWidth="-Infinity" alignment="BASELINE_CENTER" text="SET UP THE GAME" style="-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 20">
+    <textFill>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_COLOR"/>
+    </textFill>
+    <font>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_FONT"/>
+    </font>
+    <prefWidth>
+      <StageConstants fx:constant="DEFAULT_STAGE_SIZE"/>
+    </prefWidth>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_LABEL_HEIGHT"/>
+    </prefHeight>
+  </Label>
+
+  <Button fx:id="startButton" text="Start the game" onAction="#onStartButtonPressed">
+    <font>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_FONT"/>
+    </font>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_HEIGHT"/>
+    </prefHeight>
+    <prefWidth>
+      <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_WIDTH"/>
+    </prefWidth>
+    <VBox.margin>
+      <Insets>
+        <left>
+          <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+        </left>
+        <right>
+          <SettingsSceneConstants fx:constant="DEFAULT_BUTTON_INSET"/>
+        </right>
+      </Insets>
+    </VBox.margin>
+  </Button>
+
+<!--  PARAMETERS BOX  -->
+  <VBox>
+    <prefHeight>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_HEIGHT"/>
+    </prefHeight>
+    <prefWidth>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_WIDTH"/>
+    </prefWidth>
+    <spacing>
+      <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_SPACING"/>
+    </spacing>
+    <VBox.margin>
+      <Insets>
+        <left>
+          <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_INSET"/>
+        </left>
+        <right>
+          <SettingsSceneConstants fx:constant="DEFAULT_PARAMS_BOX_INSET"/>
+        </right>
+      </Insets>
+    </VBox.margin>
+
+<!--    GRID SIZE    -->
+    <HBox>
+      <VBox>
+        <Label fx:id="rowsLabel" text="ROWS: [5]"/>
+        <TextField fx:id="rowsField" text="5"/>
+      </VBox>
+      <VBox>
+        <Label fx:id="columnsLabel" text="COLUMNS: [5]"/>
+        <TextField fx:id="columnsField" text="5"/>
+      </VBox>
+    </HBox>
+
+<!--    WINNING LENGTH    -->
+    <VBox>
+      <Label fx:id="lengthLabel" text="LENGTH TO WIN: [5]"/>
+      <TextField fx:id="lengthField" text="5"/>
+    </VBox>
+
+<!--    MAX FOOD NUMBER    -->
+    <VBox>
+      <Label fx:id="maxFoodLabel" text="MAX NUMBER OF FOOD: [1]"/>
+      <TextField fx:id="maxFoodField" text="1"/>
+    </VBox>
+
+<!--    SPEED    -->
+    <VBox>
+      <Label fx:id="speedLabel" text="SPEED: [1]"/>
+      <TextField fx:id="speedField" text="1"/>
+    </VBox>
+
+<!--    BRICK NUMBER    -->
+    <VBox>
+      <Label fx:id="brickNumberLabel" text="BRICK NUMBER: [0]"/>
+      <TextField fx:id="brickNumberField" text="0"/>
+    </VBox>
+
+
+<!--    GRID COLORS    -->
+    <HBox>
+      <VBox>
+        <Label text="Color 1"/>
+        <ColorPicker fx:id="colorPicker1">
+          <value>
+            <Color fx:constant="WHITE"/>
+          </value>
+        </ColorPicker>
+      </VBox>
+      <VBox>
+        <Label text="Color 2"/>
+        <ColorPicker fx:id="colorPicker2">
+          <value>
+            <Color fx:constant="GREY"/>
+          </value>
+        </ColorPicker>
+      </VBox>
+    </HBox>
+
+
+  </VBox>
+</VBox>
