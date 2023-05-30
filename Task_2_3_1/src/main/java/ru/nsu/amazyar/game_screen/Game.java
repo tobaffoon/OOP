@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.bases.Vector2;
 import ru.nsu.amazyar.entities.Brick;
@@ -32,7 +30,7 @@ public class Game {
     private final int brickNumber;
     private boolean gameLost;
     private boolean gameWon;
-    private final SimpleIntegerProperty score;
+    private int score;
 
     /**
      * Create new game.
@@ -50,7 +48,6 @@ public class Game {
         this.maxFoodNumber = maxFoodNumber;
         this.lengthGoal = lengthGoal;
         this.brickNumber = brickNumber;
-        this.score = new SimpleIntegerProperty();
 
         restart();
     }
@@ -58,7 +55,7 @@ public class Game {
     private void initializeInnerStructures() {
         generateBricks();
 
-        score.set(1);
+        score = 1;
         playerSnake = new Snake(0, 0, rowCount, columnCount, Direction.DOWN);
         playerDirectionBuffer = playerSnake.getCurrentDirection();
         addEntity(playerSnake);
@@ -127,13 +124,6 @@ public class Game {
      * Returns current score.
      */
     public int getScore() {
-        return this.score.get();
-    }
-
-    /**
-     * Returns current score's property.
-     */
-    public IntegerProperty getScoreProperty() {
         return this.score;
     }
 
@@ -212,8 +202,8 @@ public class Game {
                 e.growTail();
                 grid[e.getPrevX()][e.getPrevY()] = e;   // account for new tail
                 grid[e.getNextX()][e.getNextY()] = e;   // account for new head
-                score.set(score.get() + 1);
-                if (score.get() >= lengthGoal) {
+                score++;
+                if (score >= lengthGoal) {
                     gameWon = true;
                 }
                 foodNumber--;

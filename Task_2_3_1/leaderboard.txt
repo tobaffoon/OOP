@@ -1,6 +1,8 @@
 SIX;6
 FIVE;5
 AAA;5
+5/5;5
+5;5;;5
 THREE;3
 TWO;2
 ONE;1

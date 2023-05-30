@@ -135,8 +135,6 @@ public class GameScreenController implements Initializable {
         this.stage = stage;
         stage.setScene(gamePane.getScene());
         gamePane.getScene().setOnKeyPressed(new ControlHandler(this));
-        game.getScoreProperty()
-            .addListener((b, o, n) -> currentScoreLabel.setText(n + "/" + lengthGoal));
         currentScoreLabel.setText(game.getScore() + "/" + lengthGoal);
 
         // create painter
@@ -182,6 +180,7 @@ public class GameScreenController implements Initializable {
      */
     public void step() {
         game.update();
+        updateScreen();
         if (game.isGameLost()) {
             // Show lose screen
             resultLabel.setText("YOU LOSE");
@@ -202,6 +201,10 @@ public class GameScreenController implements Initializable {
             gameActive = false;
         }
         painter.draw();
+    }
+
+    private void updateScreen(){
+        currentScoreLabel.setText(game.getScore() + "/" + game.getLengthGoal());
     }
 
     /**
