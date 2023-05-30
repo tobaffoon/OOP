@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.nsu.amazyar.SnakeApplication;
-import ru.nsu.amazyar.game_screen.GameScreenController;
+import ru.nsu.amazyar.game_view.GameScreenController;
 import ru.nsu.amazyar.utils.ErrorAlerter;
 
 /**
@@ -156,7 +156,7 @@ public class SettingsController implements Initializable {
 
         try {
             FXMLLoader fxmlLoader =
-                new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_screen.fxml"));
+                new FXMLLoader(SnakeApplication.class.getResource("fxmls/game_view.fxml"));
             new Scene(fxmlLoader.load());
 
             GameScreenController controller = fxmlLoader.getController();

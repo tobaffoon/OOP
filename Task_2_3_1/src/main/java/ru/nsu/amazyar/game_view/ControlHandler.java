@@ -1,4 +1,4 @@
-package ru.nsu.amazyar.game_screen;
+package ru.nsu.amazyar.game_view;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;

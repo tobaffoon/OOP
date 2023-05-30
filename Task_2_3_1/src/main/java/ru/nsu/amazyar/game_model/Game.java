@@ -1,4 +1,4 @@
-package ru.nsu.amazyar.game_screen;
+package ru.nsu.amazyar.game_model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

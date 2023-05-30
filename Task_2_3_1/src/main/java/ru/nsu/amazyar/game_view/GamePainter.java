@@ -1,4 +1,4 @@
-package ru.nsu.amazyar.game_screen;
+package ru.nsu.amazyar.game_view;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +14,7 @@ import ru.nsu.amazyar.entities.Entity;
 import ru.nsu.amazyar.entities.food.SimpleEdible;
 import ru.nsu.amazyar.entities.snake.Snake;
 import ru.nsu.amazyar.entities.snake.SnakeLink;
+import ru.nsu.amazyar.game_model.Game;
 
 /**
  * Painter of the snake game grid.

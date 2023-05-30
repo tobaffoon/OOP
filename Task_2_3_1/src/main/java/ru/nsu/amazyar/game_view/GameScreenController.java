@@ -1,4 +1,4 @@
-package ru.nsu.amazyar.game_screen;
+package ru.nsu.amazyar.game_view;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +20,7 @@ import ru.nsu.amazyar.bases.Direction;
 import ru.nsu.amazyar.constants.GameSceneConstants;
 import ru.nsu.amazyar.constants.InGameConstants;
 import ru.nsu.amazyar.constants.StageConstants;
+import ru.nsu.amazyar.game_model.Game;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 import ru.nsu.amazyar.utils.ErrorAlerter;

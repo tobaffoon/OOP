@@ -3,7 +3,7 @@ package ru.nsu.amazyar;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.nsu.amazyar.game_screen.Game;
+import ru.nsu.amazyar.game_model.Game;
 import ru.nsu.amazyar.leaderboard.LeaderboardEntry;
 import ru.nsu.amazyar.leaderboard.LeaderboardManager;
 
